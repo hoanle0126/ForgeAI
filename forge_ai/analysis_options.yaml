@@ -1,0 +1,56 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    # Lỗi không thể tha thứ (Ép thành Error đỏ)
+    avoid_print: error
+    prefer_const_constructors: error
+    prefer_typing_uninitialized_variables: error
+    always_use_package_imports: warning
+
+    # Bỏ qua warning không cần thiết cho code gen
+    invalid_annotation_target: ignore
+
+linter:
+  rules:
+    # ----------------------------------------------------
+    # QUY TẮC BẮT BUỘC TỪ AGENTS.md
+    # ----------------------------------------------------
+    - avoid_print # (R12) Cấm dùng print(), phải dùng debugPrint
+    - always_use_package_imports # (R8) Khuyến khích dùng absolute import
+    - prefer_const_constructors # (R4.5) Bắt buộc const
+    - prefer_const_declarations # (R4.5) Bắt buộc const declarations
+    - prefer_const_constructors_in_immutables
+    - prefer_const_literals_to_create_immutables
+
+    # ----------------------------------------------------
+    # CHẤT LƯỢNG CODE & AN TOÀN TRẠNG THÁI
+    # ----------------------------------------------------
+    - always_declare_return_types # Rõ ràng kiểu trả về
+    - prefer_final_locals # Ép dùng "final" thay cho "var" nếu không đổi
+    - unawaited_futures # Bắt buộc dùng "await" khi gọi async, không được quên
+    - require_trailing_commas # Ép phẩy cuối câu ở widget tree (tự format sẽ đẹp hơn)
+    - sort_child_properties_last # Thuộc tính "child" hoặc "children" luôn nằm cuối cùng
+    - cancel_subscriptions # Chống memory leak
+    - close_sinks
+    - avoid_empty_else
+    - prefer_single_quotes # Dùng nháy đơn cho string
+    - avoid_slow_async_io
+    - directives_ordering # Buộc sắp xếp import đúng chuẩn
+    - sized_box_for_whitespace # Ép dùng SizedBox thay vì Container rỗng
+
+custom_lint:
+  rules:
+    # Riverpod lint rules
+    - riverpod_notifier_parameters: true
+    - riverpod_generator_class_extends_generated: true
+    - missing_provider_scope: true
