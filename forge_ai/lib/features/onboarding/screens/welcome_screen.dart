@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
+import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
               AppButton(
                 text: 'Get Started',
                 onPressed: () {
-                  context.go(AppRoutes.goalSelection);
+                  context.push(AppRoutes.goalSelection);
                 },
               ),
 

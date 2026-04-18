@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
+import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/features/onboarding/providers/onboarding_provider.dart';
 import 'package:forge_ai/features/onboarding/widgets/analysis_card.dart';
 import 'package:forge_ai/features/onboarding/widgets/goal_card.dart';
+import 'package:forge_ai/features/onboarding/widgets/onboarding_app_bar.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
+import 'package:go_router/go_router.dart';
 
 class GoalSelectionScreen extends ConsumerWidget {
   const GoalSelectionScreen({super.key});
@@ -22,7 +25,7 @@ class GoalSelectionScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildAppBar(context),
+            const OnboardingAppBar(step: 1, totalSteps: 5, title: 'Goal'),
             Expanded(
               child: SingleChildScrollView(
                 padding: AppSpacing.screenPadding.copyWith(
@@ -98,59 +101,17 @@ class GoalSelectionScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            _buildBottomActionBar(selectedGoal),
+            _buildBottomActionBar(context, selectedGoal),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.base,
-        vertical: AppSpacing.md,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.textDark),
-                onPressed: () {},
-              ),
-              const SizedBox(width: AppSpacing.xs),
-              Text(
-                'SELECT GOAL',
-                style: AppTypography.labelUppercase.copyWith(
-                  color: AppColors.sportOrange,
-                  fontSize: 13,
-                  letterSpacing: 1.5,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text('STEP 1/5', style: AppTypography.labelUppercase),
-              const SizedBox(width: AppSpacing.base),
-              Text(
-                'SKIP',
-                style: AppTypography.labelUppercase.copyWith(
-                  color: AppColors.textDark,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomActionBar(OnboardingGoal? selectedGoal) {
+  Widget _buildBottomActionBar(
+    BuildContext context,
+    OnboardingGoal? selectedGoal,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(
         left: AppSpacing.lg,
@@ -160,7 +121,11 @@ class GoalSelectionScreen extends ConsumerWidget {
       ),
       child: AppButton(
         text: 'CONTINUE',
-        onPressed: selectedGoal != null ? () {} : null,
+        onPressed: selectedGoal != null
+            ? () {
+                context.push(AppRoutes.equipmentSelection);
+              }
+            : null,
       ),
     );
   }

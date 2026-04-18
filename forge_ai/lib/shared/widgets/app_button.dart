@@ -15,6 +15,7 @@ class AppButton extends StatelessWidget {
     this.isLoading = false,
     this.isFullWidth = true,
     this.icon,
+    this.trailingIcon,
   });
 
   final String text;
@@ -23,6 +24,7 @@ class AppButton extends StatelessWidget {
   final bool isLoading;
   final bool isFullWidth;
   final IconData? icon;
+  final IconData? trailingIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,14 @@ class AppButton extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
+                      if (trailingIcon != null) ...[
+                        const SizedBox(width: AppSpacing.sm),
+                        Icon(
+                          trailingIcon,
+                          color: _getTextColor(isDisabled),
+                          size: 20,
+                        ),
+                      ],
                     ],
                   ),
           ),
