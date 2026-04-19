@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 import 'package:forge_ai/features/auth/widgets/auth_submit_section.dart';
 import 'package:forge_ai/features/auth/widgets/auth_text_field.dart';
 import 'package:forge_ai/features/auth/widgets/forgot_password_button.dart';
+import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class AuthForm extends StatelessWidget {
@@ -17,7 +19,7 @@ class AuthForm extends StatelessWidget {
     required this.passwordController,
     required this.confirmPasswordController,
     required this.onSubmit,
-    required this.onToggleMode,
+    required this.onSwitchMode,
   });
 
   final AuthState state;
@@ -26,16 +28,28 @@ class AuthForm extends StatelessWidget {
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   final VoidCallback onSubmit;
-  final VoidCallback onToggleMode;
+  final ValueChanged<AuthMode> onSwitchMode;
 
   bool get _isRegister => state.mode == AuthMode.register;
+  bool get _isForgotPassword => state.mode == AuthMode.forgotPassword;
+  bool get _isSuccess => state.mode == AuthMode.forgotPasswordSuccess;
 
   @override
   Widget build(BuildContext context) {
-    final title = _isRegister
+    if (_isSuccess) {
+      return _buildSuccessView(context);
+    }
+
+    final title = _isForgotPassword
+        ? 'Reset access key'
+        : _isRegister
         ? 'Create athlete profile'
         : 'Resume adaptive plan';
-    final action = _isRegister ? 'Create profile' : 'Sign in';
+    final action = _isForgotPassword
+        ? 'Send reset link'
+        : _isRegister
+        ? 'Create profile'
+        : 'Sign in';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,15 +79,17 @@ class AuthForm extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           icon: PhosphorIcons.envelopeSimple(),
         ),
-        const SizedBox(height: AppSpacing.base),
-        AuthTextField(
-          label: 'Password',
-          hint: 'Minimum 6 characters',
-          controller: passwordController,
-          errorText: state.fieldErrors['password'],
-          obscureText: true,
-          icon: PhosphorIcons.lockKey(),
-        ),
+        if (!_isForgotPassword) ...[
+          const SizedBox(height: AppSpacing.base),
+          AuthTextField(
+            label: 'Password',
+            hint: 'Minimum 6 characters',
+            controller: passwordController,
+            errorText: state.fieldErrors['password'],
+            obscureText: true,
+            icon: PhosphorIcons.lockKey(),
+          ),
+        ],
         if (_isRegister) ...[
           const SizedBox(height: AppSpacing.base),
           AuthTextField(
@@ -85,22 +101,58 @@ class AuthForm extends StatelessWidget {
             icon: PhosphorIcons.shieldCheck(),
           ),
         ],
-        if (!_isRegister) ...[
+        if (!_isRegister && !_isForgotPassword) ...[
           const SizedBox(height: AppSpacing.sm),
-          ForgotPasswordButton(isEnabled: !state.isLoading, onPressed: () {}),
+          ForgotPasswordButton(
+            isEnabled: !state.isLoading,
+            onPressed: () => onSwitchMode(AuthMode.forgotPassword),
+          ),
         ],
         const SizedBox(height: AppSpacing.lg),
         AuthSubmitSection(
           state: state,
           actionText: action,
           onSubmit: onSubmit,
-          onToggleMode: onToggleMode,
+          onSwitchMode: onSwitchMode,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSuccessView(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Icon(
+          PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
+          color: AppColors.success,
+          size: 64,
+        ),
+        const SizedBox(height: AppSpacing.md),
+        Text(
+          'Check your inbox',
+          style: AppTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          'We\'ve sent an encrypted link to reset your access key.',
+          style: AppTypography.bodyMedium.copyWith(height: 1.5),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        AppButton(
+          text: 'Return to sign in',
+          onPressed: () => onSwitchMode(AuthMode.login),
         ),
       ],
     );
   }
 
   String get _description {
+    if (_isForgotPassword) {
+      return 'Enter your email to receive a secure reset link.';
+    }
     if (_isRegister) {
       return 'Start with a local profile, then ForgeAI will build the plan.';
     }

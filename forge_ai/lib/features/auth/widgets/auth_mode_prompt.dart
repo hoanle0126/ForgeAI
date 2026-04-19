@@ -8,15 +8,16 @@ class AuthModePrompt extends StatelessWidget {
   const AuthModePrompt({
     super.key,
     required this.mode,
-    required this.onPressed,
+    required this.onSwitchMode,
     required this.isEnabled,
   });
 
   final AuthMode mode;
-  final VoidCallback onPressed;
+  final ValueChanged<AuthMode> onSwitchMode;
   final bool isEnabled;
 
   bool get _isRegister => mode == AuthMode.register;
+  bool get _isForgotPassword => mode == AuthMode.forgotPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,22 @@ class AuthModePrompt extends StatelessWidget {
     );
     final actionStyle = baseStyle.copyWith(color: AppColors.sportOrange);
 
+    if (_isForgotPassword) {
+      return TextButton(
+        onPressed: isEnabled ? () => onSwitchMode(AuthMode.login) : null,
+        child: Text(
+          'Back to login',
+          style: AppTypography.bodySemiBold.copyWith(
+            color: AppColors.sportOrange,
+          ),
+        ),
+      );
+    }
+
+    final targetMode = _isRegister ? AuthMode.login : AuthMode.register;
+
     return TextButton(
-      onPressed: isEnabled ? onPressed : null,
+      onPressed: isEnabled ? () => onSwitchMode(targetMode) : null,
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(

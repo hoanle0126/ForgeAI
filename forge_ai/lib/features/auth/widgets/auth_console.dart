@@ -17,7 +17,6 @@ class AuthConsole extends StatelessWidget {
     required this.confirmPasswordController,
     required this.onModeChanged,
     required this.onSubmit,
-    required this.onToggleMode,
   });
 
   final AuthState state;
@@ -27,17 +26,22 @@ class AuthConsole extends StatelessWidget {
   final TextEditingController confirmPasswordController;
   final ValueChanged<AuthMode> onModeChanged;
   final VoidCallback onSubmit;
-  final VoidCallback onToggleMode;
 
   @override
   Widget build(BuildContext context) {
+    final isResetFlow =
+        state.mode == AuthMode.forgotPassword ||
+        state.mode == AuthMode.forgotPasswordSuccess;
+
     return AppCard(
       padding: const EdgeInsets.all(AppSpacing.base),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          AuthModeSwitcher(mode: state.mode, onChanged: onModeChanged),
-          const SizedBox(height: AppSpacing.base),
+          if (!isResetFlow) ...[
+            AuthModeSwitcher(mode: state.mode, onChanged: onModeChanged),
+            const SizedBox(height: AppSpacing.base),
+          ],
           const AuthProtocolPanel(),
           const SizedBox(height: AppSpacing.lg),
           AuthForm(
@@ -47,7 +51,7 @@ class AuthConsole extends StatelessWidget {
             passwordController: passwordController,
             confirmPasswordController: confirmPasswordController,
             onSubmit: onSubmit,
-            onToggleMode: onToggleMode,
+            onSwitchMode: onModeChanged,
           ),
         ],
       ),

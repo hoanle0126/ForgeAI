@@ -14,13 +14,13 @@ class AuthSubmitSection extends StatelessWidget {
     required this.state,
     required this.actionText,
     required this.onSubmit,
-    required this.onToggleMode,
+    required this.onSwitchMode,
   });
 
   final AuthState state;
   final String actionText;
   final VoidCallback onSubmit;
-  final VoidCallback onToggleMode;
+  final ValueChanged<AuthMode> onSwitchMode;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class AuthSubmitSection extends StatelessWidget {
           child: AuthModePrompt(
             mode: state.mode,
             isEnabled: !state.isLoading,
-            onPressed: onToggleMode,
+            onSwitchMode: onSwitchMode,
           ),
         ),
       ],

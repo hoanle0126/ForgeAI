@@ -63,7 +63,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ref.read(authProvider.notifier).switchMode(mode);
                 },
                 onSubmit: _submit,
-                onToggleMode: _toggleMode,
               ),
               const SizedBox(height: AppSpacing.xxl),
             ],
@@ -76,6 +75,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   Future<void> _submit() async {
     final notifier = ref.read(authProvider.notifier);
     final mode = ref.read(authProvider).mode;
+
+    if (mode == AuthMode.forgotPassword) {
+      await notifier.submitPasswordReset(email: _emailController.text);
+      return;
+    }
 
     if (mode == AuthMode.login) {
       final result = await notifier.submitLogin(
@@ -97,14 +101,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     if (mounted && result == AuthSubmitResult.success) {
       context.go(AppRoutes.goalSelection);
     }
-  }
-
-  void _toggleMode() {
-    final currentMode = ref.read(authProvider).mode;
-    final nextMode = currentMode == AuthMode.login
-        ? AuthMode.register
-        : AuthMode.login;
-    ref.read(authProvider.notifier).switchMode(nextMode);
   }
 
   void _scheduleModeSync(AuthMode mode) {
