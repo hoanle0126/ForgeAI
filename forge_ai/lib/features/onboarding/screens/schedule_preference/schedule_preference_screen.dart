@@ -3,13 +3,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
-import 'package:forge_ai/features/onboarding/widgets/onboarding_app_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/preferred_time_grid.dart';
-import 'package:forge_ai/features/onboarding/widgets/schedule_ai_promo.dart';
-import 'package:forge_ai/features/onboarding/widgets/schedule_preference_action_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/schedule_section_header.dart';
-import 'package:forge_ai/features/onboarding/widgets/session_length_card.dart';
-import 'package:forge_ai/features/onboarding/widgets/training_days_selector.dart';
+import 'package:forge_ai/features/onboarding/widgets/common/onboarding_app_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/preferred_time_grid.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/schedule_ai_promo.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/schedule_preference_action_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/schedule_section_header.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/session_length_card.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/training_days_selector.dart';
 
 class SchedulePreferenceScreen extends StatelessWidget {
   const SchedulePreferenceScreen({super.key});

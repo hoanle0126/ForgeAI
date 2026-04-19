@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/onboarding/providers/onboarding_provider.dart';
-import 'package:forge_ai/features/onboarding/widgets/equipment_card.dart';
+import 'package:forge_ai/features/onboarding/widgets/equipment_selection/equipment_card.dart';
 
 class EquipmentGrid extends ConsumerWidget {
   const EquipmentGrid({super.key});

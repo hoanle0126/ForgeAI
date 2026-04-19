@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
-import 'package:forge_ai/features/onboarding/widgets/activity_level_chips.dart';
-import 'package:forge_ai/features/onboarding/widgets/body_metric_inputs.dart';
-import 'package:forge_ai/features/onboarding/widgets/body_profile_action_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/onboarding_app_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/body_profile/activity_level_chips.dart';
+import 'package:forge_ai/features/onboarding/widgets/body_profile/body_metric_inputs.dart';
+import 'package:forge_ai/features/onboarding/widgets/body_profile/body_profile_action_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/common/onboarding_app_bar.dart';
 
 class BodyProfileScreen extends ConsumerWidget {
   const BodyProfileScreen({super.key});

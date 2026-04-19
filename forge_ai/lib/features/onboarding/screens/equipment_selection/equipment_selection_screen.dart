@@ -5,10 +5,10 @@ import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/features/onboarding/providers/onboarding_provider.dart';
-import 'package:forge_ai/features/onboarding/widgets/equipment_grid.dart';
-import 'package:forge_ai/features/onboarding/widgets/equipment_scaling_promo.dart';
-import 'package:forge_ai/features/onboarding/widgets/equipment_selection_action_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/onboarding_app_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/common/onboarding_app_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/equipment_selection/equipment_grid.dart';
+import 'package:forge_ai/features/onboarding/widgets/equipment_selection/equipment_scaling_promo.dart';
+import 'package:forge_ai/features/onboarding/widgets/equipment_selection/equipment_selection_action_bar.dart';
 
 class EquipmentSelectionScreen extends ConsumerWidget {
   const EquipmentSelectionScreen({super.key});

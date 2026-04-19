@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
-import 'package:forge_ai/features/dashboard/widgets/ai_readiness_card.dart';
-import 'package:forge_ai/features/dashboard/widgets/dashboard_top_header_row.dart';
-import 'package:forge_ai/features/dashboard/widgets/hero_workout_card.dart';
-import 'package:forge_ai/features/dashboard/widgets/nutrition_overview_card.dart';
-import 'package:forge_ai/features/dashboard/widgets/page_greeting_title.dart';
-import 'package:forge_ai/features/dashboard/widgets/stats_grid_row.dart';
-import 'package:forge_ai/features/dashboard/widgets/weekly_progress_row.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/ai_readiness_card.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/dashboard_top_header_row.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/page_greeting_title.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/stats_grid_row.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/weekly_progress_row.dart';
+import 'package:forge_ai/features/dashboard/widgets/nutrition/nutrition_overview_card.dart';
+import 'package:forge_ai/features/dashboard/widgets/workout/hero_workout_card.dart';
 
 class DashboardHomeScreen extends StatelessWidget {
   const DashboardHomeScreen({super.key});

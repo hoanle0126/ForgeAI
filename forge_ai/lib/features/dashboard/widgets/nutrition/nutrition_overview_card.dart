@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
-import 'package:forge_ai/features/dashboard/widgets/nutrition_macro_row.dart';
+import 'package:forge_ai/features/dashboard/widgets/nutrition/nutrition_macro_row.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
 
 class NutritionOverviewCard extends StatelessWidget {

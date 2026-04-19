@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
-import 'package:forge_ai/features/onboarding/widgets/welcome_content.dart';
-import 'package:forge_ai/features/onboarding/widgets/welcome_hero.dart';
+import 'package:forge_ai/features/onboarding/widgets/welcome/welcome_content.dart';
+import 'package:forge_ai/features/onboarding/widgets/welcome/welcome_hero.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

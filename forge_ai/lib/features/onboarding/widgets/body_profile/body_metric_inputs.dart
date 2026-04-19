@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/onboarding/providers/onboarding_provider.dart';
-import 'package:forge_ai/features/onboarding/widgets/metric_input_field.dart';
+import 'package:forge_ai/features/onboarding/widgets/body_profile/metric_input_field.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
 
 class BodyMetricInputs extends ConsumerWidget {

@@ -3,11 +3,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
-import 'package:forge_ai/features/onboarding/widgets/ai_plan_action_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/ai_plan_avatar.dart';
-import 'package:forge_ai/features/onboarding/widgets/ai_quote_block.dart';
-import 'package:forge_ai/features/onboarding/widgets/onboarding_app_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/timeline_section.dart';
+import 'package:forge_ai/features/onboarding/widgets/ai_plan_preview/ai_plan_action_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/ai_plan_preview/ai_plan_avatar.dart';
+import 'package:forge_ai/features/onboarding/widgets/ai_plan_preview/ai_quote_block.dart';
+import 'package:forge_ai/features/onboarding/widgets/ai_plan_preview/timeline_section.dart';
+import 'package:forge_ai/features/onboarding/widgets/common/onboarding_app_bar.dart';
 
 class AiPlanPreviewScreen extends StatelessWidget {
   const AiPlanPreviewScreen({super.key});

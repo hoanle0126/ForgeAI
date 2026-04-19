@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
-import 'package:forge_ai/features/dashboard/widgets/hero_workout_card_actions.dart';
-import 'package:forge_ai/features/dashboard/widgets/hero_workout_exercise_count.dart';
-import 'package:forge_ai/features/dashboard/widgets/hero_workout_meta_row.dart';
+import 'package:forge_ai/features/dashboard/widgets/workout/hero_workout_card_actions.dart';
+import 'package:forge_ai/features/dashboard/widgets/workout/hero_workout_exercise_count.dart';
+import 'package:forge_ai/features/dashboard/widgets/workout/hero_workout_meta_row.dart';
 
 class HeroWorkoutCard extends StatelessWidget {
   const HeroWorkoutCard({super.key});

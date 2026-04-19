@@ -1,12 +1,12 @@
-import 'package:forge_ai/features/dashboard/screens/dashboard_home_screen.dart';
-import 'package:forge_ai/features/dashboard/screens/dashboard_shell_screen.dart';
-import 'package:forge_ai/features/dashboard/screens/placeholder_screen.dart';
-import 'package:forge_ai/features/onboarding/screens/ai_plan_preview_screen.dart';
-import 'package:forge_ai/features/onboarding/screens/body_profile_screen.dart';
-import 'package:forge_ai/features/onboarding/screens/equipment_selection_screen.dart';
-import 'package:forge_ai/features/onboarding/screens/goal_selection_screen.dart';
-import 'package:forge_ai/features/onboarding/screens/schedule_preference_screen.dart';
-import 'package:forge_ai/features/onboarding/screens/welcome_screen.dart';
+import 'package:forge_ai/features/dashboard/screens/home/dashboard_home_screen.dart';
+import 'package:forge_ai/features/dashboard/screens/placeholder/placeholder_screen.dart';
+import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen.dart';
+import 'package:forge_ai/features/onboarding/screens/ai_plan_preview/ai_plan_preview_screen.dart';
+import 'package:forge_ai/features/onboarding/screens/body_profile/body_profile_screen.dart';
+import 'package:forge_ai/features/onboarding/screens/equipment_selection/equipment_selection_screen.dart';
+import 'package:forge_ai/features/onboarding/screens/goal_selection/goal_selection_screen.dart';
+import 'package:forge_ai/features/onboarding/screens/schedule_preference/schedule_preference_screen.dart';
+import 'package:forge_ai/features/onboarding/screens/welcome/welcome_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {

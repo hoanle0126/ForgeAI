@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
-import 'package:forge_ai/features/dashboard/widgets/dashboard_stat_card.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/dashboard_stat_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class StatsGridRow extends StatelessWidget {

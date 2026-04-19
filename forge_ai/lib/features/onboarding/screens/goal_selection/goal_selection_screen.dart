@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/onboarding/providers/onboarding_provider.dart';
-import 'package:forge_ai/features/onboarding/widgets/analysis_card.dart';
-import 'package:forge_ai/features/onboarding/widgets/goal_card.dart';
-import 'package:forge_ai/features/onboarding/widgets/goal_selection_action_bar.dart';
-import 'package:forge_ai/features/onboarding/widgets/goal_selection_header.dart';
-import 'package:forge_ai/features/onboarding/widgets/onboarding_app_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/common/onboarding_app_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/goal_selection/analysis_card.dart';
+import 'package:forge_ai/features/onboarding/widgets/goal_selection/goal_card.dart';
+import 'package:forge_ai/features/onboarding/widgets/goal_selection/goal_selection_action_bar.dart';
+import 'package:forge_ai/features/onboarding/widgets/goal_selection/goal_selection_header.dart';
 
 class GoalSelectionScreen extends ConsumerWidget {
   const GoalSelectionScreen({super.key});

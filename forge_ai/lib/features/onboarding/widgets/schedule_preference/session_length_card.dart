@@ -4,7 +4,7 @@ import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/features/onboarding/providers/onboarding_provider.dart';
-import 'package:forge_ai/features/onboarding/widgets/schedule_section_header.dart';
+import 'package:forge_ai/features/onboarding/widgets/schedule_preference/schedule_section_header.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
 
 class SessionLengthCard extends ConsumerWidget {

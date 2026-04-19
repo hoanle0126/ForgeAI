@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
-import 'package:forge_ai/features/onboarding/widgets/timeline_phase_content.dart';
+import 'package:forge_ai/features/onboarding/widgets/ai_plan_preview/timeline_phase_content.dart';
 
 class TimelinePhase extends StatelessWidget {
   const TimelinePhase({

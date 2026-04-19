@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
-import 'package:forge_ai/features/onboarding/widgets/timeline_phase.dart';
+import 'package:forge_ai/features/onboarding/widgets/ai_plan_preview/timeline_phase.dart';
 
 class TimelineSection extends StatelessWidget {
   const TimelineSection({super.key});
