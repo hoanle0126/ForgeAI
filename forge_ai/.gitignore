@@ -1,4 +1,6 @@
 # Miscellaneous
+docs/superpowers/plans/
+docs/superpowers/specs/
 .worktrees/
 *.class
 *.log
