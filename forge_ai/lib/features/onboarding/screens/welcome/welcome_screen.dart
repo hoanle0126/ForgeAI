@@ -8,14 +8,26 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.warmIvory,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(flex: 5, child: WelcomeHero()),
-          Expanded(flex: 4, child: WelcomeContent()),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isCompactHeight = constraints.maxHeight < 720;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                flex: isCompactHeight ? 4 : 5,
+                child: const WelcomeHero(),
+              ),
+              Expanded(
+                flex: isCompactHeight ? 5 : 4,
+                child: const WelcomeContent(),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
