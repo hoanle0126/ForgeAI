@@ -35,6 +35,8 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   hive_generator: ^2.0.1
   custom_lint: ^0.6.4
+  forge_ai_lints:
+    path: tools/forge_ai_lints
   riverpod_lint: ^2.3.10
 
 flutter:

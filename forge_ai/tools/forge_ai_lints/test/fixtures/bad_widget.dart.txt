@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+final exampleProvider = StateProvider<String>((ref) => '');
+
+class FixtureWidget extends ConsumerWidget {
+  const FixtureWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(exampleProvider.notifier).state = 'bad';
+
+    return Container(
+      color: Colors.white,
+      child: Text(
+        'Fixture',
+        style: TextStyle(color: Color(0xFFFFFFFF)),
+      ),
+    );
+  }
+}
+
+class SecondFixtureWidget extends StatelessWidget {
+  const SecondFixtureWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    context.go('/bad-route');
+    return const SizedBox.shrink();
+  }
+}

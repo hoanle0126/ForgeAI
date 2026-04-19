@@ -13,9 +13,15 @@ analyzer:
   errors:
     # Lỗi không thể tha thứ (Ép thành Error đỏ)
     avoid_print: error
+    always_use_package_imports: error
+    directives_ordering: error
     prefer_const_constructors: error
+    prefer_const_declarations: error
+    prefer_const_constructors_in_immutables: error
+    prefer_const_literals_to_create_immutables: error
     prefer_typing_uninitialized_variables: error
-    always_use_package_imports: warning
+    require_trailing_commas: error
+    sort_child_properties_last: error
 
     # Bỏ qua warning không cần thiết cho code gen
     invalid_annotation_target: ignore
@@ -51,6 +57,22 @@ linter:
 custom_lint:
   rules:
     # Riverpod lint rules
-    - riverpod_notifier_parameters: true
-    - riverpod_generator_class_extends_generated: true
+    - avoid_build_context_in_providers: true
+    - avoid_public_notifier_properties: true
+    - avoid_ref_inside_state_dispose: true
+    - functional_ref: true
     - missing_provider_scope: true
+    - notifier_build: true
+    - notifier_extends: true
+    - provider_dependencies: true
+    - provider_parameters: true
+    - protected_notifier_properties: true
+    - unsupported_provider_value: true
+
+    # ForgeAI architecture lint rules
+    - forge_no_hardcoded_colors: true
+    - forge_no_direct_text_style: true
+    - forge_no_raw_route_strings: true
+    - forge_widget_file_size: true
+    - forge_one_public_widget_per_file: true
+    - forge_no_direct_state_provider_mutation_in_widgets: true

@@ -513,10 +513,13 @@ try {
 5. Dùng ĐÚNG Design System (R3): AppColors, AppTypography, AppSpacing
 6. ĐẶT TÊN đúng convention (R9)
 7. KIỂM TRA widget < 120 dòng (R4.1)
-8. CHẠY `flutter analyze` đảm bảo 0 warnings
+8. CHẠY `./tool/check.sh` từ thư mục `forge_ai/` đảm bảo 0 errors/warnings
 ```
+
+> [!IMPORTANT]
+> `./tool/check.sh` là verification gate chuẩn của project. Script này chạy `flutter analyze`, `dart run custom_lint` và format check. **KHÔNG dùng `flutter analyze` đơn lẻ làm final check**, vì các rule kiến trúc ForgeAI nằm trong custom lint.
 
 ---
 
 > _Rules version 1.0 — ForgeAI Flutter Project_
-> _Last updated: 2026-04-18_
+> _Last updated: 2026-04-19_

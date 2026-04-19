@@ -336,6 +336,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  forge_ai_lints:
+    dependency: "direct dev"
+    description:
+      path: "tools/forge_ai_lints"
+      relative: true
+    source: path
+    version: "0.1.0"
   freezed:
     dependency: "direct dev"
     description:
