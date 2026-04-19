@@ -148,9 +148,7 @@ class AuthNotifier extends Notifier<AuthState> {
     return AuthSubmitResult.success;
   }
 
-  AuthValidationResult validatePasswordReset({
-    required String email,
-  }) {
+  AuthValidationResult validatePasswordReset({required String email}) {
     final errors = <String, String>{};
     if (!_isValidEmail(email)) {
       errors['email'] = 'Enter a valid email.';
@@ -161,9 +159,7 @@ class AuthNotifier extends Notifier<AuthState> {
     return result;
   }
 
-  Future<AuthSubmitResult> submitPasswordReset({
-    required String email,
-  }) async {
+  Future<AuthSubmitResult> submitPasswordReset({required String email}) async {
     final validation = validatePasswordReset(email: email);
     if (!validation.isValid) {
       state = state.copyWith(
