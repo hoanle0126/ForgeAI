@@ -80,32 +80,24 @@ class AppButton extends StatelessWidget {
   }
 
   Color _getBackgroundColor(bool isDisabled) {
-    if (variant == AppButtonVariant.outline) return Colors.transparent;
+    if (variant == AppButtonVariant.outline) return AppColors.transparent;
+    if (isDisabled) return AppColors.border;
 
-    if (isDisabled) {
-      return AppColors.border; // Grey background when disabled
-    }
-
-    switch (variant) {
-      case AppButtonVariant.primary:
-        return AppColors.sportOrange;
-      case AppButtonVariant.secondary:
-        return AppColors.sportOrangeLight;
-      case AppButtonVariant.outline:
-        return Colors.transparent;
-    }
+    return switch (variant) {
+      AppButtonVariant.primary => AppColors.sportOrange,
+      AppButtonVariant.secondary => AppColors.sportOrangeLight,
+      AppButtonVariant.outline => AppColors.transparent,
+    };
   }
 
   Color _getTextColor(bool isDisabled) {
     if (isDisabled) return AppColors.textDisabled;
 
-    switch (variant) {
-      case AppButtonVariant.primary:
-        return AppColors.cardWhite;
-      case AppButtonVariant.secondary:
-      case AppButtonVariant.outline:
-        return AppColors.sportOrange;
-    }
+    return switch (variant) {
+      AppButtonVariant.primary => AppColors.cardWhite,
+      AppButtonVariant.secondary ||
+      AppButtonVariant.outline => AppColors.sportOrange,
+    };
   }
 
   Widget _buildLoader() {

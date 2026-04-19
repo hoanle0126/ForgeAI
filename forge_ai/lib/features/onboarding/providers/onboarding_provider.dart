@@ -14,9 +14,19 @@ enum OnboardingGoal {
   const OnboardingGoal(this.title, this.subtitle, this.icon);
 }
 
-final selectedGoalProvider = StateProvider<OnboardingGoal?>(
-  (ref) => OnboardingGoal.loseFat,
-);
+class SelectedGoalNotifier extends Notifier<OnboardingGoal?> {
+  @override
+  OnboardingGoal? build() => OnboardingGoal.loseFat;
+
+  void select(OnboardingGoal goal) {
+    state = goal;
+  }
+}
+
+final selectedGoalProvider =
+    NotifierProvider<SelectedGoalNotifier, OnboardingGoal?>(
+      SelectedGoalNotifier.new,
+    );
 
 enum Equipment {
   dumbbells('Dumbbells', Icons.fitness_center),
@@ -73,10 +83,41 @@ enum ActivityLevel {
   final String title;
 }
 
-final heightProvider = StateProvider<String>((ref) => '');
-final weightProvider = StateProvider<String>((ref) => '');
-final ageProvider = StateProvider<String>((ref) => '');
-final activityLevelProvider = StateProvider<ActivityLevel?>((ref) => null);
+abstract class StringFieldNotifier extends Notifier<String> {
+  @override
+  String build() => '';
+
+  void update(String value) {
+    state = value;
+  }
+}
+
+class HeightNotifier extends StringFieldNotifier {}
+
+class WeightNotifier extends StringFieldNotifier {}
+
+class AgeNotifier extends StringFieldNotifier {}
+
+class ActivityLevelNotifier extends Notifier<ActivityLevel?> {
+  @override
+  ActivityLevel? build() => null;
+
+  void select(ActivityLevel level) {
+    state = level;
+  }
+}
+
+final heightProvider = NotifierProvider<HeightNotifier, String>(
+  HeightNotifier.new,
+);
+final weightProvider = NotifierProvider<WeightNotifier, String>(
+  WeightNotifier.new,
+);
+final ageProvider = NotifierProvider<AgeNotifier, String>(AgeNotifier.new);
+final activityLevelProvider =
+    NotifierProvider<ActivityLevelNotifier, ActivityLevel?>(
+      ActivityLevelNotifier.new,
+    );
 
 // Phase 5: Schedule Preference
 enum TrainingDay {
@@ -110,7 +151,18 @@ final selectedDaysProvider =
       SelectedDaysNotifier.new,
     );
 
-final sessionLengthProvider = StateProvider<double>((ref) => 30.0);
+class SessionLengthNotifier extends Notifier<double> {
+  @override
+  double build() => 30.0;
+
+  void update(double value) {
+    state = value;
+  }
+}
+
+final sessionLengthProvider = NotifierProvider<SessionLengthNotifier, double>(
+  SessionLengthNotifier.new,
+);
 
 enum PreferredTime {
   morning('Morning', Icons.wb_sunny_outlined),
@@ -123,4 +175,16 @@ enum PreferredTime {
   final IconData icon; // using material icons representing the mockup
 }
 
-final preferredTimeProvider = StateProvider<PreferredTime?>((ref) => null);
+class PreferredTimeNotifier extends Notifier<PreferredTime?> {
+  @override
+  PreferredTime? build() => null;
+
+  void select(PreferredTime time) {
+    state = time;
+  }
+}
+
+final preferredTimeProvider =
+    NotifierProvider<PreferredTimeNotifier, PreferredTime?>(
+      PreferredTimeNotifier.new,
+    );

@@ -40,7 +40,7 @@ class PersonalizedAnalysisCard extends StatelessWidget {
                 child: Icon(
                   Icons.sports_gymnastics,
                   size: 100,
-                  color: Colors.white,
+                  color: AppColors.cardWhite,
                 ),
               ),
             ),
@@ -54,7 +54,7 @@ class PersonalizedAnalysisCard extends StatelessWidget {
                 Text(
                   'PERSONALIZED ANALYSIS',
                   style: AppTypography.h4.copyWith(
-                    color: Colors.white,
+                    color: AppColors.cardWhite,
                     letterSpacing: -0.5,
                   ),
                 ),
@@ -62,7 +62,7 @@ class PersonalizedAnalysisCard extends StatelessWidget {
                 Text(
                   'Based on your previous activity, "Lose Fat" is optimized for your current recovery rate.',
                   style: AppTypography.bodyMedium.copyWith(
-                    color: Colors.white70,
+                    color: AppColors.cardWhite.withValues(alpha: 0.7),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
@@ -70,9 +70,13 @@ class PersonalizedAnalysisCard extends StatelessWidget {
                   children: [
                     _buildStat('ACCURACY', '94.2%', AppColors.sportOrange),
                     const SizedBox(width: AppSpacing.lg),
-                    Container(width: 1, height: 32, color: Colors.white24),
+                    Container(
+                      width: 1,
+                      height: 32,
+                      color: AppColors.cardWhite.withValues(alpha: 0.24),
+                    ),
                     const SizedBox(width: AppSpacing.lg),
-                    _buildStat('ENGINE', 'v4.0', Colors.white),
+                    _buildStat('ENGINE', 'v4.0', AppColors.cardWhite),
                   ],
                 ),
               ],
@@ -90,7 +94,7 @@ class PersonalizedAnalysisCard extends StatelessWidget {
         Text(
           label,
           style: AppTypography.labelUppercase.copyWith(
-            color: Colors.white54,
+            color: AppColors.cardWhite.withValues(alpha: 0.54),
             letterSpacing: 2,
           ),
         ),

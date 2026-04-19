@@ -5,6 +5,7 @@ abstract final class AppColors {
   static const warmIvory = Color(0xFFF9F7F4);
   static const cardWhite = Color(0xFFFFFFFF);
   static const inputBg = Color(0xFFF3F1ED);
+  static const transparent = Color(0x00000000);
 
   // Primary
   static const sportOrange = Color(0xFFF05A1F);

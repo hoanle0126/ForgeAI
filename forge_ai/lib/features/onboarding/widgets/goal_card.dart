@@ -31,7 +31,7 @@ class GoalCard extends StatelessWidget {
           color: isSelected ? AppColors.sportOrangeLight : AppColors.inputBg,
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
           border: Border.all(
-            color: isSelected ? AppColors.sportOrange : Colors.transparent,
+            color: isSelected ? AppColors.sportOrange : AppColors.transparent,
             width: 2,
           ),
           boxShadow: isSelected
@@ -111,7 +111,7 @@ class GoalCard extends StatelessWidget {
         ),
       ),
       child: isSelected
-          ? const Icon(Icons.check, size: 18, color: Colors.white)
+          ? const Icon(Icons.check, size: 18, color: AppColors.cardWhite)
           : null,
     );
   }

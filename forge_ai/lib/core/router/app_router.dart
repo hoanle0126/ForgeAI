@@ -1,3 +1,6 @@
+import 'package:forge_ai/features/dashboard/screens/dashboard_home_screen.dart';
+import 'package:forge_ai/features/dashboard/screens/dashboard_shell_screen.dart';
+import 'package:forge_ai/features/dashboard/screens/placeholder_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/ai_plan_preview_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/body_profile_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/equipment_selection_screen.dart';
@@ -13,6 +16,12 @@ abstract final class AppRoutes {
   static const bodyProfile = '/body-profile';
   static const schedulePreference = '/schedule';
   static const aiPlanPreview = '/ai-plan-preview';
+
+  // Dashboard Routes
+  static const dashboard = '/dashboard';
+  static const training = '/training';
+  static const insights = '/insights';
+  static const profile = '/profile';
 }
 
 final appRouter = GoRouter(
@@ -41,6 +50,48 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.aiPlanPreview,
       builder: (context, state) => const AiPlanPreviewScreen(),
+    ),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return DashboardShellScreen(navigationShell: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.dashboard,
+              builder: (context, state) => const DashboardHomeScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.training,
+              builder: (context, state) =>
+                  const PlaceholderScreen(title: 'Training'),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.insights,
+              builder: (context, state) =>
+                  const PlaceholderScreen(title: 'Insights'),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.profile,
+              builder: (context, state) =>
+                  const PlaceholderScreen(title: 'Profile'),
+            ),
+          ],
+        ),
+      ],
     ),
   ],
 );

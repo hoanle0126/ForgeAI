@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
+import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 
 class MetricInputField extends StatefulWidget {
@@ -57,40 +58,39 @@ class _MetricInputFieldState extends State<MetricInputField> {
             fontSize: 11,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Container(
           height: 54,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: AppColors.inputBg,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
           ),
           child: Row(
             children: [
               AnimatedContainer(
                 duration: 200.ms,
-                width: 4,
-                color: _isFocused ? AppColors.sportOrange : Colors.transparent,
+                width: AppSpacing.xs,
+                color: _isFocused
+                    ? AppColors.sportOrange
+                    : AppColors.transparent,
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.base,
+                  ),
                   child: TextFormField(
                     controller: _controller,
                     focusNode: _focusNode,
                     onChanged: widget.onChanged,
                     keyboardType: TextInputType.number,
-                    style: const TextStyle(
-                      fontFamily: 'monospace',
-                      fontSize: 18,
+                    style: AppTypography.statMedium.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textDark,
                     ),
                     decoration: InputDecoration(
                       hintText: widget.hint,
-                      hintStyle: TextStyle(
-                        fontFamily: 'monospace',
-                        fontSize: 18,
+                      hintStyle: AppTypography.statMedium.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.textDisabled.withValues(alpha: 0.5),
                       ),
