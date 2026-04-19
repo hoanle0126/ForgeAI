@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
+import 'package:forge_ai/features/auth/widgets/auth_password_fields.dart';
 import 'package:forge_ai/features/auth/widgets/auth_submit_section.dart';
 import 'package:forge_ai/features/auth/widgets/auth_success_view.dart';
 import 'package:forge_ai/features/auth/widgets/auth_text_field.dart';
@@ -78,28 +79,14 @@ class AuthForm extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           icon: PhosphorIcons.envelopeSimple(),
         ),
-        if (!_isForgotPassword) ...[
-          const SizedBox(height: AppSpacing.base),
-          AuthTextField(
-            label: 'Password',
-            hint: 'Minimum 6 characters',
-            controller: passwordController,
-            errorText: state.fieldErrors['password'],
-            obscureText: true,
-            icon: PhosphorIcons.lockKey(),
+        if (!_isForgotPassword)
+          AuthPasswordFields(
+            isRegister: _isRegister,
+            passwordController: passwordController,
+            confirmPasswordController: confirmPasswordController,
+            passwordError: state.fieldErrors['password'],
+            confirmPasswordError: state.fieldErrors['confirmPassword'],
           ),
-        ],
-        if (_isRegister) ...[
-          const SizedBox(height: AppSpacing.base),
-          AuthTextField(
-            label: 'Confirm Password',
-            hint: 'Repeat password',
-            controller: confirmPasswordController,
-            errorText: state.fieldErrors['confirmPassword'],
-            obscureText: true,
-            icon: PhosphorIcons.shieldCheck(),
-          ),
-        ],
         if (!_isRegister && !_isForgotPassword) ...[
           const SizedBox(height: AppSpacing.sm),
           ForgotPasswordButton(
