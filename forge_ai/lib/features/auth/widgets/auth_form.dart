@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
@@ -8,7 +7,6 @@ import 'package:forge_ai/features/auth/widgets/auth_submit_section.dart';
 import 'package:forge_ai/features/auth/widgets/auth_success_view.dart';
 import 'package:forge_ai/features/auth/widgets/auth_text_field.dart';
 import 'package:forge_ai/features/auth/widgets/forgot_password_button.dart';
-import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class AuthForm extends StatelessWidget {
