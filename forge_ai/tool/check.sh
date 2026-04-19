@@ -2,7 +2,7 @@
 set -euo pipefail
 
 flutter analyze
-dart run custom_lint
+flutter pub run custom_lint
 
 format_targets=(lib tools)
 if [[ -d test ]]; then

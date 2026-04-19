@@ -33,46 +33,63 @@ class AppButton extends StatelessWidget {
     return Semantics(
       button: true,
       enabled: !isDisabled,
-      child: InkWell(
-        onTap: isDisabled ? null : onPressed,
+      child: Material(
+        color: AppColors.transparent,
         borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-        child: Ink(
-          width: isFullWidth ? double.infinity : null,
-          height: 56, // Standard touch target height for main CTAs
-          decoration: BoxDecoration(
-            color: _getBackgroundColor(isDisabled),
-            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-            border: variant == AppButtonVariant.outline
-                ? Border.all(color: AppColors.border)
-                : null,
-          ),
-          child: Center(
-            child: isLoading
-                ? _buildLoader()
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (icon != null) ...[
-                        Icon(icon, color: _getTextColor(isDisabled), size: 20),
-                        const SizedBox(width: AppSpacing.sm),
-                      ],
-                      Text(
-                        text,
-                        style: AppTypography.bodySemiBold.copyWith(
-                          color: _getTextColor(isDisabled),
-                          fontSize: 16,
+        child: InkWell(
+          onTap: isDisabled ? null : onPressed,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+          child: Ink(
+            width: isFullWidth ? double.infinity : null,
+            height: 56,
+            decoration: BoxDecoration(
+              color: _getBackgroundColor(isDisabled),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+              border: variant == AppButtonVariant.outline
+                  ? Border.all(color: AppColors.border)
+                  : null,
+            ),
+            child: Center(
+              child: isLoading
+                  ? SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.5,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          _getTextColor(false),
                         ),
                       ),
-                      if (trailingIcon != null) ...[
-                        const SizedBox(width: AppSpacing.sm),
-                        Icon(
-                          trailingIcon,
-                          color: _getTextColor(isDisabled),
-                          size: 20,
+                    )
+                  : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (icon != null) ...[
+                          Icon(
+                            icon,
+                            color: _getTextColor(isDisabled),
+                            size: 20,
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                        ],
+                        Text(
+                          text,
+                          style: AppTypography.bodySemiBold.copyWith(
+                            color: _getTextColor(isDisabled),
+                            fontSize: 16,
+                          ),
                         ),
+                        if (trailingIcon != null) ...[
+                          const SizedBox(width: AppSpacing.sm),
+                          Icon(
+                            trailingIcon,
+                            color: _getTextColor(isDisabled),
+                            size: 20,
+                          ),
+                        ],
                       ],
-                    ],
-                  ),
+                    ),
+            ),
           ),
         ),
       ),
@@ -98,16 +115,5 @@ class AppButton extends StatelessWidget {
       AppButtonVariant.secondary ||
       AppButtonVariant.outline => AppColors.sportOrange,
     };
-  }
-
-  Widget _buildLoader() {
-    return SizedBox(
-      width: 24,
-      height: 24,
-      child: CircularProgressIndicator(
-        strokeWidth: 2.5,
-        valueColor: AlwaysStoppedAnimation<Color>(_getTextColor(false)),
-      ),
-    );
   }
 }

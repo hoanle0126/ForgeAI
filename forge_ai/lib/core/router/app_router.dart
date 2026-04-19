@@ -1,3 +1,5 @@
+import 'package:forge_ai/features/auth/providers/auth_provider.dart';
+import 'package:forge_ai/features/auth/screens/auth_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/home/dashboard_home_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/placeholder/placeholder_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen.dart';
@@ -11,6 +13,10 @@ import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {
   static const splash = '/';
+  static const auth = '/auth';
+  static const authModeParam = 'mode';
+  static const authModeLogin = 'login';
+  static const authModeRegister = 'register';
   static const goalSelection = '/goal-selection';
   static const equipmentSelection = '/equipment';
   static const bodyProfile = '/body-profile';
@@ -22,6 +28,13 @@ abstract final class AppRoutes {
   static const training = '/training';
   static const insights = '/insights';
   static const profile = '/profile';
+
+  static String get authLogin => _authWithMode(authModeLogin);
+  static String get authRegister => _authWithMode(authModeRegister);
+
+  static String _authWithMode(String mode) {
+    return Uri(path: auth, queryParameters: {authModeParam: mode}).toString();
+  }
 }
 
 final appRouter = GoRouter(
@@ -30,6 +43,18 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.splash,
       builder: (context, state) => const WelcomeScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.auth,
+      builder: (context, state) {
+        final mode =
+            state.uri.queryParameters[AppRoutes.authModeParam] ==
+                AppRoutes.authModeRegister
+            ? AuthMode.register
+            : AuthMode.login;
+
+        return AuthScreen(initialMode: mode);
+      },
     ),
     GoRoute(
       path: AppRoutes.goalSelection,
