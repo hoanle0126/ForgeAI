@@ -111,5 +111,31 @@ void main() {
         expect(state.isLoading, isFalse);
       },
     );
+
+    test('validatePasswordReset reports email errors', () {
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final notifier = container.read(authProvider.notifier);
+
+      final result = notifier.validatePasswordReset(email: 'bad');
+
+      expect(result.isValid, isFalse);
+      expect(result.fieldErrors['email'], 'Enter a valid email.');
+    });
+
+    test('submitPasswordReset returns success and switches to success mode', () async {
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final notifier = container.read(authProvider.notifier);
+
+      notifier.switchMode(AuthMode.forgotPassword);
+      final result = await notifier.submitPasswordReset(email: 'athlete@forge.ai');
+
+      expect(result, AuthSubmitResult.success);
+      final state = container.read(authProvider);
+      expect(state.isLoading, isFalse);
+      expect(state.errorMessage, isNull);
+      expect(state.mode, AuthMode.forgotPasswordSuccess);
+    });
   });
 }

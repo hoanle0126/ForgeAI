@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum AuthMode { login, register }
+enum AuthMode { login, register, forgotPassword, forgotPasswordSuccess }
 
 enum AuthSubmitResult { success, invalid }
 
@@ -144,6 +144,41 @@ class AuthNotifier extends Notifier<AuthState> {
       fieldErrors: {},
       displayName: name.trim(),
       clearError: true,
+    );
+    return AuthSubmitResult.success;
+  }
+
+  AuthValidationResult validatePasswordReset({
+    required String email,
+  }) {
+    final errors = <String, String>{};
+    if (!_isValidEmail(email)) {
+      errors['email'] = 'Enter a valid email.';
+    }
+
+    final result = AuthValidationResult(errors);
+    state = state.copyWith(fieldErrors: errors, clearError: true);
+    return result;
+  }
+
+  Future<AuthSubmitResult> submitPasswordReset({
+    required String email,
+  }) async {
+    final validation = validatePasswordReset(email: email);
+    if (!validation.isValid) {
+      state = state.copyWith(
+        errorMessage: 'Provide a valid email to reset your access key.',
+      );
+      return AuthSubmitResult.invalid;
+    }
+
+    state = state.copyWith(isLoading: true, clearError: true);
+    await Future<void>.delayed(_mockDelay);
+    state = state.copyWith(
+      isLoading: false,
+      fieldErrors: {},
+      clearError: true,
+      mode: AuthMode.forgotPasswordSuccess,
     );
     return AuthSubmitResult.success;
   }
