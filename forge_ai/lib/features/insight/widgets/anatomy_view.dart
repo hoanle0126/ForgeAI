@@ -9,19 +9,43 @@ class AnatomyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const resolver = MuscleResolver();
+    
+    final Map<MuscleInfo, Color> colorMapping = {};
+
+    for (final muscle in data) {
+      final muscleInfo = resolver.resolve(muscle.id);
+      if (muscleInfo != null) {
+        Color color = AppColors.success;
+        if (muscle.rpe >= 8) {
+          color = AppColors.sportOrange;
+        } else if (muscle.rpe >= 5) {
+          color = AppColors.energy;
+        }
+        
+        colorMapping[muscleInfo] = color;
+      }
+    }
+
     return SizedBox(
       height: 400,
-      child: FlutterBodyAtlas(
-        bodyAtlasController: BodyAtlasController(), // For hit testing if needed
-        colorsResolver: (id) {
-          final match = data.where((m) => m.id == id).firstOrNull;
-          if (match != null) {
-            if (match.rpe >= 8) return AppColors.sportOrange;
-            if (match.rpe >= 5) return AppColors.energy;
-            return AppColors.success;
-          }
-          return AppColors.inputBg;
-        },
+      child: Row(
+        children: [
+          Expanded(
+            child: BodyAtlasView<MuscleInfo>(
+              view: AtlasAsset.musclesFront,
+              resolver: resolver,
+              colorMapping: colorMapping,
+            ),
+          ),
+          Expanded(
+            child: BodyAtlasView<MuscleInfo>(
+              view: AtlasAsset.musclesBack,
+              resolver: resolver,
+              colorMapping: colorMapping,
+            ),
+          ),
+        ],
       ),
     );
   }
