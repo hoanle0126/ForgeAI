@@ -10,6 +10,7 @@ import 'package:forge_ai/features/onboarding/screens/goal_selection/goal_selecti
 import 'package:forge_ai/features/onboarding/screens/schedule_preference/schedule_preference_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/welcome/welcome_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
+import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {
@@ -103,7 +104,7 @@ final appRouter = GoRouter(
             GoRoute(
               path: AppRoutes.insights,
               builder: (context, state) =>
-                  const PlaceholderScreen(title: 'Insights'),
+                  const InsightScreen(),
             ),
           ],
         ),
