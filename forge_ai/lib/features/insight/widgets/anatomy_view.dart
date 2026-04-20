@@ -14,7 +14,7 @@ class AnatomyView extends StatelessWidget {
     final Map<MuscleInfo, Color> colorMapping = {};
 
     for (final muscle in data) {
-      final muscleInfo = resolver.resolve(muscle.id);
+      final muscleInfo = resolver.tryById(muscle.id);
       if (muscleInfo != null) {
         Color color = AppColors.success;
         if (muscle.rpe >= 8) {
