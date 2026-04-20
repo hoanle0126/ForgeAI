@@ -521,5 +521,14 @@ try {
 
 ---
 
-> _Rules version 1.0 — ForgeAI Flutter Project_
-> _Last updated: 2026-04-19_
+## R14. Ngôn ngữ & Giao tiếp
+
+- **Giao tiếp với User:** LUÔN LUÔN sử dụng **Tiếng Việt**.
+- **Code & Comment:** Mọi biến, hàm, class, file name và comment trong source code PHẢI sử dụng **Tiếng Anh**.
+- **Commit Messages:** Tất cả nội dung commit (title và body) PHẢI sử dụng **Tiếng Anh**.
+- **Ngôn ngữ trong App:** Các chuỗi text hiển thị trên giao diện (UI text) mặc định PHẢI sử dụng **Tiếng Anh**.
+
+---
+
+> _Rules version 1.1 — ForgeAI Flutter Project_
+> _Last updated: 2026-04-20_
