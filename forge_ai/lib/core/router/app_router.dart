@@ -3,7 +3,9 @@ import 'package:forge_ai/features/auth/screens/auth_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/home/dashboard_home_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/placeholder/placeholder_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen.dart';
+import 'package:forge_ai/features/insight/screens/insight_chat_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_screen.dart';
+import 'package:forge_ai/features/insight/screens/muscle_detail_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/ai_plan_preview/ai_plan_preview_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/body_profile/body_profile_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/equipment_selection/equipment_selection_screen.dart';
@@ -81,6 +83,17 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.aiPlanPreview,
       builder: (context, state) => const AiPlanPreviewScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.insightMuscleDetailPath,
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '';
+        return MuscleDetailScreen(muscleId: id);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.insightChat,
+      builder: (context, state) => const InsightChatScreen(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
