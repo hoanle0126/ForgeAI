@@ -29,10 +29,14 @@ abstract final class AppRoutes {
   static const dashboard = '/dashboard';
   static const training = '/training';
   static const insights = '/insights';
+  static const insightMuscleDetailPath = '/insights/muscle/:id';
+  static const insightChat = '/insights/chat';
   static const profile = '/profile';
 
   static String get authLogin => _authWithMode(authModeLogin);
   static String get authRegister => _authWithMode(authModeRegister);
+
+  static String insightMuscleDetail(String id) => '/insights/muscle/$id';
 
   static String _authWithMode(String mode) {
     return Uri(path: auth, queryParameters: {authModeParam: mode}).toString();
