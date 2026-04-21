@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_body_atlas/flutter_body_atlas.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
-import '../models/insight_models.dart';
+import 'package:forge_ai/features/insight/models/insight_models.dart';
 
 class AnatomyView extends StatelessWidget {
   final List<MuscleData> data;
@@ -10,7 +10,7 @@ class AnatomyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const resolver = MuscleResolver();
-    
+
     final Map<MuscleInfo, Color> colorMapping = {};
 
     for (final muscle in data) {
@@ -22,7 +22,7 @@ class AnatomyView extends StatelessWidget {
         } else if (muscle.rpe >= 5) {
           color = AppColors.energy;
         }
-        
+
         colorMapping[muscleInfo] = color;
       }
     }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
+import 'package:forge_ai/features/insight/models/insight_models.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
-import '../models/insight_models.dart';
 
 class InsightCard extends StatelessWidget {
   final InsightMessage message;
@@ -20,7 +20,12 @@ class InsightCard extends StatelessWidget {
             color: AppColors.sportOrange,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Text(message.content, style: AppTypography.bodyMedium.copyWith(color: AppColors.cardWhite)),
+          child: Text(
+            message.content,
+            style: AppTypography.bodyMedium.copyWith(
+              color: AppColors.cardWhite,
+            ),
+          ),
         ),
       );
     }
@@ -50,8 +55,8 @@ class InsightCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Center(child: Text('Mini Chart Placeholder')),
-              )
-            ]
+              ),
+            ],
           ],
         ),
       ),

@@ -11,7 +11,8 @@ class MuscleData with _$MuscleData {
     required double rpe,
   }) = _MuscleData;
 
-  factory MuscleData.fromJson(Map<String, dynamic> json) => _$MuscleDataFromJson(json);
+  factory MuscleData.fromJson(Map<String, dynamic> json) =>
+      _$MuscleDataFromJson(json);
 }
 
 @freezed
@@ -23,5 +24,6 @@ class InsightMessage with _$InsightMessage {
     @Default(false) bool hasChart,
   }) = _InsightMessage;
 
-  factory InsightMessage.fromJson(Map<String, dynamic> json) => _$InsightMessageFromJson(json);
+  factory InsightMessage.fromJson(Map<String, dynamic> json) =>
+      _$InsightMessageFromJson(json);
 }

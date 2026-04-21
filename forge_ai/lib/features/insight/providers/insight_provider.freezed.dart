@@ -12,7 +12,8 @@ part of 'insight_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$InsightState {
@@ -27,8 +28,9 @@ mixin _$InsightState {
 /// @nodoc
 abstract class $InsightStateCopyWith<$Res> {
   factory $InsightStateCopyWith(
-          InsightState value, $Res Function(InsightState) then) =
-      _$InsightStateCopyWithImpl<$Res, InsightState>;
+    InsightState value,
+    $Res Function(InsightState) then,
+  ) = _$InsightStateCopyWithImpl<$Res, InsightState>;
   @useResult
   $Res call({List<MuscleData> muscleData, List<InsightMessage> messages});
 }
@@ -45,20 +47,20 @@ class _$InsightStateCopyWithImpl<$Res, $Val extends InsightState>
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? muscleData = null,
-    Object? messages = null,
-  }) {
-    return _then(_value.copyWith(
-      muscleData: null == muscleData
-          ? _value.muscleData
-          : muscleData // ignore: cast_nullable_to_non_nullable
-              as List<MuscleData>,
-      messages: null == messages
-          ? _value.messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<InsightMessage>,
-    ) as $Val);
+  $Res call({Object? muscleData = null, Object? messages = null}) {
+    return _then(
+      _value.copyWith(
+            muscleData: null == muscleData
+                ? _value.muscleData
+                : muscleData // ignore: cast_nullable_to_non_nullable
+                      as List<MuscleData>,
+            messages: null == messages
+                ? _value.messages
+                : messages // ignore: cast_nullable_to_non_nullable
+                      as List<InsightMessage>,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -66,8 +68,9 @@ class _$InsightStateCopyWithImpl<$Res, $Val extends InsightState>
 abstract class _$$InsightStateImplCopyWith<$Res>
     implements $InsightStateCopyWith<$Res> {
   factory _$$InsightStateImplCopyWith(
-          _$InsightStateImpl value, $Res Function(_$InsightStateImpl) then) =
-      __$$InsightStateImplCopyWithImpl<$Res>;
+    _$InsightStateImpl value,
+    $Res Function(_$InsightStateImpl) then,
+  ) = __$$InsightStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<MuscleData> muscleData, List<InsightMessage> messages});
@@ -78,36 +81,36 @@ class __$$InsightStateImplCopyWithImpl<$Res>
     extends _$InsightStateCopyWithImpl<$Res, _$InsightStateImpl>
     implements _$$InsightStateImplCopyWith<$Res> {
   __$$InsightStateImplCopyWithImpl(
-      _$InsightStateImpl _value, $Res Function(_$InsightStateImpl) _then)
-      : super(_value, _then);
+    _$InsightStateImpl _value,
+    $Res Function(_$InsightStateImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? muscleData = null,
-    Object? messages = null,
-  }) {
-    return _then(_$InsightStateImpl(
-      muscleData: null == muscleData
-          ? _value._muscleData
-          : muscleData // ignore: cast_nullable_to_non_nullable
-              as List<MuscleData>,
-      messages: null == messages
-          ? _value._messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<InsightMessage>,
-    ));
+  $Res call({Object? muscleData = null, Object? messages = null}) {
+    return _then(
+      _$InsightStateImpl(
+        muscleData: null == muscleData
+            ? _value._muscleData
+            : muscleData // ignore: cast_nullable_to_non_nullable
+                  as List<MuscleData>,
+        messages: null == messages
+            ? _value._messages
+            : messages // ignore: cast_nullable_to_non_nullable
+                  as List<InsightMessage>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$InsightStateImpl implements _InsightState {
-  const _$InsightStateImpl(
-      {required final List<MuscleData> muscleData,
-      required final List<InsightMessage> messages})
-      : _muscleData = muscleData,
-        _messages = messages;
+  const _$InsightStateImpl({
+    required final List<MuscleData> muscleData,
+    required final List<InsightMessage> messages,
+  }) : _muscleData = muscleData,
+       _messages = messages;
 
   final List<MuscleData> _muscleData;
   @override
@@ -135,16 +138,19 @@ class _$InsightStateImpl implements _InsightState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InsightStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._muscleData, _muscleData) &&
+            const DeepCollectionEquality().equals(
+              other._muscleData,
+              _muscleData,
+            ) &&
             const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_muscleData),
-      const DeepCollectionEquality().hash(_messages));
+    runtimeType,
+    const DeepCollectionEquality().hash(_muscleData),
+    const DeepCollectionEquality().hash(_messages),
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -154,9 +160,10 @@ class _$InsightStateImpl implements _InsightState {
 }
 
 abstract class _InsightState implements InsightState {
-  const factory _InsightState(
-      {required final List<MuscleData> muscleData,
-      required final List<InsightMessage> messages}) = _$InsightStateImpl;
+  const factory _InsightState({
+    required final List<MuscleData> muscleData,
+    required final List<InsightMessage> messages,
+  }) = _$InsightStateImpl;
 
   @override
   List<MuscleData> get muscleData;

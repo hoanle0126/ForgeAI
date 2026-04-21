@@ -3,6 +3,7 @@ import 'package:forge_ai/features/auth/screens/auth_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/home/dashboard_home_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/placeholder/placeholder_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen.dart';
+import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/ai_plan_preview/ai_plan_preview_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/body_profile/body_profile_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/equipment_selection/equipment_selection_screen.dart';
@@ -10,7 +11,6 @@ import 'package:forge_ai/features/onboarding/screens/goal_selection/goal_selecti
 import 'package:forge_ai/features/onboarding/screens/schedule_preference/schedule_preference_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/welcome/welcome_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
-import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {
@@ -103,8 +103,7 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.insights,
-              builder: (context, state) =>
-                  const InsightScreen(),
+              builder: (context, state) => const InsightScreen(),
             ),
           ],
         ),

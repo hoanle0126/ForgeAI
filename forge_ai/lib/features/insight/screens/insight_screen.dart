@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
-import 'insight_dashboard_tab.dart';
-import 'insight_chat_tab.dart';
+import 'package:forge_ai/features/insight/screens/insight_chat_tab.dart';
+import 'package:forge_ai/features/insight/screens/insight_dashboard_tab.dart';
 
 class InsightScreen extends StatelessWidget {
   const InsightScreen({super.key});
@@ -29,10 +29,7 @@ class InsightScreen extends StatelessWidget {
           ),
         ),
         body: const TabBarView(
-          children: [
-            InsightDashboardTab(),
-            InsightChatTab(),
-          ],
+          children: [InsightDashboardTab(), InsightChatTab()],
         ),
       ),
     );

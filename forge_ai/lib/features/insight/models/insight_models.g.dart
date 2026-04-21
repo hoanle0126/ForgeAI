@@ -29,10 +29,10 @@ _$InsightMessageImpl _$$InsightMessageImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$InsightMessageImplToJson(
-        _$InsightMessageImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'content': instance.content,
-      'isUser': instance.isUser,
-      'hasChart': instance.hasChart,
-    };
+  _$InsightMessageImpl instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'content': instance.content,
+  'isUser': instance.isUser,
+  'hasChart': instance.hasChart,
+};

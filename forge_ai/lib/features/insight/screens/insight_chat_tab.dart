@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
-import '../providers/insight_provider.dart';
-import '../widgets/insight_card.dart';
+import 'package:forge_ai/features/insight/providers/insight_provider.dart';
+import 'package:forge_ai/features/insight/widgets/insight_card.dart';
 
 class InsightChatTab extends ConsumerStatefulWidget {
   const InsightChatTab({super.key});
@@ -46,7 +46,11 @@ class _InsightChatTabState extends ConsumerState<InsightChatTab> {
               color: AppColors.cardWhite,
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
-                BoxShadow(color: AppColors.aiBlue.withValues(alpha: 0.1), blurRadius: 10, spreadRadius: 2),
+                BoxShadow(
+                  color: AppColors.aiBlue.withValues(alpha: 0.1),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                ),
               ],
             ),
             child: Row(

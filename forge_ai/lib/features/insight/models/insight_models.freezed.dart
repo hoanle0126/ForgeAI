@@ -12,7 +12,8 @@ part of 'insight_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 MuscleData _$MuscleDataFromJson(Map<String, dynamic> json) {
   return _MuscleData.fromJson(json);
@@ -34,8 +35,9 @@ mixin _$MuscleData {
 /// @nodoc
 abstract class $MuscleDataCopyWith<$Res> {
   factory $MuscleDataCopyWith(
-          MuscleData value, $Res Function(MuscleData) then) =
-      _$MuscleDataCopyWithImpl<$Res, MuscleData>;
+    MuscleData value,
+    $Res Function(MuscleData) then,
+  ) = _$MuscleDataCopyWithImpl<$Res, MuscleData>;
   @useResult
   $Res call({String id, double volume, double rpe});
 }
@@ -52,25 +54,24 @@ class _$MuscleDataCopyWithImpl<$Res, $Val extends MuscleData>
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? volume = null,
-    Object? rpe = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      volume: null == volume
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      rpe: null == rpe
-          ? _value.rpe
-          : rpe // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  $Res call({Object? id = null, Object? volume = null, Object? rpe = null}) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            volume: null == volume
+                ? _value.volume
+                : volume // ignore: cast_nullable_to_non_nullable
+                      as double,
+            rpe: null == rpe
+                ? _value.rpe
+                : rpe // ignore: cast_nullable_to_non_nullable
+                      as double,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -78,8 +79,9 @@ class _$MuscleDataCopyWithImpl<$Res, $Val extends MuscleData>
 abstract class _$$MuscleDataImplCopyWith<$Res>
     implements $MuscleDataCopyWith<$Res> {
   factory _$$MuscleDataImplCopyWith(
-          _$MuscleDataImpl value, $Res Function(_$MuscleDataImpl) then) =
-      __$$MuscleDataImplCopyWithImpl<$Res>;
+    _$MuscleDataImpl value,
+    $Res Function(_$MuscleDataImpl) then,
+  ) = __$$MuscleDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, double volume, double rpe});
@@ -90,45 +92,47 @@ class __$$MuscleDataImplCopyWithImpl<$Res>
     extends _$MuscleDataCopyWithImpl<$Res, _$MuscleDataImpl>
     implements _$$MuscleDataImplCopyWith<$Res> {
   __$$MuscleDataImplCopyWithImpl(
-      _$MuscleDataImpl _value, $Res Function(_$MuscleDataImpl) _then)
-      : super(_value, _then);
+    _$MuscleDataImpl _value,
+    $Res Function(_$MuscleDataImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? volume = null,
-    Object? rpe = null,
-  }) {
-    return _then(_$MuscleDataImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      volume: null == volume
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      rpe: null == rpe
-          ? _value.rpe
-          : rpe // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+  $Res call({Object? id = null, Object? volume = null, Object? rpe = null}) {
+    return _then(
+      _$MuscleDataImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        volume: null == volume
+            ? _value.volume
+            : volume // ignore: cast_nullable_to_non_nullable
+                  as double,
+        rpe: null == rpe
+            ? _value.rpe
+            : rpe // ignore: cast_nullable_to_non_nullable
+                  as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MuscleDataImpl implements _MuscleData {
-  const _$MuscleDataImpl(
-      {required this.id, required this.volume, required this.rpe});
+  const _$MuscleDataImpl({
+    required this.id,
+    required this.volume,
+    required this.rpe,
+  });
 
   factory _$MuscleDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$MuscleDataImplFromJson(json);
 
   @override
   final String id;
-// corresponds to flutter_body_atlas IDs
+  // corresponds to flutter_body_atlas IDs
   @override
   final double volume;
   @override
@@ -161,17 +165,16 @@ class _$MuscleDataImpl implements _MuscleData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MuscleDataImplToJson(
-      this,
-    );
+    return _$$MuscleDataImplToJson(this);
   }
 }
 
 abstract class _MuscleData implements MuscleData {
-  const factory _MuscleData(
-      {required final String id,
-      required final double volume,
-      required final double rpe}) = _$MuscleDataImpl;
+  const factory _MuscleData({
+    required final String id,
+    required final double volume,
+    required final double rpe,
+  }) = _$MuscleDataImpl;
 
   factory _MuscleData.fromJson(Map<String, dynamic> json) =
       _$MuscleDataImpl.fromJson;
@@ -208,8 +211,9 @@ mixin _$InsightMessage {
 /// @nodoc
 abstract class $InsightMessageCopyWith<$Res> {
   factory $InsightMessageCopyWith(
-          InsightMessage value, $Res Function(InsightMessage) then) =
-      _$InsightMessageCopyWithImpl<$Res, InsightMessage>;
+    InsightMessage value,
+    $Res Function(InsightMessage) then,
+  ) = _$InsightMessageCopyWithImpl<$Res, InsightMessage>;
   @useResult
   $Res call({String id, String content, bool isUser, bool hasChart});
 }
@@ -232,33 +236,37 @@ class _$InsightMessageCopyWithImpl<$Res, $Val extends InsightMessage>
     Object? isUser = null,
     Object? hasChart = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      isUser: null == isUser
-          ? _value.isUser
-          : isUser // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasChart: null == hasChart
-          ? _value.hasChart
-          : hasChart // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            content: null == content
+                ? _value.content
+                : content // ignore: cast_nullable_to_non_nullable
+                      as String,
+            isUser: null == isUser
+                ? _value.isUser
+                : isUser // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            hasChart: null == hasChart
+                ? _value.hasChart
+                : hasChart // ignore: cast_nullable_to_non_nullable
+                      as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$InsightMessageImplCopyWith<$Res>
     implements $InsightMessageCopyWith<$Res> {
-  factory _$$InsightMessageImplCopyWith(_$InsightMessageImpl value,
-          $Res Function(_$InsightMessageImpl) then) =
-      __$$InsightMessageImplCopyWithImpl<$Res>;
+  factory _$$InsightMessageImplCopyWith(
+    _$InsightMessageImpl value,
+    $Res Function(_$InsightMessageImpl) then,
+  ) = __$$InsightMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String content, bool isUser, bool hasChart});
@@ -269,8 +277,9 @@ class __$$InsightMessageImplCopyWithImpl<$Res>
     extends _$InsightMessageCopyWithImpl<$Res, _$InsightMessageImpl>
     implements _$$InsightMessageImplCopyWith<$Res> {
   __$$InsightMessageImplCopyWithImpl(
-      _$InsightMessageImpl _value, $Res Function(_$InsightMessageImpl) _then)
-      : super(_value, _then);
+    _$InsightMessageImpl _value,
+    $Res Function(_$InsightMessageImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -280,35 +289,38 @@ class __$$InsightMessageImplCopyWithImpl<$Res>
     Object? isUser = null,
     Object? hasChart = null,
   }) {
-    return _then(_$InsightMessageImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
-      isUser: null == isUser
-          ? _value.isUser
-          : isUser // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasChart: null == hasChart
-          ? _value.hasChart
-          : hasChart // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$InsightMessageImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        content: null == content
+            ? _value.content
+            : content // ignore: cast_nullable_to_non_nullable
+                  as String,
+        isUser: null == isUser
+            ? _value.isUser
+            : isUser // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        hasChart: null == hasChart
+            ? _value.hasChart
+            : hasChart // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$InsightMessageImpl implements _InsightMessage {
-  const _$InsightMessageImpl(
-      {required this.id,
-      required this.content,
-      required this.isUser,
-      this.hasChart = false});
+  const _$InsightMessageImpl({
+    required this.id,
+    required this.content,
+    required this.isUser,
+    this.hasChart = false,
+  });
 
   factory _$InsightMessageImpl.fromJson(Map<String, dynamic> json) =>
       _$$InsightMessageImplFromJson(json);
@@ -349,22 +361,23 @@ class _$InsightMessageImpl implements _InsightMessage {
   @pragma('vm:prefer-inline')
   _$$InsightMessageImplCopyWith<_$InsightMessageImpl> get copyWith =>
       __$$InsightMessageImplCopyWithImpl<_$InsightMessageImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InsightMessageImplToJson(
-      this,
-    );
+    return _$$InsightMessageImplToJson(this);
   }
 }
 
 abstract class _InsightMessage implements InsightMessage {
-  const factory _InsightMessage(
-      {required final String id,
-      required final String content,
-      required final bool isUser,
-      final bool hasChart}) = _$InsightMessageImpl;
+  const factory _InsightMessage({
+    required final String id,
+    required final String content,
+    required final bool isUser,
+    final bool hasChart,
+  }) = _$InsightMessageImpl;
 
   factory _InsightMessage.fromJson(Map<String, dynamic> json) =
       _$InsightMessageImpl.fromJson;

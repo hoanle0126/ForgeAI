@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/insight_provider.dart';
-import '../widgets/anatomy_view.dart';
-import '../widgets/trend_chart.dart';
+import 'package:forge_ai/features/insight/providers/insight_provider.dart';
+import 'package:forge_ai/features/insight/widgets/anatomy_view.dart';
+import 'package:forge_ai/features/insight/widgets/trend_chart.dart';
 
 class InsightDashboardTab extends ConsumerWidget {
   const InsightDashboardTab({super.key});
