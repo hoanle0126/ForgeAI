@@ -6,7 +6,7 @@ part of 'insight_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$insightNotifierHash() => r'b5937b9af052e197209a11d51dee4210fdb3d80a';
+String _$insightNotifierHash() => r'12ee8ef649ac0ff5f59eacbe0937824a1c66ff24';
 
 /// See also [InsightNotifier].
 @ProviderFor(InsightNotifier)
