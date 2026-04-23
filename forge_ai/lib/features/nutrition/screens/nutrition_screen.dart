@@ -16,25 +16,24 @@ class NutritionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.warmIvory,
-      floatingActionButton: NutritionAiChatFab(
-        onPressed: () => context.push(AppRoutes.nutritionChat),
-      ),
-      body: const SafeArea(
+      body: SafeArea(
         child: SingleChildScrollView(
           padding: AppSpacing.screenPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: AppSpacing.md),
-              NutritionScreenHeader(),
-              SizedBox(height: AppSpacing.lg),
-              NutritionWeekStrip(),
-              SizedBox(height: AppSpacing.base),
-              TodayNutritionSummaryCard(),
-              SizedBox(height: AppSpacing.lg),
-              NutritionDayTimeline(),
-              SizedBox(height: AppSpacing.xxxl),
-              SizedBox(height: AppSpacing.xxxl),
+              const SizedBox(height: AppSpacing.md),
+              NutritionScreenHeader(
+                onChatPressed: () => context.push(AppRoutes.nutritionChat),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              const NutritionWeekStrip(),
+              const SizedBox(height: AppSpacing.base),
+              const TodayNutritionSummaryCard(),
+              const SizedBox(height: AppSpacing.lg),
+              const NutritionDayTimeline(),
+              const SizedBox(height: AppSpacing.xxxl),
+              const SizedBox(height: AppSpacing.xxxl),
             ],
           ),
         ),
