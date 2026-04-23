@@ -11,10 +11,19 @@ class TodayWorkoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppCard(
-      color: AppColors.textDark,
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Column(
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.textDark,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        image: const DecorationImage(
+          image: AssetImage('assets/images/dark_gym.png'),
+          fit: BoxFit.cover,
+          opacity: 0.28,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
