@@ -14,12 +14,11 @@ class NutritionWeekStrip extends ConsumerWidget {
     final week = ref.watch(nutritionWeekProvider);
     final selectedIndex = ref.watch(selectedNutritionDayIndexProvider);
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          for (var index = 0; index < week.length; index++)
-            _DayChip(
+    return Row(
+      children: [
+        for (var index = 0; index < week.length; index++) ...[
+          Expanded(
+            child: _DayChip(
               day: week[index],
               isSelected: index == selectedIndex,
               onTap: () {
@@ -28,8 +27,10 @@ class NutritionWeekStrip extends ConsumerWidget {
                     .selectDay(index);
               },
             ),
+          ),
+          if (index != week.length - 1) const SizedBox(width: AppSpacing.sm),
         ],
-      ),
+      ],
     );
   }
 }
@@ -50,9 +51,7 @@ class _DayChip extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 48,
         height: 64,
-        margin: const EdgeInsets.only(right: AppSpacing.sm),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.sportOrange : AppColors.cardWhite,
           borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
