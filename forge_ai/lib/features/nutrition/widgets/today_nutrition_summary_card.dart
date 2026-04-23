@@ -16,10 +16,16 @@ class TodayNutritionSummaryCard extends ConsumerWidget {
     const consumed = 1250; // Placeholder
     final rem = target - consumed;
 
-    return AppCard(
-      color: AppColors.textDark,
-      padding: EdgeInsets.zero,
-      hasShadow: false,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.textDark,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        image: const DecorationImage(
+          image: AssetImage('assets/images/dark_gym.png'),
+          fit: BoxFit.cover,
+          opacity: 0.28,
+        ),
+      ),
       child: Stack(
         children: [
           Padding(
