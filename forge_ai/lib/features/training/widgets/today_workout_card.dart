@@ -3,7 +3,6 @@ import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
-import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class TodayWorkoutCard extends StatelessWidget {
@@ -72,6 +71,7 @@ class TodayWorkoutCard extends StatelessWidget {
             onPressed: () {},
           ),
         ],
+      ),
       ),
     );
   }
