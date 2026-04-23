@@ -1,17 +1,19 @@
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 import 'package:forge_ai/features/auth/screens/auth_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/home/dashboard_home_screen.dart';
-import 'package:forge_ai/features/dashboard/screens/placeholder/placeholder_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_chat_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 import 'package:forge_ai/features/insight/screens/muscle_detail_screen.dart';
+import 'package:forge_ai/features/nutrition/screens/nutrition_chat_screen.dart';
+import 'package:forge_ai/features/nutrition/screens/nutrition_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/ai_plan_preview/ai_plan_preview_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/body_profile/body_profile_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/equipment_selection/equipment_selection_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/goal_selection/goal_selection_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/schedule_preference/schedule_preference_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/welcome/welcome_screen.dart';
+import 'package:forge_ai/features/profile/screens/profile_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,6 +32,8 @@ abstract final class AppRoutes {
   // Dashboard Routes
   static const dashboard = '/dashboard';
   static const training = '/training';
+  static const nutrition = '/nutrition';
+  static const nutritionChat = '/nutrition/chat';
   static const insights = '/insights';
   static const insightMuscleDetailPath = '/insights/muscle/:id';
   static const insightChat = '/insights/chat';
@@ -95,6 +99,10 @@ final appRouter = GoRouter(
       path: AppRoutes.insightChat,
       builder: (context, state) => const InsightChatScreen(),
     ),
+    GoRoute(
+      path: AppRoutes.nutritionChat,
+      builder: (context, state) => const NutritionChatScreen(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return DashboardShellScreen(navigationShell: navigationShell);
@@ -119,6 +127,14 @@ final appRouter = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
+              path: AppRoutes.nutrition,
+              builder: (context, state) => const NutritionScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
               path: AppRoutes.insights,
               builder: (context, state) => const InsightScreen(),
             ),
@@ -128,8 +144,7 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.profile,
-              builder: (context, state) =>
-                  const PlaceholderScreen(title: 'Profile'),
+              builder: (context, state) => const ProfileScreen(),
             ),
           ],
         ),

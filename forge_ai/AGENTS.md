@@ -507,13 +507,14 @@ try {
 
 ```
 1. ĐỌC file này (AGENTS.md) TRƯỚC
-2. SEARCH project tìm widget/component tương tự
-3. Nếu có → REUSE hoặc MỞ RỘNG
-4. Nếu không → TẠO MỚI theo đúng folder structure (R2)
-5. Dùng ĐÚNG Design System (R3): AppColors, AppTypography, AppSpacing
-6. ĐẶT TÊN đúng convention (R9)
-7. KIỂM TRA widget < 120 dòng (R4.1)
-8. CHẠY `./tool/check.sh` từ thư mục `forge_ai/` đảm bảo 0 errors/warnings
+2. Nếu task liên quan UI/design/widget/screen/theme → ĐỌC `DESIGN.md`
+3. SEARCH project tìm widget/component tương tự
+4. Nếu có → REUSE hoặc MỞ RỘNG
+5. Nếu không → TẠO MỚI theo đúng folder structure (R2)
+6. Dùng ĐÚNG Design System (R3): AppColors, AppTypography, AppSpacing
+7. ĐẶT TÊN đúng convention (R9)
+8. KIỂM TRA widget < 120 dòng (R4.1)
+9. CHẠY `./tool/check.sh` từ thư mục `forge_ai/` đảm bảo 0 errors/warnings
 ```
 
 > [!IMPORTANT]
@@ -527,6 +528,15 @@ try {
 - **Code & Comment:** Mọi biến, hàm, class, file name và comment trong source code PHẢI sử dụng **Tiếng Anh**.
 - **Commit Messages:** Tất cả nội dung commit (title và body) PHẢI sử dụng **Tiếng Anh**.
 - **Ngôn ngữ trong App:** Các chuỗi text hiển thị trên giao diện (UI text) mặc định PHẢI sử dụng **Tiếng Anh**.
+
+---
+
+## R15. Design Reference — DESIGN.md
+
+- Trước khi viết hoặc sửa UI, design, widget, screen, theme, layout, animation, icon, chart hoặc asset usage → agent **PHẢI đọc `DESIGN.md`**.
+- Mọi UI mới phải tuân thủ visual direction, color roles, typography rules, component styling, layout principles, motion rules và feature-level patterns trong `DESIGN.md`.
+- Nếu cần thay đổi design system có chủ đích → cập nhật cả code token/component liên quan (`AppColors`, `AppTypography`, `AppSpacing`, shared widgets...) và `DESIGN.md`.
+- Nếu `DESIGN.md` và code hiện tại lệch nhau → ưu tiên token/component trong code, sau đó cập nhật `DESIGN.md` để đồng bộ.
 
 ---
 

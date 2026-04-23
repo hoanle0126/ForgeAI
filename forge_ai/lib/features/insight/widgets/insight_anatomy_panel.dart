@@ -103,6 +103,6 @@ class _AtlasViewport extends StatelessWidget {
       return Expanded(child: child);
     }
 
-    return SizedBox(height: AppSpacing.xxxl * 8, child: child);
+    return SizedBox(height: AppSpacing.xxxl * 11, child: child);
   }
 }

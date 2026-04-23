@@ -23,9 +23,9 @@ class NutritionWeekStrip extends ConsumerWidget {
               day: week[index],
               isSelected: index == selectedIndex,
               onTap: () {
-                ref.read(selectedNutritionDayIndexProvider.notifier).selectDay(
-                  index,
-                );
+                ref
+                    .read(selectedNutritionDayIndexProvider.notifier)
+                    .selectDay(index);
               },
             ),
         ],
