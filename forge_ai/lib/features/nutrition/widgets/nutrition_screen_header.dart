@@ -18,8 +18,10 @@ class NutritionScreenHeader extends StatelessWidget {
             children: [
               Text('Meals', style: AppTypography.h1),
               const SizedBox(height: AppSpacing.xs),
-              Text('Your AI-built weekly meal plan',
-                  style: AppTypography.bodyMedium),
+              Text(
+                'Your AI-built weekly meal plan',
+                style: AppTypography.bodyMedium,
+              ),
             ],
           ),
         ),

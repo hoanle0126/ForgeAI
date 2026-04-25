@@ -94,7 +94,9 @@ class _NutritionWideLayout extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 12), // Canh chỉnh chiều cao tương đối với cột trái
+                SizedBox(
+                  height: 12,
+                ), // Canh chỉnh chiều cao tương đối với cột trái
                 TodayNutritionSummaryCard(),
               ],
             ),
