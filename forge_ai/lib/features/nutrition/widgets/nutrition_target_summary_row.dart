@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 
@@ -42,7 +41,7 @@ class NutritionTargetSummaryRow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '$remaining',
+              '${remaining > 0 ? remaining : 0}',
               style: AppTypography.statLarge.copyWith(
                 color: AppColors.sportOrange,
                 fontSize: 24,

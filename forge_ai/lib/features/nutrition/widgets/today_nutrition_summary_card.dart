@@ -37,10 +37,7 @@ class TodayNutritionSummaryCard extends ConsumerWidget {
               children: [
                 const NutritionDailyTargetLabel(),
                 const SizedBox(height: AppSpacing.md),
-                NutritionTargetSummaryRow(
-                  target: target,
-                  remaining: rem > 0 ? rem : 0,
-                ),
+                NutritionTargetSummaryRow(target: target, remaining: rem),
                 const SizedBox(height: AppSpacing.lg),
                 const MacroProgressRow(
                   label: 'PRO',
@@ -65,7 +62,7 @@ class TodayNutritionSummaryCard extends ConsumerWidget {
               ],
             ),
           ),
-          const NutritionAiAdaptedBadge(),
+          const Positioned(top: 0, right: 0, child: NutritionAiAdaptedBadge()),
         ],
       ),
     );

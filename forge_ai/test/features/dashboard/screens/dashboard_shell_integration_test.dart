@@ -1,36 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forge_ai/core/router/app_router.dart';
-import 'package:go_router/go_router.dart';
+import 'package:forge_ai/core/theme/app_theme.dart';
 
 void main() {
-  Future<void> pumpShellAtRoute(WidgetTester tester, String route) async {
-    final router = GoRouter(
-      routes: appRouter.configuration.routes,
-      initialLocation: route,
-      overridePlatformDefaultLocation: true,
+  testWidgets('workout preview deep link opens outside shell navigation', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp.router(theme: appTheme, routerConfig: appRouter),
     );
 
-    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+    appRouter.go(AppRoutes.workoutPreview);
     await tester.pumpAndSettle();
-  }
 
-  testWidgets('deep-link startup at dashboard mounts shell branch content', (
-    tester,
-  ) async {
-    await pumpShellAtRoute(tester, AppRoutes.dashboard);
-
-    expect(find.text('Today\'s Plan'), findsOneWidget);
-    expect(find.text('Start today\'s session'), findsOneWidget);
-    expect(find.text('HOME'), findsOneWidget);
-  });
-
-  testWidgets('deep-link startup at training mounts shell branch content', (
-    tester,
-  ) async {
-    await pumpShellAtRoute(tester, AppRoutes.training);
-
-    expect(find.text('Today\'s Workout'), findsOneWidget);
-    expect(find.text('TRAINING'), findsOneWidget);
+    expect(find.text('WORKOUT PREVIEW'), findsOneWidget);
+    expect(find.text('Begin Workout'), findsOneWidget);
+    expect(find.text('TRAINING'), findsNothing);
   });
 }

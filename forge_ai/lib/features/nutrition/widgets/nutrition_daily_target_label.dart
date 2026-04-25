@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 

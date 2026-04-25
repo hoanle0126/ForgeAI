@@ -14,7 +14,9 @@ import 'package:forge_ai/features/onboarding/screens/goal_selection/goal_selecti
 import 'package:forge_ai/features/onboarding/screens/schedule_preference/schedule_preference_screen.dart';
 import 'package:forge_ai/features/onboarding/screens/welcome/welcome_screen.dart';
 import 'package:forge_ai/features/profile/screens/profile_screen.dart';
+import 'package:forge_ai/features/training/screens/active_workout_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
+import 'package:forge_ai/features/training/screens/workout_preview_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {
@@ -32,6 +34,8 @@ abstract final class AppRoutes {
   // Dashboard Routes
   static const dashboard = '/dashboard';
   static const training = '/training';
+  static const workoutPreview = '/training/workout-preview';
+  static const workoutActive = '/training/workout-active';
   static const nutrition = '/nutrition';
   static const nutritionChat = '/nutrition/chat';
   static const insights = '/insights';
@@ -102,6 +106,16 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.nutritionChat,
       builder: (context, state) => const NutritionChatScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.workoutPreview,
+      builder: (context, state) => WorkoutPreviewScreen(
+        onBeginWorkout: () => context.push(AppRoutes.workoutActive),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.workoutActive,
+      builder: (context, state) => const ActiveWorkoutScreen(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

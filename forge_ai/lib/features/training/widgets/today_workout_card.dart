@@ -8,7 +8,9 @@ import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class TodayWorkoutCard extends StatelessWidget {
-  const TodayWorkoutCard({super.key});
+  const TodayWorkoutCard({super.key, this.onStartWorkout});
+
+  final VoidCallback? onStartWorkout;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class TodayWorkoutCard extends StatelessWidget {
             AppButton(
               text: 'Start Workout',
               icon: PhosphorIcons.play(PhosphorIconsStyle.fill),
-              onPressed: () {},
+              onPressed: onStartWorkout,
             ),
           ],
         ),

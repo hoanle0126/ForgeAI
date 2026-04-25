@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
@@ -9,28 +8,24 @@ class NutritionAiAdaptedBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 0,
-      right: 0,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.sportOrange, AppColors.sportOrangeLight],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(AppSpacing.radiusMd),
-          ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [AppColors.sportOrange, AppColors.sportOrangeLight],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: Text(
-          'AI ADAPTED',
-          style: AppTypography.labelUppercase.copyWith(
-            color: AppColors.cardWhite,
-            fontSize: 10,
-            fontWeight: FontWeight.w800,
-          ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(AppSpacing.radiusMd),
+        ),
+      ),
+      child: Text(
+        'AI ADAPTED',
+        style: AppTypography.labelUppercase.copyWith(
+          color: AppColors.cardWhite,
+          fontSize: 10,
+          fontWeight: FontWeight.w800,
         ),
       ),
     );

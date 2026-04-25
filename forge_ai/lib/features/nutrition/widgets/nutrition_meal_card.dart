@@ -7,6 +7,7 @@ import 'package:forge_ai/features/nutrition/widgets/nutrition_food_item_row.dart
 
 class NutritionMealGroup extends StatelessWidget {
   const NutritionMealGroup({super.key, required this.meal});
+
   final NutritionMeal meal;
 
   @override
