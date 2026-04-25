@@ -7,7 +7,7 @@ import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:go_router/go_router.dart';
 
-const double _compactContentHeight = 360;
+const double _compactContentHeight = 400;
 
 class WelcomeContent extends StatelessWidget {
   const WelcomeContent({super.key});
