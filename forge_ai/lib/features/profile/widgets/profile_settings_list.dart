@@ -8,7 +8,16 @@ import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class ProfileSettingsList extends StatelessWidget {
-  const ProfileSettingsList({super.key});
+  const ProfileSettingsList({
+    super.key,
+    required this.onTrainingPreferences,
+    required this.onNotifications,
+    required this.onLogOut,
+  });
+
+  final VoidCallback onTrainingPreferences;
+  final VoidCallback onNotifications;
+  final VoidCallback onLogOut;
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +28,24 @@ class ProfileSettingsList extends StatelessWidget {
           Text('Account Controls', style: AppTypography.h3),
           const SizedBox(height: AppSpacing.base),
           ProfileSettingsTile(
-            icon: PhosphorIcons.user(PhosphorIconsStyle.fill),
-            title: 'Athlete profile',
-            subtitle: 'Body metrics, goals, equipment',
-          ),
-          const _SettingsDivider(),
-          ProfileSettingsTile(
             icon: PhosphorIcons.slidersHorizontal(PhosphorIconsStyle.bold),
-            title: 'Plan preferences',
-            subtitle: 'Training days and session length',
+            title: 'Training preferences',
+            subtitle: 'Goals, equipment, and schedule',
+            onTap: onTrainingPreferences,
           ),
           const _SettingsDivider(),
           ProfileSettingsTile(
             icon: PhosphorIcons.bell(PhosphorIconsStyle.fill),
             title: 'Notifications',
             subtitle: 'Workout reminders and recovery nudges',
+            onTap: onNotifications,
           ),
           const _SettingsDivider(),
           ProfileSettingsTile(
-            icon: PhosphorIcons.shieldCheck(PhosphorIconsStyle.fill),
-            title: 'Privacy and data',
-            subtitle: 'Local profile and sync controls',
+            icon: PhosphorIcons.signOut(PhosphorIconsStyle.bold),
+            title: 'Log out',
+            subtitle: 'Return to the sign-in screen',
+            onTap: onLogOut,
           ),
         ],
       ),

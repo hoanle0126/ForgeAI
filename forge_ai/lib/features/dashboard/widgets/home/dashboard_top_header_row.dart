@@ -63,11 +63,10 @@ class DashboardTopHeaderRow extends ConsumerWidget {
           Navigator.of(sheetContext).pop();
           context.go(AppRoutes.profile);
         },
-        onTrainingPreferences: () => _closeSheetAndShowMessage(
-          sheetContext,
-          context,
-          'Training preferences coming soon',
-        ),
+        onTrainingPreferences: () {
+          Navigator.of(sheetContext).pop();
+          context.go(AppRoutes.training);
+        },
         onNotifications: () => _closeSheetAndShowMessage(
           sheetContext,
           context,

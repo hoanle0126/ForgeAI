@@ -50,7 +50,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Account Controls'), findsOneWidget);
-      expect(find.text('Athlete profile'), findsOneWidget);
+      expect(find.text('View full profile'), findsNothing);
+      expect(find.text('Training preferences'), findsOneWidget);
       expect(find.text('ATHLETE PROFILE'), findsNothing);
     },
   );
@@ -89,7 +90,7 @@ void main() {
     expect(find.text("Today's alerts"), findsNothing);
   });
 
-  testWidgets('dashboard account secondary action shows snackbar', (
+  testWidgets('dashboard account training preferences opens training tab', (
     tester,
   ) async {
     await tester.pumpWidget(
@@ -114,7 +115,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('ATHLETE PROFILE'), findsNothing);
-    expect(find.text('Training preferences coming soon'), findsOneWidget);
+    expect(find.text('TRAINING'), findsWidgets);
+    expect(find.text('Today\'s Workout'), findsOneWidget);
   });
 
   testWidgets('dashboard account log out returns to login', (tester) async {
