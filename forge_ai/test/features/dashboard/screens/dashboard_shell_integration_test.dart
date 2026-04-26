@@ -79,6 +79,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Notification Center'), findsOneWidget);
+    expect(find.text('2 unread'), findsOneWidget);
+    expect(find.text('Action queue'), findsOneWidget);
+    expect(find.text('Workout'), findsOneWidget);
+    expect(find.text('Recovery'), findsWidgets);
+    expect(find.text('AI insight'), findsWidgets);
     expect(find.text('Today'), findsOneWidget);
     expect(find.text('Earlier'), findsOneWidget);
     expect(find.text("Today's alerts"), findsNothing);
