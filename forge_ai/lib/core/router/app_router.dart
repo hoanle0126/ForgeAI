@@ -1,6 +1,7 @@
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 import 'package:forge_ai/features/auth/screens/auth_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/home/dashboard_home_screen.dart';
+import 'package:forge_ai/features/dashboard/screens/notification_center_screen.dart';
 import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_chat_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_screen.dart';
@@ -39,6 +40,7 @@ abstract final class AppRoutes {
   static const nutrition = '/nutrition';
   static const nutritionChat = '/nutrition/chat';
   static const insights = '/insights';
+  static const notifications = '/notifications';
   static const insightMuscleDetailPath = '/insights/muscle/:id';
   static const insightChat = '/insights/chat';
   static const profile = '/profile';
@@ -106,6 +108,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.nutritionChat,
       builder: (context, state) => const NutritionChatScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.notifications,
+      builder: (context, state) => const NotificationCenterScreen(),
     ),
     GoRoute(
       path: AppRoutes.workoutPreview,

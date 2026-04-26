@@ -55,6 +55,35 @@ void main() {
     },
   );
 
+  testWidgets('dashboard notification bell opens quick sheet and full page', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp.router(theme: appTheme, routerConfig: appRouter),
+      ),
+    );
+
+    appRouter.go(AppRoutes.dashboard);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.bySemanticsLabel('Open notifications'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('NOTIFICATIONS'), findsOneWidget);
+    expect(find.text('Today\'s alerts'), findsOneWidget);
+    expect(find.text('Upper strength starts in 25 min'), findsOneWidget);
+    expect(find.text('View all notifications'), findsOneWidget);
+
+    await tester.tap(find.text('View all notifications'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Notification Center'), findsOneWidget);
+    expect(find.text('Today'), findsOneWidget);
+    expect(find.text('Earlier'), findsOneWidget);
+    expect(find.text("Today's alerts"), findsNothing);
+  });
+
   testWidgets('dashboard account secondary action shows snackbar', (
     tester,
   ) async {
