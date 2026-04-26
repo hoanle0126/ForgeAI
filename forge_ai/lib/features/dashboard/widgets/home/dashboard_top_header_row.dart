@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
-import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_quick_sheet.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/dashboard_account_avatar_button.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/dashboard_notification_button.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/dashboard_streak_pill.dart';
 import 'package:forge_ai/features/dashboard/widgets/notifications/notification_quick_sheet.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class DashboardTopHeaderRow extends ConsumerWidget {
   const DashboardTopHeaderRow({super.key});
@@ -27,63 +27,10 @@ class DashboardTopHeaderRow extends ConsumerWidget {
         ),
         Row(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md,
-                vertical: AppSpacing.xs,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.sportOrangeLight,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    '12',
-                    style: AppTypography.labelUppercase.copyWith(
-                      color: AppColors.sportOrange,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.xs),
-                  Text(
-                    '🔥',
-                    style: AppTypography.bodySmall.copyWith(fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
+            const DashboardStreakPill(),
             const SizedBox(width: AppSpacing.md),
-            Semantics(
-              button: true,
-              label: 'Open notifications',
-              child: Material(
-                color: AppColors.transparent,
-                shape: const CircleBorder(),
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () => _showNotificationSheet(context),
-                  child: SizedBox(
-                    width: AppSpacing.xxxl,
-                    height: AppSpacing.xxxl,
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(AppSpacing.sm),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.border),
-                          color: AppColors.cardWhite,
-                        ),
-                        child: Icon(
-                          PhosphorIcons.bell(PhosphorIconsStyle.fill),
-                          color: AppColors.textDark,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            DashboardNotificationButton(
+              onTap: () => _showNotificationSheet(context),
             ),
           ],
         ),
@@ -92,24 +39,14 @@ class DashboardTopHeaderRow extends ConsumerWidget {
   }
 
   void _showNotificationSheet(BuildContext context) {
-    showModalBottomSheet<void>(
+    _showBottomSheet(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: AppColors.cardWhite,
-      barrierColor: AppColors.textDark.withValues(alpha: 0.28),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppSpacing.radiusXl),
-        ),
+      builder: (sheetContext) => NotificationQuickSheet(
+        onViewAll: () {
+          Navigator.of(sheetContext).pop();
+          context.push(AppRoutes.notifications);
+        },
       ),
-      builder: (sheetContext) {
-        return NotificationQuickSheet(
-          onViewAll: () {
-            Navigator.of(sheetContext).pop();
-            context.push(AppRoutes.notifications);
-          },
-        );
-      },
     );
   }
 
@@ -118,6 +55,37 @@ class DashboardTopHeaderRow extends ConsumerWidget {
     WidgetRef ref,
     String displayName,
   ) {
+    _showBottomSheet(
+      context: context,
+      builder: (sheetContext) => AccountQuickSheet(
+        displayName: displayName,
+        onViewFullProfile: () {
+          Navigator.of(sheetContext).pop();
+          context.go(AppRoutes.profile);
+        },
+        onTrainingPreferences: () => _closeSheetAndShowMessage(
+          sheetContext,
+          context,
+          'Training preferences coming soon',
+        ),
+        onNotifications: () => _closeSheetAndShowMessage(
+          sheetContext,
+          context,
+          'Notifications coming soon',
+        ),
+        onLogOut: () {
+          Navigator.of(sheetContext).pop();
+          ref.read(authProvider.notifier).logOut();
+          context.go(AppRoutes.authLogin);
+        },
+      ),
+    );
+  }
+
+  void _showBottomSheet({
+    required BuildContext context,
+    required WidgetBuilder builder,
+  }) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -128,30 +96,7 @@ class DashboardTopHeaderRow extends ConsumerWidget {
           top: Radius.circular(AppSpacing.radiusXl),
         ),
       ),
-      builder: (sheetContext) {
-        return AccountQuickSheet(
-          displayName: displayName,
-          onViewFullProfile: () {
-            Navigator.of(sheetContext).pop();
-            context.go(AppRoutes.profile);
-          },
-          onTrainingPreferences: () => _closeSheetAndShowMessage(
-            sheetContext,
-            context,
-            'Training preferences coming soon',
-          ),
-          onNotifications: () => _closeSheetAndShowMessage(
-            sheetContext,
-            context,
-            'Notifications coming soon',
-          ),
-          onLogOut: () {
-            Navigator.of(sheetContext).pop();
-            ref.read(authProvider.notifier).logOut();
-            context.go(AppRoutes.authLogin);
-          },
-        );
-      },
+      builder: builder,
     );
   }
 

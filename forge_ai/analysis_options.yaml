@@ -10,6 +10,8 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+    - "worktrees/**"
+    - ".worktrees/**"
   errors:
     # Lỗi không thể tha thứ (Ép thành Error đỏ)
     avoid_print: error
