@@ -40,7 +40,13 @@ void main() {
       expect(find.text('ATHLETE PROFILE'), findsOneWidget);
       expect(find.text('View full profile'), findsOneWidget);
 
-      await tester.tap(find.text('View full profile'));
+      await tester.ensureVisible(find.text('View full profile'));
+      await tester.tap(
+        find.ancestor(
+          of: find.text('View full profile'),
+          matching: find.byType(AccountSheetActionRow),
+        ),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Account Controls'), findsOneWidget);
@@ -75,5 +81,31 @@ void main() {
 
     expect(find.text('ATHLETE PROFILE'), findsNothing);
     expect(find.text('Training preferences coming soon'), findsOneWidget);
+  });
+
+  testWidgets('dashboard account log out returns to login', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp.router(theme: appTheme, routerConfig: appRouter),
+      ),
+    );
+
+    appRouter.go(AppRoutes.dashboard);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.bySemanticsLabel('Open account sheet'));
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('Log out'));
+    await tester.tap(
+      find.ancestor(
+        of: find.text('Log out'),
+        matching: find.byType(AccountSheetActionRow),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sign in'), findsWidgets);
+    expect(find.text('ATHLETE PROFILE'), findsNothing);
   });
 }

@@ -22,7 +22,7 @@ class DashboardTopHeaderRow extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         DashboardAccountAvatarButton(
-          onTap: () => _showAccountSheet(context, displayName),
+          onTap: () => _showAccountSheet(context, ref, displayName),
         ),
         Row(
           children: [
@@ -72,7 +72,11 @@ class DashboardTopHeaderRow extends ConsumerWidget {
     );
   }
 
-  void _showAccountSheet(BuildContext context, String displayName) {
+  void _showAccountSheet(
+    BuildContext context,
+    WidgetRef ref,
+    String displayName,
+  ) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -100,6 +104,11 @@ class DashboardTopHeaderRow extends ConsumerWidget {
             context,
             'Notifications coming soon',
           ),
+          onLogOut: () {
+            Navigator.of(sheetContext).pop();
+            ref.read(authProvider.notifier).logOut();
+            context.go(AppRoutes.authLogin);
+          },
         );
       },
     );

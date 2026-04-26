@@ -9,12 +9,14 @@ class AccountMetricTile extends StatelessWidget {
     super.key,
     required this.label,
     required this.value,
+    required this.icon,
     required this.backgroundColor,
     this.labelColor = AppColors.textDisabled,
   });
 
   final String label;
   final String value;
+  final IconData icon;
   final Color backgroundColor;
   final Color labelColor;
 
@@ -31,14 +33,22 @@ class AccountMetricTile extends StatelessWidget {
           ),
           child: Column(
             children: [
+              Container(
+                padding: const EdgeInsets.all(AppSpacing.xs),
+                decoration: BoxDecoration(
+                  color: AppColors.cardWhite.withValues(alpha: 0.64),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                ),
+                child: Icon(icon, color: labelColor, size: 16),
+              ),
+              const SizedBox(height: AppSpacing.xs),
+              Text(value, style: AppTypography.statLarge),
               Text(
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: AppTypography.labelUppercase.copyWith(color: labelColor),
               ),
-              const SizedBox(height: AppSpacing.xs),
-              Text(value, style: AppTypography.statLarge),
             ],
           ),
         ),

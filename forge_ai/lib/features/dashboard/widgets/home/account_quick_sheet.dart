@@ -6,6 +6,7 @@ import 'package:forge_ai/features/dashboard/widgets/home/account_coach_card.dart
 import 'package:forge_ai/features/dashboard/widgets/home/account_metric_tile.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_profile_hero.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_sheet_action_list.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class AccountQuickSheet extends StatelessWidget {
   const AccountQuickSheet({
@@ -14,12 +15,14 @@ class AccountQuickSheet extends StatelessWidget {
     required this.onViewFullProfile,
     required this.onTrainingPreferences,
     required this.onNotifications,
+    required this.onLogOut,
   });
 
   final String displayName;
   final VoidCallback onViewFullProfile;
   final VoidCallback onTrainingPreferences;
   final VoidCallback onNotifications;
+  final VoidCallback onLogOut;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +51,7 @@ class AccountQuickSheet extends StatelessWidget {
               onViewFullProfile: onViewFullProfile,
               onTrainingPreferences: onTrainingPreferences,
               onNotifications: onNotifications,
+              onLogOut: onLogOut,
             ),
           ],
         ),
@@ -79,24 +83,27 @@ class _MetricRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         AccountMetricTile(
           label: 'STREAK',
           value: '12',
+          icon: PhosphorIcons.fire(PhosphorIconsStyle.fill),
           backgroundColor: AppColors.sportOrangeLight,
           labelColor: AppColors.sportOrange,
         ),
-        SizedBox(width: AppSpacing.sm),
+        const SizedBox(width: AppSpacing.sm),
         AccountMetricTile(
           label: 'READY',
           value: '86',
+          icon: PhosphorIcons.heartbeat(PhosphorIconsStyle.fill),
           backgroundColor: AppColors.inputBg,
         ),
-        SizedBox(width: AppSpacing.sm),
+        const SizedBox(width: AppSpacing.sm),
         AccountMetricTile(
           label: 'LOAD',
           value: '7.4',
+          icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
           backgroundColor: AppColors.recoveryLight,
           labelColor: AppColors.recovery,
         ),

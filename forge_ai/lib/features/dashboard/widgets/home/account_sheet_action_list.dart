@@ -11,11 +11,13 @@ class AccountSheetActionList extends StatelessWidget {
     required this.onViewFullProfile,
     required this.onTrainingPreferences,
     required this.onNotifications,
+    required this.onLogOut,
   });
 
   final VoidCallback onViewFullProfile;
   final VoidCallback onTrainingPreferences;
   final VoidCallback onNotifications;
+  final VoidCallback onLogOut;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,13 @@ class AccountSheetActionList extends StatelessWidget {
             title: 'Notifications',
             subtitle: 'Workout reminders and recovery nudges',
             onTap: onNotifications,
+          ),
+          const Divider(height: 1, color: AppColors.border),
+          AccountSheetActionRow(
+            icon: PhosphorIcons.signOut(PhosphorIconsStyle.bold),
+            title: 'Log out',
+            subtitle: 'Return to the sign-in screen',
+            onTap: onLogOut,
           ),
         ],
       ),

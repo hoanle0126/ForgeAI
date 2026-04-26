@@ -179,6 +179,10 @@ class AuthNotifier extends Notifier<AuthState> {
     return AuthSubmitResult.success;
   }
 
+  void logOut() {
+    state = const AuthState();
+  }
+
   bool _isValidEmail(String value) {
     final trimmed = value.trim();
     return trimmed.contains('@') && trimmed.indexOf('@') > 0;

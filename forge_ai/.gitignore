@@ -2,6 +2,7 @@
 docs/superpowers/plans/
 docs/superpowers/specs/
 .worktrees/
+worktrees/
 *.class
 *.log
 *.pyc
