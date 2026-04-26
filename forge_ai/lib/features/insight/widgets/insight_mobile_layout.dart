@@ -29,7 +29,7 @@ class InsightMobileLayout extends ConsumerWidget {
         bottom: AppSpacing.xl,
       ),
       children: [
-        InsightHeader(onChatPressed: () => context.go(AppRoutes.insightChat)),
+        InsightHeader(onChatPressed: () => context.push(AppRoutes.insightChat)),
         const SizedBox(height: AppSpacing.base),
         InsightAnatomyPanel(
           muscleData: state.muscleData,
