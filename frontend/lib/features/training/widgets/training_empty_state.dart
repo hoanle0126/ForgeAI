@@ -9,9 +9,14 @@ import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class TrainingEmptyState extends StatelessWidget {
-  const TrainingEmptyState({super.key, required this.onPlanWorkout});
+  const TrainingEmptyState({
+    super.key,
+    required this.onPlanWorkout,
+    required this.onAiBuildWorkout,
+  });
 
   final VoidCallback onPlanWorkout;
+  final VoidCallback onAiBuildWorkout;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +59,13 @@ class TrainingEmptyState extends StatelessWidget {
             description: 'Get a practical workout instead of a blank week.',
           ),
           const SizedBox(height: AppSpacing.lg),
+          AppButton(
+            text: 'Ask AI to Build Workout',
+            icon: PhosphorIcons.sparkle(PhosphorIconsStyle.fill),
+            variant: AppButtonVariant.secondary,
+            onPressed: onAiBuildWorkout,
+          ),
+          const SizedBox(height: AppSpacing.md),
           AppButton(
             text: 'Build First Workout',
             icon: PhosphorIcons.plus(PhosphorIconsStyle.bold),

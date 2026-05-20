@@ -1,7 +1,18 @@
-# ForgeAI — Flutter Architecture Rules
+# ForgeAI — Project Agent Guidance
 
 > **Tài liệu này là luật tối cao.** Mọi code được viết trong project phải tuân thủ 100%.
 > Agent AI (Gemini/Claude/GPT) khi code cho project này **PHẢI đọc file này trước khi viết bất kỳ dòng code nào.**
+
+---
+
+## R-1. Product Context — Must Read
+
+- Trước khi đề xuất hoặc triển khai feature/sản phẩm, agent **PHẢI đọc `PRODUCT_CONTEXT.md`**.
+- `PRODUCT_CONTEXT.md` mô tả định hướng ForgeAI: app tập gym đa nền tảng, ưu tiên mobile, hỗ trợ người mới bằng phân tích/gợi ý bài tập và thực đơn, có định hướng thương mại App Store/CH Play.
+- Repository hiện tại tách thành `frontend/` (Flutter app) và `backend/` (NestJS app). Không giả định cấu trúc `forge_ai/` cũ khi đọc hoặc sửa source.
+- Với frontend Flutter → đọc thêm `frontend/AGENTS.md` và `frontend/CLAUDE.md` nếu làm trong `frontend/`.
+- Với backend NestJS → đọc thêm `backend/AGENTS.md` nếu làm trong `backend/`.
+- Không trộn quyết định sản phẩm dài hạn vào code nếu chưa phục vụ trực tiếp cho task hiện tại.
 
 ---
 
@@ -19,14 +30,16 @@
 
 ```
 □ Tôi đã grep/search toàn bộ project tìm widget tương tự chưa?
-□ Tôi đã kiểm tra thư mục lib/shared/widgets/ chưa?
+□ Nếu đang làm frontend: tôi đã kiểm tra thư mục frontend/lib/shared/widgets/ chưa?
 □ Widget hiện có có thể mở rộng thêm variant không?
 □ Nếu tạo mới — nó có khả năng dùng lại ở ≥2 nơi không?
 ```
 
 ---
 
-## R1. Tech Stack — Cố định, không thay đổi
+## R1. Tech Stack — Tôn trọng theo từng app
+
+### Frontend (`frontend/`)
 
 | Vai trò            | Package                                          | Phiên bản     |
 | ------------------ | ------------------------------------------------ | ------------- |
@@ -43,102 +56,57 @@
 | Rich Animation     | `lottie` hoặc `rive`                             | latest stable |
 | Progress Ring      | `percent_indicator`                              | latest stable |
 
+### Backend (`backend/`)
+
+- Framework: `NestJS`
+- Language: `TypeScript`
+- Package manager: `npm`
+- Test stack: `jest` + `supertest`
+- Lint/format: `eslint` + `prettier`
+- Database hiện tại: **chưa được tích hợp trong source code**
+- Database direction: `PostgreSQL` trong định hướng sản phẩm, nhưng chưa nên mô tả như thể đã được implement
+
 > [!WARNING]
 > **KHÔNG được thêm package mới** mà không có lý do rõ ràng và được User approve trước. Mỗi package thêm vào = thêm 1 dependency phải maintain.
+> Quy tắc này áp dụng cho cả `frontend/` và `backend/`.
 
 ---
 
-## R2. Cấu trúc thư mục — Feature-First Architecture
+## R2. Cấu trúc thư mục — Repository tách frontend/backend
 
 ```
-lib/
-├── main.dart                         # Entry point duy nhất
-├── app.dart                          # MaterialApp + GoRouter + ProviderScope
-│
-├── core/                             # ⚙️ Nền tảng dùng chung toàn app
-│   ├── constants/                    # Màu, font size, spacing, strings
-│   │   ├── app_colors.dart           # Tất cả màu sắc (#F05A1F, #F9F7F4...)
-│   │   ├── app_typography.dart       # TextStyle cho heading, body, mono
-│   │   ├── app_spacing.dart          # 8px grid constants
-│   │   └── app_strings.dart          # Chuỗi text tĩnh
-│   ├── theme/
-│   │   └── app_theme.dart            # ThemeData chính (light theme)
-│   ├── router/
-│   │   └── app_router.dart           # GoRouter config + tất cả routes
-│   └── utils/                        # Helper functions dùng chung
-│       ├── formatters.dart           # Format số, ngày, thời gian
-│       └── validators.dart           # Validate input
-│
-├── shared/                           # 🧩 Widget tái sử dụng toàn app
-│   ├── widgets/                      # UI components dùng chung
-│   │   ├── app_card.dart             # Card chuẩn (white, border, shadow)
-│   │   ├── app_button.dart           # Primary, Secondary, Outline buttons
-│   │   ├── app_badge.dart            # Pill badge (streak, tag)
-│   │   ├── app_bottom_nav.dart       # Bottom Tab Bar (1 chỗ duy nhất!)
-│   │   ├── app_avatar.dart           # Avatar tròn có viền
-│   │   ├── app_progress_ring.dart    # Vòng progress (readiness, calories)
-│   │   ├── app_chip.dart             # Chip pill (equipment, filter)
-│   │   ├── app_section_header.dart   # Label + optional action link
-│   │   └── ...
-│   └── extensions/                   # Extension methods cho Dart types
-│       ├── context_ext.dart          # context.colorScheme, context.textTheme
-│       └── num_ext.dart              # 8.h, 16.w (spacing shortcuts)
-│
-├── features/                         # 📱 Mỗi feature = 1 folder độc lập
-│   ├── onboarding/
-│   │   ├── screens/                  # Các màn hình
-│   │   │   ├── welcome_screen.dart
-│   │   │   ├── goal_selection_screen.dart
-│   │   │   └── ...
-│   │   ├── widgets/                  # Widget CHỈ dùng trong onboarding
-│   │   │   ├── goal_card.dart
-│   │   │   └── equipment_chip.dart
-│   │   ├── providers/                # Riverpod providers
-│   │   │   └── onboarding_provider.dart
-│   │   └── models/                   # Data models (freezed)
-│   │       └── user_goal.dart
-│   │
-│   ├── dashboard/
-│   │   ├── screens/
-│   │   │   └── dashboard_screen.dart # Logic chọn variant bên trong
-│   │   ├── widgets/
-│   │   │   ├── readiness_card.dart
-│   │   │   ├── workout_hero_card.dart
-│   │   │   ├── weekly_dots.dart
-│   │   │   └── stats_row.dart
-│   │   └── providers/
-│   │       └── dashboard_provider.dart
-│   │
-│   ├── workout/                      # Workout flow (active, rest, complete)
-│   ├── ai_coach/                     # Chat, insights, weekly review
-│   ├── planning/                     # Calendar, timeline, mood-to-workout
-│   ├── progress/                     # Stats, charts, photos, records
-│   ├── nutrition/                    # Macros, meal plan, scanner
-│   ├── profile/                      # User profile, equipment, settings
-│   └── gamification/                 # Streaks, badges, challenges, leaderboard
-│
-└── data/                             # 💾 Data layer
-    ├── models/                       # Freezed data classes dùng chung
-    │   ├── workout.dart
-    │   ├── exercise.dart
-    │   ├── user_profile.dart
-    │   └── ...
-    ├── repositories/                 # Repository pattern (abstract + impl)
-    │   ├── workout_repository.dart
-    │   └── user_repository.dart
-    └── datasources/                  # Hive DB, SharedPrefs, future API
-        ├── local/
-        │   ├── hive_service.dart
-        │   └── prefs_service.dart
-        └── remote/                   # Để dành cho tương lai (API, Firebase)
-            └── api_service.dart
+.
+├── PRODUCT_CONTEXT.md
+├── AGENTS.md
+├── frontend/                         # Flutter app
+│   ├── lib/
+│   │   ├── main.dart                 # Entry point thực tế hiện tại
+│   │   ├── core/
+│   │   ├── shared/
+│   │   └── features/
+│   ├── test/
+│   ├── tool/
+│   ├── AGENTS.md
+│   └── CLAUDE.md
+└── backend/                          # NestJS app
+    ├── src/
+    │   ├── app.module.ts
+    │   ├── app.controller.ts
+    │   └── app.service.ts
+    ├── test/
+    │   └── app.e2e-spec.ts
+    ├── package.json
+    └── AGENTS.md
 ```
 
 ### Quy tắc cấu trúc:
 
-- **Feature-First**: Mỗi feature (dashboard, workout, progress...) có thư mục riêng chứa `screens/`, `widgets/`, `providers/`, `models/`.
-- **Shared widgets** (`lib/shared/widgets/`) = widget dùng ở **≥2 features**. Nếu widget chỉ dùng trong 1 feature → để trong `features/xxx/widgets/`.
-- **KHÔNG BAO GIỜ** import widget từ `features/A/widgets/` sang `features/B/`. Nếu cần dùng chung → chuyển lên `shared/widgets/`.
+- Khi làm việc trong `frontend/`, tuân thủ feature-first architecture của Flutter app và đọc `frontend/AGENTS.md`.
+- Khi làm việc trong `backend/`, tuân thủ module-based architecture của NestJS app và đọc `backend/AGENTS.md`.
+- Không mô tả hoặc sửa source dựa trên cấu trúc cũ như `forge_ai/` nếu trong repo hiện tại source thực nằm ở `frontend/` và `backend/`.
+- Chỉ coi một module/feature là “đã tồn tại” nếu nó thực sự có mặt trong source code hiện tại, không chỉ vì nó là định hướng dài hạn trong tài liệu.
+- Với frontend, **KHÔNG BAO GIỜ** import widget từ `features/A/widgets/` sang `features/B/`. Nếu cần dùng chung → chuyển lên `shared/widgets/`.
+- Với backend, không nhét logic nghiệp vụ lớn vào `AppModule`; khi code thật hãy tách theo module NestJS rõ ràng.
 
 ---
 
@@ -513,11 +481,13 @@ try {
 5. Dùng ĐÚNG Design System (R3): AppColors, AppTypography, AppSpacing
 6. ĐẶT TÊN đúng convention (R9)
 7. KIỂM TRA widget < 120 dòng (R4.1)
-8. CHẠY `./tool/check.sh` từ thư mục `forge_ai/` đảm bảo 0 errors/warnings
+8. Nếu làm frontend: chạy `./tool/check.sh` từ thư mục `frontend/` để đảm bảo 0 errors/warnings
+9. Nếu làm backend: chạy command phù hợp trong `backend/` như `npm test`, `npm run build`, hoặc `npm run lint`
 ```
 
 > [!IMPORTANT]
-> `./tool/check.sh` là verification gate chuẩn của project. Script này chạy `flutter analyze`, `dart run custom_lint` và format check. **KHÔNG dùng `flutter analyze` đơn lẻ làm final check**, vì các rule kiến trúc ForgeAI nằm trong custom lint.
+> Với frontend, `./tool/check.sh` là verification gate chuẩn của project. Script này chạy `flutter analyze`, `dart run custom_lint` và format check. **KHÔNG dùng `flutter analyze` đơn lẻ làm final check**, vì các rule kiến trúc ForgeAI nằm trong custom lint.
+> Với backend, dùng command kiểm thử/build/lint phù hợp trong `backend/` trước khi báo hoàn tất.
 
 ---
 
