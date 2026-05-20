@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/router/app_router.dart';
-import 'package:forge_ai/data/datasources/remote/api_client.dart';
-import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 import 'package:forge_ai/features/training/models/workout_session_models.dart';
+import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
 import 'package:forge_ai/features/training/widgets/today_workout_card.dart';
 import 'package:forge_ai/features/training/widgets/training_empty_state.dart';
+import 'package:forge_ai/features/training/widgets/training_error_state.dart';
 import 'package:forge_ai/features/training/widgets/training_header.dart';
 import 'package:forge_ai/features/training/widgets/training_insight_card.dart';
 import 'package:forge_ai/features/training/widgets/training_loading_state.dart';
@@ -16,24 +15,6 @@ import 'package:forge_ai/features/training/widgets/training_more_sheet.dart';
 import 'package:forge_ai/features/training/widgets/upcoming_workout_list.dart';
 import 'package:forge_ai/features/training/widgets/weekly_plan_row.dart';
 import 'package:go_router/go_router.dart';
-
-final trainingWorkoutProvider = FutureProvider<TrainingWorkoutPlan?>((
-  ref,
-) async {
-  try {
-    final tokenStorage = ref.watch(tokenStorageProvider);
-    final apiClient = ApiClient(tokenStorage);
-    final response = await apiClient.dio.get<Map<String, dynamic>>('/workouts');
-    final workouts =
-        response.data?['data']?['workouts'] as List<dynamic>? ?? const [];
-    final firstWorkout = workouts.whereType<Map<String, dynamic>>().firstOrNull;
-    if (firstWorkout == null) return null;
-    return TrainingWorkoutPlan.fromWorkoutJson(firstWorkout);
-  } catch (error) {
-    debugPrint('Training workout load failed: $error');
-    return todayTrainingWorkoutPlan;
-  }
-});
 
 class TrainingScreen extends ConsumerWidget {
   const TrainingScreen({super.key});
@@ -51,6 +32,8 @@ class TrainingScreen extends ConsumerWidget {
             data: (plan) => plan == null || plan.exercises.isEmpty
                 ? _TrainingEmptyContent(
                     onPlanWorkout: () => TrainingMoreSheet.show(context),
+                    onAiBuildWorkout: () =>
+                        context.push(AppRoutes.workoutBuilderGoal),
                   )
                 : _TrainingContent(
                     plan: plan,
@@ -58,9 +41,8 @@ class TrainingScreen extends ConsumerWidget {
                         context.push(AppRoutes.workoutPreview),
                   ),
             loading: () => const TrainingLoadingState(),
-            error: (error, _) => _TrainingContent(
-              plan: todayTrainingWorkoutPlan,
-              onStartWorkout: () => context.push(AppRoutes.workoutPreview),
+            error: (error, stackTrace) => TrainingErrorState(
+              onRetry: () => ref.invalidate(trainingWorkoutProvider),
             ),
           ),
         ),
@@ -70,9 +52,13 @@ class TrainingScreen extends ConsumerWidget {
 }
 
 class _TrainingEmptyContent extends StatelessWidget {
-  const _TrainingEmptyContent({required this.onPlanWorkout});
+  const _TrainingEmptyContent({
+    required this.onPlanWorkout,
+    required this.onAiBuildWorkout,
+  });
 
   final VoidCallback onPlanWorkout;
+  final VoidCallback onAiBuildWorkout;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +68,10 @@ class _TrainingEmptyContent extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         const TrainingHeader(),
         const SizedBox(height: AppSpacing.lg),
-        TrainingEmptyState(onPlanWorkout: onPlanWorkout),
+        TrainingEmptyState(
+          onPlanWorkout: onPlanWorkout,
+          onAiBuildWorkout: onAiBuildWorkout,
+        ),
         const SizedBox(height: AppSpacing.xxl),
       ],
     );

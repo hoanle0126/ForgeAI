@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/features/training/models/workout_session_models.dart';
+import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
 import 'package:forge_ai/features/training/screens/active_workout_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_preview_screen.dart';
@@ -120,6 +121,39 @@ void main() {
       expect(find.text('Empty Plan'), findsNothing);
     },
   );
+
+  testWidgets('opens workout builder goal step from AI empty-state CTA', (
+    tester,
+  ) async {
+    final router = GoRouter(
+      initialLocation: AppRoutes.training,
+      routes: [
+        GoRoute(
+          path: AppRoutes.training,
+          builder: (context, state) => const TrainingScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.workoutBuilderGoal,
+          builder: (context, state) => const Scaffold(
+            body: Center(child: Text('Workout builder goal step')),
+          ),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [trainingWorkoutProvider.overrideWith((ref) async => null)],
+        child: MaterialApp.router(routerConfig: router),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Ask AI to Build Workout'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Workout builder goal step'), findsOneWidget);
+  });
 
   testWidgets('opens date picker sheet from calendar action', (tester) async {
     final router = GoRouter(
