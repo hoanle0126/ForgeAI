@@ -81,6 +81,10 @@ class ActiveWorkoutSessionController
         ActiveWorkoutSessionState.initial(plan ?? todayTrainingWorkoutPlan),
       );
 
+  void loadPlan(TrainingWorkoutPlan plan) {
+    state = ActiveWorkoutSessionState.initial(plan);
+  }
+
   void tick() {
     switch (state.currentPhase) {
       case ActiveWorkoutPhase.countdown:

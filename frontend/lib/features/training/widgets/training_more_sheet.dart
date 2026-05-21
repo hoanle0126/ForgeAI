@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
+import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/features/training/widgets/training_date_picker_sheet.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class TrainingMoreSheet extends StatelessWidget {
@@ -52,33 +54,27 @@ class TrainingMoreSheet extends StatelessWidget {
             child: Text('More Options', style: AppTypography.h3),
           ),
           ListTile(
-            leading: Icon(PhosphorIcons.plus(), color: AppColors.textDark),
-            title: Text('Add Workout', style: AppTypography.bodyMedium),
+            leading: Icon(PhosphorIcons.books(), color: AppColors.textDark),
+            title: Text('Workout Library', style: AppTypography.bodyMedium),
             onTap: () {
-              final sm = ScaffoldMessenger.of(context);
               Navigator.of(context).pop();
-              sm
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text('Add Workout feature coming soon!'),
-                  ),
-                );
+              context.push(AppRoutes.workoutLibrary);
+            },
+          ),
+          ListTile(
+            leading: Icon(PhosphorIcons.plus(), color: AppColors.textDark),
+            title: Text('Create Workout', style: AppTypography.bodyMedium),
+            onTap: () {
+              Navigator.of(context).pop();
+              context.push(AppRoutes.workoutCreate);
             },
           ),
           ListTile(
             leading: Icon(PhosphorIcons.barbell(), color: AppColors.textDark),
             title: Text('Add Exercise', style: AppTypography.bodyMedium),
             onTap: () {
-              final sm = ScaffoldMessenger.of(context);
               Navigator.of(context).pop();
-              sm
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text('Add Exercise feature coming soon!'),
-                  ),
-                );
+              context.push(AppRoutes.exerciseCreate);
             },
           ),
           ListTile(

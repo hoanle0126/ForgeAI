@@ -11,8 +11,12 @@ import 'package:forge_ai/features/nutrition/screens/nutrition_chat_screen.dart';
 import 'package:forge_ai/features/nutrition/screens/nutrition_screen.dart';
 import 'package:forge_ai/features/profile/screens/profile_screen.dart';
 import 'package:forge_ai/features/profile/screens/profile_settings_screen.dart';
+import 'package:forge_ai/features/training/models/workout_session_models.dart';
+import 'package:forge_ai/features/training/providers/active_workout_session_provider.dart';
 import 'package:forge_ai/features/training/screens/active_workout_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
+import 'package:forge_ai/features/training/screens/workout_detail_screen.dart';
+import 'package:forge_ai/features/training/screens/workout_library_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_preview_screen.dart';
 import 'package:forge_ai/features/welcome/screens/welcome_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/ai_plan_preview/ai_plan_preview_screen.dart';
@@ -20,6 +24,7 @@ import 'package:forge_ai/features/workout_builder/screens/body_profile/body_prof
 import 'package:forge_ai/features/workout_builder/screens/equipment_selection/equipment_selection_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/goal_selection/goal_selection_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/schedule_preference/schedule_preference_screen.dart';
+import 'package:forge_ai/features/workout_create/screens/exercise_create_screen.dart';
 import 'package:forge_ai/features/workout_create/screens/workout_create_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,9 +43,12 @@ abstract final class AppRoutes {
   // Dashboard Routes
   static const dashboard = '/dashboard';
   static const training = '/training';
+  static const workoutLibrary = '/training/workouts';
+  static const workoutDetailPath = '/training/workouts/:id';
   static const workoutPreview = '/training/workout-preview';
   static const workoutActive = '/training/workout-active';
   static const workoutCreate = '/workout/create';
+  static const exerciseCreate = '/exercise/create';
   static const nutrition = '/nutrition';
   static const nutritionChat = '/nutrition/chat';
   static const insights = '/insights';
@@ -54,6 +62,7 @@ abstract final class AppRoutes {
   static String get authRegister => _authWithMode(authModeRegister);
 
   static String insightMuscleDetail(String id) => '/insights/muscle/$id';
+  static String workoutDetail(String id) => '/training/workouts/$id';
 
   static String _authWithMode(String mode) {
     return Uri(path: auth, queryParameters: {authModeParam: mode}).toString();
@@ -104,6 +113,10 @@ final appRouter = GoRouter(
       builder: (context, state) => const WorkoutCreateScreen(),
     ),
     GoRoute(
+      path: AppRoutes.exerciseCreate,
+      builder: (context, state) => const ExerciseCreateScreen(),
+    ),
+    GoRoute(
       path: AppRoutes.insightMuscleDetailPath,
       builder: (context, state) {
         final id = state.pathParameters['id'] ?? '';
@@ -137,10 +150,35 @@ final appRouter = GoRouter(
       ),
     ),
     GoRoute(
+      path: AppRoutes.workoutLibrary,
+      builder: (context, state) => const WorkoutLibraryScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.workoutDetailPath,
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '';
+        return WorkoutDetailScreen(workoutId: id);
+      },
+    ),
+    GoRoute(
       path: AppRoutes.workoutPreview,
-      builder: (context, state) => WorkoutPreviewScreen(
-        onBeginWorkout: () => context.push(AppRoutes.workoutActive),
-      ),
+      builder: (context, state) {
+        final extra = state.extra;
+        final plan = extra is TrainingWorkoutPlan
+            ? extra
+            : todayTrainingWorkoutPlan;
+
+        return WorkoutPreviewScreen(
+          plan: plan,
+          onBeginWorkout: () {
+            ProviderScope.containerOf(
+              context,
+              listen: false,
+            ).read(activeWorkoutSessionProvider.notifier).loadPlan(plan);
+            context.push(AppRoutes.workoutActive);
+          },
+        );
+      },
     ),
     GoRoute(
       path: AppRoutes.workoutActive,

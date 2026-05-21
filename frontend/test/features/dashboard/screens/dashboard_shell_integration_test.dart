@@ -5,16 +5,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/core/theme/app_theme.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_sheet_action_row.dart';
+import 'package:forge_ai/features/training/models/workout_session_models.dart';
+import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
 
 void main() {
   testWidgets('workout preview deep link opens outside shell navigation', (
     tester,
   ) async {
+    appRouter.go(AppRoutes.workoutPreview);
+
     await tester.pumpWidget(
       MaterialApp.router(theme: appTheme, routerConfig: appRouter),
     );
 
-    appRouter.go(AppRoutes.workoutPreview);
     await tester.pumpAndSettle();
 
     expect(find.text('WORKOUT PREVIEW'), findsOneWidget);
@@ -95,6 +98,11 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
+        overrides: [
+          trainingWorkoutProvider.overrideWith(
+            (ref) async => todayTrainingWorkoutPlan,
+          ),
+        ],
         child: MaterialApp.router(theme: appTheme, routerConfig: appRouter),
       ),
     );
