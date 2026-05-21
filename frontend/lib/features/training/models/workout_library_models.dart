@@ -99,6 +99,7 @@ class WorkoutLibraryWorkout with _$WorkoutLibraryWorkout {
       exercises: items.map((item) => item.toTrainingExercise()).toList(),
       statusLabel: statusLabel,
       estimatedDateLabel: scheduleLabel,
+      scheduledFor: scheduledFor,
     );
   }
 

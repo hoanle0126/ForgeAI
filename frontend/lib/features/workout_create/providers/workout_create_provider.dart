@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/data/datasources/remote/api_client.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
@@ -34,10 +35,15 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
         availableExercises: exercises,
         isLoadingExercises: false,
       );
-    } catch (e) {
+    } on DioException catch (e) {
       state = state.copyWith(
         isLoadingExercises: false,
-        errorMessage: 'Failed to load exercises: ${e.toString()}',
+        errorMessage: _readDioError(e, 'Failed to load exercises'),
+      );
+    } catch (_) {
+      state = state.copyWith(
+        isLoadingExercises: false,
+        errorMessage: 'Failed to load exercises. Please try again.',
       );
     }
   }
@@ -181,10 +187,16 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
       } else {
         throw Exception('Failed to save workout: ${response.statusCode}');
       }
-    } catch (e) {
+    } on DioException catch (e) {
       state = state.copyWith(
         isSaving: false,
-        errorMessage: 'Failed to save workout: ${e.toString()}',
+        errorMessage: _readDioError(e, 'Failed to save workout'),
+      );
+      return false;
+    } catch (_) {
+      state = state.copyWith(
+        isSaving: false,
+        errorMessage: 'Failed to save workout. Please try again.',
       );
       return false;
     }
@@ -192,6 +204,19 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
 
   void reset() {
     state = const WorkoutCreateState();
+  }
+
+  String _readDioError(DioException error, String fallback) {
+    final data = error.response?.data;
+    if (data is Map<String, dynamic>) {
+      final message = data['message'];
+      if (message is List && message.isNotEmpty) {
+        return '$fallback: ${message.first}';
+      }
+      if (message != null) return '$fallback: $message';
+    }
+
+    return '$fallback. Please try again.';
   }
 }
 

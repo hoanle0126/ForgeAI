@@ -9,13 +9,28 @@ import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class TodayWorkoutCard extends StatelessWidget {
-  const TodayWorkoutCard({super.key, required this.plan, this.onStartWorkout});
+  const TodayWorkoutCard({
+    super.key,
+    required this.plan,
+    this.eyebrow = 'Today\'s Workout',
+    this.onStartWorkout,
+  }) : onEmptyAction = null;
 
-  final TrainingWorkoutPlan plan;
+  const TodayWorkoutCard.emptyToday({super.key, this.onEmptyAction})
+    : plan = null,
+      eyebrow = 'Today',
+      onStartWorkout = null;
+
+  final TrainingWorkoutPlan? plan;
+  final String eyebrow;
   final VoidCallback? onStartWorkout;
+  final VoidCallback? onEmptyAction;
 
   @override
   Widget build(BuildContext context) {
+    final workoutPlan = plan;
+    final isEmpty = workoutPlan == null;
+
     return Container(
       decoration: BoxDecoration(
         color: AppColors.textDark,
@@ -35,22 +50,24 @@ class TodayWorkoutCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Today\'s Workout',
+                  eyebrow,
                   style: AppTypography.labelUppercase.copyWith(
                     color: AppColors.cardWhite.withValues(alpha: 0.78),
                   ),
                 ),
-                MetricPill(label: plan.durationLabel),
+                MetricPill(label: isEmpty ? 'Open' : workoutPlan.durationLabel),
               ],
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(
-              plan.title,
+              isEmpty ? 'No workout today' : workoutPlan.title,
               style: AppTypography.h1.copyWith(color: AppColors.cardWhite),
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              plan.aiNote,
+              isEmpty
+                  ? 'Today has no workout scheduled. Keep it light or create one for today.'
+                  : workoutPlan.aiNote,
               style: AppTypography.bodyMedium.copyWith(
                 color: AppColors.cardWhite.withValues(alpha: 0.74),
                 height: 1.4,
@@ -60,21 +77,27 @@ class TodayWorkoutCard extends StatelessWidget {
             Row(
               children: [
                 WorkoutStat(
-                  icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
-                  label: plan.exerciseCountLabel,
+                  icon: isEmpty
+                      ? PhosphorIcons.calendarDots(PhosphorIconsStyle.fill)
+                      : PhosphorIcons.barbell(PhosphorIconsStyle.fill),
+                  label: isEmpty
+                      ? 'No workout'
+                      : workoutPlan.exerciseCountLabel,
                 ),
                 const SizedBox(width: AppSpacing.base),
                 WorkoutStat(
                   icon: PhosphorIcons.lightning(PhosphorIconsStyle.fill),
-                  label: plan.intensityLabel,
+                  label: isEmpty ? 'Open day' : workoutPlan.intensityLabel,
                 ),
               ],
             ),
             const SizedBox(height: AppSpacing.lg),
             AppButton(
-              text: 'Start Workout',
-              icon: PhosphorIcons.play(PhosphorIconsStyle.fill),
-              onPressed: onStartWorkout,
+              text: isEmpty ? 'Create Workout' : 'Start Workout',
+              icon: isEmpty
+                  ? PhosphorIcons.plus()
+                  : PhosphorIcons.play(PhosphorIconsStyle.fill),
+              onPressed: isEmpty ? onEmptyAction : onStartWorkout,
             ),
           ],
         ),

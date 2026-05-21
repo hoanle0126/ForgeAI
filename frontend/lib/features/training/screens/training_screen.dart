@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/router/app_router.dart';
-import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
+import 'package:forge_ai/features/training/models/workout_library_models.dart';
+import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 import 'package:forge_ai/features/training/widgets/training_content.dart';
 import 'package:forge_ai/features/training/widgets/training_empty_state.dart';
 import 'package:forge_ai/features/training/widgets/training_error_state.dart';
@@ -16,7 +17,7 @@ class TrainingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final workoutAsync = ref.watch(trainingWorkoutProvider);
+    final workoutAsync = ref.watch(workoutLibraryProvider);
 
     return Scaffold(
       backgroundColor: AppColors.warmIvory,
@@ -24,28 +25,41 @@ class TrainingScreen extends ConsumerWidget {
         child: SingleChildScrollView(
           padding: AppSpacing.screenPadding,
           child: workoutAsync.when(
-            data: (plan) => plan == null || plan.exercises.isEmpty
-                ? _TrainingEmptyContent(
-                    onPlanWorkout: () => context.push(AppRoutes.workoutCreate),
-                    onAiBuildWorkout: () =>
-                        context.push(AppRoutes.workoutBuilderGoal),
-                  )
-                : TrainingContent(
-                    plan: plan,
-                    onStartWorkout: () =>
-                        context.push(AppRoutes.workoutPreview, extra: plan),
-                    onOpenLibrary: () => context.push(AppRoutes.workoutLibrary),
-                    onCreateWorkout: () =>
-                        context.push(AppRoutes.workoutCreate),
-                  ),
+            data: (workouts) {
+              final plans = workouts
+                  .where(_isUsableTrainingWorkout)
+                  .map((workout) => workout.toTrainingPlan())
+                  .toList(growable: false);
+
+              if (plans.isEmpty) {
+                return _TrainingEmptyContent(
+                  onPlanWorkout: () => context.push(AppRoutes.workoutCreate),
+                  onAiBuildWorkout: () =>
+                      context.push(AppRoutes.workoutBuilderGoal),
+                );
+              }
+
+              return TrainingContent(
+                plans: plans,
+                onStartWorkout: (plan) =>
+                    context.push(AppRoutes.workoutPreview, extra: plan),
+                onOpenLibrary: () => context.push(AppRoutes.workoutLibrary),
+                onCreateWorkout: () => context.push(AppRoutes.workoutCreate),
+              );
+            },
             loading: () => const TrainingLoadingState(),
             error: (error, stackTrace) => TrainingErrorState(
-              onRetry: () => ref.invalidate(trainingWorkoutProvider),
+              onRetry: () => ref.invalidate(workoutLibraryProvider),
             ),
           ),
         ),
       ),
     );
+  }
+
+  bool _isUsableTrainingWorkout(WorkoutLibraryWorkout workout) {
+    return workout.status != TrainingWorkoutStatus.archived &&
+        workout.items.isNotEmpty;
   }
 }
 

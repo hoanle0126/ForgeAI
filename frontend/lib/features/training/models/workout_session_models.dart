@@ -11,6 +11,7 @@ class TrainingWorkoutPlan {
     required this.exercises,
     required this.statusLabel,
     required this.estimatedDateLabel,
+    this.scheduledFor,
   });
 
   final String id;
@@ -22,6 +23,7 @@ class TrainingWorkoutPlan {
   final List<TrainingExercise> exercises;
   final String statusLabel;
   final String estimatedDateLabel;
+  final DateTime? scheduledFor;
 
   String get durationLabel => '$durationMinutes min';
   String get exerciseCountLabel => '${exercises.length} exercises';
@@ -71,6 +73,7 @@ class TrainingWorkoutPlan {
         'estimatedDateLabel',
         fallback: todayTrainingWorkoutPlan.estimatedDateLabel,
       ),
+      scheduledFor: _readNullableDate(json, 'scheduledFor'),
     );
   }
 }
@@ -259,4 +262,9 @@ TrainingExercise _parseExercise(Map<String, dynamic> json) {
 int? _readNullableInt(Map<String, dynamic> json, String key) {
   final value = json[key];
   return value is int ? value : null;
+}
+
+DateTime? _readNullableDate(Map<String, dynamic> json, String key) {
+  final value = json[key];
+  return value is String ? DateTime.tryParse(value) : null;
 }

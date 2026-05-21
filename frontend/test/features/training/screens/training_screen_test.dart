@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forge_ai/core/router/app_router.dart';
-import 'package:forge_ai/features/training/models/workout_session_models.dart';
-import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
+import 'package:forge_ai/features/training/models/workout_library_models.dart';
+import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 import 'package:forge_ai/features/training/screens/active_workout_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_preview_screen.dart';
@@ -36,8 +36,8 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          trainingWorkoutProvider.overrideWith(
-            (ref) async => todayTrainingWorkoutPlan,
+          workoutLibraryProvider.overrideWith(
+            (ref) async => [_upperStrengthWorkout],
           ),
         ],
         child: MaterialApp.router(routerConfig: router),
@@ -47,10 +47,13 @@ void main() {
 
     expect(find.text('Training'), findsOneWidget);
     expect(find.text('Today\'s Workout'), findsOneWidget);
-    expect(find.text('Upper Strength'), findsOneWidget);
+    expect(find.text('Upper Strength'), findsNWidgets(2));
     expect(find.text('Start Workout'), findsOneWidget);
     expect(find.text('Weekly Plan'), findsOneWidget);
-    expect(find.text('28'), findsOneWidget);
+    expect(
+      find.text(DateTime.now().day.toString().padLeft(2, '0')),
+      findsOneWidget,
+    );
     expect(find.text('Up Next'), findsOneWidget);
     expect(find.text('ForgeAI Recovery'), findsOneWidget);
   });
@@ -70,7 +73,7 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [trainingWorkoutProvider.overrideWith((ref) async => null)],
+        overrides: [workoutLibraryProvider.overrideWith((ref) async => [])],
         child: MaterialApp.router(routerConfig: router),
       ),
     );
@@ -98,18 +101,14 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            trainingWorkoutProvider.overrideWith(
-              (ref) async => const TrainingWorkoutPlan(
-                id: 'empty-plan',
-                title: 'Empty Plan',
-                durationMinutes: 0,
-                intensityLabel: 'Unplanned',
-                equipment: [],
-                aiNote: 'No session is ready yet.',
-                exercises: [],
-                statusLabel: 'Empty',
-                estimatedDateLabel: 'Today',
-              ),
+            workoutLibraryProvider.overrideWith(
+              (ref) async => const [
+                WorkoutLibraryWorkout(
+                  id: 'empty-plan',
+                  title: 'Empty Plan',
+                  items: [],
+                ),
+              ],
             ),
           ],
           child: MaterialApp.router(routerConfig: router),
@@ -143,7 +142,7 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [trainingWorkoutProvider.overrideWith((ref) async => null)],
+        overrides: [workoutLibraryProvider.overrideWith((ref) async => [])],
         child: MaterialApp.router(routerConfig: router),
       ),
     );
@@ -169,8 +168,8 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          trainingWorkoutProvider.overrideWith(
-            (ref) async => todayTrainingWorkoutPlan,
+          workoutLibraryProvider.overrideWith(
+            (ref) async => [_upperStrengthWorkout],
           ),
         ],
         child: MaterialApp.router(routerConfig: router),
@@ -216,8 +215,8 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          trainingWorkoutProvider.overrideWith(
-            (ref) async => todayTrainingWorkoutPlan,
+          workoutLibraryProvider.overrideWith(
+            (ref) async => [_upperStrengthWorkout],
           ),
         ],
         child: MaterialApp.router(routerConfig: router),
@@ -237,4 +236,180 @@ void main() {
     expect(find.text('Lock in'), findsOneWidget);
     expect(find.text('DB Bench Press'), findsOneWidget);
   });
+
+  testWidgets('selecting a scheduled weekly item updates the hero workout', (
+    tester,
+  ) async {
+    final startDate = DateTime.now();
+    final scheduled = DateTime(
+      startDate.year,
+      startDate.month,
+      startDate.day + 1,
+    );
+    final router = GoRouter(
+      initialLocation: AppRoutes.training,
+      routes: [
+        GoRoute(
+          path: AppRoutes.training,
+          builder: (context, state) => const TrainingScreen(),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          workoutLibraryProvider.overrideWith(
+            (ref) async => [
+              _upperStrengthWorkout,
+              _lowerStarterWorkout.copyWith(scheduledFor: scheduled),
+              _mobilityResetWorkout.copyWith(scheduledFor: scheduled),
+            ],
+          ),
+        ],
+        child: MaterialApp.router(routerConfig: router),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Upper Strength'), findsNWidgets(2));
+    expect(find.text('Lower Starter'), findsNothing);
+
+    final scheduledDayFinder = find.text(
+      scheduled.day.toString().padLeft(2, '0'),
+    );
+    await tester.ensureVisible(scheduledDayFinder);
+    await tester.pumpAndSettle();
+    await tester.tap(scheduledDayFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Upper Strength'), findsOneWidget);
+    expect(find.text('Lower Starter'), findsOneWidget);
+    expect(find.text('Mobility Reset'), findsOneWidget);
+
+    final workoutItemFinder = find.text('Lower Starter');
+    await tester.ensureVisible(workoutItemFinder);
+    await tester.pumpAndSettle();
+    await tester.tap(workoutItemFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Lower Starter'), findsNWidgets(2));
+  });
+
+  testWidgets('defaults weekly plan to today when today has no workouts', (
+    tester,
+  ) async {
+    final startDate = DateTime.now();
+    final scheduled = DateTime(
+      startDate.year,
+      startDate.month,
+      startDate.day + 1,
+    );
+    final router = GoRouter(
+      initialLocation: AppRoutes.training,
+      routes: [
+        GoRoute(
+          path: AppRoutes.training,
+          builder: (context, state) => const TrainingScreen(),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          workoutLibraryProvider.overrideWith(
+            (ref) async => [
+              _lowerStarterWorkout.copyWith(scheduledFor: scheduled),
+            ],
+          ),
+        ],
+        child: MaterialApp.router(routerConfig: router),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('No workout today'), findsNWidgets(2));
+    expect(
+      find.text(
+        'Today has no workout scheduled. Keep it light or create one for today.',
+      ),
+      findsNWidgets(2),
+    );
+    expect(find.text('Lower Starter'), findsNothing);
+
+    final scheduledDayFinder = find.text(
+      scheduled.day.toString().padLeft(2, '0'),
+    );
+    await tester.ensureVisible(scheduledDayFinder);
+    await tester.pumpAndSettle();
+    await tester.tap(scheduledDayFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('No workout today'), findsOneWidget);
+    expect(find.text('Lower Starter'), findsOneWidget);
+
+    final workoutItemFinder = find.text('Lower Starter');
+    await tester.ensureVisible(workoutItemFinder);
+    await tester.pumpAndSettle();
+    await tester.tap(workoutItemFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('No workout today'), findsNothing);
+    expect(find.text('Lower Starter'), findsNWidgets(2));
+  });
 }
+
+final _today = DateTime.now();
+
+final _upperStrengthWorkout = WorkoutLibraryWorkout(
+  id: 'upper-strength',
+  title: 'Upper Strength',
+  scheduledFor: DateTime(_today.year, _today.month, _today.day),
+  durationMinutes: 28,
+  difficulty: TrainingWorkoutDifficulty.intermediate,
+  status: TrainingWorkoutStatus.planned,
+  description: 'ForgeAI Recovery keeps the load focused.',
+  items: const [
+    WorkoutLibraryItem(
+      exerciseId: 'db-bench-press',
+      exerciseNameSnapshot: 'DB Bench Press',
+      order: 1,
+      sets: [WorkoutLibrarySet(order: 1, reps: 8)],
+    ),
+  ],
+);
+
+const _lowerStarterWorkout = WorkoutLibraryWorkout(
+  id: 'lower-starter',
+  title: 'Lower Starter',
+  durationMinutes: 24,
+  difficulty: TrainingWorkoutDifficulty.beginner,
+  status: TrainingWorkoutStatus.draft,
+  description: 'Leg day starter.',
+  items: [
+    WorkoutLibraryItem(
+      exerciseId: 'goblet-squat',
+      exerciseNameSnapshot: 'Goblet Squat',
+      order: 1,
+      sets: [WorkoutLibrarySet(order: 1, reps: 10)],
+    ),
+  ],
+);
+
+const _mobilityResetWorkout = WorkoutLibraryWorkout(
+  id: 'mobility-reset',
+  title: 'Mobility Reset',
+  durationMinutes: 12,
+  difficulty: TrainingWorkoutDifficulty.beginner,
+  status: TrainingWorkoutStatus.planned,
+  description: 'Light reset after lifting.',
+  items: [
+    WorkoutLibraryItem(
+      exerciseId: 'hip-flow',
+      exerciseNameSnapshot: 'Hip Flow',
+      order: 1,
+      sets: [WorkoutLibrarySet(order: 1, durationSeconds: 60)],
+    ),
+  ],
+);
