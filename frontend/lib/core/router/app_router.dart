@@ -14,11 +14,13 @@ import 'package:forge_ai/features/profile/screens/profile_settings_screen.dart';
 import 'package:forge_ai/features/training/screens/active_workout_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_preview_screen.dart';
+import 'package:forge_ai/features/welcome/screens/welcome_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/ai_plan_preview/ai_plan_preview_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/body_profile/body_profile_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/equipment_selection/equipment_selection_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/goal_selection/goal_selection_screen.dart';
 import 'package:forge_ai/features/workout_builder/screens/schedule_preference/schedule_preference_screen.dart';
+import 'package:forge_ai/features/workout_create/screens/workout_create_screen.dart';
 import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {
@@ -38,6 +40,7 @@ abstract final class AppRoutes {
   static const training = '/training';
   static const workoutPreview = '/training/workout-preview';
   static const workoutActive = '/training/workout-active';
+  static const workoutCreate = '/workout/create';
   static const nutrition = '/nutrition';
   static const nutritionChat = '/nutrition/chat';
   static const insights = '/insights';
@@ -62,7 +65,7 @@ final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppRoutes.splash,
-      redirect: (context, state) => AppRoutes.authLogin,
+      builder: (context, state) => const WelcomeScreen(),
     ),
     GoRoute(
       path: AppRoutes.auth,
@@ -95,6 +98,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.workoutBuilderPreview,
       builder: (context, state) => const AiPlanPreviewScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.workoutCreate,
+      builder: (context, state) => const WorkoutCreateScreen(),
     ),
     GoRoute(
       path: AppRoutes.insightMuscleDetailPath,
