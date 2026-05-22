@@ -48,7 +48,7 @@ class ScheduleAiPromo extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            '4 SESSIONS PER WEEK,\nTHEN A 28-DAY CHECK-IN.',
+            'YOUR SELECTED FREQUENCY,\nTHEN A 28-DAY CHECK-IN.',
             style: AppTypography.h3.copyWith(
               color: AppColors.cardWhite,
               fontSize: 18,

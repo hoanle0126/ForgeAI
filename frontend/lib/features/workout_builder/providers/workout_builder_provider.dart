@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 
-const int workoutBuilderMonthlyTrainingDays = 4;
-
 enum WorkoutGoal {
   fatLoss('Fat Loss', 'CONDITIONING', Icons.local_fire_department),
   muscleGain('Muscle Gain', 'HYPERTROPHY', Icons.fitness_center),
@@ -161,9 +159,6 @@ class SelectedDaysNotifier extends Notifier<Set<TrainingDay>> {
     if (state.contains(day)) {
       state = {...state}..remove(day);
     } else {
-      if (state.length >= workoutBuilderMonthlyTrainingDays) {
-        return;
-      }
       state = {...state, day};
     }
   }

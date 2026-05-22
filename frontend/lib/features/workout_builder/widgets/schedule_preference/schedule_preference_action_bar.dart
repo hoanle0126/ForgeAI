@@ -15,11 +15,10 @@ class SchedulePreferenceActionBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final days = ref.watch(selectedDaysProvider);
     final time = ref.watch(preferredTimeProvider);
-    final isValid =
-        days.length == workoutBuilderMonthlyTrainingDays && time != null;
+    final isValid = days.isNotEmpty && time != null;
     final helperText = time == null
         ? 'Choose a preferred training time to continue.'
-        : 'Select exactly 4 training days to build the month 1 block.';
+        : 'Select at least one training day to build your plan.';
 
     return Padding(
       padding: const EdgeInsets.only(

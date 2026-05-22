@@ -12,7 +12,7 @@ class TrainingDaysSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDays = ref.watch(selectedDaysProvider);
-    final isReady = selectedDays.length == workoutBuilderMonthlyTrainingDays;
+    final hasSelection = selectedDays.isNotEmpty;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,15 +57,15 @@ class TrainingDaysSelector extends ConsumerWidget {
         ),
         const SizedBox(height: AppSpacing.md),
         Text(
-          '${selectedDays.length} of $workoutBuilderMonthlyTrainingDays days selected',
+          '${selectedDays.length} day(s) selected',
           style: AppTypography.bodySmall.copyWith(
-            color: isReady ? AppColors.success : AppColors.textDisabled,
+            color: hasSelection ? AppColors.success : AppColors.textDisabled,
             fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
-          'Month 1 planning currently runs on exactly 4 weekly sessions.',
+          'ForgeAI will use your selected weekly frequency for month 1.',
           style: AppTypography.bodySmall.copyWith(
             color: AppColors.textDisabled,
           ),

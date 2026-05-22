@@ -26,10 +26,16 @@ String buildMonthlyWorkoutPlanErrorMessage(Object error) {
   }
 
   if (error is DioException) {
-    final responseMessage = error.response?.data?['message'];
-    if (responseMessage is String && responseMessage.isNotEmpty) {
-      return responseMessage;
+    final extractedMessage = _extractErrorMessage(error.response?.data);
+    if (extractedMessage != null) {
+      return extractedMessage;
     }
+
+    final statusCode = error.response?.statusCode;
+    if (statusCode == 404) {
+      return 'Monthly plan endpoint not found. Update and restart backend API.';
+    }
+
     if (error.message != null && error.message!.isNotEmpty) {
       return error.message!;
     }
@@ -64,9 +70,9 @@ Map<String, dynamic> _buildMonthlyPlanPayload(Ref ref) {
       'Choose a preferred training time before building your plan.',
     );
   }
-  if (trainingDays.length != workoutBuilderMonthlyTrainingDays) {
+  if (trainingDays.isEmpty) {
     throw const FormatException(
-      'Pick exactly 4 training days for the month 1 block.',
+      'Pick at least one training day before building your plan.',
     );
   }
 
@@ -99,4 +105,35 @@ int _parseInt(String input, {required String fieldLabel}) {
     throw FormatException('Enter a valid $fieldLabel before continuing.');
   }
   return int.parse(match.group(1)!);
+}
+
+String? _extractErrorMessage(dynamic responseData) {
+  if (responseData is! Map<String, dynamic>) {
+    return null;
+  }
+
+  final message = responseData['message'];
+  if (message is String && message.isNotEmpty) {
+    return message;
+  }
+
+  if (message is List && message.isNotEmpty) {
+    final first = message.first;
+    if (first is String && first.isNotEmpty) {
+      return first;
+    }
+  }
+
+  final errors = responseData['errors'];
+  if (errors is Map<String, dynamic> && errors.isNotEmpty) {
+    final firstValue = errors.values.first;
+    if (firstValue is List && firstValue.isNotEmpty) {
+      final first = firstValue.first;
+      if (first is String && first.isNotEmpty) {
+        return first;
+      }
+    }
+  }
+
+  return null;
 }
