@@ -41,6 +41,11 @@ String buildMonthlyWorkoutPlanErrorMessage(Object error) {
     }
   }
 
+  final fallback = error.toString();
+  if (fallback.isNotEmpty && fallback != 'Instance of Object') {
+    return fallback;
+  }
+
   return 'ForgeAI could not build your month 1 block yet.';
 }
 

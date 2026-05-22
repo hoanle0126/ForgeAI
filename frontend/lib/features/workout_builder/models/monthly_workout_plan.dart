@@ -40,8 +40,11 @@ class AiReadinessAdjustment with _$AiReadinessAdjustment {
     required String reason,
   }) = _AiReadinessAdjustment;
 
-  factory AiReadinessAdjustment.fromJson(Map<String, dynamic> json) =>
-      _$AiReadinessAdjustmentFromJson(json);
+  factory AiReadinessAdjustment.fromJson(Map<String, dynamic> json) {
+    final normalized = <String, dynamic>{...json};
+    normalized['intensityModifier'] ??= json['intensity_modifier'];
+    return _$AiReadinessAdjustmentFromJson(normalized);
+  }
 }
 
 @freezed
