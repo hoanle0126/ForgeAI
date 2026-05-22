@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
 
 class AiQuoteBlock extends StatelessWidget {
-  const AiQuoteBlock({super.key});
+  const AiQuoteBlock({
+    super.key,
+    required this.quote,
+    this.signature = '— COACH FORGEAI',
+  });
+
+  final String quote;
+  final String signature;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class AiQuoteBlock extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                '"Based on your biometrics, we\'ve shifted the first four weeks to prioritize fat loss optimization through steady-state cardiac output, ensuring your metabolic engine is primed before we ramp up the intensity."',
+                '"$quote"',
                 style: AppTypography.bodyMedium.copyWith(
                   color: AppColors.textDark.withValues(alpha: 0.8),
                   fontStyle: FontStyle.italic,
@@ -30,7 +38,7 @@ class AiQuoteBlock extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.md),
               Text(
-                '— COACH FORGEAI',
+                signature,
                 textAlign: TextAlign.right,
                 style: AppTypography.labelUppercase.copyWith(
                   color: AppColors.aiBlue,

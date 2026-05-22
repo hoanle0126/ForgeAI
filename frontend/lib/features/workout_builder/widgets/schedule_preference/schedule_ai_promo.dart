@@ -9,7 +9,7 @@ class ScheduleAiPromo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
+      height: 156,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
@@ -38,7 +38,7 @@ class ScheduleAiPromo extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
-                'PRECISION AI SYNC',
+                'MONTH 1 AI BLOCK',
                 style: AppTypography.labelUppercase.copyWith(
                   color: AppColors.cardWhite,
                   fontWeight: FontWeight.w800,
@@ -46,13 +46,21 @@ class ScheduleAiPromo extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.xs),
+          const SizedBox(height: AppSpacing.sm),
           Text(
-            'OPTIMIZE YOUR\nPERFORMANCE WINDOW',
+            '4 SESSIONS PER WEEK,\nTHEN A 28-DAY CHECK-IN.',
             style: AppTypography.h3.copyWith(
               color: AppColors.cardWhite,
               fontSize: 18,
               fontStyle: FontStyle.italic,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            'ForgeAI maps one full month first, then asks for new feedback before building the next block.',
+            style: AppTypography.bodySmall.copyWith(
+              color: AppColors.cardWhite.withValues(alpha: 0.72),
+              height: 1.4,
             ),
           ),
         ],

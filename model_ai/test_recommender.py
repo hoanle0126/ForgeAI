@@ -11,6 +11,7 @@ from recommender import (
     PlanFeedback,
     RecommenderArtifacts,
     evaluate_recommender,
+    recommend_monthly_plan,
     recommend_plan,
     train_artifacts,
 )
@@ -92,6 +93,92 @@ class RecommenderTest(unittest.TestCase):
         self.assertEqual(len(plan["meals"]), 3)
         self.assertTrue(any(item["equipment"] == "Dumbbell" for item in plan["workouts"]))
         self.assertTrue(all(item["keyword"] for item in plan["meals"]))
+
+    def test_recommend_plan_accepts_frontend_goal_and_equipment_slugs(self):
+        artifacts = train_artifacts(self.gym_csv, self.food_csv)
+        profile = OnboardingProfile(
+            goal="muscle_gain",
+            equipment=["bodyweight", "dumbbell", "band"],
+            height_cm=180,
+            weight_kg=82,
+            age=29,
+            activity_level="very active",
+        )
+
+        plan = recommend_plan(profile, artifacts)
+
+        self.assertEqual(plan["goal_slug"], "build_muscle")
+        self.assertEqual(len(plan["workouts"]), 5)
+        self.assertTrue(
+            any(item["equipment"] in {"Body Only", "Dumbbell", "Bands"} for item in plan["workouts"])
+        )
+
+    def test_recommend_plan_supports_mobility_goal(self):
+        artifacts = train_artifacts(self.gym_csv, self.food_csv)
+        profile = OnboardingProfile(
+            goal="mobility",
+            equipment=["bodyweight", "band"],
+            height_cm=168,
+            weight_kg=63,
+            age=31,
+            activity_level="light",
+            session_minutes=30,
+        )
+
+        plan = recommend_plan(profile, artifacts)
+
+        self.assertEqual(plan["goal_slug"], "mobility")
+        self.assertEqual(len(plan["workouts"]), 5)
+        self.assertTrue(any("seconds" in item["reps"] for item in plan["workouts"]))
+
+    def test_recommend_monthly_plan_returns_four_templates_and_reassessment(self):
+        artifacts = train_artifacts(self.gym_csv, self.food_csv)
+        profile = OnboardingProfile(
+            goal="muscle_gain",
+            equipment=["bodyweight", "dumbbell", "band"],
+            height_cm=180,
+            weight_kg=82,
+            age=29,
+            activity_level="very active",
+            training_days_per_week=4,
+            session_minutes=45,
+        )
+
+        plan = recommend_monthly_plan(profile, artifacts)
+
+        self.assertEqual(plan["schema_version"], "coach-month-plan-v1")
+        self.assertEqual(plan["block_length_weeks"], 4)
+        self.assertEqual(plan["training_days_per_week"], 4)
+        self.assertEqual(len(plan["workout_templates"]), 4)
+        self.assertEqual(len(plan["progression_plan"]), 4)
+        self.assertEqual(plan["reassessment"]["due_after_days"], 28)
+        self.assertTrue(plan["reassessment"]["questions"])
+        self.assertTrue(all(template["exercises"] for template in plan["workout_templates"]))
+
+    def test_recommend_monthly_plan_supports_mobility_goal(self):
+        artifacts = train_artifacts(self.gym_csv, self.food_csv)
+        profile = OnboardingProfile(
+            goal="mobility",
+            equipment=["bodyweight", "band"],
+            height_cm=168,
+            weight_kg=63,
+            age=31,
+            activity_level="light",
+            training_days_per_week=4,
+            session_minutes=30,
+        )
+
+        plan = recommend_monthly_plan(profile, artifacts)
+
+        self.assertEqual(plan["goal_slug"], "mobility")
+        self.assertEqual(len(plan["workout_templates"]), 4)
+        self.assertTrue(
+            any(
+                "seconds" in exercise["reps"]
+                for template in plan["workout_templates"]
+                for exercise in template["exercises"]
+            )
+        )
 
     def test_recommend_plan_prefers_clean_plain_foods_for_nutrition(self):
         artifacts = train_artifacts(self.gym_csv, self.food_csv)

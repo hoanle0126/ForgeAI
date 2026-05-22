@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
+import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/features/workout_builder/providers/workout_builder_provider.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
@@ -13,7 +15,11 @@ class SchedulePreferenceActionBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final days = ref.watch(selectedDaysProvider);
     final time = ref.watch(preferredTimeProvider);
-    final isValid = days.isNotEmpty && time != null;
+    final isValid =
+        days.length == workoutBuilderMonthlyTrainingDays && time != null;
+    final helperText = time == null
+        ? 'Choose a preferred training time to continue.'
+        : 'Select exactly 4 training days to build the month 1 block.';
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -22,11 +28,27 @@ class SchedulePreferenceActionBar extends ConsumerWidget {
         bottom: AppSpacing.xl,
         top: AppSpacing.base,
       ),
-      child: AppButton(
-        text: 'Continue',
-        onPressed: isValid
-            ? () => context.push(AppRoutes.workoutBuilderPreview)
-            : null,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (!isValid) ...[
+            Text(
+              helperText,
+              style: AppTypography.bodySmall.copyWith(
+                color: AppColors.textDisabled,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+          ],
+          AppButton(
+            text: 'Build Month 1 Plan',
+            trailingIcon: Icons.auto_awesome,
+            onPressed: isValid
+                ? () => context.push(AppRoutes.workoutBuilderPreview)
+                : null,
+          ),
+        ],
       ),
     );
   }

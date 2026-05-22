@@ -21,17 +21,26 @@ GOAL_ADJUSTMENTS = {
     "build_muscle": 250,
     "get_stronger": 150,
     "stay_active": 0,
+    "mobility": 0,
 }
 
 GOAL_ALIASES = {
     "lose fat": "lose_fat",
     "lose_fat": "lose_fat",
+    "fat loss": "lose_fat",
+    "fat_loss": "lose_fat",
     "build muscle": "build_muscle",
     "build_muscle": "build_muscle",
+    "muscle gain": "build_muscle",
+    "muscle_gain": "build_muscle",
     "get stronger": "get_stronger",
     "get_stronger": "get_stronger",
+    "strength": "get_stronger",
     "stay active": "stay_active",
     "stay_active": "stay_active",
+    "general fitness": "stay_active",
+    "general_fitness": "stay_active",
+    "mobility": "mobility",
 }
 
 INJURY_BLOCKLIST = {
@@ -45,6 +54,7 @@ GOAL_FOOD_TARGETS = {
     "build_muscle": ["chicken breast", "egg", "greek yogurt"],
     "get_stronger": ["salmon", "white rice", "egg"],
     "stay_active": ["oats", "banana", "milk"],
+    "mobility": ["greek yogurt", "banana", "salmon"],
 }
 
 GOAL_BODY_PARTS = {
@@ -52,6 +62,7 @@ GOAL_BODY_PARTS = {
     "build_muscle": ["Chest", "Lats", "Quadriceps", "Shoulders", "Biceps"],
     "get_stronger": ["Quadriceps", "Lower Back", "Chest", "Hamstrings", "Shoulders"],
     "stay_active": ["Abdominals", "Quadriceps", "Shoulders", "Hamstrings", "Chest"],
+    "mobility": ["Shoulders", "Hamstrings", "Quadriceps", "Lower Back", "Abdominals"],
 }
 
 GOAL_MACRO_RATIOS = {
@@ -59,6 +70,7 @@ GOAL_MACRO_RATIOS = {
     "build_muscle": {"protein": 0.30, "carbs": 0.45, "fat": 0.25},
     "get_stronger": {"protein": 0.28, "carbs": 0.47, "fat": 0.25},
     "stay_active": {"protein": 0.25, "carbs": 0.45, "fat": 0.30},
+    "mobility": {"protein": 0.25, "carbs": 0.40, "fat": 0.35},
 }
 
 PORTION_GRAMS_BY_KEYWORD = {
@@ -83,16 +95,53 @@ PORTION_GRAMS_BY_KEYWORD = {
 }
 
 EQUIPMENT_ALIASES = {
+    "bodyweight": "Body Only",
+    "Bodyweight": "Body Only",
+    "Bodyweight Only": "Body Only",
+    "body only": "Body Only",
+    "Body Only": "Body Only",
     "Dumbbells": "Dumbbell",
     "Dumbbell": "Dumbbell",
+    "dumbbell": "Dumbbell",
     "Bench": "Other",
+    "bench": "Other",
     "Yoga Mat": "Body Only",
+    "yoga mat": "Body Only",
     "Resistance Bands": "Bands",
+    "resistance bands": "Bands",
+    "band": "Bands",
+    "bands": "Bands",
+    "Bands": "Bands",
     "Pull-up Bar": "Body Only",
+    "pull-up bar": "Body Only",
     "Kettlebell": "Kettlebells",
+    "kettlebell": "Kettlebells",
+    "Kettlebells": "Kettlebells",
     "Jump Rope": "Body Only",
+    "jump rope": "Body Only",
     "None": "Body Only",
+    "none": "Body Only",
+    "barbell": "Barbell",
+    "Barbell": "Barbell",
+    "machine": "Machine",
+    "Machine": "Machine",
+    "cable": "Cable",
+    "Cable": "Cable",
+    "other": "Other",
+    "Other": "Other",
 }
+
+MOBILITY_KEYWORDS = [
+    "mobility",
+    "stretch",
+    "flexibility",
+    "range of motion",
+    "warm-up",
+    "warm up",
+    "yoga",
+    "stability",
+    "activation",
+]
 
 FEATURE_NAMES = [
     "rating",
@@ -180,6 +229,28 @@ class RecommenderArtifacts:
     @classmethod
     def load(cls, path: Path) -> "RecommenderArtifacts":
         payload = json.loads(path.read_text(encoding="utf-8"))
+        payload["equipment_aliases"] = {
+            **EQUIPMENT_ALIASES,
+            **payload.get("equipment_aliases", {}),
+        }
+        payload["goal_food_targets"] = {
+            **GOAL_FOOD_TARGETS,
+            **payload.get("goal_food_targets", {}),
+        }
+        payload["goal_body_parts"] = {
+            **GOAL_BODY_PARTS,
+            **payload.get("goal_body_parts", {}),
+        }
+        nutrition_model = payload.get("nutrition_model", {})
+        macro_targets = nutrition_model.get("macro_targets", {})
+        nutrition_model["macro_targets"] = {
+            **{
+                goal_slug: _macro_targets(goal_slug, 2400, 75)
+                for goal_slug in GOAL_MACRO_RATIOS
+            },
+            **macro_targets,
+        }
+        payload["nutrition_model"] = nutrition_model
         return cls(**payload)
 
 
@@ -453,6 +524,8 @@ def _predict_workout_scores(feature_rows: list[list[float]], workout_model: dict
 
 
 def _predict_macro_targets(profile: OnboardingProfile, artifacts: RecommenderArtifacts, goal_slug: str, daily_calories: int) -> dict:
+    if goal_slug == "mobility":
+        return _macro_targets(goal_slug, daily_calories, profile.weight_kg)
     model_path = artifacts.nutrition_model.get("model_path")
     if model_path and Path(model_path).exists():
         model = _load_model(model_path)
@@ -465,9 +538,21 @@ def _predict_macro_targets(profile: OnboardingProfile, artifacts: RecommenderArt
     return _macro_targets(goal_slug, daily_calories, profile.weight_kg)
 
 
-def _workout_prescription(item: dict) -> dict:
+def _mobility_signal(item: dict) -> int:
+    text = f"{item.get('title') or ''} {item.get('desc') or ''}".lower()
+    signal = sum(term in text for term in MOBILITY_KEYWORDS)
+    if item.get("type") in {"Stretching", "Plyometrics"}:
+        signal += 2
+    if item.get("equipment") == "Body Only":
+        signal += 1
+    return signal
+
+
+def _workout_prescription(item: dict, goal_slug: str) -> dict:
     beginner = item["level"] == "Beginner"
-    if item["type"] == "Cardio":
+    if goal_slug == "mobility" or _mobility_signal(item) >= 2:
+        reps = "30-45 seconds per side"
+    elif item["type"] == "Cardio":
         reps = "8-12 minutes"
     elif item["body_part"] == "Abdominals":
         reps = "10-15 controlled reps"
@@ -476,10 +561,18 @@ def _workout_prescription(item: dict) -> dict:
     return {
         "sets": 2 if beginner else 3,
         "reps": reps,
-        "rest_seconds": 75 if beginner else 60,
+        "rest_seconds": 45 if goal_slug == "mobility" else (75 if beginner else 60),
         "confidence": round(min(1.0, max(0.0, item["model_score"] / 12)), 4),
         "rationale": f"Matches your {item['body_part'].lower()} focus with {item['equipment'].lower()} availability.",
     }
+
+
+def _session_exercise_count(session_minutes: int) -> int:
+    if session_minutes <= 30:
+        return 3
+    if session_minutes <= 45:
+        return 4
+    return 5
 
 
 def _blocked_injury_terms(injuries: list[str]) -> list[str]:
@@ -499,10 +592,9 @@ def _is_workout_allowed_for_profile(item: dict, profile: OnboardingProfile, feed
     return True
 
 
-def _pick_workouts(profile: OnboardingProfile, artifacts: RecommenderArtifacts, goal_slug: str, feedback: PlanFeedback | None = None) -> list[dict]:
+def _rank_workouts(profile: OnboardingProfile, artifacts: RecommenderArtifacts, goal_slug: str, feedback: PlanFeedback | None = None) -> list[dict]:
     pool = _equipment_pool(profile, artifacts)
     scored = []
-    used_titles = set()
     feature_rows = []
     prepared_rows = []
     for row in artifacts.workouts:
@@ -521,11 +613,12 @@ def _pick_workouts(profile: OnboardingProfile, artifacts: RecommenderArtifacts, 
         if not _is_workout_allowed_for_profile(item, profile, feedback):
             continue
         item["model_score"] = round(model_score, 4)
-        item.update(_workout_prescription(item))
+        item.update(_workout_prescription(item, goal_slug))
         scored.append(item)
     ranked = sorted(
         scored,
         key=lambda item: (
+            _mobility_signal(item) if goal_slug == "mobility" else 0,
             item["equipment"] in pool,
             item["body_part"] in artifacts.goal_body_parts[goal_slug],
             bool(item["desc"].strip()),
@@ -533,6 +626,12 @@ def _pick_workouts(profile: OnboardingProfile, artifacts: RecommenderArtifacts, 
         ),
         reverse=True,
     )
+    return ranked
+
+
+def _pick_workouts(profile: OnboardingProfile, artifacts: RecommenderArtifacts, goal_slug: str, feedback: PlanFeedback | None = None) -> list[dict]:
+    ranked = _rank_workouts(profile, artifacts, goal_slug, feedback)
+    used_titles = set()
     selected = []
     for item in ranked:
         if item["title"] in used_titles:
@@ -561,6 +660,107 @@ def _attach_substitutions(selected: list[dict], ranked: list[dict]) -> None:
             if len(substitutions) == 2:
                 break
         workout["substitutions"] = substitutions
+
+
+def _template_label(index: int) -> str:
+    return chr(ord("A") + index)
+
+
+def _template_title(goal_slug: str, focus: str, index: int) -> str:
+    label = _template_label(index)
+    if goal_slug == "mobility":
+        return f"Session {label}: {focus} Mobility"
+    return f"Session {label}: {focus} Focus"
+
+
+def _template_exercises(
+    ranked: list[dict],
+    goal_slug: str,
+    target_focus: str,
+    count: int,
+    used_titles: set[str],
+) -> list[dict]:
+    selected = []
+    focus_pool = artifacts_focus_pool = GOAL_BODY_PARTS[goal_slug]
+    sources = [
+        [
+            item
+            for item in ranked
+            if item["title"] not in used_titles and item["body_part"] == target_focus
+        ],
+        [
+            item
+            for item in ranked
+            if item["title"] not in used_titles
+            and item["body_part"] in focus_pool
+            and item["body_part"] != target_focus
+        ],
+        [item for item in ranked if item["title"] not in used_titles],
+    ]
+
+    for source in sources:
+        for item in source:
+            if item["title"] in {exercise["title"] for exercise in selected}:
+                continue
+            selected.append(dict(item))
+            used_titles.add(item["title"])
+            if len(selected) == count:
+                _attach_substitutions(selected, ranked)
+                return selected
+
+    if len(selected) < count:
+        for item in ranked:
+            if item["title"] in {exercise["title"] for exercise in selected}:
+                continue
+            selected.append(dict(item))
+            if len(selected) == count:
+                break
+
+    _attach_substitutions(selected, ranked)
+    return selected
+
+
+def _build_monthly_templates(
+    profile: OnboardingProfile,
+    artifacts: RecommenderArtifacts,
+    goal_slug: str,
+    feedback: PlanFeedback | None = None,
+) -> list[dict]:
+    ranked = _rank_workouts(profile, artifacts, goal_slug, feedback)
+    template_count = min(max(profile.training_days_per_week, 1), 4)
+    exercise_count = _session_exercise_count(profile.session_minutes)
+    focus_sequence = GOAL_BODY_PARTS[goal_slug][:template_count]
+    if len(focus_sequence) < template_count:
+        focus_sequence.extend(
+            GOAL_BODY_PARTS[goal_slug][
+                : template_count - len(focus_sequence)
+            ]
+        )
+    used_titles: set[str] = set()
+    templates = []
+    for index, focus in enumerate(focus_sequence):
+        exercises = _template_exercises(
+            ranked,
+            goal_slug,
+            focus,
+            exercise_count,
+            used_titles,
+        )
+        templates.append(
+            {
+                "template_id": f"session_{index + 1}",
+                "title": _template_title(goal_slug, focus, index),
+                "focus": focus,
+                "estimated_minutes": min(
+                    profile.session_minutes,
+                    8 + len(exercises) * 9,
+                ),
+                "warm_up": "5 minutes easy cardio plus dynamic mobility",
+                "cooldown": "3-5 minutes light stretching and breathing",
+                "exercises": exercises,
+            }
+        )
+    return templates
 
 
 def _training_day_indexes(training_days_per_week: int) -> set[int]:
@@ -821,6 +1021,11 @@ def _build_meal_plan(profile: OnboardingProfile, artifacts: RecommenderArtifacts
             ("Lunch", ["tofu", "brown rice", "broccoli"]),
             ("Dinner", ["chicken breast", "sweet potato", "spinach"]),
         ],
+        "mobility": [
+            ("Breakfast", ["greek yogurt", "banana", "oats"]),
+            ("Lunch", ["salmon", "brown rice", "spinach"]),
+            ("Dinner", ["tofu", "sweet potato", "broccoli"]),
+        ],
     }
     plan = []
     for meal_name, keywords in templates[goal_slug]:
@@ -957,6 +1162,42 @@ def _coach_summary(goal_slug: str, profile: OnboardingProfile, workouts: list[di
     )
 
 
+def _coach_monthly_summary(goal_slug: str, profile: OnboardingProfile, templates: list[dict], meal_plan: list[dict]) -> str:
+    focuses = ", ".join(dict.fromkeys(template["focus"] for template in templates))
+    calories = sum(meal["total_calories"] for meal in meal_plan)
+    return (
+        f"4-week block for {goal_slug.replace('_', ' ')} with {profile.training_days_per_week} training days per week, "
+        f"about {profile.session_minutes} minutes per session, rotating through {focuses}. "
+        f"Meal plan provides about {calories} kcal across three practical meals."
+    )
+
+
+def _reassessment_questions(goal_slug: str) -> list[str]:
+    base_questions = [
+        "Which sessions felt most manageable and which felt too demanding?",
+        "Did you complete most of the planned four training days each week?",
+        "Did any exercise cause pain, excessive soreness, or awkward setup issues?",
+        "Has your available equipment or schedule changed since this plan started?",
+    ]
+    goal_specific = {
+        "lose_fat": "Do you want the next block to push harder on conditioning or keep recovery easier?",
+        "build_muscle": "Which body areas do you want more volume or emphasis on next month?",
+        "get_stronger": "Which lifts felt ready for progression and which need steadier loading?",
+        "stay_active": "Do you want more variety next month or a steadier repeatable rhythm?",
+        "mobility": "Did range of motion improve enough to move toward more loaded work next month?",
+    }
+    return [*base_questions, goal_specific[goal_slug]]
+
+
+def _month_end_reassessment(goal_slug: str) -> dict:
+    return {
+        "due_after_days": 28,
+        "prompt_title": "Month-end training check-in",
+        "summary": "Before month 2, ForgeAI should re-check adherence, recovery, and equipment reality.",
+        "questions": _reassessment_questions(goal_slug),
+    }
+
+
 def recommend_plan(profile: OnboardingProfile, artifacts: RecommenderArtifacts, feedback: PlanFeedback | None = None) -> dict:
     _validate_profile(profile)
     goal_slug = normalize_goal(profile.goal)
@@ -982,4 +1223,34 @@ def recommend_plan(profile: OnboardingProfile, artifacts: RecommenderArtifacts, 
         "workouts": workouts,
         "meals": meals,
         "meal_plan": meal_plan,
+    }
+
+
+def recommend_monthly_plan(profile: OnboardingProfile, artifacts: RecommenderArtifacts, feedback: PlanFeedback | None = None) -> dict:
+    _validate_profile(profile)
+    goal_slug = normalize_goal(profile.goal)
+    calories = _daily_calories(profile, goal_slug)
+    templates = _build_monthly_templates(profile, artifacts, goal_slug, feedback)
+    meals, macro_targets = _pick_foods(profile, artifacts, goal_slug, calories)
+    meal_plan = _build_meal_plan(profile, artifacts, goal_slug, macro_targets)
+    return {
+        "schema_version": "coach-month-plan-v1",
+        "model_version": artifacts.workout_model.get("model_type", "unknown"),
+        "goal_slug": goal_slug,
+        "block_length_weeks": 4,
+        "training_days_per_week": profile.training_days_per_week,
+        "daily_calorie_target": calories,
+        "protein_target_g": macro_targets["protein_target_g"],
+        "carb_target_g": macro_targets["carb_target_g"],
+        "fat_target_g": macro_targets["fat_target_g"],
+        "daily_macro_coverage": _daily_macro_coverage(meal_plan, macro_targets),
+        "safety_notes": _safety_notes(profile, calories),
+        "coach_summary": _coach_monthly_summary(goal_slug, profile, templates, meal_plan),
+        "coach_notes": _coach_notes(feedback),
+        "readiness_adjustment": _readiness_adjustment(feedback),
+        "progression_plan": _progression_plan(goal_slug, profile, feedback),
+        "workout_templates": templates,
+        "meals": meals,
+        "meal_plan": meal_plan,
+        "reassessment": _month_end_reassessment(goal_slug),
     }

@@ -3,22 +3,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 
+const int workoutBuilderMonthlyTrainingDays = 4;
+
 enum WorkoutGoal {
-  loseFat('Lose Fat', 'RECOMMENDED', Icons.fitness_center),
-  buildMuscle('Build Muscle', 'HYPERTROPHY', Icons.sports_gymnastics),
-  getStronger('Get Stronger', 'POWER & LOAD', Icons.monitor_weight_outlined),
-  stayActive('Stay Active', 'ENDURANCE', Icons.directions_run);
+  fatLoss('Fat Loss', 'CONDITIONING', Icons.local_fire_department),
+  muscleGain('Muscle Gain', 'HYPERTROPHY', Icons.fitness_center),
+  strength('Strength', 'LOAD & POWER', Icons.sports_gymnastics),
+  mobility('Mobility', 'RANGE & CONTROL', Icons.self_improvement),
+  generalFitness('General Fitness', 'CONSISTENCY', Icons.directions_run);
 
   final String title;
   final String subtitle;
   final IconData icon;
 
   const WorkoutGoal(this.title, this.subtitle, this.icon);
+
+  String get apiValue {
+    return switch (this) {
+      WorkoutGoal.fatLoss => 'fat_loss',
+      WorkoutGoal.muscleGain => 'muscle_gain',
+      WorkoutGoal.strength => 'strength',
+      WorkoutGoal.mobility => 'mobility',
+      WorkoutGoal.generalFitness => 'general_fitness',
+    };
+  }
 }
 
 class SelectedWorkoutGoalNotifier extends Notifier<WorkoutGoal?> {
   @override
-  WorkoutGoal? build() => WorkoutGoal.loseFat;
+  WorkoutGoal? build() => null;
 
   void select(WorkoutGoal goal) {
     state = goal;
@@ -31,20 +44,18 @@ final selectedWorkoutGoalProvider =
     );
 
 enum Equipment {
-  dumbbells('Dumbbells', Icons.fitness_center),
-  resistanceBands(
-    'Resistance Bands',
-    Icons.gesture,
-  ), // using gesture as a curved band
-  yogaMat('Yoga Mat', Icons.self_improvement),
-  pullUpBar('Pull-up Bar', Icons.minimize),
-  bench('Bench', Icons.event_seat),
-  kettlebell('Kettlebell', Icons.shopping_bag), // approximate shape
-  jumpRope('Jump Rope', Icons.cable),
-  none('None', Icons.cancel);
+  bodyweight('Bodyweight', 'bodyweight', Icons.accessibility_new),
+  dumbbell('Dumbbell', 'dumbbell', Icons.fitness_center),
+  barbell('Barbell', 'barbell', Icons.drag_handle),
+  machine('Machine', 'machine', Icons.precision_manufacturing),
+  cable('Cable', 'cable', Icons.cable),
+  band('Bands', 'band', Icons.gesture),
+  kettlebell('Kettlebell', 'kettlebell', Icons.shopping_bag),
+  other('Other', 'other', Icons.more_horiz);
 
-  const Equipment(this.title, this.icon);
+  const Equipment(this.title, this.apiValue, this.icon);
   final String title;
+  final String apiValue;
   final IconData icon;
 }
 
@@ -53,20 +64,11 @@ class SelectedEquipmentNotifier extends Notifier<Set<Equipment>> {
   Set<Equipment> build() => {};
 
   void toggle(Equipment equipment) {
-    if (equipment == Equipment.none) {
-      state = {Equipment.none};
-      return;
-    }
-
-    final newState = Set<Equipment>.from(state);
-    newState.remove(Equipment.none);
-
-    if (newState.contains(equipment)) {
-      newState.remove(equipment);
+    if (state.contains(equipment)) {
+      state = {...state}..remove(equipment);
     } else {
-      newState.add(equipment);
+      state = {...state, equipment};
     }
-    state = newState;
   }
 }
 
@@ -83,6 +85,15 @@ enum ActivityLevel {
 
   const ActivityLevel(this.title);
   final String title;
+
+  String get apiValue {
+    return switch (this) {
+      ActivityLevel.sedentary => 'sedentary',
+      ActivityLevel.light => 'light',
+      ActivityLevel.active => 'active',
+      ActivityLevel.veryActive => 'very_active',
+    };
+  }
 }
 
 abstract class StringFieldNotifier extends Notifier<String> {
@@ -138,6 +149,8 @@ enum TrainingDay {
 
   const TrainingDay(this.label);
   final String label;
+
+  String get apiValue => name;
 }
 
 class SelectedDaysNotifier extends Notifier<Set<TrainingDay>> {
@@ -148,6 +161,9 @@ class SelectedDaysNotifier extends Notifier<Set<TrainingDay>> {
     if (state.contains(day)) {
       state = {...state}..remove(day);
     } else {
+      if (state.length >= workoutBuilderMonthlyTrainingDays) {
+        return;
+      }
       state = {...state, day};
     }
   }
@@ -180,6 +196,8 @@ enum PreferredTime {
   const PreferredTime(this.label, this.icon);
   final String label;
   final IconData icon; // using material icons representing the mockup
+
+  String get apiValue => name;
 }
 
 class PreferredTimeNotifier extends Notifier<PreferredTime?> {
