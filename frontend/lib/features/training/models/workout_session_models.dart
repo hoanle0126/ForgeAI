@@ -12,6 +12,7 @@ class TrainingWorkoutPlan {
     required this.statusLabel,
     required this.estimatedDateLabel,
     this.scheduledFor,
+    this.scheduledDays = const [],
   });
 
   final String id;
@@ -24,6 +25,7 @@ class TrainingWorkoutPlan {
   final String statusLabel;
   final String estimatedDateLabel;
   final DateTime? scheduledFor;
+  final List<String> scheduledDays;
 
   String get durationLabel => '$durationMinutes min';
   String get exerciseCountLabel => '${exercises.length} exercises';
@@ -74,6 +76,7 @@ class TrainingWorkoutPlan {
         fallback: todayTrainingWorkoutPlan.estimatedDateLabel,
       ),
       scheduledFor: _readNullableDate(json, 'scheduledFor'),
+      scheduledDays: _readStringList(json, 'scheduledDays', fallback: const []),
     );
   }
 }
@@ -88,6 +91,7 @@ class TrainingExercise {
     this.durationSeconds,
     this.targetReps,
     this.sets,
+    this.workoutItemId,
   }) : assert(
          mode != WorkoutExerciseMode.timed || durationSeconds != null,
          'Timed exercises require durationSeconds.',
@@ -113,6 +117,7 @@ class TrainingExercise {
   final int? durationSeconds;
   final int? targetReps;
   final int? sets;
+  final String? workoutItemId;
   final List<String> formCues;
   final String muscleLabel;
   final String equipmentLabel;
@@ -249,6 +254,7 @@ TrainingExercise _parseExercise(Map<String, dynamic> json) {
         : null,
     targetReps: mode == WorkoutExerciseMode.reps ? (targetReps ?? 1) : null,
     sets: mode == WorkoutExerciseMode.reps ? sets : null,
+    workoutItemId: _readNullableString(json, 'workoutItemId'),
     muscleLabel: _readString(json, 'muscleLabel', fallback: 'Muscle'),
     equipmentLabel: _readString(json, 'equipmentLabel', fallback: 'Equipment'),
     formCues: _readStringList(
@@ -267,4 +273,12 @@ int? _readNullableInt(Map<String, dynamic> json, String key) {
 DateTime? _readNullableDate(Map<String, dynamic> json, String key) {
   final value = json[key];
   return value is String ? DateTime.tryParse(value) : null;
+}
+
+String? _readNullableString(Map<String, dynamic> json, String key) {
+  final value = json[key];
+  if (value is String && value.isNotEmpty) {
+    return value;
+  }
+  return null;
 }

@@ -6,9 +6,9 @@ import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/workout_builder/providers/workout_builder_provider.dart';
 import 'package:forge_ai/features/workout_builder/widgets/common/workout_builder_app_bar.dart';
 import 'package:forge_ai/features/workout_builder/widgets/goal_selection/analysis_card.dart';
-import 'package:forge_ai/features/workout_builder/widgets/goal_selection/goal_card.dart';
 import 'package:forge_ai/features/workout_builder/widgets/goal_selection/goal_selection_action_bar.dart';
 import 'package:forge_ai/features/workout_builder/widgets/goal_selection/goal_selection_header.dart';
+import 'package:forge_ai/features/workout_builder/widgets/goal_selection/workout_goal_list.dart';
 
 class GoalSelectionScreen extends ConsumerWidget {
   const GoalSelectionScreen({super.key});
@@ -36,24 +36,7 @@ class GoalSelectionScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.base),
                     const GoalSelectionHeader(),
                     const SizedBox(height: AppSpacing.xl),
-                    ...WorkoutGoal.values.map((goal) {
-                      return GoalCard(
-                            title: goal.title,
-                            subtitle: goal.subtitle,
-                            icon: goal.icon,
-                            isSelected: selectedGoal == goal,
-                            onTap: () => ref
-                                .read(selectedWorkoutGoalProvider.notifier)
-                                .select(goal),
-                          )
-                          .animate()
-                          .fadeIn(
-                            delay: Duration(
-                              milliseconds: 200 + goal.index * 100,
-                            ),
-                          )
-                          .slideX(begin: 0.1, end: 0);
-                    }),
+                    const WorkoutGoalList(),
                     const SizedBox(height: AppSpacing.xl),
                     const PersonalizedAnalysisCard()
                         .animate()

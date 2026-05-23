@@ -19,6 +19,20 @@ enum TrainingWorkoutGoal {
 
 enum TrainingWorkoutStatus { draft, planned, completed, archived }
 
+enum TrainingWorkoutScheduleDay {
+  mo('Mo'),
+  tu('Tu'),
+  we('We'),
+  th('Th'),
+  fr('Fr'),
+  sa('Sa'),
+  su('Su');
+
+  const TrainingWorkoutScheduleDay(this.shortLabel);
+
+  final String shortLabel;
+}
+
 @freezed
 class WorkoutLibraryWorkout with _$WorkoutLibraryWorkout {
   const WorkoutLibraryWorkout._();
@@ -29,6 +43,7 @@ class WorkoutLibraryWorkout with _$WorkoutLibraryWorkout {
     String? description,
     @Default(false) bool isTemplate,
     DateTime? scheduledFor,
+    @Default([]) List<TrainingWorkoutScheduleDay> scheduledDays,
     int? durationMinutes,
     TrainingWorkoutDifficulty? difficulty,
     TrainingWorkoutGoal? goal,
@@ -56,36 +71,53 @@ class WorkoutLibraryWorkout with _$WorkoutLibraryWorkout {
 
   String get durationLabel => '$resolvedDurationMinutes min';
   String get exerciseCountLabel => '${items.length} exercises';
-  String get statusLabel => status.label;
+  String get statusLabel => resolvedStatus.label;
   String get goalLabel => goal?.label ?? 'Custom';
   String get difficultyLabel => difficulty?.label ?? 'Flexible';
 
+  TrainingWorkoutStatus get resolvedStatus {
+    if (status != TrainingWorkoutStatus.completed || scheduledDays.isEmpty) {
+      return status;
+    }
+    final completedAt = updatedAt?.toLocal();
+    if (completedAt == null) {
+      return TrainingWorkoutStatus.planned;
+    }
+    return _isCurrentWeek(completedAt)
+        ? TrainingWorkoutStatus.completed
+        : TrainingWorkoutStatus.planned;
+  }
+
   String get scheduleLabel {
     final date = scheduledFor;
-    if (date == null) return 'Not scheduled';
+    if (date == null && scheduledDays.isEmpty) return 'Not scheduled';
 
-    final localDate = date.toLocal();
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final target = DateTime(localDate.year, localDate.month, localDate.day);
-    if (target == today) return 'Today';
-    if (target == today.add(const Duration(days: 1))) return 'Tomorrow';
+    if (date != null) {
+      final localDate = date.toLocal();
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final target = DateTime(localDate.year, localDate.month, localDate.day);
+      if (target == today) return 'Today';
+      if (target == today.add(const Duration(days: 1))) return 'Tomorrow';
 
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return '${months[localDate.month - 1]} ${localDate.day}';
+      const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+      return '${months[localDate.month - 1]} ${localDate.day}';
+    }
+
+    return scheduledDays.map((day) => day.shortLabel).join(' • ');
   }
 
   TrainingWorkoutPlan toTrainingPlan() {
@@ -100,6 +132,9 @@ class WorkoutLibraryWorkout with _$WorkoutLibraryWorkout {
       statusLabel: statusLabel,
       estimatedDateLabel: scheduleLabel,
       scheduledFor: scheduledFor,
+      scheduledDays: scheduledDays
+          .map((day) => day.name)
+          .toList(growable: false),
     );
   }
 
@@ -108,6 +143,17 @@ class WorkoutLibraryWorkout with _$WorkoutLibraryWorkout {
     if (copy != null && copy.isNotEmpty) return copy;
     return 'ForgeAI keeps this workout ready so you can review the plan, start clean, and adjust loads by readiness.';
   }
+}
+
+bool _isCurrentWeek(DateTime date) {
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+  final weekStart = today.subtract(Duration(days: today.weekday - 1));
+  final weekEndExclusive = weekStart.add(
+    const Duration(days: DateTime.daysPerWeek),
+  );
+  final target = DateTime(date.year, date.month, date.day);
+  return !target.isBefore(weekStart) && target.isBefore(weekEndExclusive);
 }
 
 @freezed
@@ -154,6 +200,7 @@ class WorkoutLibraryItem with _$WorkoutLibraryItem {
         name: exerciseNameSnapshot,
         mode: WorkoutExerciseMode.timed,
         durationSeconds: timedSet.durationSeconds ?? 30,
+        workoutItemId: id,
         formCues: cues,
         muscleLabel: 'Workout',
         equipmentLabel: _restLabel,
@@ -165,6 +212,7 @@ class WorkoutLibraryItem with _$WorkoutLibraryItem {
       mode: WorkoutExerciseMode.reps,
       targetReps: repsSet?.reps ?? 1,
       sets: sets.isEmpty ? 1 : sets.length,
+      workoutItemId: id,
       formCues: cues,
       muscleLabel: 'Workout',
       equipmentLabel: _restLabel,

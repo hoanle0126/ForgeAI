@@ -95,7 +95,6 @@ class _TrainingContentState extends State<TrainingContent> {
         onEmptyAction: widget.onCreateWorkout,
       );
     }
-
     return TodayWorkoutCard(
       key: ValueKey(selectedPlan.id),
       plan: selectedPlan,
@@ -109,8 +108,9 @@ class _TrainingContentState extends State<TrainingContent> {
   TrainingWorkoutPlan? _todayPlan() {
     final today = DateTime.now();
     for (final plan in widget.plans) {
-      final date = resolveWeeklyPlanWorkoutDate(plan, today);
-      if (date != null && isSameDate(date, today)) return plan;
+      if (isWorkoutPlanScheduledOnDate(plan, today, fallbackToday: today)) {
+        return plan;
+      }
     }
     return null;
   }

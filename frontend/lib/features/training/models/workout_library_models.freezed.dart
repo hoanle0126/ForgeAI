@@ -26,6 +26,8 @@ mixin _$WorkoutLibraryWorkout {
   String? get description => throw _privateConstructorUsedError;
   bool get isTemplate => throw _privateConstructorUsedError;
   DateTime? get scheduledFor => throw _privateConstructorUsedError;
+  List<TrainingWorkoutScheduleDay> get scheduledDays =>
+      throw _privateConstructorUsedError;
   int? get durationMinutes => throw _privateConstructorUsedError;
   TrainingWorkoutDifficulty? get difficulty =>
       throw _privateConstructorUsedError;
@@ -54,6 +56,7 @@ abstract class $WorkoutLibraryWorkoutCopyWith<$Res> {
       String? description,
       bool isTemplate,
       DateTime? scheduledFor,
+      List<TrainingWorkoutScheduleDay> scheduledDays,
       int? durationMinutes,
       TrainingWorkoutDifficulty? difficulty,
       TrainingWorkoutGoal? goal,
@@ -83,6 +86,7 @@ class _$WorkoutLibraryWorkoutCopyWithImpl<$Res,
     Object? description = freezed,
     Object? isTemplate = null,
     Object? scheduledFor = freezed,
+    Object? scheduledDays = null,
     Object? durationMinutes = freezed,
     Object? difficulty = freezed,
     Object? goal = freezed,
@@ -113,6 +117,10 @@ class _$WorkoutLibraryWorkoutCopyWithImpl<$Res,
           ? _value.scheduledFor
           : scheduledFor // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      scheduledDays: null == scheduledDays
+          ? _value.scheduledDays
+          : scheduledDays // ignore: cast_nullable_to_non_nullable
+              as List<TrainingWorkoutScheduleDay>,
       durationMinutes: freezed == durationMinutes
           ? _value.durationMinutes
           : durationMinutes // ignore: cast_nullable_to_non_nullable
@@ -164,6 +172,7 @@ abstract class _$$WorkoutLibraryWorkoutImplCopyWith<$Res>
       String? description,
       bool isTemplate,
       DateTime? scheduledFor,
+      List<TrainingWorkoutScheduleDay> scheduledDays,
       int? durationMinutes,
       TrainingWorkoutDifficulty? difficulty,
       TrainingWorkoutGoal? goal,
@@ -191,6 +200,7 @@ class __$$WorkoutLibraryWorkoutImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? isTemplate = null,
     Object? scheduledFor = freezed,
+    Object? scheduledDays = null,
     Object? durationMinutes = freezed,
     Object? difficulty = freezed,
     Object? goal = freezed,
@@ -221,6 +231,10 @@ class __$$WorkoutLibraryWorkoutImplCopyWithImpl<$Res>
           ? _value.scheduledFor
           : scheduledFor // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      scheduledDays: null == scheduledDays
+          ? _value._scheduledDays
+          : scheduledDays // ignore: cast_nullable_to_non_nullable
+              as List<TrainingWorkoutScheduleDay>,
       durationMinutes: freezed == durationMinutes
           ? _value.durationMinutes
           : durationMinutes // ignore: cast_nullable_to_non_nullable
@@ -266,6 +280,7 @@ class _$WorkoutLibraryWorkoutImpl extends _WorkoutLibraryWorkout {
       this.description,
       this.isTemplate = false,
       this.scheduledFor,
+      final List<TrainingWorkoutScheduleDay> scheduledDays = const [],
       this.durationMinutes,
       this.difficulty,
       this.goal,
@@ -274,7 +289,8 @@ class _$WorkoutLibraryWorkoutImpl extends _WorkoutLibraryWorkout {
       final List<WorkoutLibraryItem> items = const [],
       this.createdAt,
       this.updatedAt})
-      : _items = items,
+      : _scheduledDays = scheduledDays,
+        _items = items,
         super._();
 
   factory _$WorkoutLibraryWorkoutImpl.fromJson(Map<String, dynamic> json) =>
@@ -291,6 +307,15 @@ class _$WorkoutLibraryWorkoutImpl extends _WorkoutLibraryWorkout {
   final bool isTemplate;
   @override
   final DateTime? scheduledFor;
+  final List<TrainingWorkoutScheduleDay> _scheduledDays;
+  @override
+  @JsonKey()
+  List<TrainingWorkoutScheduleDay> get scheduledDays {
+    if (_scheduledDays is EqualUnmodifiableListView) return _scheduledDays;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_scheduledDays);
+  }
+
   @override
   final int? durationMinutes;
   @override
@@ -318,7 +343,7 @@ class _$WorkoutLibraryWorkoutImpl extends _WorkoutLibraryWorkout {
 
   @override
   String toString() {
-    return 'WorkoutLibraryWorkout(id: $id, title: $title, description: $description, isTemplate: $isTemplate, scheduledFor: $scheduledFor, durationMinutes: $durationMinutes, difficulty: $difficulty, goal: $goal, status: $status, notes: $notes, items: $items, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'WorkoutLibraryWorkout(id: $id, title: $title, description: $description, isTemplate: $isTemplate, scheduledFor: $scheduledFor, scheduledDays: $scheduledDays, durationMinutes: $durationMinutes, difficulty: $difficulty, goal: $goal, status: $status, notes: $notes, items: $items, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -334,6 +359,8 @@ class _$WorkoutLibraryWorkoutImpl extends _WorkoutLibraryWorkout {
                 other.isTemplate == isTemplate) &&
             (identical(other.scheduledFor, scheduledFor) ||
                 other.scheduledFor == scheduledFor) &&
+            const DeepCollectionEquality()
+                .equals(other._scheduledDays, _scheduledDays) &&
             (identical(other.durationMinutes, durationMinutes) ||
                 other.durationMinutes == durationMinutes) &&
             (identical(other.difficulty, difficulty) ||
@@ -357,6 +384,7 @@ class _$WorkoutLibraryWorkoutImpl extends _WorkoutLibraryWorkout {
       description,
       isTemplate,
       scheduledFor,
+      const DeepCollectionEquality().hash(_scheduledDays),
       durationMinutes,
       difficulty,
       goal,
@@ -388,6 +416,7 @@ abstract class _WorkoutLibraryWorkout extends WorkoutLibraryWorkout {
       final String? description,
       final bool isTemplate,
       final DateTime? scheduledFor,
+      final List<TrainingWorkoutScheduleDay> scheduledDays,
       final int? durationMinutes,
       final TrainingWorkoutDifficulty? difficulty,
       final TrainingWorkoutGoal? goal,
@@ -411,6 +440,8 @@ abstract class _WorkoutLibraryWorkout extends WorkoutLibraryWorkout {
   bool get isTemplate;
   @override
   DateTime? get scheduledFor;
+  @override
+  List<TrainingWorkoutScheduleDay> get scheduledDays;
   @override
   int? get durationMinutes;
   @override

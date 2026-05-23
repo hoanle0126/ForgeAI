@@ -16,6 +16,10 @@ _$WorkoutLibraryWorkoutImpl _$$WorkoutLibraryWorkoutImplFromJson(
       scheduledFor: json['scheduledFor'] == null
           ? null
           : DateTime.parse(json['scheduledFor'] as String),
+      scheduledDays: (json['scheduledDays'] as List<dynamic>?)
+              ?.map((e) => $enumDecode(_$TrainingWorkoutScheduleDayEnumMap, e))
+              .toList() ??
+          const [],
       durationMinutes: (json['durationMinutes'] as num?)?.toInt(),
       difficulty: $enumDecodeNullable(
           _$TrainingWorkoutDifficultyEnumMap, json['difficulty']),
@@ -45,6 +49,9 @@ Map<String, dynamic> _$$WorkoutLibraryWorkoutImplToJson(
       'description': instance.description,
       'isTemplate': instance.isTemplate,
       'scheduledFor': instance.scheduledFor?.toIso8601String(),
+      'scheduledDays': instance.scheduledDays
+          .map((e) => _$TrainingWorkoutScheduleDayEnumMap[e]!)
+          .toList(),
       'durationMinutes': instance.durationMinutes,
       'difficulty': _$TrainingWorkoutDifficultyEnumMap[instance.difficulty],
       'goal': _$TrainingWorkoutGoalEnumMap[instance.goal],
@@ -54,6 +61,16 @@ Map<String, dynamic> _$$WorkoutLibraryWorkoutImplToJson(
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };
+
+const _$TrainingWorkoutScheduleDayEnumMap = {
+  TrainingWorkoutScheduleDay.mo: 'mo',
+  TrainingWorkoutScheduleDay.tu: 'tu',
+  TrainingWorkoutScheduleDay.we: 'we',
+  TrainingWorkoutScheduleDay.th: 'th',
+  TrainingWorkoutScheduleDay.fr: 'fr',
+  TrainingWorkoutScheduleDay.sa: 'sa',
+  TrainingWorkoutScheduleDay.su: 'su',
+};
 
 const _$TrainingWorkoutDifficultyEnumMap = {
   TrainingWorkoutDifficulty.beginner: 'beginner',

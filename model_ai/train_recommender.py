@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from recommender import OnboardingProfile, recommend_plan, train_artifacts
+from recommender import OnboardingProfile, RecommenderArtifacts, recommend_plan
 
 
 BASE_DIR = Path(__file__).parent
@@ -9,12 +9,7 @@ ARTIFACT_PATH = BASE_DIR / "recommender_artifacts.json"
 
 
 def main() -> None:
-    artifacts = train_artifacts(
-        BASE_DIR / "megaGymDataset.csv",
-        BASE_DIR / "foods_usda.csv",
-        model_dir=BASE_DIR / "models",
-    )
-    artifacts.save(ARTIFACT_PATH)
+    artifacts = RecommenderArtifacts.load(ARTIFACT_PATH)
 
     sample_profile = OnboardingProfile(
         goal="lose fat",
@@ -26,7 +21,7 @@ def main() -> None:
     )
     recommendation = recommend_plan(sample_profile, artifacts)
 
-    print(f"Saved artifacts to {ARTIFACT_PATH}")
+    print(f"Loaded artifacts from {ARTIFACT_PATH}")
     print(json.dumps(recommendation, ensure_ascii=False, indent=2))
 
 

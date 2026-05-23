@@ -1,54 +1,51 @@
 import 'package:flutter/material.dart';
 
-import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
-import 'package:forge_ai/core/constants/app_typography.dart';
+import 'package:forge_ai/features/welcome/widgets/welcome_hero_copy.dart';
+import 'package:forge_ai/features/welcome/widgets/welcome_hero_visual.dart';
 
 class WelcomeHeroContent extends StatelessWidget {
-  const WelcomeHeroContent({super.key, required this.isWide});
+  const WelcomeHeroContent({
+    super.key,
+    required this.isWide,
+    required this.isCompactHeight,
+  });
 
   final bool isWide;
+  final bool isCompactHeight;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.md,
-            vertical: AppSpacing.xs,
-          ),
-          decoration: BoxDecoration(
-            color: AppColors.sportOrangeLight,
-            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-          ),
-          child: Text(
-            'AI-POWERED TRAINING',
-            style: AppTypography.label.copyWith(
-              color: AppColors.sportOrange,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.2,
+    if (isWide) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 10,
+            child: WelcomeHeroCopy(
+              isWide: isWide,
+              isCompactHeight: isCompactHeight,
             ),
           ),
+          SizedBox(width: isCompactHeight ? AppSpacing.lg : AppSpacing.xxxl),
+          const Expanded(flex: 12, child: WelcomeHeroVisual()),
+        ],
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          flex: isCompactHeight ? 11 : 12,
+          child: const WelcomeHeroVisual(),
         ),
-        const SizedBox(height: AppSpacing.lg),
-        Text(
-          'Your Personal\nCoach Lives\nHere',
-          style: AppTypography.h1.copyWith(
-            fontSize: isWide ? 64 : 48,
-            height: 1.1,
-            letterSpacing: -2,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        Text(
-          'Smart workout plans and nutrition guidance tailored to your goals, equipment, and schedule.',
-          style: AppTypography.bodyLarge.copyWith(
-            fontSize: 18,
-            height: 1.6,
-            color: AppColors.textMuted,
+        SizedBox(height: isCompactHeight ? AppSpacing.base : AppSpacing.lg),
+        Expanded(
+          flex: isCompactHeight ? 9 : 10,
+          child: WelcomeHeroCopy(
+            isWide: isWide,
+            isCompactHeight: isCompactHeight,
           ),
         ),
       ],

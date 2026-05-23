@@ -40,11 +40,8 @@ class AiReadinessAdjustment with _$AiReadinessAdjustment {
     required String reason,
   }) = _AiReadinessAdjustment;
 
-  factory AiReadinessAdjustment.fromJson(Map<String, dynamic> json) {
-    final normalized = <String, dynamic>{...json};
-    normalized['intensityModifier'] ??= json['intensity_modifier'];
-    return _$AiReadinessAdjustmentFromJson(normalized);
-  }
+  factory AiReadinessAdjustment.fromJson(Map<String, dynamic> json) =>
+      _$AiReadinessAdjustmentFromJson(_normalizeReadinessAdjustmentJson(json));
 }
 
 @freezed
@@ -162,4 +159,12 @@ String _trainingDayLabelFromCode(String code) {
     'su' => 'Sunday',
     _ => code.toUpperCase(),
   };
+}
+
+Map<String, dynamic> _normalizeReadinessAdjustmentJson(
+  Map<String, dynamic> json,
+) {
+  final normalized = <String, dynamic>{...json};
+  normalized['intensityModifier'] ??= json['intensity_modifier'];
+  return normalized;
 }

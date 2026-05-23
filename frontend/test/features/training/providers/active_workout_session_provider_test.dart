@@ -70,6 +70,7 @@ void main() {
     expect(controller.state.currentExerciseIndex, 0);
     expect(controller.state.currentExercise.name, 'Squat');
     expect(controller.state.nextExercise?.name, 'Hold');
+    expect(controller.state.completedExerciseIndexes, isEmpty);
   });
 
   test('countdown ticks into first exercise', () {
@@ -96,6 +97,7 @@ void main() {
     expect(controller.state.currentPhase, ActiveWorkoutPhase.rest);
     expect(controller.state.secondsRemaining, 30);
     expect(controller.state.currentExerciseIndex, 0);
+    expect(controller.state.completedExerciseIndexes, [0]);
 
     for (var i = 0; i < 30; i += 1) {
       controller.tick();
@@ -104,6 +106,7 @@ void main() {
     expect(controller.state.currentPhase, ActiveWorkoutPhase.exercise);
     expect(controller.state.currentExerciseIndex, 1);
     expect(controller.state.currentExercise.name, 'Rep Finisher');
+    expect(controller.state.completedExerciseIndexes, [0]);
   });
 
   test(
@@ -120,6 +123,7 @@ void main() {
       expect(controller.state.secondsRemaining, 30);
       expect(controller.state.currentExerciseIndex, 0);
       expect(controller.state.nextExercise?.name, 'Hold');
+      expect(controller.state.completedExerciseIndexes, [0]);
     },
   );
 
@@ -138,6 +142,7 @@ void main() {
     expect(controller.state.currentPhase, ActiveWorkoutPhase.complete);
     expect(controller.state.secondsRemaining, 0);
     expect(controller.state.currentExerciseIndex, 1);
+    expect(controller.state.completedExerciseIndexes, [0, 1]);
   });
 
   test('today timed shoulder press advances to rest after enough ticks', () {
@@ -166,5 +171,44 @@ void main() {
     expect(controller.state.currentPhase, ActiveWorkoutPhase.rest);
     expect(controller.state.secondsRemaining, 30);
     expect(controller.state.nextExercise?.name, 'Plank Shoulder Tap');
+  });
+
+  test('timed exercise pause and resume controls auto ticking', () {
+    final controller = ActiveWorkoutSessionController(plan: timedFirstPlan);
+
+    controller.tick();
+    controller.tick();
+    controller.tick();
+
+    expect(controller.state.currentPhase, ActiveWorkoutPhase.exercise);
+    expect(controller.state.shouldAutoTick, isTrue);
+    expect(controller.state.secondsRemaining, 2);
+
+    controller.toggleTimedExercisePause();
+    expect(controller.state.isTimerPaused, isTrue);
+    expect(controller.state.shouldAutoTick, isFalse);
+
+    controller.tick();
+    expect(controller.state.secondsRemaining, 2);
+
+    controller.toggleTimedExercisePause();
+    expect(controller.state.isTimerPaused, isFalse);
+    expect(controller.state.shouldAutoTick, isTrue);
+
+    controller.tick();
+    expect(controller.state.secondsRemaining, 1);
+  });
+
+  test('skip timed exercise does not mark it as completed', () {
+    final controller = ActiveWorkoutSessionController(plan: timedFirstPlan);
+
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.skipPhase();
+
+    expect(controller.state.currentPhase, ActiveWorkoutPhase.rest);
+    expect(controller.state.currentExerciseIndex, 0);
+    expect(controller.state.completedExerciseIndexes, isEmpty);
   });
 }

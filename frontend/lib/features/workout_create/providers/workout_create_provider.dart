@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/data/datasources/remote/api_client.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
+import 'package:forge_ai/features/training/models/workout_library_models.dart';
 import 'package:forge_ai/features/workout_create/models/workout_create_models.dart';
 
 class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
@@ -68,8 +69,40 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
     state = state.copyWith(scheduledFor: scheduledFor);
   }
 
+  void toggleScheduledDay(WorkoutScheduleDay day) {
+    final currentDays = state.scheduledDays;
+    final nextDays =
+        currentDays.contains(day)
+              ? currentDays.where((item) => item != day).toList(growable: false)
+              : [...currentDays, day]
+          ..sort((left, right) {
+            return left.index.compareTo(right.index);
+          });
+    state = state.copyWith(scheduledDays: nextDays);
+  }
+
   void updateNotes(String notes) {
     state = state.copyWith(notes: notes);
+  }
+
+  void loadForEditing(WorkoutLibraryWorkout workout) {
+    state = state.copyWith(
+      editingWorkoutId: workout.id,
+      title: workout.title,
+      description: workout.description ?? '',
+      isTemplate: workout.isTemplate,
+      scheduledFor: workout.scheduledFor,
+      scheduledDays: workout.scheduledDays
+          .map(_mapScheduleDay)
+          .toList(growable: false),
+      durationMinutes: workout.durationMinutes,
+      difficulty: _mapDifficulty(workout.difficulty),
+      goal: _mapGoal(workout.goal),
+      status: _mapStatus(workout.status),
+      notes: workout.notes ?? '',
+      items: workout.items.map(_mapItem).toList(growable: false),
+      errorMessage: null,
+    );
   }
 
   void addExercise(Exercise exercise) {
@@ -163,11 +196,13 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
     state = state.copyWith(isSaving: true, errorMessage: null);
 
     try {
+      final workoutId = state.editingWorkoutId;
       final request = CreateWorkoutRequest(
         title: state.title,
         description: state.description.isEmpty ? null : state.description,
         isTemplate: state.isTemplate,
         scheduledFor: state.scheduledFor,
+        scheduledDays: state.scheduledDays,
         durationMinutes: state.durationMinutes,
         difficulty: state.difficulty,
         goal: state.goal,
@@ -176,27 +211,32 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
         items: state.items,
       );
 
-      final response = await _apiClient.post<Map<String, dynamic>>(
-        '/workouts',
-        data: request.toJson(),
-      );
+      final response = workoutId == null
+          ? await _apiClient.post<Map<String, dynamic>>(
+              '/workouts',
+              data: request.toJson(),
+            )
+          : await _apiClient.patch<Map<String, dynamic>>(
+              '/workouts/$workoutId',
+              data: request.toJson(),
+            );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         state = state.copyWith(isSaving: false);
         return true;
       } else {
-        throw Exception('Failed to save workout: ${response.statusCode}');
+        throw Exception('Failed to persist workout: ${response.statusCode}');
       }
     } on DioException catch (e) {
       state = state.copyWith(
         isSaving: false,
-        errorMessage: _readDioError(e, 'Failed to save workout'),
+        errorMessage: _readDioError(e, _saveErrorPrefix),
       );
       return false;
     } catch (_) {
       state = state.copyWith(
         isSaving: false,
-        errorMessage: 'Failed to save workout. Please try again.',
+        errorMessage: '$_saveErrorPrefix. Please try again.',
       );
       return false;
     }
@@ -204,6 +244,75 @@ class WorkoutCreateNotifier extends StateNotifier<WorkoutCreateState> {
 
   void reset() {
     state = const WorkoutCreateState();
+  }
+
+  WorkoutItem _mapItem(WorkoutLibraryItem item) {
+    return WorkoutItem(
+      exerciseId: item.exerciseId,
+      exerciseName: item.exerciseNameSnapshot,
+      order: item.order,
+      restSeconds: item.restSeconds,
+      notes: item.notes,
+      sets: item.sets.map(_mapSet).toList(growable: false),
+    );
+  }
+
+  WorkoutSet _mapSet(WorkoutLibrarySet set) {
+    return WorkoutSet(
+      order: set.order,
+      reps: set.reps,
+      weightKg: set.weightKg,
+      durationSeconds: set.durationSeconds,
+      restSeconds: set.restSeconds,
+      isCompleted: set.isCompleted,
+    );
+  }
+
+  WorkoutDifficulty? _mapDifficulty(TrainingWorkoutDifficulty? difficulty) {
+    return switch (difficulty) {
+      TrainingWorkoutDifficulty.beginner => WorkoutDifficulty.beginner,
+      TrainingWorkoutDifficulty.intermediate => WorkoutDifficulty.intermediate,
+      TrainingWorkoutDifficulty.advanced => WorkoutDifficulty.advanced,
+      null => null,
+    };
+  }
+
+  WorkoutGoal? _mapGoal(TrainingWorkoutGoal? goal) {
+    return switch (goal) {
+      TrainingWorkoutGoal.strength => WorkoutGoal.strength,
+      TrainingWorkoutGoal.muscleGain => WorkoutGoal.muscleGain,
+      TrainingWorkoutGoal.fatLoss => WorkoutGoal.fatLoss,
+      TrainingWorkoutGoal.mobility => WorkoutGoal.mobility,
+      TrainingWorkoutGoal.generalFitness => WorkoutGoal.generalFitness,
+      null => null,
+    };
+  }
+
+  WorkoutScheduleDay _mapScheduleDay(TrainingWorkoutScheduleDay day) {
+    return switch (day) {
+      TrainingWorkoutScheduleDay.mo => WorkoutScheduleDay.mo,
+      TrainingWorkoutScheduleDay.tu => WorkoutScheduleDay.tu,
+      TrainingWorkoutScheduleDay.we => WorkoutScheduleDay.we,
+      TrainingWorkoutScheduleDay.th => WorkoutScheduleDay.th,
+      TrainingWorkoutScheduleDay.fr => WorkoutScheduleDay.fr,
+      TrainingWorkoutScheduleDay.sa => WorkoutScheduleDay.sa,
+      TrainingWorkoutScheduleDay.su => WorkoutScheduleDay.su,
+    };
+  }
+
+  WorkoutStatus _mapStatus(TrainingWorkoutStatus status) {
+    return switch (status) {
+      TrainingWorkoutStatus.draft => WorkoutStatus.draft,
+      TrainingWorkoutStatus.planned => WorkoutStatus.planned,
+      TrainingWorkoutStatus.completed => WorkoutStatus.completed,
+      TrainingWorkoutStatus.archived => WorkoutStatus.archived,
+    };
+  }
+
+  String get _saveErrorPrefix {
+    return state.isEditing
+        ? 'Failed to update workout'
+        : 'Failed to save workout';
   }
 
   String _readDioError(DioException error, String fallback) {

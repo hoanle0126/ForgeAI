@@ -84,10 +84,11 @@ class AiPlanPreviewScreen extends ConsumerWidget {
                         .slideY(begin: 0.1, end: 0),
                     const SizedBox(height: AppSpacing.xxl),
                     monthlyPlanAsync.when(
-                      data: (plan) => MonthlyPlanContent(plan: plan)
-                          .animate()
-                          .fadeIn(delay: 500.ms)
-                          .slideY(begin: 0.1, end: 0),
+                      data: (monthlyPlan) =>
+                          MonthlyPlanContent(plan: monthlyPlan.plan)
+                              .animate()
+                              .fadeIn(delay: 500.ms)
+                              .slideY(begin: 0.1, end: 0),
                       loading: () => const MonthlyPlanLoadingState()
                           .animate()
                           .fadeIn(delay: 400.ms),

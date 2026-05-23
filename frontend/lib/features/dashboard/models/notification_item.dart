@@ -44,8 +44,8 @@ const todayNotificationItems = [
 
 const earlierNotificationItems = [
   NotificationItem(
-    title: 'Meal target nearly complete',
-    subtitle: 'Add 28g protein to close today\'s macro gap.',
+    title: 'Session target nearly complete',
+    subtitle: 'One more set block will close today\'s volume goal.',
     timeLabel: 'Yesterday',
     tone: NotificationTone.insight,
   ),

@@ -24,20 +24,18 @@ void main() {
 
       expect(find.text('LIVE SESSION'), findsOneWidget);
       expect(find.text('Lock in'), findsOneWidget);
-      expect(find.text('DB Bench Press'), findsOneWidget);
-      expect(find.text('Continue Countdown'), findsOneWidget);
+      expect(find.text('DB Bench Press'), findsWidgets);
+      expect(find.text('Skip Countdown'), findsOneWidget);
       expect(find.text('Tick'), findsNothing);
     },
   );
 
-  testWidgets('countdown CTA advances into first reps exercise', (
+  testWidgets('countdown auto advances into first reps exercise', (
     tester,
   ) async {
     await pumpActiveWorkoutScreen(tester);
-
-    await tapAction(tester, 'Continue Countdown');
-    await tapAction(tester, 'Continue Countdown');
-    await tapAction(tester, 'Start Movement');
+    await tester.pump(const Duration(seconds: 3));
+    await tester.pump();
 
     expect(find.text('DB Bench Press'), findsWidgets);
     expect(find.text('Complete Target Reps'), findsOneWidget);
@@ -48,31 +46,51 @@ void main() {
     tester,
   ) async {
     await pumpActiveWorkoutScreen(tester);
-
-    await tapAction(tester, 'Continue Countdown');
-    await tapAction(tester, 'Continue Countdown');
-    await tapAction(tester, 'Start Movement');
+    await tester.pump(const Duration(seconds: 3));
+    await tester.pump();
     await tapAction(tester, 'Complete Target Reps');
 
     expect(find.text('Recover with intent'), findsOneWidget);
     expect(find.textContaining('One-arm Row'), findsWidgets);
-    expect(find.text('Continue Rest'), findsOneWidget);
+    expect(find.text('Skip Rest'), findsOneWidget);
   });
 
-  testWidgets('rest CTA advances to second reps exercise after thirty ticks', (
-    tester,
-  ) async {
-    await pumpActiveWorkoutScreen(tester);
+  testWidgets(
+    'rest auto advances to second reps exercise after thirty seconds',
+    (tester) async {
+      await pumpActiveWorkoutScreen(tester);
+      await tester.pump(const Duration(seconds: 3));
+      await tester.pump();
+      await tapAction(tester, 'Complete Target Reps');
+      await tester.pump(const Duration(seconds: 30));
+      await tester.pump();
 
-    await tapAction(tester, 'Continue Countdown');
-    await tapAction(tester, 'Continue Countdown');
-    await tapAction(tester, 'Start Movement');
-    await tapAction(tester, 'Complete Target Reps');
-    for (var i = 0; i < 30; i += 1) {
-      await tapAction(tester, 'Continue Rest');
-    }
+      expect(find.text('One-arm Row'), findsWidgets);
+      expect(find.text('Complete Target Reps'), findsOneWidget);
+    },
+  );
 
-    expect(find.text('One-arm Row'), findsWidgets);
-    expect(find.text('Complete Target Reps'), findsOneWidget);
-  });
+  testWidgets(
+    'timed exercise shows skip and pause controls, then skips to rest',
+    (tester) async {
+      await pumpActiveWorkoutScreen(tester);
+      await tester.pump(const Duration(seconds: 3));
+      await tester.pump();
+      await tapAction(tester, 'Complete Target Reps');
+      await tester.pump(const Duration(seconds: 30));
+      await tester.pump();
+      await tapAction(tester, 'Complete Target Reps');
+      await tester.pump(const Duration(seconds: 30));
+      await tester.pump();
+
+      expect(find.text('Shoulder Press'), findsWidgets);
+      expect(find.text('Skip'), findsOneWidget);
+      expect(find.text('Pause Timer'), findsOneWidget);
+
+      await tapAction(tester, 'Skip');
+
+      expect(find.text('Skip Rest'), findsOneWidget);
+      expect(find.text('Recover with intent'), findsOneWidget);
+    },
+  );
 }

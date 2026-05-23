@@ -15,7 +15,7 @@ class ActiveWorkoutProgressCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final next = session.nextExercise?.name ?? 'Finish session';
     final progress =
-        (session.currentExerciseIndex + 1) / session.plan.exercises.length;
+        session.completedExerciseCount / session.plan.exercises.length;
 
     return AppCard(
       hasShadow: false,
@@ -51,6 +51,12 @@ class ActiveWorkoutProgressCard extends StatelessWidget {
           _ProgressLine(label: 'Current', value: session.currentExercise.name),
           const SizedBox(height: AppSpacing.sm),
           _ProgressLine(label: 'Next', value: next),
+          const SizedBox(height: AppSpacing.base),
+          _ProgressLine(
+            label: 'Completed',
+            value:
+                '${session.completedExerciseCount}/${session.plan.exercises.length} exercises',
+          ),
         ],
       ),
     );

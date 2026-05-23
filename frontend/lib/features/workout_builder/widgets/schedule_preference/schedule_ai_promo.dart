@@ -9,7 +9,8 @@ class ScheduleAiPromo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 156,
+      constraints: const BoxConstraints(minHeight: 156),
+      alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
@@ -23,7 +24,7 @@ class ScheduleAiPromo extends StatelessWidget {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(

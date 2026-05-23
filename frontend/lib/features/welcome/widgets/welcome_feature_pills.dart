@@ -12,7 +12,7 @@ class WelcomeFeaturePills extends StatelessWidget {
   Widget build(BuildContext context) {
     final features = [
       ('Adaptive Plans', PhosphorIconsRegular.calendar),
-      ('AI Nutrition', PhosphorIconsRegular.forkKnife),
+      ('Smart Recovery', PhosphorIconsRegular.heartbeat),
       ('Progress Tracking', PhosphorIconsRegular.chartLine),
     ];
 

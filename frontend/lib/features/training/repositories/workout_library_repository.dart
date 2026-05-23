@@ -37,6 +37,15 @@ class WorkoutLibraryRepository {
     await _apiClient.delete<void>('/workouts/$id');
   }
 
+  Future<void> completeWorkoutItem({
+    required String workoutId,
+    required String workoutItemId,
+  }) async {
+    await _apiClient.patch<void>(
+      '/workouts/$workoutId/items/$workoutItemId/complete',
+    );
+  }
+
   List<dynamic> _readList(Map<String, dynamic>? response, String key) {
     final data = response?['data'];
     if (data is! Map<String, dynamic>) return const [];

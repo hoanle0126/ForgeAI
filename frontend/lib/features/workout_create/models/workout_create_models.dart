@@ -18,6 +18,21 @@ enum WorkoutGoal {
 
 enum WorkoutStatus { draft, planned, completed, archived }
 
+enum WorkoutScheduleDay {
+  mo('Mo', 'Monday'),
+  tu('Tu', 'Tuesday'),
+  we('We', 'Wednesday'),
+  th('Th', 'Thursday'),
+  fr('Fr', 'Friday'),
+  sa('Sa', 'Saturday'),
+  su('Su', 'Sunday');
+
+  const WorkoutScheduleDay(this.shortLabel, this.fullLabel);
+
+  final String shortLabel;
+  final String fullLabel;
+}
+
 @freezed
 class WorkoutSet with _$WorkoutSet {
   const factory WorkoutSet({
@@ -55,6 +70,7 @@ class CreateWorkoutRequest with _$CreateWorkoutRequest {
     String? description,
     @Default(false) bool isTemplate,
     DateTime? scheduledFor,
+    @Default([]) List<WorkoutScheduleDay> scheduledDays,
     int? durationMinutes,
     WorkoutDifficulty? difficulty,
     WorkoutGoal? goal,
@@ -127,10 +143,12 @@ class ExerciseCreateState with _$ExerciseCreateState {
 @freezed
 class WorkoutCreateState with _$WorkoutCreateState {
   const factory WorkoutCreateState({
+    String? editingWorkoutId,
     @Default('') String title,
     @Default('') String description,
     @Default(false) bool isTemplate,
     DateTime? scheduledFor,
+    @Default([]) List<WorkoutScheduleDay> scheduledDays,
     int? durationMinutes,
     WorkoutDifficulty? difficulty,
     WorkoutGoal? goal,
@@ -142,6 +160,10 @@ class WorkoutCreateState with _$WorkoutCreateState {
     @Default(false) bool isSaving,
     String? errorMessage,
   }) = _WorkoutCreateState;
+}
+
+extension WorkoutCreateStateX on WorkoutCreateState {
+  bool get isEditing => editingWorkoutId != null;
 }
 
 extension WorkoutDifficultyX on WorkoutDifficulty {

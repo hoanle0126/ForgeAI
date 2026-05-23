@@ -80,26 +80,48 @@ List<TrainingWorkoutPlan> _plansForDate(
 ) {
   final dayPlans = <TrainingWorkoutPlan>[];
   for (final plan in plans) {
-    final workoutDate = resolveWeeklyPlanWorkoutDate(plan, fallbackToday);
-    if (workoutDate != null && isSameDate(date, workoutDate)) {
+    if (isWorkoutPlanScheduledOnDate(
+      plan,
+      date,
+      fallbackToday: fallbackToday,
+    )) {
       dayPlans.add(plan);
     }
   }
   return dayPlans;
 }
 
-DateTime? resolveWeeklyPlanWorkoutDate(
+bool isWorkoutPlanScheduledOnDate(
   TrainingWorkoutPlan plan,
-  DateTime fallbackToday,
-) {
+  DateTime date, {
+  DateTime? fallbackToday,
+}) {
   final scheduled = plan.scheduledFor?.toLocal();
   if (scheduled != null) {
-    return DateTime(scheduled.year, scheduled.month, scheduled.day);
+    final normalized = DateTime(scheduled.year, scheduled.month, scheduled.day);
+    return isSameDate(normalized, date);
   }
 
-  return plan.estimatedDateLabel == 'Today'
-      ? DateTime(fallbackToday.year, fallbackToday.month, fallbackToday.day)
-      : null;
+  if (plan.scheduledDays.isNotEmpty) {
+    return plan.scheduledDays.contains(_weekdayCode(date.weekday));
+  }
+
+  final fallback = fallbackToday ?? DateTime.now();
+  final fallbackDate = DateTime(fallback.year, fallback.month, fallback.day);
+  return plan.estimatedDateLabel == 'Today' && isSameDate(fallbackDate, date);
+}
+
+String _weekdayCode(int weekday) {
+  return switch (weekday) {
+    DateTime.monday => 'mo',
+    DateTime.tuesday => 'tu',
+    DateTime.wednesday => 'we',
+    DateTime.thursday => 'th',
+    DateTime.friday => 'fr',
+    DateTime.saturday => 'sa',
+    DateTime.sunday => 'su',
+    _ => 'mo',
+  };
 }
 
 String weeklyPlanWeekdayLabel(int weekday) {

@@ -13,10 +13,15 @@ class TrainingEmptyState extends StatelessWidget {
     super.key,
     required this.onPlanWorkout,
     required this.onAiBuildWorkout,
+    this.title = 'No training plan yet',
+    this.description =
+        'Create your first workout so ForgeAI can organize today, the next session, and weekly recovery cues.',
   });
 
   final VoidCallback onPlanWorkout;
   final VoidCallback onAiBuildWorkout;
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +34,12 @@ class TrainingEmptyState extends StatelessWidget {
           const _EmptyStateSignal(),
           const SizedBox(height: AppSpacing.xl),
           Text(
-            'No training plan yet',
+            title,
             style: AppTypography.h1.copyWith(color: AppColors.cardWhite),
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'Create your first workout so ForgeAI can organize today, the next session, and weekly recovery cues.',
+            description,
             style: AppTypography.bodyMedium.copyWith(
               color: AppColors.cardWhite.withValues(alpha: 0.74),
               height: 1.4,

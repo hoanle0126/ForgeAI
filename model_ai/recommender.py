@@ -164,8 +164,6 @@ class OnboardingProfile:
     weight_kg: int
     age: int
     activity_level: str
-    allergies: list[str] = field(default_factory=list)
-    dietary_preferences: list[str] = field(default_factory=list)
     injuries: list[str] = field(default_factory=list)
     training_days_per_week: int = 4
     session_minutes: int = 45
@@ -710,9 +708,12 @@ def _template_exercises(
 
     if len(selected) < count:
         for item in ranked:
+            if item["title"] in used_titles:
+                continue
             if item["title"] in {exercise["title"] for exercise in selected}:
                 continue
             selected.append(dict(item))
+            used_titles.add(item["title"])
             if len(selected) == count:
                 break
 
@@ -1077,13 +1078,11 @@ def _validate_profile(profile: OnboardingProfile) -> None:
         raise ValueError("weight_kg must be between 35 and 250")
 
 
-def _safety_notes(profile: OnboardingProfile, calories: int) -> list[str]:
+def _safety_notes(profile: OnboardingProfile) -> list[str]:
     notes = [
         "Start conservatively and stop if you feel sharp pain, dizziness, or unusual shortness of breath.",
         "Use this as general fitness guidance, not medical advice.",
     ]
-    if calories < 1500:
-        notes.append("Calorie target is low; avoid aggressive deficits without professional guidance.")
     if not profile.equipment or "None" in profile.equipment:
         notes.append("Plan uses bodyweight-friendly movements because no equipment was selected.")
     for injury in profile.injuries:
@@ -1123,7 +1122,6 @@ def evaluate_recommender(artifacts: RecommenderArtifacts) -> dict:
     contract_checks = [
         "weekly_schedule" in adaptation_plan,
         "progression_plan" in adaptation_plan,
-        "meal_plan" in adaptation_plan,
         "coach_summary" in adaptation_plan,
         all("substitutions" in workout for workout in adaptation_plan["workouts"]),
     ]
@@ -1152,23 +1150,19 @@ def evaluate_recommender(artifacts: RecommenderArtifacts) -> dict:
     }
 
 
-def _coach_summary(goal_slug: str, profile: OnboardingProfile, workouts: list[dict], meal_plan: list[dict]) -> str:
+def _coach_summary(goal_slug: str, profile: OnboardingProfile, workouts: list[dict]) -> str:
     body_parts = ", ".join(dict.fromkeys(workout["body_part"] for workout in workouts))
-    calories = sum(meal["total_calories"] for meal in meal_plan)
     return (
         f"Weekly focus: {goal_slug.replace('_', ' ')} with {profile.training_days_per_week} training days, "
-        f"about {profile.session_minutes} minutes per session, covering {body_parts}. "
-        f"Meal plan provides about {calories} kcal across three practical meals."
+        f"about {profile.session_minutes} minutes per session, covering {body_parts}."
     )
 
 
-def _coach_monthly_summary(goal_slug: str, profile: OnboardingProfile, templates: list[dict], meal_plan: list[dict]) -> str:
+def _coach_monthly_summary(goal_slug: str, profile: OnboardingProfile, templates: list[dict]) -> str:
     focuses = ", ".join(dict.fromkeys(template["focus"] for template in templates))
-    calories = sum(meal["total_calories"] for meal in meal_plan)
     return (
         f"4-week block for {goal_slug.replace('_', ' ')} with {profile.training_days_per_week} training days per week, "
-        f"about {profile.session_minutes} minutes per session, rotating through {focuses}. "
-        f"Meal plan provides about {calories} kcal across three practical meals."
+        f"about {profile.session_minutes} minutes per session, rotating through {focuses}."
     )
 
 
@@ -1201,56 +1195,36 @@ def _month_end_reassessment(goal_slug: str) -> dict:
 def recommend_plan(profile: OnboardingProfile, artifacts: RecommenderArtifacts, feedback: PlanFeedback | None = None) -> dict:
     _validate_profile(profile)
     goal_slug = normalize_goal(profile.goal)
-    calories = _daily_calories(profile, goal_slug)
     workouts = _pick_workouts(profile, artifacts, goal_slug, feedback)
-    meals, macro_targets = _pick_foods(profile, artifacts, goal_slug, calories)
-    meal_plan = _build_meal_plan(profile, artifacts, goal_slug, macro_targets)
     return {
         "schema_version": "coach-plan-v1",
         "model_version": artifacts.workout_model.get("model_type", "unknown"),
         "goal_slug": goal_slug,
-        "daily_calorie_target": calories,
-        "protein_target_g": macro_targets["protein_target_g"],
-        "carb_target_g": macro_targets["carb_target_g"],
-        "fat_target_g": macro_targets["fat_target_g"],
-        "daily_macro_coverage": _daily_macro_coverage(meal_plan, macro_targets),
-        "safety_notes": _safety_notes(profile, calories),
-        "coach_summary": _coach_summary(goal_slug, profile, workouts, meal_plan),
+        "safety_notes": _safety_notes(profile),
+        "coach_summary": _coach_summary(goal_slug, profile, workouts),
         "coach_notes": _coach_notes(feedback),
         "readiness_adjustment": _readiness_adjustment(feedback),
         "progression_plan": _progression_plan(goal_slug, profile, feedback),
         "weekly_schedule": _weekly_schedule(profile, workouts, feedback),
         "workouts": workouts,
-        "meals": meals,
-        "meal_plan": meal_plan,
     }
 
 
 def recommend_monthly_plan(profile: OnboardingProfile, artifacts: RecommenderArtifacts, feedback: PlanFeedback | None = None) -> dict:
     _validate_profile(profile)
     goal_slug = normalize_goal(profile.goal)
-    calories = _daily_calories(profile, goal_slug)
     templates = _build_monthly_templates(profile, artifacts, goal_slug, feedback)
-    meals, macro_targets = _pick_foods(profile, artifacts, goal_slug, calories)
-    meal_plan = _build_meal_plan(profile, artifacts, goal_slug, macro_targets)
     return {
         "schema_version": "coach-month-plan-v1",
         "model_version": artifacts.workout_model.get("model_type", "unknown"),
         "goal_slug": goal_slug,
         "block_length_weeks": 4,
         "training_days_per_week": profile.training_days_per_week,
-        "daily_calorie_target": calories,
-        "protein_target_g": macro_targets["protein_target_g"],
-        "carb_target_g": macro_targets["carb_target_g"],
-        "fat_target_g": macro_targets["fat_target_g"],
-        "daily_macro_coverage": _daily_macro_coverage(meal_plan, macro_targets),
-        "safety_notes": _safety_notes(profile, calories),
-        "coach_summary": _coach_monthly_summary(goal_slug, profile, templates, meal_plan),
+        "safety_notes": _safety_notes(profile),
+        "coach_summary": _coach_monthly_summary(goal_slug, profile, templates),
         "coach_notes": _coach_notes(feedback),
         "readiness_adjustment": _readiness_adjustment(feedback),
         "progression_plan": _progression_plan(goal_slug, profile, feedback),
         "workout_templates": templates,
-        "meals": meals,
-        "meal_plan": meal_plan,
         "reassessment": _month_end_reassessment(goal_slug),
     }

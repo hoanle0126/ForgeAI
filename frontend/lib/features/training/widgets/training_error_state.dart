@@ -8,9 +8,17 @@ import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class TrainingErrorState extends StatelessWidget {
-  const TrainingErrorState({super.key, required this.onRetry});
+  const TrainingErrorState({
+    super.key,
+    required this.onRetry,
+    this.title = 'We could not load your plan',
+    this.description =
+        'Check your connection and try again. ForgeAI will sync your latest workouts as soon as the link is back.',
+  });
 
   final VoidCallback onRetry;
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +31,12 @@ class TrainingErrorState extends StatelessWidget {
           const _ErrorStateSignal(),
           const SizedBox(height: AppSpacing.xl),
           Text(
-            'We could not load your plan',
+            title,
             style: AppTypography.h1.copyWith(color: AppColors.cardWhite),
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'Check your connection and try again. ForgeAI will sync your latest workouts as soon as the link is back.',
+            description,
             style: AppTypography.bodyMedium.copyWith(
               color: AppColors.cardWhite.withValues(alpha: 0.74),
               height: 1.4,

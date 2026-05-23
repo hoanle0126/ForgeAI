@@ -30,8 +30,6 @@ def main() -> int:
             session_minutes=int(payload["session_minutes"]),
             experience_level=payload.get("experience_level", "beginner"),
             injuries=payload.get("injuries", []),
-            allergies=payload.get("allergies", []),
-            dietary_preferences=payload.get("dietary_preferences", []),
         )
         feedback_payload = payload.get("feedback")
         feedback = (

@@ -7,14 +7,14 @@ import 'package:forge_ai/features/dashboard/screens/shell/dashboard_shell_screen
 import 'package:forge_ai/features/insight/screens/insight_chat_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 import 'package:forge_ai/features/insight/screens/muscle_detail_screen.dart';
-import 'package:forge_ai/features/nutrition/screens/nutrition_chat_screen.dart';
-import 'package:forge_ai/features/nutrition/screens/nutrition_screen.dart';
 import 'package:forge_ai/features/profile/screens/profile_screen.dart';
 import 'package:forge_ai/features/profile/screens/profile_settings_screen.dart';
+import 'package:forge_ai/features/training/models/workout_library_models.dart';
 import 'package:forge_ai/features/training/models/workout_session_models.dart';
 import 'package:forge_ai/features/training/providers/active_workout_session_provider.dart';
 import 'package:forge_ai/features/training/screens/active_workout_screen.dart';
 import 'package:forge_ai/features/training/screens/training_screen.dart';
+import 'package:forge_ai/features/training/screens/training_statistics_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_detail_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_library_screen.dart';
 import 'package:forge_ai/features/training/screens/workout_preview_screen.dart';
@@ -44,13 +44,12 @@ abstract final class AppRoutes {
   static const dashboard = '/dashboard';
   static const training = '/training';
   static const workoutLibrary = '/training/workouts';
+  static const trainingStatistics = '/training/statistics';
   static const workoutDetailPath = '/training/workouts/:id';
   static const workoutPreview = '/training/workout-preview';
   static const workoutActive = '/training/workout-active';
   static const workoutCreate = '/workout/create';
   static const exerciseCreate = '/exercise/create';
-  static const nutrition = '/nutrition';
-  static const nutritionChat = '/nutrition/chat';
   static const insights = '/insights';
   static const notifications = '/notifications';
   static const insightMuscleDetailPath = '/insights/muscle/:id';
@@ -110,7 +109,12 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.workoutCreate,
-      builder: (context, state) => const WorkoutCreateScreen(),
+      builder: (context, state) {
+        final extra = state.extra;
+        return WorkoutCreateScreen(
+          editingWorkout: extra is WorkoutLibraryWorkout ? extra : null,
+        );
+      },
     ),
     GoRoute(
       path: AppRoutes.exerciseCreate,
@@ -126,10 +130,6 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.insightChat,
       builder: (context, state) => const InsightChatScreen(),
-    ),
-    GoRoute(
-      path: AppRoutes.nutritionChat,
-      builder: (context, state) => const NutritionChatScreen(),
     ),
     GoRoute(
       path: AppRoutes.notifications,
@@ -152,6 +152,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.workoutLibrary,
       builder: (context, state) => const WorkoutLibraryScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.trainingStatistics,
+      builder: (context, state) => const TrainingStatisticsScreen(),
     ),
     GoRoute(
       path: AppRoutes.workoutDetailPath,
@@ -202,14 +206,6 @@ final appRouter = GoRouter(
             GoRoute(
               path: AppRoutes.training,
               builder: (context, state) => const TrainingScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: AppRoutes.nutrition,
-              builder: (context, state) => const NutritionScreen(),
             ),
           ],
         ),

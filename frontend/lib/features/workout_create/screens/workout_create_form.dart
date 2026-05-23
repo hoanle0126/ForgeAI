@@ -15,7 +15,7 @@ class WorkoutCreateForm extends StatelessWidget {
     required this.state,
     required this.onDifficultyChanged,
     required this.onGoalChanged,
-    required this.onScheduledForChanged,
+    required this.onScheduledDayToggle,
     required this.onRemoveExercise,
     required this.onAddSet,
     required this.onRemoveSet,
@@ -28,7 +28,7 @@ class WorkoutCreateForm extends StatelessWidget {
   final WorkoutCreateState state;
   final void Function(WorkoutDifficulty?) onDifficultyChanged;
   final void Function(WorkoutGoal?) onGoalChanged;
-  final void Function(DateTime?) onScheduledForChanged;
+  final void Function(WorkoutScheduleDay) onScheduledDayToggle;
   final void Function(int) onRemoveExercise;
   final void Function(int) onAddSet;
   final void Function(int, int) onRemoveSet;
@@ -61,10 +61,10 @@ class WorkoutCreateForm extends StatelessWidget {
           WorkoutMetadataSection(
             difficulty: state.difficulty,
             goal: state.goal,
-            scheduledFor: state.scheduledFor,
+            scheduledDays: state.scheduledDays,
             onDifficultyChanged: onDifficultyChanged,
             onGoalChanged: onGoalChanged,
-            onScheduledForChanged: onScheduledForChanged,
+            onScheduledDayToggle: onScheduledDayToggle,
           ),
           const SizedBox(height: AppSpacing.lg),
           ExercisesSection(

@@ -7,10 +7,39 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class WelcomeCtaSection extends StatelessWidget {
-  const WelcomeCtaSection({super.key});
+  const WelcomeCtaSection({
+    super.key,
+    required this.isWide,
+    required this.isCompactHeight,
+  });
+
+  final bool isWide;
+  final bool isCompactHeight;
 
   @override
   Widget build(BuildContext context) {
+    if (isWide) {
+      return Row(
+        children: [
+          Expanded(
+            child: AppButton(
+              text: 'Start Your Journey',
+              icon: PhosphorIconsBold.lightning,
+              onPressed: () => context.go(AppRoutes.authRegister),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.base),
+          Expanded(
+            child: AppButton(
+              text: 'Sign In',
+              variant: AppButtonVariant.outline,
+              onPressed: () => context.go(AppRoutes.authLogin),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -19,7 +48,7 @@ class WelcomeCtaSection extends StatelessWidget {
           icon: PhosphorIconsBold.lightning,
           onPressed: () => context.go(AppRoutes.authRegister),
         ),
-        const SizedBox(height: AppSpacing.base),
+        SizedBox(height: isCompactHeight ? AppSpacing.sm : AppSpacing.base),
         AppButton(
           text: 'Sign In',
           variant: AppButtonVariant.outline,

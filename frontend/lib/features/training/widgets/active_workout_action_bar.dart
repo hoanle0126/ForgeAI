@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/training/models/workout_session_models.dart';
 import 'package:forge_ai/features/training/providers/active_workout_session_provider.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
@@ -8,13 +9,17 @@ class ActiveWorkoutActionBar extends StatelessWidget {
   const ActiveWorkoutActionBar({
     super.key,
     required this.session,
-    required this.onAdvanceTimer,
+    required this.onSkipPhase,
     required this.onCompleteRepsExercise,
+    required this.onToggleTimedExercisePause,
+    required this.onFinishSession,
   });
 
   final ActiveWorkoutSessionState session;
-  final VoidCallback onAdvanceTimer;
+  final VoidCallback onSkipPhase;
   final VoidCallback onCompleteRepsExercise;
+  final VoidCallback onToggleTimedExercisePause;
+  final VoidCallback onFinishSession;
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +27,23 @@ class ActiveWorkoutActionBar extends StatelessWidget {
       return AppButton(
         text: 'Finish Session',
         icon: PhosphorIcons.checkCircle(PhosphorIconsStyle.bold),
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: onFinishSession,
       );
     }
 
     if (session.currentPhase == ActiveWorkoutPhase.countdown) {
       return AppButton(
-        text: session.secondsRemaining <= 1
-            ? 'Start Movement'
-            : 'Continue Countdown',
-        icon: PhosphorIcons.play(PhosphorIconsStyle.fill),
-        onPressed: onAdvanceTimer,
+        text: 'Skip Countdown',
+        icon: PhosphorIcons.skipForward(PhosphorIconsStyle.bold),
+        onPressed: onSkipPhase,
       );
     }
 
     if (session.currentPhase == ActiveWorkoutPhase.rest) {
       return AppButton(
-        text: 'Continue Rest',
-        icon: PhosphorIcons.timer(PhosphorIconsStyle.bold),
-        onPressed: onAdvanceTimer,
+        text: 'Skip Rest',
+        icon: PhosphorIcons.skipForward(PhosphorIconsStyle.bold),
+        onPressed: onSkipPhase,
       );
     }
 
@@ -52,10 +55,27 @@ class ActiveWorkoutActionBar extends StatelessWidget {
       );
     }
 
-    return AppButton(
-      text: 'Advance Timer',
-      icon: PhosphorIcons.lightning(PhosphorIconsStyle.fill),
-      onPressed: onAdvanceTimer,
+    return Row(
+      children: [
+        Expanded(
+          child: AppButton(
+            text: 'Skip',
+            variant: AppButtonVariant.secondary,
+            icon: PhosphorIcons.skipForward(PhosphorIconsStyle.bold),
+            onPressed: onSkipPhase,
+          ),
+        ),
+        const SizedBox(width: AppSpacing.sm),
+        Expanded(
+          child: AppButton(
+            text: session.isTimerPaused ? 'Resume Timer' : 'Pause Timer',
+            icon: session.isTimerPaused
+                ? PhosphorIcons.play(PhosphorIconsStyle.fill)
+                : PhosphorIcons.pause(PhosphorIconsStyle.fill),
+            onPressed: onToggleTimedExercisePause,
+          ),
+        ),
+      ],
     );
   }
 }

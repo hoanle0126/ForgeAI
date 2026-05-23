@@ -89,17 +89,11 @@ class TrainingMoreSheet extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(PhosphorIcons.faders(), color: AppColors.textDark),
-            title: Text('Training Settings', style: AppTypography.bodyMedium),
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          ListTile(
             leading: Icon(PhosphorIcons.chartBar(), color: AppColors.textDark),
             title: Text('Statistics', style: AppTypography.bodyMedium),
             onTap: () {
               Navigator.of(context).pop();
+              context.push(AppRoutes.trainingStatistics);
             },
           ),
           const SizedBox(height: AppSpacing.xxl),

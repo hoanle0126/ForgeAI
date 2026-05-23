@@ -8,21 +8,27 @@ import 'package:go_router/go_router.dart';
 class WorkoutBuilderAppBar extends StatelessWidget {
   const WorkoutBuilderAppBar({
     super.key,
-    required this.step,
-    required this.totalSteps,
+    this.step,
+    this.totalSteps,
     required this.title,
+    this.progressLabel,
+    this.fallbackRoute = AppRoutes.training,
     this.onSkip,
     this.showSkip = true,
   });
 
-  final int step;
-  final int totalSteps;
+  final int? step;
+  final int? totalSteps;
   final String title;
+  final String? progressLabel;
+  final String fallbackRoute;
   final VoidCallback? onSkip;
   final bool showSkip;
 
   @override
   Widget build(BuildContext context) {
+    final resolvedProgressLabel = _resolvedProgressLabel;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.base,
@@ -46,20 +52,22 @@ class WorkoutBuilderAppBar extends StatelessWidget {
                       if (context.canPop()) {
                         context.pop();
                       } else {
-                        context.go(AppRoutes.training);
+                        context.go(fallbackRoute);
                       }
                     },
                   ),
-                  const SizedBox(width: AppSpacing.xs),
-                  Text(
-                    'Step $step of $totalSteps',
-                    style: AppTypography.labelUppercase.copyWith(
-                      color: AppColors.textDisabled,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0,
+                  if (resolvedProgressLabel != null) ...[
+                    const SizedBox(width: AppSpacing.xs),
+                    Text(
+                      resolvedProgressLabel,
+                      style: AppTypography.labelUppercase.copyWith(
+                        color: AppColors.textDisabled,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0,
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
 
@@ -92,5 +100,11 @@ class WorkoutBuilderAppBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String? get _resolvedProgressLabel {
+    if (progressLabel != null) return progressLabel;
+    if (step == null || totalSteps == null) return null;
+    return 'Step $step of $totalSteps';
   }
 }

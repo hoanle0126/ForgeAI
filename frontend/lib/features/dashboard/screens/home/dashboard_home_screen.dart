@@ -6,7 +6,6 @@ import 'package:forge_ai/features/dashboard/widgets/home/dashboard_top_header_ro
 import 'package:forge_ai/features/dashboard/widgets/home/page_greeting_title.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/stats_grid_row.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/weekly_progress_row.dart';
-import 'package:forge_ai/features/dashboard/widgets/nutrition/nutrition_overview_card.dart';
 import 'package:forge_ai/features/dashboard/widgets/workout/hero_workout_card.dart';
 
 class DashboardHomeScreen extends StatelessWidget {
@@ -30,8 +29,6 @@ class DashboardHomeScreen extends StatelessWidget {
               AiReadinessCard(),
               SizedBox(height: AppSpacing.base),
               HeroWorkoutCard(),
-              SizedBox(height: AppSpacing.base),
-              NutritionOverviewCard(),
               SizedBox(height: AppSpacing.base),
               WeeklyProgressRow(),
               SizedBox(height: AppSpacing.base),

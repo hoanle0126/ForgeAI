@@ -12,18 +12,18 @@ class WorkoutMetadataSection extends StatelessWidget {
     super.key,
     required this.difficulty,
     required this.goal,
-    required this.scheduledFor,
+    required this.scheduledDays,
     required this.onDifficultyChanged,
     required this.onGoalChanged,
-    required this.onScheduledForChanged,
+    required this.onScheduledDayToggle,
   });
 
   final WorkoutDifficulty? difficulty;
   final WorkoutGoal? goal;
-  final DateTime? scheduledFor;
+  final List<WorkoutScheduleDay> scheduledDays;
   final void Function(WorkoutDifficulty?) onDifficultyChanged;
   final void Function(WorkoutGoal?) onGoalChanged;
-  final void Function(DateTime?) onScheduledForChanged;
+  final void Function(WorkoutScheduleDay) onScheduledDayToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +60,10 @@ class WorkoutMetadataSection extends StatelessWidget {
           ),
           const Divider(height: AppSpacing.lg),
           MetadataRow(
-            label: 'Scheduled For',
-            value: scheduledFor != null
-                ? '${scheduledFor!.day}/${scheduledFor!.month}/${scheduledFor!.year}'
-                : 'Not scheduled',
+            label: 'Training Days',
+            value: _scheduleDaysLabel,
             icon: PhosphorIcons.calendar(),
-            onTap: () => _handleDateTap(context),
+            onTap: () => _handleTrainingDaysTap(context),
           ),
         ],
       ),
@@ -89,13 +87,16 @@ class WorkoutMetadataSection extends StatelessWidget {
     }
   }
 
-  Future<void> _handleDateTap(BuildContext context) async {
-    final result = await WorkoutMetadataPickers.showScheduleDatePicker(
+  Future<void> _handleTrainingDaysTap(BuildContext context) async {
+    await WorkoutMetadataPickers.showScheduleDaysPicker(
       context,
-      scheduledFor,
+      selectedDays: scheduledDays,
+      onToggle: onScheduledDayToggle,
     );
-    if (result != null) {
-      onScheduledForChanged(result);
-    }
+  }
+
+  String get _scheduleDaysLabel {
+    if (scheduledDays.isEmpty) return 'Not scheduled';
+    return scheduledDays.map((day) => day.shortLabel).join(' • ');
   }
 }

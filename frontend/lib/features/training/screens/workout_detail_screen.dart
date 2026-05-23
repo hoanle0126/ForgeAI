@@ -3,14 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
-import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/core/router/app_router.dart';
 import 'package:forge_ai/features/training/models/workout_library_models.dart';
 import 'package:forge_ai/features/training/providers/active_workout_session_provider.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
+import 'package:forge_ai/features/training/screens/workout_detail_delete_handler.dart';
 import 'package:forge_ai/features/training/widgets/training_error_state.dart';
 import 'package:forge_ai/features/training/widgets/training_loading_state.dart';
 import 'package:forge_ai/features/training/widgets/workout_detail_summary_card.dart';
+import 'package:forge_ai/features/training/widgets/workout_detail_top_bar.dart';
 import 'package:forge_ai/features/training/widgets/workout_exercise_checklist.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +66,15 @@ class _WorkoutDetailContent extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _WorkoutDetailTopBar(onBack: () => context.pop()),
+          WorkoutDetailTopBar(
+            onBack: () => context.pop(),
+            onEdit: () => context.push(AppRoutes.workoutCreate, extra: workout),
+            onDelete: () => handleWorkoutDelete(
+              context: context,
+              ref: ref,
+              workout: workout,
+            ),
+          ),
           const SizedBox(height: AppSpacing.lg),
           WorkoutDetailSummaryCard(workout: workout),
           const SizedBox(height: AppSpacing.base),
@@ -85,27 +94,6 @@ class _WorkoutDetailContent extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _WorkoutDetailTopBar extends StatelessWidget {
-  const _WorkoutDetailTopBar({required this.onBack});
-
-  final VoidCallback onBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(
-          onPressed: onBack,
-          icon: PhosphorIcon(PhosphorIcons.caretLeft()),
-          color: AppColors.textDark,
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(child: Text('Workout Detail', style: AppTypography.h3)),
-      ],
     );
   }
 }

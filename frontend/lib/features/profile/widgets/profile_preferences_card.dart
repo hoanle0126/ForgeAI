@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/features/profile/widgets/profile_preference_chip.dart';
 import 'package:forge_ai/features/profile/widgets/profile_preference_toggle_row.dart';
-import 'package:forge_ai/features/profile/widgets/profile_snapshot_row.dart';
+import 'package:forge_ai/features/profile/widgets/profile_training_preferences_summary.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -31,26 +30,7 @@ class _ProfilePreferencesCardState extends State<ProfilePreferencesCard> {
         children: [
           Text('Training Preferences', style: AppTypography.h3),
           const SizedBox(height: AppSpacing.base),
-          ProfileSnapshotRow(
-            icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
-            title: 'Primary goal',
-            value: 'Lean strength',
-            color: AppColors.sportOrange,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          ProfileSnapshotRow(
-            icon: PhosphorIcons.lightning(PhosphorIconsStyle.fill),
-            title: 'Weekly schedule',
-            value: '4 sessions',
-            color: AppColors.energy,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          ProfileSnapshotRow(
-            icon: PhosphorIcons.barbell(PhosphorIconsStyle.bold),
-            title: 'Equipment',
-            value: 'Gym + dumbbells',
-            color: AppColors.aiBlue,
-          ),
+          const ProfileTrainingPreferencesSummary(),
           const SizedBox(height: AppSpacing.lg),
           Text('App Preferences', style: AppTypography.h3),
           const SizedBox(height: AppSpacing.base),

@@ -28,11 +28,6 @@ class AppBottomNav extends StatelessWidget {
       activeIcon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
     ),
     _NavDestination(
-      label: 'MEALS',
-      icon: PhosphorIcons.forkKnife(PhosphorIconsStyle.regular),
-      activeIcon: PhosphorIcons.forkKnife(PhosphorIconsStyle.fill),
-    ),
-    _NavDestination(
       label: 'INSIGHTS',
       icon: PhosphorIcons.chartLineUp(PhosphorIconsStyle.regular),
       activeIcon: PhosphorIcons.chartLineUp(PhosphorIconsStyle.fill),

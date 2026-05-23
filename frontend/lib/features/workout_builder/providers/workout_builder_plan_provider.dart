@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
-import 'package:forge_ai/features/workout_builder/models/monthly_workout_plan.dart';
 import 'package:forge_ai/features/workout_builder/providers/workout_builder_provider.dart';
 import 'package:forge_ai/features/workout_builder/repositories/workout_builder_repository.dart';
 
@@ -14,13 +13,62 @@ final workoutBuilderRepositoryProvider = Provider<WorkoutBuilderRepository>((
 });
 
 final monthlyWorkoutPlanProvider =
-    FutureProvider.autoDispose<AiMonthlyWorkoutPlan>((ref) async {
+    FutureProvider.autoDispose<MonthlyWorkoutPlanResult>((ref) async {
       final repository = ref.watch(workoutBuilderRepositoryProvider);
       final payload = _buildMonthlyPlanPayload(ref);
       return repository.buildMonthlyPlan(payload: payload);
     });
 
+class MonthlyWorkoutSyncNotifier extends AutoDisposeAsyncNotifier<void> {
+  @override
+  Future<void> build() async {}
+
+  Future<void> updateWorkouts({
+    required List<Map<String, dynamic>> workoutTemplateDrafts,
+  }) async {
+    if (workoutTemplateDrafts.isEmpty) {
+      state = const AsyncData(null);
+      return;
+    }
+
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      final repository = ref.read(workoutBuilderRepositoryProvider);
+      await repository.updateWorkoutsFromMonthlyPlan(
+        workoutTemplateDrafts: workoutTemplateDrafts,
+      );
+    });
+  }
+}
+
+final monthlyWorkoutSyncProvider =
+    AsyncNotifierProvider.autoDispose<MonthlyWorkoutSyncNotifier, void>(
+      MonthlyWorkoutSyncNotifier.new,
+    );
+
 String buildMonthlyWorkoutPlanErrorMessage(Object error) {
+  return _resolveMonthlyPlanErrorMessage(
+    error,
+    fallbackMessage: 'ForgeAI could not build your month 1 block yet.',
+    notFoundMessage:
+        'Monthly plan endpoint not found. Update and restart backend API.',
+  );
+}
+
+String buildMonthlyWorkoutTemplateUpdateErrorMessage(Object error) {
+  return _resolveMonthlyPlanErrorMessage(
+    error,
+    fallbackMessage: 'ForgeAI could not update workouts yet.',
+    notFoundMessage:
+        'Workout endpoint not found. Update and restart backend API.',
+  );
+}
+
+String _resolveMonthlyPlanErrorMessage(
+  Object error, {
+  required String fallbackMessage,
+  required String notFoundMessage,
+}) {
   if (error is FormatException) {
     return error.message.toString();
   }
@@ -33,7 +81,7 @@ String buildMonthlyWorkoutPlanErrorMessage(Object error) {
 
     final statusCode = error.response?.statusCode;
     if (statusCode == 404) {
-      return 'Monthly plan endpoint not found. Update and restart backend API.';
+      return notFoundMessage;
     }
 
     if (error.message != null && error.message!.isNotEmpty) {
@@ -46,7 +94,7 @@ String buildMonthlyWorkoutPlanErrorMessage(Object error) {
     return fallback;
   }
 
-  return 'ForgeAI could not build your month 1 block yet.';
+  return fallbackMessage;
 }
 
 Map<String, dynamic> _buildMonthlyPlanPayload(Ref ref) {
