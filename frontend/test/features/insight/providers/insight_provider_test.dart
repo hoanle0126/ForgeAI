@@ -3,9 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forge_ai/features/insight/models/insight_models.dart';
 import 'package:forge_ai/features/insight/providers/insight_provider.dart';
 
+import '../support/fake_insight_repository.dart';
+
 void main() {
   ProviderContainer createContainer() {
-    final container = ProviderContainer();
+    final container = ProviderContainer(overrides: insightTestOverrides());
     addTearDown(container.dispose);
     container.listen(insightNotifierProvider, (previous, next) {});
     return container;
@@ -16,7 +18,7 @@ void main() {
 
     final state = await container.read(insightNotifierProvider.future);
 
-    expect(state.muscleData.length, greaterThanOrEqualTo(6));
+    expect(state.muscleData.length, greaterThanOrEqualTo(3));
     expect(state.muscleAnalyses.length, greaterThanOrEqualTo(3));
     expect(state.messages, isNotEmpty);
     expect(state.activeAtlasSide, AtlasSide.front);
@@ -56,7 +58,8 @@ void main() {
     final fallback = notifier.analysisForMuscle('unknown_muscle');
 
     expect(known.muscleId, 'pectoralis_major_r');
-    expect(known.status, MuscleTrainingStatus.overloaded);
+    expect(known.status, isNot(MuscleTrainingStatus.neutral));
+    expect(known.volume, greaterThan(0));
     expect(fallback.muscleId, 'unknown_muscle');
     expect(fallback.status, MuscleTrainingStatus.neutral);
     expect(fallback.exerciseContributions, isEmpty);

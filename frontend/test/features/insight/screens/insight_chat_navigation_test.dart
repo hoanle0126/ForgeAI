@@ -6,6 +6,8 @@ import 'package:forge_ai/features/insight/screens/insight_chat_screen.dart';
 import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../support/fake_insight_repository.dart';
+
 void main() {
   testWidgets('AI Coach back button returns to insight screen', (tester) async {
     await tester.binding.setSurfaceSize(const Size(390, 844));
@@ -26,7 +28,10 @@ void main() {
     );
 
     await tester.pumpWidget(
-      ProviderScope(child: MaterialApp.router(routerConfig: router)),
+      ProviderScope(
+        overrides: insightTestOverrides(),
+        child: MaterialApp.router(routerConfig: router),
+      ),
     );
     await tester.pumpAndSettle();
 

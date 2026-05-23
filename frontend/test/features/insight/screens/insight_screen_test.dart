@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forge_ai/features/insight/screens/insight_screen.dart';
 
+import '../support/fake_insight_repository.dart';
+
 void main() {
   Widget buildSubject({required Size size}) {
     return ProviderScope(
+      overrides: insightTestOverrides(),
       child: MaterialApp(
         home: MediaQuery(
           data: MediaQueryData(size: size),
