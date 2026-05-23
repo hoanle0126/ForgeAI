@@ -5,7 +5,16 @@ import 'package:forge_ai/features/dashboard/widgets/home/dashboard_stat_card.dar
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class StatsGridRow extends StatelessWidget {
-  const StatsGridRow({super.key});
+  const StatsGridRow({
+    super.key,
+    this.volumeValue = '12.4k',
+    this.volumeUnit = 'lbs lifted',
+    this.streakDays = 12,
+  });
+
+  final String volumeValue;
+  final String volumeUnit;
+  final int streakDays;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +23,8 @@ class StatsGridRow extends StatelessWidget {
         Expanded(
           child: DashboardStatCard(
             title: 'VOLUME',
-            value: '12.4k',
-            unit: 'lbs lifted',
+            value: volumeValue,
+            unit: volumeUnit,
             icon: PhosphorIcons.trendUp(PhosphorIconsStyle.bold),
             iconColor: AppColors.success,
           ),
@@ -24,7 +33,7 @@ class StatsGridRow extends StatelessWidget {
         Expanded(
           child: DashboardStatCard(
             title: 'STREAK',
-            value: '12',
+            value: streakDays.toString(),
             unit: 'days active',
             icon: PhosphorIcons.fire(PhosphorIconsStyle.fill),
             iconColor: AppColors.sportOrange,

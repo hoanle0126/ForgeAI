@@ -7,10 +7,20 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class AiReadinessCard extends StatelessWidget {
-  const AiReadinessCard({super.key});
+  const AiReadinessCard({
+    super.key,
+    this.readinessScore = 72,
+    this.readinessMessage =
+        'Slept 6h — today\'s session is dynamically lightened for optimal recovery.',
+  });
+
+  final int readinessScore;
+  final String readinessMessage;
 
   @override
   Widget build(BuildContext context) {
+    final clampedScore = readinessScore.clamp(0, 100).toInt();
+
     return AppCard(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,9 +28,9 @@ class AiReadinessCard extends StatelessWidget {
           CircularPercentIndicator(
             radius: AppSpacing.xl,
             lineWidth: 5,
-            percent: 0.72,
+            percent: clampedScore / 100,
             center: Text(
-              '72',
+              clampedScore.toString(),
               style: AppTypography.statSmall.copyWith(fontSize: 14),
             ),
             progressColor: AppColors.success,
@@ -52,7 +62,7 @@ class AiReadinessCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  'Slept 6h — today\'s session is dynamically lightened for optimal recovery.',
+                  readinessMessage,
                   style: AppTypography.bodySmall.copyWith(
                     color: AppColors.textDisabled,
                     height: 1.4,
