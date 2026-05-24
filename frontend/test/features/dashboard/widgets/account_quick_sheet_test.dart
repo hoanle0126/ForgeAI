@@ -15,6 +15,9 @@ void main() {
         home: Scaffold(
           body: AccountQuickSheet(
             displayName: 'Alex Morgan',
+            streakValue: '12',
+            readinessValue: '86',
+            loadValue: '7.4',
             onViewFullProfile: () {},
             onTrainingPreferences: () {},
             onNotifications: () {},
@@ -60,6 +63,9 @@ void main() {
         home: Scaffold(
           body: AccountQuickSheet(
             displayName: 'Alex Morgan',
+            streakValue: '12',
+            readinessValue: '86',
+            loadValue: '7.4',
             onViewFullProfile: () => tapped = true,
             onTrainingPreferences: () {},
             onNotifications: () {},
@@ -86,6 +92,9 @@ void main() {
         home: Scaffold(
           body: AccountQuickSheet(
             displayName: 'Alex Morgan',
+            streakValue: '12',
+            readinessValue: '86',
+            loadValue: '7.4',
             onViewFullProfile: () {},
             onTrainingPreferences: () => trainingTapped = true,
             onNotifications: () => notificationsTapped = true,

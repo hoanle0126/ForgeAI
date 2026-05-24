@@ -13,6 +13,7 @@ class AuthConsole extends StatelessWidget {
     required this.state,
     required this.nameController,
     required this.emailController,
+    required this.otpController,
     required this.passwordController,
     required this.confirmPasswordController,
     required this.selectedGender,
@@ -26,6 +27,7 @@ class AuthConsole extends StatelessWidget {
   final AuthState state;
   final TextEditingController nameController;
   final TextEditingController emailController;
+  final TextEditingController otpController;
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   final String selectedGender;
@@ -56,6 +58,7 @@ class AuthConsole extends StatelessWidget {
             state: state,
             nameController: nameController,
             emailController: emailController,
+            otpController: otpController,
             passwordController: passwordController,
             confirmPasswordController: confirmPasswordController,
             selectedGender: selectedGender,

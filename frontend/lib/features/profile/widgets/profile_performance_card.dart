@@ -7,7 +7,14 @@ import 'package:forge_ai/features/profile/widgets/profile_signal_pill.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class ProfilePerformanceCard extends StatelessWidget {
-  const ProfilePerformanceCard({super.key});
+  const ProfilePerformanceCard({
+    super.key,
+    required this.readinessScore,
+    required this.loadLabel,
+  });
+
+  final String readinessScore;
+  final String loadLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +81,13 @@ class ProfilePerformanceCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
-          const Row(
-            children: [
-              ProfileSignalPill(label: 'READINESS', value: '86'),
-              SizedBox(width: AppSpacing.sm),
-              ProfileSignalPill(label: 'LOAD', value: '7.4'),
-            ],
-          ),
+          Row(
+          children: [
+            ProfileSignalPill(label: 'READINESS', value: readinessScore),
+            const SizedBox(width: AppSpacing.sm),
+            ProfileSignalPill(label: 'LOAD', value: loadLabel),
+          ],
+        ),
         ],
       ),
     );

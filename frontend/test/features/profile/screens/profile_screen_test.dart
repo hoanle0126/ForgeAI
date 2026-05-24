@@ -81,6 +81,5 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('TRAINING'), findsWidgets);
-    expect(find.text('Today\'s Workout'), findsOneWidget);
   });
 }

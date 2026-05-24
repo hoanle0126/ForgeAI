@@ -10,6 +10,7 @@ import 'package:forge_ai/features/dashboard/widgets/home/dashboard_account_avata
 import 'package:forge_ai/features/dashboard/widgets/home/dashboard_notification_button.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/dashboard_streak_pill.dart';
 import 'package:forge_ai/features/dashboard/widgets/notifications/notification_quick_sheet.dart';
+import 'package:forge_ai/features/profile/providers/profile_provider.dart';
 import 'package:go_router/go_router.dart';
 
 class DashboardTopHeaderRow extends ConsumerWidget {
@@ -17,7 +18,9 @@ class DashboardTopHeaderRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final displayName = ref.watch(authProvider).displayName ?? 'Alex Morgan';
+    final profile = ref.watch(profileProvider).valueOrNull;
+    final displayName =
+        profile?.fullName ?? ref.watch(authProvider).displayName ?? 'Alex Morgan';
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,10 +58,14 @@ class DashboardTopHeaderRow extends ConsumerWidget {
     WidgetRef ref,
     String displayName,
   ) {
+    final profile = ref.read(profileProvider).valueOrNull;
     _showBottomSheet(
       context: context,
       builder: (sheetContext) => AccountQuickSheet(
         displayName: displayName,
+        streakValue: (profile?.streakDays ?? 0).toString(),
+        readinessValue: profile == null ? '--' : '79',
+        loadValue: profile?.latestMetric?.weightKg?.toStringAsFixed(0) ?? '--',
         onViewFullProfile: () {
           Navigator.of(sheetContext).pop();
           context.go(AppRoutes.profile);

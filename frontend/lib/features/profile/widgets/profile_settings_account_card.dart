@@ -6,9 +6,16 @@ import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class ProfileSettingsAccountCard extends StatelessWidget {
-  const ProfileSettingsAccountCard({super.key, required this.displayName});
+  const ProfileSettingsAccountCard({
+    super.key,
+    required this.displayName,
+    required this.athleteTitle,
+    required this.email,
+  });
 
   final String displayName;
+  final String athleteTitle;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +45,7 @@ class ProfileSettingsAccountCard extends StatelessWidget {
                   children: [
                     Text(displayName, style: AppTypography.h4),
                     const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      'Hybrid strength athlete',
-                      style: AppTypography.bodySmall,
-                    ),
+                    Text(athleteTitle, style: AppTypography.bodySmall),
                   ],
                 ),
               ),
@@ -66,6 +70,8 @@ class ProfileSettingsAccountCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
+          Text(email, style: AppTypography.bodySemiBold),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             'Keep your profile current so ForgeAI can tune workouts, reminders, and recovery guidance.',
             style: AppTypography.bodyMedium,

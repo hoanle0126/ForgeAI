@@ -30,7 +30,7 @@ class AuthSuccessView extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'We\'ve sent an encrypted link to reset your access key.',
+          'Your password has been reset. Return to sign in with the new credentials.',
           style: AppTypography.bodyMedium.copyWith(height: 1.5),
           textAlign: TextAlign.center,
         ),

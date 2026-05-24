@@ -54,6 +54,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 state: state,
                 nameController: _controllers.name,
                 emailController: _controllers.email,
+                otpController: _controllers.otp,
                 passwordController: _controllers.password,
                 confirmPasswordController: _controllers.confirmPassword,
                 selectedGender: _selectedGender,
@@ -83,6 +84,19 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
     if (mode == AuthMode.forgotPassword) {
       await notifier.submitPasswordReset(email: _controllers.email.text);
+      return;
+    }
+
+    if (mode == AuthMode.verifyResetOtp) {
+      await notifier.submitOtpVerification(otp: _controllers.otp.text);
+      return;
+    }
+
+    if (mode == AuthMode.resetPassword) {
+      await notifier.submitNewPassword(
+        password: _controllers.password.text,
+        confirmPassword: _controllers.confirmPassword.text,
+      );
       return;
     }
 

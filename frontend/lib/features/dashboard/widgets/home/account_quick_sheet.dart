@@ -12,6 +12,9 @@ class AccountQuickSheet extends StatelessWidget {
   const AccountQuickSheet({
     super.key,
     required this.displayName,
+    required this.streakValue,
+    required this.readinessValue,
+    required this.loadValue,
     required this.onViewFullProfile,
     required this.onTrainingPreferences,
     required this.onNotifications,
@@ -19,6 +22,9 @@ class AccountQuickSheet extends StatelessWidget {
   });
 
   final String displayName;
+  final String streakValue;
+  final String readinessValue;
+  final String loadValue;
   final VoidCallback onViewFullProfile;
   final VoidCallback onTrainingPreferences;
   final VoidCallback onNotifications;
@@ -43,7 +49,11 @@ class AccountQuickSheet extends StatelessWidget {
             const SizedBox(height: AppSpacing.base),
             AccountProfileHero(displayName: displayName),
             const SizedBox(height: AppSpacing.base),
-            const _MetricRow(),
+            _MetricRow(
+              streakValue: streakValue,
+              readinessValue: readinessValue,
+              loadValue: loadValue,
+            ),
             const SizedBox(height: AppSpacing.base),
             const AccountCoachCard(),
             const SizedBox(height: AppSpacing.base),
@@ -79,7 +89,15 @@ class _SheetHandle extends StatelessWidget {
 }
 
 class _MetricRow extends StatelessWidget {
-  const _MetricRow();
+  const _MetricRow({
+    required this.streakValue,
+    required this.readinessValue,
+    required this.loadValue,
+  });
+
+  final String streakValue;
+  final String readinessValue;
+  final String loadValue;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +105,7 @@ class _MetricRow extends StatelessWidget {
       children: [
         AccountMetricTile(
           label: 'STREAK',
-          value: '12',
+          value: streakValue,
           icon: PhosphorIcons.fire(PhosphorIconsStyle.fill),
           backgroundColor: AppColors.sportOrangeLight,
           labelColor: AppColors.sportOrange,
@@ -95,14 +113,14 @@ class _MetricRow extends StatelessWidget {
         const SizedBox(width: AppSpacing.sm),
         AccountMetricTile(
           label: 'READY',
-          value: '86',
+          value: readinessValue,
           icon: PhosphorIcons.heartbeat(PhosphorIconsStyle.fill),
           backgroundColor: AppColors.inputBg,
         ),
         const SizedBox(width: AppSpacing.sm),
         AccountMetricTile(
           label: 'LOAD',
-          value: '7.4',
+          value: loadValue,
           icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
           backgroundColor: AppColors.recoveryLight,
           labelColor: AppColors.recovery,

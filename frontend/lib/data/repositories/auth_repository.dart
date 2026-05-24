@@ -79,4 +79,38 @@ class AuthRepository {
     }
     await tokenStorage.clearTokens();
   }
+
+  Future<void> forgotPassword({required String email}) async {
+    await _dio.post<void>(
+      '/auth/forgot-password',
+      data: {'email': email},
+    );
+  }
+
+  Future<String> verifyPasswordResetOtp({
+    required String email,
+    required String otp,
+  }) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/auth/verify-otp',
+      data: {'email': email, 'otp': otp},
+    );
+    final data = response.data!['data'] as Map<String, dynamic>;
+    return data['resetToken'] as String;
+  }
+
+  Future<void> resetPassword({
+    required String resetToken,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    await _dio.post<void>(
+      '/auth/reset-password',
+      data: {
+        'resetToken': resetToken,
+        'password': password,
+        'confirmPassword': confirmPassword,
+      },
+    );
+  }
 }

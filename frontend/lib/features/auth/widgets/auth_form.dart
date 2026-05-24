@@ -17,6 +17,7 @@ class AuthForm extends StatelessWidget {
     required this.state,
     required this.nameController,
     required this.emailController,
+    required this.otpController,
     required this.passwordController,
     required this.confirmPasswordController,
     required this.selectedGender,
@@ -30,6 +31,7 @@ class AuthForm extends StatelessWidget {
   final AuthState state;
   final TextEditingController nameController;
   final TextEditingController emailController;
+  final TextEditingController otpController;
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   final String selectedGender;
@@ -41,6 +43,8 @@ class AuthForm extends StatelessWidget {
 
   bool get _isRegister => state.mode == AuthMode.register;
   bool get _isForgotPassword => state.mode == AuthMode.forgotPassword;
+  bool get _isVerifyOtp => state.mode == AuthMode.verifyResetOtp;
+  bool get _isResetPassword => state.mode == AuthMode.resetPassword;
   bool get _isSuccess => state.mode == AuthMode.forgotPasswordSuccess;
 
   @override
@@ -69,15 +73,25 @@ class AuthForm extends StatelessWidget {
             onDateOfBirthChanged: onDateOfBirthChanged,
           ),
         ],
-        AuthTextField(
-          label: 'Email',
-          hint: 'athlete@forge.ai',
-          controller: emailController,
-          errorText: state.fieldErrors['email'],
-          keyboardType: TextInputType.emailAddress,
-          icon: PhosphorIcons.envelopeSimple(),
-        ),
-        if (!_isForgotPassword)
+        if (!_isResetPassword)
+          AuthTextField(
+            label: 'Email',
+            hint: 'athlete@forge.ai',
+            controller: emailController,
+            errorText: state.fieldErrors['email'],
+            keyboardType: TextInputType.emailAddress,
+            icon: PhosphorIcons.envelopeSimple(),
+          ),
+        if (_isVerifyOtp)
+          AuthTextField(
+            label: 'OTP',
+            hint: '123456',
+            controller: otpController,
+            errorText: state.fieldErrors['otp'],
+            keyboardType: TextInputType.number,
+            icon: PhosphorIcons.password(),
+          ),
+        if (!_isForgotPassword && !_isVerifyOtp)
           AuthPasswordFields(
             isRegister: _isRegister,
             passwordController: passwordController,
@@ -85,7 +99,7 @@ class AuthForm extends StatelessWidget {
             passwordError: state.fieldErrors['password'],
             confirmPasswordError: state.fieldErrors['confirmPassword'],
           ),
-        if (!_isRegister && !_isForgotPassword) ...[
+        if (!_isRegister && !_isForgotPassword && !_isVerifyOtp && !_isResetPassword) ...[
           const SizedBox(height: AppSpacing.sm),
           ForgotPasswordButton(
             isEnabled: !state.isLoading,

@@ -7,7 +7,16 @@ import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class ProfileStatStrip extends StatelessWidget {
-  const ProfileStatStrip({super.key});
+  const ProfileStatStrip({
+    super.key,
+    required this.streakDays,
+    required this.completionCount,
+    required this.volumeLabel,
+  });
+
+  final int streakDays;
+  final int completionCount;
+  final String volumeLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,7 @@ class ProfileStatStrip extends StatelessWidget {
           Expanded(
             child: _ProfileMetric(
               icon: PhosphorIcons.fire(PhosphorIconsStyle.fill),
-              value: '12',
+              value: streakDays.toString(),
               label: 'STREAK',
               color: AppColors.sportOrange,
             ),
@@ -26,7 +35,7 @@ class ProfileStatStrip extends StatelessWidget {
           Expanded(
             child: _ProfileMetric(
               icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
-              value: '42',
+              value: completionCount.toString(),
               label: 'SESSIONS',
               color: AppColors.textDark,
             ),
@@ -35,7 +44,7 @@ class ProfileStatStrip extends StatelessWidget {
           Expanded(
             child: _ProfileMetric(
               icon: PhosphorIcons.chartLineUp(PhosphorIconsStyle.fill),
-              value: '+18%',
+              value: volumeLabel,
               label: 'VOLUME',
               color: AppColors.success,
             ),

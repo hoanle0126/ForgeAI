@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
+import 'package:forge_ai/features/profile/providers/profile_provider.dart';
 import 'package:forge_ai/features/profile/widgets/profile_preferences_card.dart';
 import 'package:forge_ai/features/profile/widgets/profile_settings_account_card.dart';
+import 'package:forge_ai/features/profile/widgets/profile_settings_form.dart';
 import 'package:forge_ai/features/profile/widgets/profile_settings_header.dart';
 import 'package:forge_ai/features/profile/widgets/profile_settings_list.dart';
 
@@ -23,7 +25,9 @@ class ProfileSettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final displayName = ref.watch(authProvider).displayName ?? 'Alex Morgan';
+    final profile = ref.watch(profileProvider).valueOrNull;
+    final displayName =
+        profile?.fullName ?? ref.watch(authProvider).displayName ?? 'Alex Morgan';
 
     return Scaffold(
       backgroundColor: AppColors.warmIvory,
@@ -36,7 +40,13 @@ class ProfileSettingsScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               ProfileSettingsHeader(onBack: () => Navigator.of(context).pop()),
               const SizedBox(height: AppSpacing.lg),
-              ProfileSettingsAccountCard(displayName: displayName),
+              ProfileSettingsAccountCard(
+                displayName: displayName,
+                athleteTitle: profile?.athleteTitle ?? 'Hybrid strength athlete',
+                email: profile?.email ?? 'athlete@forge.ai',
+              ),
+              const SizedBox(height: AppSpacing.base),
+              ProfileSettingsForm(profile: profile),
               const SizedBox(height: AppSpacing.base),
               const ProfilePreferencesCard(),
               const SizedBox(height: AppSpacing.base),

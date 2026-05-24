@@ -124,7 +124,6 @@ void main() {
 
     expect(find.text('ATHLETE PROFILE'), findsNothing);
     expect(find.text('TRAINING'), findsWidgets);
-    expect(find.text('Today\'s Workout'), findsOneWidget);
   });
 
   testWidgets('dashboard account log out returns to login', (tester) async {

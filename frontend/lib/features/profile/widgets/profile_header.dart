@@ -9,10 +9,12 @@ class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
     super.key,
     required this.displayName,
+    required this.athleteTitle,
     required this.onSettingsTap,
   });
 
   final String displayName;
+  final String athleteTitle;
   final VoidCallback onSettingsTap;
 
   @override
@@ -59,7 +61,7 @@ class ProfileHeader extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
-                'Hybrid strength athlete',
+                athleteTitle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: AppTypography.bodyMedium,

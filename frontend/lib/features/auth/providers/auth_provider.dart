@@ -4,7 +4,14 @@ import 'package:forge_ai/data/datasources/local/token_storage.dart';
 import 'package:forge_ai/data/datasources/remote/api_client.dart';
 import 'package:forge_ai/data/repositories/auth_repository.dart';
 
-enum AuthMode { login, register, forgotPassword, forgotPasswordSuccess }
+enum AuthMode {
+  login,
+  register,
+  forgotPassword,
+  verifyResetOtp,
+  resetPassword,
+  forgotPasswordSuccess,
+}
 
 enum AuthSubmitResult { success, invalid }
 
@@ -23,6 +30,8 @@ class AuthState {
     this.errorMessage,
     this.fieldErrors = const {},
     this.displayName,
+    this.passwordResetEmail,
+    this.passwordResetToken,
   });
 
   final AuthMode mode;
@@ -30,6 +39,8 @@ class AuthState {
   final String? errorMessage;
   final Map<String, String> fieldErrors;
   final String? displayName;
+  final String? passwordResetEmail;
+  final String? passwordResetToken;
 
   AuthState copyWith({
     AuthMode? mode,
@@ -37,6 +48,8 @@ class AuthState {
     String? errorMessage,
     Map<String, String>? fieldErrors,
     String? displayName,
+    String? passwordResetEmail,
+    String? passwordResetToken,
     bool clearError = false,
   }) {
     return AuthState(
@@ -45,6 +58,8 @@ class AuthState {
       errorMessage: clearError ? null : errorMessage ?? this.errorMessage,
       fieldErrors: fieldErrors ?? this.fieldErrors,
       displayName: displayName ?? this.displayName,
+      passwordResetEmail: passwordResetEmail ?? this.passwordResetEmail,
+      passwordResetToken: passwordResetToken ?? this.passwordResetToken,
     );
   }
 }
@@ -74,6 +89,12 @@ class AuthNotifier extends Notifier<AuthState> {
       mode: mode,
       isLoading: false,
       fieldErrors: {},
+      passwordResetToken: mode == AuthMode.login || mode == AuthMode.register
+          ? null
+          : state.passwordResetToken,
+      passwordResetEmail: mode == AuthMode.login || mode == AuthMode.register
+          ? null
+          : state.passwordResetEmail,
       clearError: true,
     );
   }
@@ -254,18 +275,157 @@ class AuthNotifier extends Notifier<AuthState> {
     }
 
     state = state.copyWith(isLoading: true, clearError: true);
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      await repository.forgotPassword(email: email);
+      state = state.copyWith(
+        isLoading: false,
+        fieldErrors: {},
+        clearError: true,
+        mode: AuthMode.verifyResetOtp,
+        passwordResetEmail: email.trim(),
+      );
+      return AuthSubmitResult.success;
+    } on DioException catch (e) {
+      final message =
+          e.response?.data?['message']?.toString() ??
+          'Unable to send OTP right now.';
+      state = state.copyWith(isLoading: false, errorMessage: message);
+      return AuthSubmitResult.invalid;
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'An unexpected error occurred.',
+      );
+      return AuthSubmitResult.invalid;
+    }
+  }
 
-    // NOTE: Backend doesn't have password reset yet, so keeping the mock delay for now.
-    // Replace this when backend implements /auth/forgot-password
-    await Future<void>.delayed(const Duration(milliseconds: 450));
+  AuthValidationResult validateOtp({required String otp}) {
+    final errors = <String, String>{};
+    if (otp.trim().length != 6) {
+      errors['otp'] = 'Enter the 6-digit OTP.';
+    }
 
-    state = state.copyWith(
-      isLoading: false,
-      fieldErrors: {},
-      clearError: true,
-      mode: AuthMode.forgotPasswordSuccess,
+    final result = AuthValidationResult(errors);
+    state = state.copyWith(fieldErrors: errors, clearError: true);
+    return result;
+  }
+
+  Future<AuthSubmitResult> submitOtpVerification({required String otp}) async {
+    final email = state.passwordResetEmail;
+    if (email == null || email.isEmpty) {
+      state = state.copyWith(
+        errorMessage: 'Restart password reset and request a new OTP.',
+      );
+      return AuthSubmitResult.invalid;
+    }
+
+    final validation = validateOtp(otp: otp);
+    if (!validation.isValid) {
+      state = state.copyWith(errorMessage: 'Enter the OTP to continue.');
+      return AuthSubmitResult.invalid;
+    }
+
+    state = state.copyWith(isLoading: true, clearError: true);
+
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      final resetToken = await repository.verifyPasswordResetOtp(
+        email: email,
+        otp: otp,
+      );
+      state = state.copyWith(
+        isLoading: false,
+        fieldErrors: {},
+        clearError: true,
+        mode: AuthMode.resetPassword,
+        passwordResetToken: resetToken,
+      );
+      return AuthSubmitResult.success;
+    } on DioException catch (e) {
+      final message =
+          e.response?.data?['message']?.toString() ?? 'OTP verification failed.';
+      state = state.copyWith(isLoading: false, errorMessage: message);
+      return AuthSubmitResult.invalid;
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'An unexpected error occurred.',
+      );
+      return AuthSubmitResult.invalid;
+    }
+  }
+
+  AuthValidationResult validateNewPassword({
+    required String password,
+    required String confirmPassword,
+  }) {
+    final errors = <String, String>{};
+    if (password.trim().length < 6) {
+      errors['password'] = 'Use at least 6 characters.';
+    }
+    if (confirmPassword != password) {
+      errors['confirmPassword'] = 'Passwords do not match.';
+    }
+
+    final result = AuthValidationResult(errors);
+    state = state.copyWith(fieldErrors: errors, clearError: true);
+    return result;
+  }
+
+  Future<AuthSubmitResult> submitNewPassword({
+    required String password,
+    required String confirmPassword,
+  }) async {
+    final resetToken = state.passwordResetToken;
+    if (resetToken == null || resetToken.isEmpty) {
+      state = state.copyWith(
+        errorMessage: 'Restart password reset and request a new OTP.',
+      );
+      return AuthSubmitResult.invalid;
+    }
+
+    final validation = validateNewPassword(
+      password: password,
+      confirmPassword: confirmPassword,
     );
-    return AuthSubmitResult.success;
+    if (!validation.isValid) {
+      state = state.copyWith(
+        errorMessage: 'Choose a valid password and confirm it.',
+      );
+      return AuthSubmitResult.invalid;
+    }
+
+    state = state.copyWith(isLoading: true, clearError: true);
+
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      await repository.resetPassword(
+        resetToken: resetToken,
+        password: password,
+        confirmPassword: confirmPassword,
+      );
+      state = state.copyWith(
+        isLoading: false,
+        fieldErrors: {},
+        clearError: true,
+        mode: AuthMode.forgotPasswordSuccess,
+        passwordResetToken: null,
+      );
+      return AuthSubmitResult.success;
+    } on DioException catch (e) {
+      final message =
+          e.response?.data?['message']?.toString() ?? 'Password reset failed.';
+      state = state.copyWith(isLoading: false, errorMessage: message);
+      return AuthSubmitResult.invalid;
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'An unexpected error occurred.',
+      );
+      return AuthSubmitResult.invalid;
+    }
   }
 
   Future<void> logOut() async {

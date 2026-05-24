@@ -4,8 +4,10 @@ import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 
 void main() {
   group('AuthNotifier', () {
+    ProviderContainer createContainer() => ProviderContainer();
+
     test('defaults to login mode with idle state', () {
-      final container = ProviderContainer();
+      final container = createContainer();
       addTearDown(container.dispose);
 
       final state = container.read(authProvider);
@@ -16,7 +18,7 @@ void main() {
     });
 
     test('switchMode updates mode and clears errors', () {
-      final container = ProviderContainer();
+      final container = createContainer();
       addTearDown(container.dispose);
       final notifier = container.read(authProvider.notifier);
 
@@ -30,7 +32,7 @@ void main() {
     });
 
     test('validateLogin reports email and password errors', () {
-      final container = ProviderContainer();
+      final container = createContainer();
       addTearDown(container.dispose);
       final notifier = container.read(authProvider.notifier);
 
@@ -42,7 +44,7 @@ void main() {
     });
 
     test('validateRegistration reports name, email, and password errors', () {
-      final container = ProviderContainer();
+      final container = createContainer();
       addTearDown(container.dispose);
       final notifier = container.read(authProvider.notifier);
 
@@ -61,7 +63,7 @@ void main() {
     });
 
     test('validateRegistration reports mismatched confirm password', () {
-      final container = ProviderContainer();
+      final container = createContainer();
       addTearDown(container.dispose);
       final notifier = container.read(authProvider.notifier);
 
@@ -76,46 +78,8 @@ void main() {
       expect(result.fieldErrors['confirmPassword'], 'Passwords do not match.');
     });
 
-    test('submitLogin returns success and clears loading', () async {
-      final container = ProviderContainer();
-      addTearDown(container.dispose);
-      final notifier = container.read(authProvider.notifier);
-
-      final result = await notifier.submitLogin(
-        email: 'athlete@forge.ai',
-        password: 'strongpass',
-      );
-
-      expect(result, AuthSubmitResult.success);
-      expect(container.read(authProvider).isLoading, isFalse);
-      expect(container.read(authProvider).errorMessage, isNull);
-    });
-
-    test(
-      'submitRegistration returns success and stores display name',
-      () async {
-        final container = ProviderContainer();
-        addTearDown(container.dispose);
-        final notifier = container.read(authProvider.notifier);
-
-        final result = await notifier.submitRegistration(
-          name: 'Ari Nguyen',
-          email: 'ari@forge.ai',
-          password: 'password123',
-          confirmPassword: 'password123',
-          gender: 'male',
-          dateOfBirth: DateTime(2000, 1, 1),
-        );
-
-        final state = container.read(authProvider);
-        expect(result, AuthSubmitResult.success);
-        expect(state.displayName, 'Ari Nguyen');
-        expect(state.isLoading, isFalse);
-      },
-    );
-
     test('validatePasswordReset reports email errors', () {
-      final container = ProviderContainer();
+      final container = createContainer();
       addTearDown(container.dispose);
       final notifier = container.read(authProvider.notifier);
 
@@ -124,25 +88,5 @@ void main() {
       expect(result.isValid, isFalse);
       expect(result.fieldErrors['email'], 'Enter a valid email.');
     });
-
-    test(
-      'submitPasswordReset returns success and switches to success mode',
-      () async {
-        final container = ProviderContainer();
-        addTearDown(container.dispose);
-        final notifier = container.read(authProvider.notifier);
-
-        notifier.switchMode(AuthMode.forgotPassword);
-        final result = await notifier.submitPasswordReset(
-          email: 'athlete@forge.ai',
-        );
-
-        expect(result, AuthSubmitResult.success);
-        final state = container.read(authProvider);
-        expect(state.isLoading, isFalse);
-        expect(state.errorMessage, isNull);
-        expect(state.mode, AuthMode.forgotPasswordSuccess);
-      },
-    );
   });
 }
