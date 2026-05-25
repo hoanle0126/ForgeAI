@@ -24,11 +24,7 @@ class ActiveWorkoutActionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (session.currentPhase == ActiveWorkoutPhase.complete) {
-      return AppButton(
-        text: 'Finish Session',
-        icon: PhosphorIcons.checkCircle(PhosphorIconsStyle.bold),
-        onPressed: onFinishSession,
-      );
+      return const SizedBox.shrink();
     }
 
     if (session.currentPhase == ActiveWorkoutPhase.countdown) {

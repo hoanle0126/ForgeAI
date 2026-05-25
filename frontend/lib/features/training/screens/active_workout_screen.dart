@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/training/providers/active_workout_session_provider.dart';
-import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 import 'package:forge_ai/features/training/widgets/active_workout_action_bar.dart';
 import 'package:forge_ai/features/training/widgets/active_workout_guidance_card.dart';
 import 'package:forge_ai/features/training/widgets/active_workout_header.dart';
 import 'package:forge_ai/features/training/widgets/active_workout_phase_panel.dart';
 import 'package:forge_ai/features/training/widgets/active_workout_progress_card.dart';
+import 'package:forge_ai/features/training/widgets/workout_feedback_card.dart';
 
 class ActiveWorkoutScreen extends ConsumerStatefulWidget {
   const ActiveWorkoutScreen({super.key});
@@ -57,16 +57,20 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height < 700
-                          ? 280
-                          : 360,
-                      child: ActiveWorkoutPhasePanel(session: session),
-                    ),
-                    const SizedBox(height: AppSpacing.base),
-                    ActiveWorkoutGuidanceCard(session: session),
-                    const SizedBox(height: AppSpacing.base),
-                    ActiveWorkoutProgressCard(session: session),
+                    if (session.currentPhase == ActiveWorkoutPhase.complete)
+                      const WorkoutFeedbackCard()
+                    else ...[
+                      SizedBox(
+                        height: MediaQuery.sizeOf(context).height < 700
+                            ? 280
+                            : 360,
+                        child: ActiveWorkoutPhasePanel(session: session),
+                      ),
+                      const SizedBox(height: AppSpacing.base),
+                      ActiveWorkoutGuidanceCard(session: session),
+                      const SizedBox(height: AppSpacing.base),
+                      ActiveWorkoutProgressCard(session: session),
+                    ],
                   ],
                 ),
               ),
@@ -91,10 +95,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
                   onToggleTimedExercisePause: () => ref
                       .read(activeWorkoutSessionProvider.notifier)
                       .toggleTimedExercisePause(),
-                  onFinishSession: () {
-                    ref.invalidate(workoutLibraryProvider);
-                    Navigator.of(context).pop();
-                  },
+                  onFinishSession: () {},
                 ),
               ),
             ),

@@ -46,6 +46,34 @@ class WorkoutLibraryRepository {
     );
   }
 
+  Future<void> completeWorkout({
+    required String workoutId,
+    required String effort,
+    required String difficultyAdjustment,
+    String? notes,
+    List<String>? sorenessAreas,
+    int? durationSeconds,
+  }) async {
+    final data = <String, dynamic>{
+      'effort': effort,
+      'difficultyAdjustment': difficultyAdjustment,
+    };
+    if (notes != null && notes.isNotEmpty) {
+      data['notes'] = notes;
+    }
+    if (sorenessAreas != null) {
+      data['sorenessAreas'] = sorenessAreas;
+    }
+    if (durationSeconds != null) {
+      data['durationSeconds'] = durationSeconds;
+    }
+
+    await _apiClient.post<void>(
+      '/workouts/$workoutId/complete',
+      data: data,
+    );
+  }
+
   List<dynamic> _readList(Map<String, dynamic>? response, String key) {
     final data = response?['data'];
     if (data is! Map<String, dynamic>) return const [];

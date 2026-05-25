@@ -43,6 +43,7 @@ class ActiveWorkoutSessionState {
     required this.secondsRemaining,
     required this.isTimerPaused,
     required this.completedExerciseIndexes,
+    this.isSubmittingFeedback = false,
   });
 
   factory ActiveWorkoutSessionState.initial(TrainingWorkoutPlan plan) {
@@ -53,6 +54,7 @@ class ActiveWorkoutSessionState {
       secondsRemaining: activeWorkoutCountdownSeconds,
       isTimerPaused: false,
       completedExerciseIndexes: const [],
+      isSubmittingFeedback: false,
     );
   }
 
@@ -62,6 +64,7 @@ class ActiveWorkoutSessionState {
   final int secondsRemaining;
   final bool isTimerPaused;
   final List<int> completedExerciseIndexes;
+  final bool isSubmittingFeedback;
 
   TrainingExercise get currentExercise => plan.exercises[currentExerciseIndex];
 
@@ -109,6 +112,7 @@ class ActiveWorkoutSessionState {
     int? secondsRemaining,
     bool? isTimerPaused,
     List<int>? completedExerciseIndexes,
+    bool? isSubmittingFeedback,
   }) {
     return ActiveWorkoutSessionState(
       plan: plan,
@@ -118,6 +122,7 @@ class ActiveWorkoutSessionState {
       isTimerPaused: isTimerPaused ?? this.isTimerPaused,
       completedExerciseIndexes:
           completedExerciseIndexes ?? this.completedExerciseIndexes,
+      isSubmittingFeedback: isSubmittingFeedback ?? this.isSubmittingFeedback,
     );
   }
 }
@@ -305,5 +310,34 @@ class ActiveWorkoutSessionController
             debugPrint('Failed to sync completed workout item: $error');
           }),
     );
+  }
+
+  Future<void> submitFeedback({
+    required String effort,
+    required String difficultyAdjustment,
+    String? notes,
+    required VoidCallback onSuccess,
+    required void Function(String) onError,
+  }) async {
+    if (state.isSubmittingFeedback) return;
+    state = state.copyWith(isSubmittingFeedback: true);
+
+    try {
+      final repository = _workoutLibraryRepository;
+      if (repository != null) {
+        await repository.completeWorkout(
+          workoutId: state.plan.id,
+          effort: effort,
+          difficultyAdjustment: difficultyAdjustment,
+          notes: notes,
+        );
+      }
+      onSuccess();
+    } catch (error) {
+      debugPrint('Failed to submit workout completion feedback: $error');
+      onError(error.toString());
+    } finally {
+      state = state.copyWith(isSubmittingFeedback: false);
+    }
   }
 }
