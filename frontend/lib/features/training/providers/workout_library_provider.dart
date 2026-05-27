@@ -11,7 +11,7 @@ final workoutLibraryRepositoryProvider = Provider<WorkoutLibraryRepository>((
   return WorkoutLibraryRepository(apiClient);
 });
 
-final workoutLibraryProvider = FutureProvider<List<WorkoutLibraryWorkout>>((
+final workoutLibraryProvider = FutureProvider.autoDispose<List<WorkoutLibraryWorkout>>((
   ref,
 ) {
   final repository = ref.watch(workoutLibraryRepositoryProvider);
@@ -19,7 +19,7 @@ final workoutLibraryProvider = FutureProvider<List<WorkoutLibraryWorkout>>((
 });
 
 final workoutDetailProvider =
-    FutureProvider.family<WorkoutLibraryWorkout, String>((ref, workoutId) {
+    FutureProvider.autoDispose.family<WorkoutLibraryWorkout, String>((ref, workoutId) {
       final repository = ref.watch(workoutLibraryRepositoryProvider);
       return repository.getWorkout(workoutId);
     });

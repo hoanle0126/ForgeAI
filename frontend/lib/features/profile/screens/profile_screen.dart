@@ -22,7 +22,9 @@ class ProfileScreen extends ConsumerWidget {
     final profileAsync = ref.watch(profileProvider);
     final profile = profileAsync.valueOrNull;
     final displayName =
-        profile?.fullName ?? ref.watch(authProvider).displayName ?? 'Alex Morgan';
+        profile?.fullName ??
+        ref.watch(authProvider).displayName ??
+        'Alex Morgan';
 
     return Scaffold(
       backgroundColor: AppColors.warmIvory,
@@ -35,7 +37,8 @@ class ProfileScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.md),
               ProfileHeader(
                 displayName: displayName,
-                athleteTitle: profile?.athleteTitle ?? 'Hybrid strength athlete',
+                athleteTitle:
+                    profile?.athleteTitle ?? 'Hybrid strength athlete',
                 onSettingsTap: () => context.push(AppRoutes.profileSettings),
               ),
               const SizedBox(height: AppSpacing.lg),

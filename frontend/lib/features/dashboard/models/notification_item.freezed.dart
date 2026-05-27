@@ -12,7 +12,8 @@ part of 'notification_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 NotificationItem _$NotificationItemFromJson(Map<String, dynamic> json) {
   return _NotificationItem.fromJson(json);
@@ -35,15 +36,17 @@ mixin _$NotificationItem {
 /// @nodoc
 abstract class $NotificationItemCopyWith<$Res> {
   factory $NotificationItemCopyWith(
-          NotificationItem value, $Res Function(NotificationItem) then) =
-      _$NotificationItemCopyWithImpl<$Res, NotificationItem>;
+    NotificationItem value,
+    $Res Function(NotificationItem) then,
+  ) = _$NotificationItemCopyWithImpl<$Res, NotificationItem>;
   @useResult
-  $Res call(
-      {String title,
-      String subtitle,
-      String timeLabel,
-      NotificationTone tone,
-      bool isUnread});
+  $Res call({
+    String title,
+    String subtitle,
+    String timeLabel,
+    NotificationTone tone,
+    bool isUnread,
+  });
 }
 
 /// @nodoc
@@ -65,54 +68,60 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
     Object? tone = null,
     Object? isUnread = null,
   }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      subtitle: null == subtitle
-          ? _value.subtitle
-          : subtitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      timeLabel: null == timeLabel
-          ? _value.timeLabel
-          : timeLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      tone: null == tone
-          ? _value.tone
-          : tone // ignore: cast_nullable_to_non_nullable
-              as NotificationTone,
-      isUnread: null == isUnread
-          ? _value.isUnread
-          : isUnread // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            subtitle: null == subtitle
+                ? _value.subtitle
+                : subtitle // ignore: cast_nullable_to_non_nullable
+                      as String,
+            timeLabel: null == timeLabel
+                ? _value.timeLabel
+                : timeLabel // ignore: cast_nullable_to_non_nullable
+                      as String,
+            tone: null == tone
+                ? _value.tone
+                : tone // ignore: cast_nullable_to_non_nullable
+                      as NotificationTone,
+            isUnread: null == isUnread
+                ? _value.isUnread
+                : isUnread // ignore: cast_nullable_to_non_nullable
+                      as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$NotificationItemImplCopyWith<$Res>
     implements $NotificationItemCopyWith<$Res> {
-  factory _$$NotificationItemImplCopyWith(_$NotificationItemImpl value,
-          $Res Function(_$NotificationItemImpl) then) =
-      __$$NotificationItemImplCopyWithImpl<$Res>;
+  factory _$$NotificationItemImplCopyWith(
+    _$NotificationItemImpl value,
+    $Res Function(_$NotificationItemImpl) then,
+  ) = __$$NotificationItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String title,
-      String subtitle,
-      String timeLabel,
-      NotificationTone tone,
-      bool isUnread});
+  $Res call({
+    String title,
+    String subtitle,
+    String timeLabel,
+    NotificationTone tone,
+    bool isUnread,
+  });
 }
 
 /// @nodoc
 class __$$NotificationItemImplCopyWithImpl<$Res>
     extends _$NotificationItemCopyWithImpl<$Res, _$NotificationItemImpl>
     implements _$$NotificationItemImplCopyWith<$Res> {
-  __$$NotificationItemImplCopyWithImpl(_$NotificationItemImpl _value,
-      $Res Function(_$NotificationItemImpl) _then)
-      : super(_value, _then);
+  __$$NotificationItemImplCopyWithImpl(
+    _$NotificationItemImpl _value,
+    $Res Function(_$NotificationItemImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -123,40 +132,43 @@ class __$$NotificationItemImplCopyWithImpl<$Res>
     Object? tone = null,
     Object? isUnread = null,
   }) {
-    return _then(_$NotificationItemImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      subtitle: null == subtitle
-          ? _value.subtitle
-          : subtitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      timeLabel: null == timeLabel
-          ? _value.timeLabel
-          : timeLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      tone: null == tone
-          ? _value.tone
-          : tone // ignore: cast_nullable_to_non_nullable
-              as NotificationTone,
-      isUnread: null == isUnread
-          ? _value.isUnread
-          : isUnread // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$NotificationItemImpl(
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        subtitle: null == subtitle
+            ? _value.subtitle
+            : subtitle // ignore: cast_nullable_to_non_nullable
+                  as String,
+        timeLabel: null == timeLabel
+            ? _value.timeLabel
+            : timeLabel // ignore: cast_nullable_to_non_nullable
+                  as String,
+        tone: null == tone
+            ? _value.tone
+            : tone // ignore: cast_nullable_to_non_nullable
+                  as NotificationTone,
+        isUnread: null == isUnread
+            ? _value.isUnread
+            : isUnread // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NotificationItemImpl implements _NotificationItem {
-  const _$NotificationItemImpl(
-      {required this.title,
-      required this.subtitle,
-      required this.timeLabel,
-      required this.tone,
-      this.isUnread = false});
+  const _$NotificationItemImpl({
+    required this.title,
+    required this.subtitle,
+    required this.timeLabel,
+    required this.tone,
+    this.isUnread = false,
+  });
 
   factory _$NotificationItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationItemImplFromJson(json);
@@ -203,23 +215,24 @@ class _$NotificationItemImpl implements _NotificationItem {
   @pragma('vm:prefer-inline')
   _$$NotificationItemImplCopyWith<_$NotificationItemImpl> get copyWith =>
       __$$NotificationItemImplCopyWithImpl<_$NotificationItemImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NotificationItemImplToJson(
-      this,
-    );
+    return _$$NotificationItemImplToJson(this);
   }
 }
 
 abstract class _NotificationItem implements NotificationItem {
-  const factory _NotificationItem(
-      {required final String title,
-      required final String subtitle,
-      required final String timeLabel,
-      required final NotificationTone tone,
-      final bool isUnread}) = _$NotificationItemImpl;
+  const factory _NotificationItem({
+    required final String title,
+    required final String subtitle,
+    required final String timeLabel,
+    required final NotificationTone tone,
+    final bool isUnread,
+  }) = _$NotificationItemImpl;
 
   factory _NotificationItem.fromJson(Map<String, dynamic> json) =
       _$NotificationItemImpl.fromJson;

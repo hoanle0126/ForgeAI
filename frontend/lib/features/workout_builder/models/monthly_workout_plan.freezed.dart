@@ -12,7 +12,8 @@ part of 'monthly_workout_plan.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 AiMonthlyWorkoutPlan _$AiMonthlyWorkoutPlanFromJson(Map<String, dynamic> json) {
   return _AiMonthlyWorkoutPlan.fromJson(json);
@@ -47,27 +48,29 @@ mixin _$AiMonthlyWorkoutPlan {
 
 /// @nodoc
 abstract class $AiMonthlyWorkoutPlanCopyWith<$Res> {
-  factory $AiMonthlyWorkoutPlanCopyWith(AiMonthlyWorkoutPlan value,
-          $Res Function(AiMonthlyWorkoutPlan) then) =
-      _$AiMonthlyWorkoutPlanCopyWithImpl<$Res, AiMonthlyWorkoutPlan>;
+  factory $AiMonthlyWorkoutPlanCopyWith(
+    AiMonthlyWorkoutPlan value,
+    $Res Function(AiMonthlyWorkoutPlan) then,
+  ) = _$AiMonthlyWorkoutPlanCopyWithImpl<$Res, AiMonthlyWorkoutPlan>;
   @useResult
-  $Res call(
-      {String title,
-      String goal,
-      String modelGoal,
-      String modelVersion,
-      int blockLengthWeeks,
-      List<String> selectedTrainingDays,
-      String preferredTime,
-      String preferredTimeLabel,
-      String summary,
-      List<String> safetyNotes,
-      List<String> coachNotes,
-      AiReadinessAdjustment readinessAdjustment,
-      AiNutritionTargets nutritionTargets,
-      List<AiTemplateWorkout> templateWorkouts,
-      List<AiMonthlyPlanWeek> weeks,
-      AiReassessment reassessment});
+  $Res call({
+    String title,
+    String goal,
+    String modelGoal,
+    String modelVersion,
+    int blockLengthWeeks,
+    List<String> selectedTrainingDays,
+    String preferredTime,
+    String preferredTimeLabel,
+    String summary,
+    List<String> safetyNotes,
+    List<String> coachNotes,
+    AiReadinessAdjustment readinessAdjustment,
+    AiNutritionTargets nutritionTargets,
+    List<AiTemplateWorkout> templateWorkouts,
+    List<AiMonthlyPlanWeek> weeks,
+    AiReassessment reassessment,
+  });
 
   $AiReadinessAdjustmentCopyWith<$Res> get readinessAdjustment;
   $AiNutritionTargetsCopyWith<$Res> get nutritionTargets;
@@ -75,8 +78,10 @@ abstract class $AiMonthlyWorkoutPlanCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AiMonthlyWorkoutPlanCopyWithImpl<$Res,
-        $Val extends AiMonthlyWorkoutPlan>
+class _$AiMonthlyWorkoutPlanCopyWithImpl<
+  $Res,
+  $Val extends AiMonthlyWorkoutPlan
+>
     implements $AiMonthlyWorkoutPlanCopyWith<$Res> {
   _$AiMonthlyWorkoutPlanCopyWithImpl(this._value, this._then);
 
@@ -105,79 +110,83 @@ class _$AiMonthlyWorkoutPlanCopyWithImpl<$Res,
     Object? weeks = null,
     Object? reassessment = null,
   }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      goal: null == goal
-          ? _value.goal
-          : goal // ignore: cast_nullable_to_non_nullable
-              as String,
-      modelGoal: null == modelGoal
-          ? _value.modelGoal
-          : modelGoal // ignore: cast_nullable_to_non_nullable
-              as String,
-      modelVersion: null == modelVersion
-          ? _value.modelVersion
-          : modelVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      blockLengthWeeks: null == blockLengthWeeks
-          ? _value.blockLengthWeeks
-          : blockLengthWeeks // ignore: cast_nullable_to_non_nullable
-              as int,
-      selectedTrainingDays: null == selectedTrainingDays
-          ? _value.selectedTrainingDays
-          : selectedTrainingDays // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      preferredTime: null == preferredTime
-          ? _value.preferredTime
-          : preferredTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      preferredTimeLabel: null == preferredTimeLabel
-          ? _value.preferredTimeLabel
-          : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      safetyNotes: null == safetyNotes
-          ? _value.safetyNotes
-          : safetyNotes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      coachNotes: null == coachNotes
-          ? _value.coachNotes
-          : coachNotes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      readinessAdjustment: null == readinessAdjustment
-          ? _value.readinessAdjustment
-          : readinessAdjustment // ignore: cast_nullable_to_non_nullable
-              as AiReadinessAdjustment,
-      nutritionTargets: null == nutritionTargets
-          ? _value.nutritionTargets
-          : nutritionTargets // ignore: cast_nullable_to_non_nullable
-              as AiNutritionTargets,
-      templateWorkouts: null == templateWorkouts
-          ? _value.templateWorkouts
-          : templateWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<AiTemplateWorkout>,
-      weeks: null == weeks
-          ? _value.weeks
-          : weeks // ignore: cast_nullable_to_non_nullable
-              as List<AiMonthlyPlanWeek>,
-      reassessment: null == reassessment
-          ? _value.reassessment
-          : reassessment // ignore: cast_nullable_to_non_nullable
-              as AiReassessment,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            goal: null == goal
+                ? _value.goal
+                : goal // ignore: cast_nullable_to_non_nullable
+                      as String,
+            modelGoal: null == modelGoal
+                ? _value.modelGoal
+                : modelGoal // ignore: cast_nullable_to_non_nullable
+                      as String,
+            modelVersion: null == modelVersion
+                ? _value.modelVersion
+                : modelVersion // ignore: cast_nullable_to_non_nullable
+                      as String,
+            blockLengthWeeks: null == blockLengthWeeks
+                ? _value.blockLengthWeeks
+                : blockLengthWeeks // ignore: cast_nullable_to_non_nullable
+                      as int,
+            selectedTrainingDays: null == selectedTrainingDays
+                ? _value.selectedTrainingDays
+                : selectedTrainingDays // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            preferredTime: null == preferredTime
+                ? _value.preferredTime
+                : preferredTime // ignore: cast_nullable_to_non_nullable
+                      as String,
+            preferredTimeLabel: null == preferredTimeLabel
+                ? _value.preferredTimeLabel
+                : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
+                      as String,
+            summary: null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                      as String,
+            safetyNotes: null == safetyNotes
+                ? _value.safetyNotes
+                : safetyNotes // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            coachNotes: null == coachNotes
+                ? _value.coachNotes
+                : coachNotes // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            readinessAdjustment: null == readinessAdjustment
+                ? _value.readinessAdjustment
+                : readinessAdjustment // ignore: cast_nullable_to_non_nullable
+                      as AiReadinessAdjustment,
+            nutritionTargets: null == nutritionTargets
+                ? _value.nutritionTargets
+                : nutritionTargets // ignore: cast_nullable_to_non_nullable
+                      as AiNutritionTargets,
+            templateWorkouts: null == templateWorkouts
+                ? _value.templateWorkouts
+                : templateWorkouts // ignore: cast_nullable_to_non_nullable
+                      as List<AiTemplateWorkout>,
+            weeks: null == weeks
+                ? _value.weeks
+                : weeks // ignore: cast_nullable_to_non_nullable
+                      as List<AiMonthlyPlanWeek>,
+            reassessment: null == reassessment
+                ? _value.reassessment
+                : reassessment // ignore: cast_nullable_to_non_nullable
+                      as AiReassessment,
+          )
+          as $Val,
+    );
   }
 
   @override
   @pragma('vm:prefer-inline')
   $AiReadinessAdjustmentCopyWith<$Res> get readinessAdjustment {
-    return $AiReadinessAdjustmentCopyWith<$Res>(_value.readinessAdjustment,
-        (value) {
+    return $AiReadinessAdjustmentCopyWith<$Res>(_value.readinessAdjustment, (
+      value,
+    ) {
       return _then(_value.copyWith(readinessAdjustment: value) as $Val);
     });
   }
@@ -202,28 +211,30 @@ class _$AiMonthlyWorkoutPlanCopyWithImpl<$Res,
 /// @nodoc
 abstract class _$$AiMonthlyWorkoutPlanImplCopyWith<$Res>
     implements $AiMonthlyWorkoutPlanCopyWith<$Res> {
-  factory _$$AiMonthlyWorkoutPlanImplCopyWith(_$AiMonthlyWorkoutPlanImpl value,
-          $Res Function(_$AiMonthlyWorkoutPlanImpl) then) =
-      __$$AiMonthlyWorkoutPlanImplCopyWithImpl<$Res>;
+  factory _$$AiMonthlyWorkoutPlanImplCopyWith(
+    _$AiMonthlyWorkoutPlanImpl value,
+    $Res Function(_$AiMonthlyWorkoutPlanImpl) then,
+  ) = __$$AiMonthlyWorkoutPlanImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String title,
-      String goal,
-      String modelGoal,
-      String modelVersion,
-      int blockLengthWeeks,
-      List<String> selectedTrainingDays,
-      String preferredTime,
-      String preferredTimeLabel,
-      String summary,
-      List<String> safetyNotes,
-      List<String> coachNotes,
-      AiReadinessAdjustment readinessAdjustment,
-      AiNutritionTargets nutritionTargets,
-      List<AiTemplateWorkout> templateWorkouts,
-      List<AiMonthlyPlanWeek> weeks,
-      AiReassessment reassessment});
+  $Res call({
+    String title,
+    String goal,
+    String modelGoal,
+    String modelVersion,
+    int blockLengthWeeks,
+    List<String> selectedTrainingDays,
+    String preferredTime,
+    String preferredTimeLabel,
+    String summary,
+    List<String> safetyNotes,
+    List<String> coachNotes,
+    AiReadinessAdjustment readinessAdjustment,
+    AiNutritionTargets nutritionTargets,
+    List<AiTemplateWorkout> templateWorkouts,
+    List<AiMonthlyPlanWeek> weeks,
+    AiReassessment reassessment,
+  });
 
   @override
   $AiReadinessAdjustmentCopyWith<$Res> get readinessAdjustment;
@@ -237,9 +248,10 @@ abstract class _$$AiMonthlyWorkoutPlanImplCopyWith<$Res>
 class __$$AiMonthlyWorkoutPlanImplCopyWithImpl<$Res>
     extends _$AiMonthlyWorkoutPlanCopyWithImpl<$Res, _$AiMonthlyWorkoutPlanImpl>
     implements _$$AiMonthlyWorkoutPlanImplCopyWith<$Res> {
-  __$$AiMonthlyWorkoutPlanImplCopyWithImpl(_$AiMonthlyWorkoutPlanImpl _value,
-      $Res Function(_$AiMonthlyWorkoutPlanImpl) _then)
-      : super(_value, _then);
+  __$$AiMonthlyWorkoutPlanImplCopyWithImpl(
+    _$AiMonthlyWorkoutPlanImpl _value,
+    $Res Function(_$AiMonthlyWorkoutPlanImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -261,101 +273,103 @@ class __$$AiMonthlyWorkoutPlanImplCopyWithImpl<$Res>
     Object? weeks = null,
     Object? reassessment = null,
   }) {
-    return _then(_$AiMonthlyWorkoutPlanImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      goal: null == goal
-          ? _value.goal
-          : goal // ignore: cast_nullable_to_non_nullable
-              as String,
-      modelGoal: null == modelGoal
-          ? _value.modelGoal
-          : modelGoal // ignore: cast_nullable_to_non_nullable
-              as String,
-      modelVersion: null == modelVersion
-          ? _value.modelVersion
-          : modelVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      blockLengthWeeks: null == blockLengthWeeks
-          ? _value.blockLengthWeeks
-          : blockLengthWeeks // ignore: cast_nullable_to_non_nullable
-              as int,
-      selectedTrainingDays: null == selectedTrainingDays
-          ? _value._selectedTrainingDays
-          : selectedTrainingDays // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      preferredTime: null == preferredTime
-          ? _value.preferredTime
-          : preferredTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      preferredTimeLabel: null == preferredTimeLabel
-          ? _value.preferredTimeLabel
-          : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      safetyNotes: null == safetyNotes
-          ? _value._safetyNotes
-          : safetyNotes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      coachNotes: null == coachNotes
-          ? _value._coachNotes
-          : coachNotes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      readinessAdjustment: null == readinessAdjustment
-          ? _value.readinessAdjustment
-          : readinessAdjustment // ignore: cast_nullable_to_non_nullable
-              as AiReadinessAdjustment,
-      nutritionTargets: null == nutritionTargets
-          ? _value.nutritionTargets
-          : nutritionTargets // ignore: cast_nullable_to_non_nullable
-              as AiNutritionTargets,
-      templateWorkouts: null == templateWorkouts
-          ? _value._templateWorkouts
-          : templateWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<AiTemplateWorkout>,
-      weeks: null == weeks
-          ? _value._weeks
-          : weeks // ignore: cast_nullable_to_non_nullable
-              as List<AiMonthlyPlanWeek>,
-      reassessment: null == reassessment
-          ? _value.reassessment
-          : reassessment // ignore: cast_nullable_to_non_nullable
-              as AiReassessment,
-    ));
+    return _then(
+      _$AiMonthlyWorkoutPlanImpl(
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        goal: null == goal
+            ? _value.goal
+            : goal // ignore: cast_nullable_to_non_nullable
+                  as String,
+        modelGoal: null == modelGoal
+            ? _value.modelGoal
+            : modelGoal // ignore: cast_nullable_to_non_nullable
+                  as String,
+        modelVersion: null == modelVersion
+            ? _value.modelVersion
+            : modelVersion // ignore: cast_nullable_to_non_nullable
+                  as String,
+        blockLengthWeeks: null == blockLengthWeeks
+            ? _value.blockLengthWeeks
+            : blockLengthWeeks // ignore: cast_nullable_to_non_nullable
+                  as int,
+        selectedTrainingDays: null == selectedTrainingDays
+            ? _value._selectedTrainingDays
+            : selectedTrainingDays // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        preferredTime: null == preferredTime
+            ? _value.preferredTime
+            : preferredTime // ignore: cast_nullable_to_non_nullable
+                  as String,
+        preferredTimeLabel: null == preferredTimeLabel
+            ? _value.preferredTimeLabel
+            : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
+                  as String,
+        summary: null == summary
+            ? _value.summary
+            : summary // ignore: cast_nullable_to_non_nullable
+                  as String,
+        safetyNotes: null == safetyNotes
+            ? _value._safetyNotes
+            : safetyNotes // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        coachNotes: null == coachNotes
+            ? _value._coachNotes
+            : coachNotes // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        readinessAdjustment: null == readinessAdjustment
+            ? _value.readinessAdjustment
+            : readinessAdjustment // ignore: cast_nullable_to_non_nullable
+                  as AiReadinessAdjustment,
+        nutritionTargets: null == nutritionTargets
+            ? _value.nutritionTargets
+            : nutritionTargets // ignore: cast_nullable_to_non_nullable
+                  as AiNutritionTargets,
+        templateWorkouts: null == templateWorkouts
+            ? _value._templateWorkouts
+            : templateWorkouts // ignore: cast_nullable_to_non_nullable
+                  as List<AiTemplateWorkout>,
+        weeks: null == weeks
+            ? _value._weeks
+            : weeks // ignore: cast_nullable_to_non_nullable
+                  as List<AiMonthlyPlanWeek>,
+        reassessment: null == reassessment
+            ? _value.reassessment
+            : reassessment // ignore: cast_nullable_to_non_nullable
+                  as AiReassessment,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiMonthlyWorkoutPlanImpl extends _AiMonthlyWorkoutPlan {
-  const _$AiMonthlyWorkoutPlanImpl(
-      {required this.title,
-      required this.goal,
-      required this.modelGoal,
-      required this.modelVersion,
-      required this.blockLengthWeeks,
-      final List<String> selectedTrainingDays = const [],
-      required this.preferredTime,
-      required this.preferredTimeLabel,
-      required this.summary,
-      final List<String> safetyNotes = const [],
-      final List<String> coachNotes = const [],
-      required this.readinessAdjustment,
-      required this.nutritionTargets,
-      final List<AiTemplateWorkout> templateWorkouts = const [],
-      final List<AiMonthlyPlanWeek> weeks = const [],
-      required this.reassessment})
-      : _selectedTrainingDays = selectedTrainingDays,
-        _safetyNotes = safetyNotes,
-        _coachNotes = coachNotes,
-        _templateWorkouts = templateWorkouts,
-        _weeks = weeks,
-        super._();
+  const _$AiMonthlyWorkoutPlanImpl({
+    required this.title,
+    required this.goal,
+    required this.modelGoal,
+    required this.modelVersion,
+    required this.blockLengthWeeks,
+    final List<String> selectedTrainingDays = const [],
+    required this.preferredTime,
+    required this.preferredTimeLabel,
+    required this.summary,
+    final List<String> safetyNotes = const [],
+    final List<String> coachNotes = const [],
+    required this.readinessAdjustment,
+    required this.nutritionTargets,
+    final List<AiTemplateWorkout> templateWorkouts = const [],
+    final List<AiMonthlyPlanWeek> weeks = const [],
+    required this.reassessment,
+  }) : _selectedTrainingDays = selectedTrainingDays,
+       _safetyNotes = safetyNotes,
+       _coachNotes = coachNotes,
+       _templateWorkouts = templateWorkouts,
+       _weeks = weeks,
+       super._();
 
   factory _$AiMonthlyWorkoutPlanImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiMonthlyWorkoutPlanImplFromJson(json);
@@ -448,23 +462,31 @@ class _$AiMonthlyWorkoutPlanImpl extends _AiMonthlyWorkoutPlan {
                 other.modelVersion == modelVersion) &&
             (identical(other.blockLengthWeeks, blockLengthWeeks) ||
                 other.blockLengthWeeks == blockLengthWeeks) &&
-            const DeepCollectionEquality()
-                .equals(other._selectedTrainingDays, _selectedTrainingDays) &&
+            const DeepCollectionEquality().equals(
+              other._selectedTrainingDays,
+              _selectedTrainingDays,
+            ) &&
             (identical(other.preferredTime, preferredTime) ||
                 other.preferredTime == preferredTime) &&
             (identical(other.preferredTimeLabel, preferredTimeLabel) ||
                 other.preferredTimeLabel == preferredTimeLabel) &&
             (identical(other.summary, summary) || other.summary == summary) &&
-            const DeepCollectionEquality()
-                .equals(other._safetyNotes, _safetyNotes) &&
-            const DeepCollectionEquality()
-                .equals(other._coachNotes, _coachNotes) &&
+            const DeepCollectionEquality().equals(
+              other._safetyNotes,
+              _safetyNotes,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._coachNotes,
+              _coachNotes,
+            ) &&
             (identical(other.readinessAdjustment, readinessAdjustment) ||
                 other.readinessAdjustment == readinessAdjustment) &&
             (identical(other.nutritionTargets, nutritionTargets) ||
                 other.nutritionTargets == nutritionTargets) &&
-            const DeepCollectionEquality()
-                .equals(other._templateWorkouts, _templateWorkouts) &&
+            const DeepCollectionEquality().equals(
+              other._templateWorkouts,
+              _templateWorkouts,
+            ) &&
             const DeepCollectionEquality().equals(other._weeks, _weeks) &&
             (identical(other.reassessment, reassessment) ||
                 other.reassessment == reassessment));
@@ -473,58 +495,60 @@ class _$AiMonthlyWorkoutPlanImpl extends _AiMonthlyWorkoutPlan {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      title,
-      goal,
-      modelGoal,
-      modelVersion,
-      blockLengthWeeks,
-      const DeepCollectionEquality().hash(_selectedTrainingDays),
-      preferredTime,
-      preferredTimeLabel,
-      summary,
-      const DeepCollectionEquality().hash(_safetyNotes),
-      const DeepCollectionEquality().hash(_coachNotes),
-      readinessAdjustment,
-      nutritionTargets,
-      const DeepCollectionEquality().hash(_templateWorkouts),
-      const DeepCollectionEquality().hash(_weeks),
-      reassessment);
+    runtimeType,
+    title,
+    goal,
+    modelGoal,
+    modelVersion,
+    blockLengthWeeks,
+    const DeepCollectionEquality().hash(_selectedTrainingDays),
+    preferredTime,
+    preferredTimeLabel,
+    summary,
+    const DeepCollectionEquality().hash(_safetyNotes),
+    const DeepCollectionEquality().hash(_coachNotes),
+    readinessAdjustment,
+    nutritionTargets,
+    const DeepCollectionEquality().hash(_templateWorkouts),
+    const DeepCollectionEquality().hash(_weeks),
+    reassessment,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiMonthlyWorkoutPlanImplCopyWith<_$AiMonthlyWorkoutPlanImpl>
-      get copyWith =>
-          __$$AiMonthlyWorkoutPlanImplCopyWithImpl<_$AiMonthlyWorkoutPlanImpl>(
-              this, _$identity);
+  get copyWith =>
+      __$$AiMonthlyWorkoutPlanImplCopyWithImpl<_$AiMonthlyWorkoutPlanImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiMonthlyWorkoutPlanImplToJson(
-      this,
-    );
+    return _$$AiMonthlyWorkoutPlanImplToJson(this);
   }
 }
 
 abstract class _AiMonthlyWorkoutPlan extends AiMonthlyWorkoutPlan {
-  const factory _AiMonthlyWorkoutPlan(
-      {required final String title,
-      required final String goal,
-      required final String modelGoal,
-      required final String modelVersion,
-      required final int blockLengthWeeks,
-      final List<String> selectedTrainingDays,
-      required final String preferredTime,
-      required final String preferredTimeLabel,
-      required final String summary,
-      final List<String> safetyNotes,
-      final List<String> coachNotes,
-      required final AiReadinessAdjustment readinessAdjustment,
-      required final AiNutritionTargets nutritionTargets,
-      final List<AiTemplateWorkout> templateWorkouts,
-      final List<AiMonthlyPlanWeek> weeks,
-      required final AiReassessment reassessment}) = _$AiMonthlyWorkoutPlanImpl;
+  const factory _AiMonthlyWorkoutPlan({
+    required final String title,
+    required final String goal,
+    required final String modelGoal,
+    required final String modelVersion,
+    required final int blockLengthWeeks,
+    final List<String> selectedTrainingDays,
+    required final String preferredTime,
+    required final String preferredTimeLabel,
+    required final String summary,
+    final List<String> safetyNotes,
+    final List<String> coachNotes,
+    required final AiReadinessAdjustment readinessAdjustment,
+    required final AiNutritionTargets nutritionTargets,
+    final List<AiTemplateWorkout> templateWorkouts,
+    final List<AiMonthlyPlanWeek> weeks,
+    required final AiReassessment reassessment,
+  }) = _$AiMonthlyWorkoutPlanImpl;
   const _AiMonthlyWorkoutPlan._() : super._();
 
   factory _AiMonthlyWorkoutPlan.fromJson(Map<String, dynamic> json) =
@@ -565,11 +589,12 @@ abstract class _AiMonthlyWorkoutPlan extends AiMonthlyWorkoutPlan {
   @override
   @JsonKey(ignore: true)
   _$$AiMonthlyWorkoutPlanImplCopyWith<_$AiMonthlyWorkoutPlanImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 AiReadinessAdjustment _$AiReadinessAdjustmentFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _AiReadinessAdjustment.fromJson(json);
 }
 
@@ -586,16 +611,19 @@ mixin _$AiReadinessAdjustment {
 
 /// @nodoc
 abstract class $AiReadinessAdjustmentCopyWith<$Res> {
-  factory $AiReadinessAdjustmentCopyWith(AiReadinessAdjustment value,
-          $Res Function(AiReadinessAdjustment) then) =
-      _$AiReadinessAdjustmentCopyWithImpl<$Res, AiReadinessAdjustment>;
+  factory $AiReadinessAdjustmentCopyWith(
+    AiReadinessAdjustment value,
+    $Res Function(AiReadinessAdjustment) then,
+  ) = _$AiReadinessAdjustmentCopyWithImpl<$Res, AiReadinessAdjustment>;
   @useResult
   $Res call({String intensityModifier, String reason});
 }
 
 /// @nodoc
-class _$AiReadinessAdjustmentCopyWithImpl<$Res,
-        $Val extends AiReadinessAdjustment>
+class _$AiReadinessAdjustmentCopyWithImpl<
+  $Res,
+  $Val extends AiReadinessAdjustment
+>
     implements $AiReadinessAdjustmentCopyWith<$Res> {
   _$AiReadinessAdjustmentCopyWithImpl(this._value, this._then);
 
@@ -606,20 +634,20 @@ class _$AiReadinessAdjustmentCopyWithImpl<$Res,
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? intensityModifier = null,
-    Object? reason = null,
-  }) {
-    return _then(_value.copyWith(
-      intensityModifier: null == intensityModifier
-          ? _value.intensityModifier
-          : intensityModifier // ignore: cast_nullable_to_non_nullable
-              as String,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? intensityModifier = null, Object? reason = null}) {
+    return _then(
+      _value.copyWith(
+            intensityModifier: null == intensityModifier
+                ? _value.intensityModifier
+                : intensityModifier // ignore: cast_nullable_to_non_nullable
+                      as String,
+            reason: null == reason
+                ? _value.reason
+                : reason // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -627,9 +655,9 @@ class _$AiReadinessAdjustmentCopyWithImpl<$Res,
 abstract class _$$AiReadinessAdjustmentImplCopyWith<$Res>
     implements $AiReadinessAdjustmentCopyWith<$Res> {
   factory _$$AiReadinessAdjustmentImplCopyWith(
-          _$AiReadinessAdjustmentImpl value,
-          $Res Function(_$AiReadinessAdjustmentImpl) then) =
-      __$$AiReadinessAdjustmentImplCopyWithImpl<$Res>;
+    _$AiReadinessAdjustmentImpl value,
+    $Res Function(_$AiReadinessAdjustmentImpl) then,
+  ) = __$$AiReadinessAdjustmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String intensityModifier, String reason});
@@ -637,37 +665,39 @@ abstract class _$$AiReadinessAdjustmentImplCopyWith<$Res>
 
 /// @nodoc
 class __$$AiReadinessAdjustmentImplCopyWithImpl<$Res>
-    extends _$AiReadinessAdjustmentCopyWithImpl<$Res,
-        _$AiReadinessAdjustmentImpl>
+    extends
+        _$AiReadinessAdjustmentCopyWithImpl<$Res, _$AiReadinessAdjustmentImpl>
     implements _$$AiReadinessAdjustmentImplCopyWith<$Res> {
-  __$$AiReadinessAdjustmentImplCopyWithImpl(_$AiReadinessAdjustmentImpl _value,
-      $Res Function(_$AiReadinessAdjustmentImpl) _then)
-      : super(_value, _then);
+  __$$AiReadinessAdjustmentImplCopyWithImpl(
+    _$AiReadinessAdjustmentImpl _value,
+    $Res Function(_$AiReadinessAdjustmentImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? intensityModifier = null,
-    Object? reason = null,
-  }) {
-    return _then(_$AiReadinessAdjustmentImpl(
-      intensityModifier: null == intensityModifier
-          ? _value.intensityModifier
-          : intensityModifier // ignore: cast_nullable_to_non_nullable
-              as String,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? intensityModifier = null, Object? reason = null}) {
+    return _then(
+      _$AiReadinessAdjustmentImpl(
+        intensityModifier: null == intensityModifier
+            ? _value.intensityModifier
+            : intensityModifier // ignore: cast_nullable_to_non_nullable
+                  as String,
+        reason: null == reason
+            ? _value.reason
+            : reason // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiReadinessAdjustmentImpl implements _AiReadinessAdjustment {
-  const _$AiReadinessAdjustmentImpl(
-      {required this.intensityModifier, required this.reason});
+  const _$AiReadinessAdjustmentImpl({
+    required this.intensityModifier,
+    required this.reason,
+  });
 
   factory _$AiReadinessAdjustmentImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiReadinessAdjustmentImplFromJson(json);
@@ -700,21 +730,23 @@ class _$AiReadinessAdjustmentImpl implements _AiReadinessAdjustment {
   @override
   @pragma('vm:prefer-inline')
   _$$AiReadinessAdjustmentImplCopyWith<_$AiReadinessAdjustmentImpl>
-      get copyWith => __$$AiReadinessAdjustmentImplCopyWithImpl<
-          _$AiReadinessAdjustmentImpl>(this, _$identity);
+  get copyWith =>
+      __$$AiReadinessAdjustmentImplCopyWithImpl<_$AiReadinessAdjustmentImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiReadinessAdjustmentImplToJson(
-      this,
-    );
+    return _$$AiReadinessAdjustmentImplToJson(this);
   }
 }
 
 abstract class _AiReadinessAdjustment implements AiReadinessAdjustment {
-  const factory _AiReadinessAdjustment(
-      {required final String intensityModifier,
-      required final String reason}) = _$AiReadinessAdjustmentImpl;
+  const factory _AiReadinessAdjustment({
+    required final String intensityModifier,
+    required final String reason,
+  }) = _$AiReadinessAdjustmentImpl;
 
   factory _AiReadinessAdjustment.fromJson(Map<String, dynamic> json) =
       _$AiReadinessAdjustmentImpl.fromJson;
@@ -726,7 +758,7 @@ abstract class _AiReadinessAdjustment implements AiReadinessAdjustment {
   @override
   @JsonKey(ignore: true)
   _$$AiReadinessAdjustmentImplCopyWith<_$AiReadinessAdjustmentImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 AiNutritionTargets _$AiNutritionTargetsFromJson(Map<String, dynamic> json) {
@@ -749,11 +781,16 @@ mixin _$AiNutritionTargets {
 /// @nodoc
 abstract class $AiNutritionTargetsCopyWith<$Res> {
   factory $AiNutritionTargetsCopyWith(
-          AiNutritionTargets value, $Res Function(AiNutritionTargets) then) =
-      _$AiNutritionTargetsCopyWithImpl<$Res, AiNutritionTargets>;
+    AiNutritionTargets value,
+    $Res Function(AiNutritionTargets) then,
+  ) = _$AiNutritionTargetsCopyWithImpl<$Res, AiNutritionTargets>;
   @useResult
-  $Res call(
-      {int dailyCalories, int proteinTargetG, int carbTargetG, int fatTargetG});
+  $Res call({
+    int dailyCalories,
+    int proteinTargetG,
+    int carbTargetG,
+    int fatTargetG,
+  });
 }
 
 /// @nodoc
@@ -774,46 +811,55 @@ class _$AiNutritionTargetsCopyWithImpl<$Res, $Val extends AiNutritionTargets>
     Object? carbTargetG = null,
     Object? fatTargetG = null,
   }) {
-    return _then(_value.copyWith(
-      dailyCalories: null == dailyCalories
-          ? _value.dailyCalories
-          : dailyCalories // ignore: cast_nullable_to_non_nullable
-              as int,
-      proteinTargetG: null == proteinTargetG
-          ? _value.proteinTargetG
-          : proteinTargetG // ignore: cast_nullable_to_non_nullable
-              as int,
-      carbTargetG: null == carbTargetG
-          ? _value.carbTargetG
-          : carbTargetG // ignore: cast_nullable_to_non_nullable
-              as int,
-      fatTargetG: null == fatTargetG
-          ? _value.fatTargetG
-          : fatTargetG // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            dailyCalories: null == dailyCalories
+                ? _value.dailyCalories
+                : dailyCalories // ignore: cast_nullable_to_non_nullable
+                      as int,
+            proteinTargetG: null == proteinTargetG
+                ? _value.proteinTargetG
+                : proteinTargetG // ignore: cast_nullable_to_non_nullable
+                      as int,
+            carbTargetG: null == carbTargetG
+                ? _value.carbTargetG
+                : carbTargetG // ignore: cast_nullable_to_non_nullable
+                      as int,
+            fatTargetG: null == fatTargetG
+                ? _value.fatTargetG
+                : fatTargetG // ignore: cast_nullable_to_non_nullable
+                      as int,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AiNutritionTargetsImplCopyWith<$Res>
     implements $AiNutritionTargetsCopyWith<$Res> {
-  factory _$$AiNutritionTargetsImplCopyWith(_$AiNutritionTargetsImpl value,
-          $Res Function(_$AiNutritionTargetsImpl) then) =
-      __$$AiNutritionTargetsImplCopyWithImpl<$Res>;
+  factory _$$AiNutritionTargetsImplCopyWith(
+    _$AiNutritionTargetsImpl value,
+    $Res Function(_$AiNutritionTargetsImpl) then,
+  ) = __$$AiNutritionTargetsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int dailyCalories, int proteinTargetG, int carbTargetG, int fatTargetG});
+  $Res call({
+    int dailyCalories,
+    int proteinTargetG,
+    int carbTargetG,
+    int fatTargetG,
+  });
 }
 
 /// @nodoc
 class __$$AiNutritionTargetsImplCopyWithImpl<$Res>
     extends _$AiNutritionTargetsCopyWithImpl<$Res, _$AiNutritionTargetsImpl>
     implements _$$AiNutritionTargetsImplCopyWith<$Res> {
-  __$$AiNutritionTargetsImplCopyWithImpl(_$AiNutritionTargetsImpl _value,
-      $Res Function(_$AiNutritionTargetsImpl) _then)
-      : super(_value, _then);
+  __$$AiNutritionTargetsImplCopyWithImpl(
+    _$AiNutritionTargetsImpl _value,
+    $Res Function(_$AiNutritionTargetsImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -823,35 +869,38 @@ class __$$AiNutritionTargetsImplCopyWithImpl<$Res>
     Object? carbTargetG = null,
     Object? fatTargetG = null,
   }) {
-    return _then(_$AiNutritionTargetsImpl(
-      dailyCalories: null == dailyCalories
-          ? _value.dailyCalories
-          : dailyCalories // ignore: cast_nullable_to_non_nullable
-              as int,
-      proteinTargetG: null == proteinTargetG
-          ? _value.proteinTargetG
-          : proteinTargetG // ignore: cast_nullable_to_non_nullable
-              as int,
-      carbTargetG: null == carbTargetG
-          ? _value.carbTargetG
-          : carbTargetG // ignore: cast_nullable_to_non_nullable
-              as int,
-      fatTargetG: null == fatTargetG
-          ? _value.fatTargetG
-          : fatTargetG // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$AiNutritionTargetsImpl(
+        dailyCalories: null == dailyCalories
+            ? _value.dailyCalories
+            : dailyCalories // ignore: cast_nullable_to_non_nullable
+                  as int,
+        proteinTargetG: null == proteinTargetG
+            ? _value.proteinTargetG
+            : proteinTargetG // ignore: cast_nullable_to_non_nullable
+                  as int,
+        carbTargetG: null == carbTargetG
+            ? _value.carbTargetG
+            : carbTargetG // ignore: cast_nullable_to_non_nullable
+                  as int,
+        fatTargetG: null == fatTargetG
+            ? _value.fatTargetG
+            : fatTargetG // ignore: cast_nullable_to_non_nullable
+                  as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiNutritionTargetsImpl implements _AiNutritionTargets {
-  const _$AiNutritionTargetsImpl(
-      {required this.dailyCalories,
-      required this.proteinTargetG,
-      required this.carbTargetG,
-      required this.fatTargetG});
+  const _$AiNutritionTargetsImpl({
+    required this.dailyCalories,
+    required this.proteinTargetG,
+    required this.carbTargetG,
+    required this.fatTargetG,
+  });
 
   factory _$AiNutritionTargetsImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiNutritionTargetsImplFromJson(json);
@@ -888,29 +937,35 @@ class _$AiNutritionTargetsImpl implements _AiNutritionTargets {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, dailyCalories, proteinTargetG, carbTargetG, fatTargetG);
+    runtimeType,
+    dailyCalories,
+    proteinTargetG,
+    carbTargetG,
+    fatTargetG,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiNutritionTargetsImplCopyWith<_$AiNutritionTargetsImpl> get copyWith =>
       __$$AiNutritionTargetsImplCopyWithImpl<_$AiNutritionTargetsImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiNutritionTargetsImplToJson(
-      this,
-    );
+    return _$$AiNutritionTargetsImplToJson(this);
   }
 }
 
 abstract class _AiNutritionTargets implements AiNutritionTargets {
-  const factory _AiNutritionTargets(
-      {required final int dailyCalories,
-      required final int proteinTargetG,
-      required final int carbTargetG,
-      required final int fatTargetG}) = _$AiNutritionTargetsImpl;
+  const factory _AiNutritionTargets({
+    required final int dailyCalories,
+    required final int proteinTargetG,
+    required final int carbTargetG,
+    required final int fatTargetG,
+  }) = _$AiNutritionTargetsImpl;
 
   factory _AiNutritionTargets.fromJson(Map<String, dynamic> json) =
       _$AiNutritionTargetsImpl.fromJson;
@@ -952,17 +1007,19 @@ mixin _$AiTemplateWorkout {
 /// @nodoc
 abstract class $AiTemplateWorkoutCopyWith<$Res> {
   factory $AiTemplateWorkoutCopyWith(
-          AiTemplateWorkout value, $Res Function(AiTemplateWorkout) then) =
-      _$AiTemplateWorkoutCopyWithImpl<$Res, AiTemplateWorkout>;
+    AiTemplateWorkout value,
+    $Res Function(AiTemplateWorkout) then,
+  ) = _$AiTemplateWorkoutCopyWithImpl<$Res, AiTemplateWorkout>;
   @useResult
-  $Res call(
-      {String templateId,
-      String title,
-      String focus,
-      int estimatedMinutes,
-      String warmUp,
-      String cooldown,
-      List<AiTemplateExercise> exercises});
+  $Res call({
+    String templateId,
+    String title,
+    String focus,
+    int estimatedMinutes,
+    String warmUp,
+    String cooldown,
+    List<AiTemplateExercise> exercises,
+  });
 }
 
 /// @nodoc
@@ -986,64 +1043,70 @@ class _$AiTemplateWorkoutCopyWithImpl<$Res, $Val extends AiTemplateWorkout>
     Object? cooldown = null,
     Object? exercises = null,
   }) {
-    return _then(_value.copyWith(
-      templateId: null == templateId
-          ? _value.templateId
-          : templateId // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      focus: null == focus
-          ? _value.focus
-          : focus // ignore: cast_nullable_to_non_nullable
-              as String,
-      estimatedMinutes: null == estimatedMinutes
-          ? _value.estimatedMinutes
-          : estimatedMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      warmUp: null == warmUp
-          ? _value.warmUp
-          : warmUp // ignore: cast_nullable_to_non_nullable
-              as String,
-      cooldown: null == cooldown
-          ? _value.cooldown
-          : cooldown // ignore: cast_nullable_to_non_nullable
-              as String,
-      exercises: null == exercises
-          ? _value.exercises
-          : exercises // ignore: cast_nullable_to_non_nullable
-              as List<AiTemplateExercise>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            templateId: null == templateId
+                ? _value.templateId
+                : templateId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            focus: null == focus
+                ? _value.focus
+                : focus // ignore: cast_nullable_to_non_nullable
+                      as String,
+            estimatedMinutes: null == estimatedMinutes
+                ? _value.estimatedMinutes
+                : estimatedMinutes // ignore: cast_nullable_to_non_nullable
+                      as int,
+            warmUp: null == warmUp
+                ? _value.warmUp
+                : warmUp // ignore: cast_nullable_to_non_nullable
+                      as String,
+            cooldown: null == cooldown
+                ? _value.cooldown
+                : cooldown // ignore: cast_nullable_to_non_nullable
+                      as String,
+            exercises: null == exercises
+                ? _value.exercises
+                : exercises // ignore: cast_nullable_to_non_nullable
+                      as List<AiTemplateExercise>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AiTemplateWorkoutImplCopyWith<$Res>
     implements $AiTemplateWorkoutCopyWith<$Res> {
-  factory _$$AiTemplateWorkoutImplCopyWith(_$AiTemplateWorkoutImpl value,
-          $Res Function(_$AiTemplateWorkoutImpl) then) =
-      __$$AiTemplateWorkoutImplCopyWithImpl<$Res>;
+  factory _$$AiTemplateWorkoutImplCopyWith(
+    _$AiTemplateWorkoutImpl value,
+    $Res Function(_$AiTemplateWorkoutImpl) then,
+  ) = __$$AiTemplateWorkoutImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String templateId,
-      String title,
-      String focus,
-      int estimatedMinutes,
-      String warmUp,
-      String cooldown,
-      List<AiTemplateExercise> exercises});
+  $Res call({
+    String templateId,
+    String title,
+    String focus,
+    int estimatedMinutes,
+    String warmUp,
+    String cooldown,
+    List<AiTemplateExercise> exercises,
+  });
 }
 
 /// @nodoc
 class __$$AiTemplateWorkoutImplCopyWithImpl<$Res>
     extends _$AiTemplateWorkoutCopyWithImpl<$Res, _$AiTemplateWorkoutImpl>
     implements _$$AiTemplateWorkoutImplCopyWith<$Res> {
-  __$$AiTemplateWorkoutImplCopyWithImpl(_$AiTemplateWorkoutImpl _value,
-      $Res Function(_$AiTemplateWorkoutImpl) _then)
-      : super(_value, _then);
+  __$$AiTemplateWorkoutImplCopyWithImpl(
+    _$AiTemplateWorkoutImpl _value,
+    $Res Function(_$AiTemplateWorkoutImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -1056,51 +1119,53 @@ class __$$AiTemplateWorkoutImplCopyWithImpl<$Res>
     Object? cooldown = null,
     Object? exercises = null,
   }) {
-    return _then(_$AiTemplateWorkoutImpl(
-      templateId: null == templateId
-          ? _value.templateId
-          : templateId // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      focus: null == focus
-          ? _value.focus
-          : focus // ignore: cast_nullable_to_non_nullable
-              as String,
-      estimatedMinutes: null == estimatedMinutes
-          ? _value.estimatedMinutes
-          : estimatedMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      warmUp: null == warmUp
-          ? _value.warmUp
-          : warmUp // ignore: cast_nullable_to_non_nullable
-              as String,
-      cooldown: null == cooldown
-          ? _value.cooldown
-          : cooldown // ignore: cast_nullable_to_non_nullable
-              as String,
-      exercises: null == exercises
-          ? _value._exercises
-          : exercises // ignore: cast_nullable_to_non_nullable
-              as List<AiTemplateExercise>,
-    ));
+    return _then(
+      _$AiTemplateWorkoutImpl(
+        templateId: null == templateId
+            ? _value.templateId
+            : templateId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        focus: null == focus
+            ? _value.focus
+            : focus // ignore: cast_nullable_to_non_nullable
+                  as String,
+        estimatedMinutes: null == estimatedMinutes
+            ? _value.estimatedMinutes
+            : estimatedMinutes // ignore: cast_nullable_to_non_nullable
+                  as int,
+        warmUp: null == warmUp
+            ? _value.warmUp
+            : warmUp // ignore: cast_nullable_to_non_nullable
+                  as String,
+        cooldown: null == cooldown
+            ? _value.cooldown
+            : cooldown // ignore: cast_nullable_to_non_nullable
+                  as String,
+        exercises: null == exercises
+            ? _value._exercises
+            : exercises // ignore: cast_nullable_to_non_nullable
+                  as List<AiTemplateExercise>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiTemplateWorkoutImpl implements _AiTemplateWorkout {
-  const _$AiTemplateWorkoutImpl(
-      {required this.templateId,
-      required this.title,
-      required this.focus,
-      required this.estimatedMinutes,
-      required this.warmUp,
-      required this.cooldown,
-      final List<AiTemplateExercise> exercises = const []})
-      : _exercises = exercises;
+  const _$AiTemplateWorkoutImpl({
+    required this.templateId,
+    required this.title,
+    required this.focus,
+    required this.estimatedMinutes,
+    required this.warmUp,
+    required this.cooldown,
+    final List<AiTemplateExercise> exercises = const [],
+  }) : _exercises = exercises;
 
   factory _$AiTemplateWorkoutImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiTemplateWorkoutImplFromJson(json);
@@ -1145,46 +1210,50 @@ class _$AiTemplateWorkoutImpl implements _AiTemplateWorkout {
             (identical(other.warmUp, warmUp) || other.warmUp == warmUp) &&
             (identical(other.cooldown, cooldown) ||
                 other.cooldown == cooldown) &&
-            const DeepCollectionEquality()
-                .equals(other._exercises, _exercises));
+            const DeepCollectionEquality().equals(
+              other._exercises,
+              _exercises,
+            ));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      templateId,
-      title,
-      focus,
-      estimatedMinutes,
-      warmUp,
-      cooldown,
-      const DeepCollectionEquality().hash(_exercises));
+    runtimeType,
+    templateId,
+    title,
+    focus,
+    estimatedMinutes,
+    warmUp,
+    cooldown,
+    const DeepCollectionEquality().hash(_exercises),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiTemplateWorkoutImplCopyWith<_$AiTemplateWorkoutImpl> get copyWith =>
       __$$AiTemplateWorkoutImplCopyWithImpl<_$AiTemplateWorkoutImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiTemplateWorkoutImplToJson(
-      this,
-    );
+    return _$$AiTemplateWorkoutImplToJson(this);
   }
 }
 
 abstract class _AiTemplateWorkout implements AiTemplateWorkout {
-  const factory _AiTemplateWorkout(
-      {required final String templateId,
-      required final String title,
-      required final String focus,
-      required final int estimatedMinutes,
-      required final String warmUp,
-      required final String cooldown,
-      final List<AiTemplateExercise> exercises}) = _$AiTemplateWorkoutImpl;
+  const factory _AiTemplateWorkout({
+    required final String templateId,
+    required final String title,
+    required final String focus,
+    required final int estimatedMinutes,
+    required final String warmUp,
+    required final String cooldown,
+    final List<AiTemplateExercise> exercises,
+  }) = _$AiTemplateWorkoutImpl;
 
   factory _AiTemplateWorkout.fromJson(Map<String, dynamic> json) =
       _$AiTemplateWorkoutImpl.fromJson;
@@ -1237,22 +1306,24 @@ mixin _$AiTemplateExercise {
 /// @nodoc
 abstract class $AiTemplateExerciseCopyWith<$Res> {
   factory $AiTemplateExerciseCopyWith(
-          AiTemplateExercise value, $Res Function(AiTemplateExercise) then) =
-      _$AiTemplateExerciseCopyWithImpl<$Res, AiTemplateExercise>;
+    AiTemplateExercise value,
+    $Res Function(AiTemplateExercise) then,
+  ) = _$AiTemplateExerciseCopyWithImpl<$Res, AiTemplateExercise>;
   @useResult
-  $Res call(
-      {int order,
-      String title,
-      String bodyPart,
-      String equipment,
-      String level,
-      String type,
-      String description,
-      int sets,
-      String reps,
-      int restSeconds,
-      String prescriptionLabel,
-      String rationale});
+  $Res call({
+    int order,
+    String title,
+    String bodyPart,
+    String equipment,
+    String level,
+    String type,
+    String description,
+    int sets,
+    String reps,
+    int restSeconds,
+    String prescriptionLabel,
+    String rationale,
+  });
 }
 
 /// @nodoc
@@ -1281,89 +1352,95 @@ class _$AiTemplateExerciseCopyWithImpl<$Res, $Val extends AiTemplateExercise>
     Object? prescriptionLabel = null,
     Object? rationale = null,
   }) {
-    return _then(_value.copyWith(
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      bodyPart: null == bodyPart
-          ? _value.bodyPart
-          : bodyPart // ignore: cast_nullable_to_non_nullable
-              as String,
-      equipment: null == equipment
-          ? _value.equipment
-          : equipment // ignore: cast_nullable_to_non_nullable
-              as String,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as int,
-      reps: null == reps
-          ? _value.reps
-          : reps // ignore: cast_nullable_to_non_nullable
-              as String,
-      restSeconds: null == restSeconds
-          ? _value.restSeconds
-          : restSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      prescriptionLabel: null == prescriptionLabel
-          ? _value.prescriptionLabel
-          : prescriptionLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      rationale: null == rationale
-          ? _value.rationale
-          : rationale // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            order: null == order
+                ? _value.order
+                : order // ignore: cast_nullable_to_non_nullable
+                      as int,
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            bodyPart: null == bodyPart
+                ? _value.bodyPart
+                : bodyPart // ignore: cast_nullable_to_non_nullable
+                      as String,
+            equipment: null == equipment
+                ? _value.equipment
+                : equipment // ignore: cast_nullable_to_non_nullable
+                      as String,
+            level: null == level
+                ? _value.level
+                : level // ignore: cast_nullable_to_non_nullable
+                      as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as String,
+            description: null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String,
+            sets: null == sets
+                ? _value.sets
+                : sets // ignore: cast_nullable_to_non_nullable
+                      as int,
+            reps: null == reps
+                ? _value.reps
+                : reps // ignore: cast_nullable_to_non_nullable
+                      as String,
+            restSeconds: null == restSeconds
+                ? _value.restSeconds
+                : restSeconds // ignore: cast_nullable_to_non_nullable
+                      as int,
+            prescriptionLabel: null == prescriptionLabel
+                ? _value.prescriptionLabel
+                : prescriptionLabel // ignore: cast_nullable_to_non_nullable
+                      as String,
+            rationale: null == rationale
+                ? _value.rationale
+                : rationale // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AiTemplateExerciseImplCopyWith<$Res>
     implements $AiTemplateExerciseCopyWith<$Res> {
-  factory _$$AiTemplateExerciseImplCopyWith(_$AiTemplateExerciseImpl value,
-          $Res Function(_$AiTemplateExerciseImpl) then) =
-      __$$AiTemplateExerciseImplCopyWithImpl<$Res>;
+  factory _$$AiTemplateExerciseImplCopyWith(
+    _$AiTemplateExerciseImpl value,
+    $Res Function(_$AiTemplateExerciseImpl) then,
+  ) = __$$AiTemplateExerciseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int order,
-      String title,
-      String bodyPart,
-      String equipment,
-      String level,
-      String type,
-      String description,
-      int sets,
-      String reps,
-      int restSeconds,
-      String prescriptionLabel,
-      String rationale});
+  $Res call({
+    int order,
+    String title,
+    String bodyPart,
+    String equipment,
+    String level,
+    String type,
+    String description,
+    int sets,
+    String reps,
+    int restSeconds,
+    String prescriptionLabel,
+    String rationale,
+  });
 }
 
 /// @nodoc
 class __$$AiTemplateExerciseImplCopyWithImpl<$Res>
     extends _$AiTemplateExerciseCopyWithImpl<$Res, _$AiTemplateExerciseImpl>
     implements _$$AiTemplateExerciseImplCopyWith<$Res> {
-  __$$AiTemplateExerciseImplCopyWithImpl(_$AiTemplateExerciseImpl _value,
-      $Res Function(_$AiTemplateExerciseImpl) _then)
-      : super(_value, _then);
+  __$$AiTemplateExerciseImplCopyWithImpl(
+    _$AiTemplateExerciseImpl _value,
+    $Res Function(_$AiTemplateExerciseImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -1381,75 +1458,78 @@ class __$$AiTemplateExerciseImplCopyWithImpl<$Res>
     Object? prescriptionLabel = null,
     Object? rationale = null,
   }) {
-    return _then(_$AiTemplateExerciseImpl(
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      bodyPart: null == bodyPart
-          ? _value.bodyPart
-          : bodyPart // ignore: cast_nullable_to_non_nullable
-              as String,
-      equipment: null == equipment
-          ? _value.equipment
-          : equipment // ignore: cast_nullable_to_non_nullable
-              as String,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      sets: null == sets
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as int,
-      reps: null == reps
-          ? _value.reps
-          : reps // ignore: cast_nullable_to_non_nullable
-              as String,
-      restSeconds: null == restSeconds
-          ? _value.restSeconds
-          : restSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      prescriptionLabel: null == prescriptionLabel
-          ? _value.prescriptionLabel
-          : prescriptionLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      rationale: null == rationale
-          ? _value.rationale
-          : rationale // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$AiTemplateExerciseImpl(
+        order: null == order
+            ? _value.order
+            : order // ignore: cast_nullable_to_non_nullable
+                  as int,
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        bodyPart: null == bodyPart
+            ? _value.bodyPart
+            : bodyPart // ignore: cast_nullable_to_non_nullable
+                  as String,
+        equipment: null == equipment
+            ? _value.equipment
+            : equipment // ignore: cast_nullable_to_non_nullable
+                  as String,
+        level: null == level
+            ? _value.level
+            : level // ignore: cast_nullable_to_non_nullable
+                  as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        sets: null == sets
+            ? _value.sets
+            : sets // ignore: cast_nullable_to_non_nullable
+                  as int,
+        reps: null == reps
+            ? _value.reps
+            : reps // ignore: cast_nullable_to_non_nullable
+                  as String,
+        restSeconds: null == restSeconds
+            ? _value.restSeconds
+            : restSeconds // ignore: cast_nullable_to_non_nullable
+                  as int,
+        prescriptionLabel: null == prescriptionLabel
+            ? _value.prescriptionLabel
+            : prescriptionLabel // ignore: cast_nullable_to_non_nullable
+                  as String,
+        rationale: null == rationale
+            ? _value.rationale
+            : rationale // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiTemplateExerciseImpl implements _AiTemplateExercise {
-  const _$AiTemplateExerciseImpl(
-      {required this.order,
-      required this.title,
-      required this.bodyPart,
-      required this.equipment,
-      required this.level,
-      required this.type,
-      required this.description,
-      required this.sets,
-      required this.reps,
-      required this.restSeconds,
-      required this.prescriptionLabel,
-      required this.rationale});
+  const _$AiTemplateExerciseImpl({
+    required this.order,
+    required this.title,
+    required this.bodyPart,
+    required this.equipment,
+    required this.level,
+    required this.type,
+    required this.description,
+    required this.sets,
+    required this.reps,
+    required this.restSeconds,
+    required this.prescriptionLabel,
+    required this.rationale,
+  });
 
   factory _$AiTemplateExerciseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiTemplateExerciseImplFromJson(json);
@@ -1512,49 +1592,51 @@ class _$AiTemplateExerciseImpl implements _AiTemplateExercise {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      order,
-      title,
-      bodyPart,
-      equipment,
-      level,
-      type,
-      description,
-      sets,
-      reps,
-      restSeconds,
-      prescriptionLabel,
-      rationale);
+    runtimeType,
+    order,
+    title,
+    bodyPart,
+    equipment,
+    level,
+    type,
+    description,
+    sets,
+    reps,
+    restSeconds,
+    prescriptionLabel,
+    rationale,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiTemplateExerciseImplCopyWith<_$AiTemplateExerciseImpl> get copyWith =>
       __$$AiTemplateExerciseImplCopyWithImpl<_$AiTemplateExerciseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiTemplateExerciseImplToJson(
-      this,
-    );
+    return _$$AiTemplateExerciseImplToJson(this);
   }
 }
 
 abstract class _AiTemplateExercise implements AiTemplateExercise {
-  const factory _AiTemplateExercise(
-      {required final int order,
-      required final String title,
-      required final String bodyPart,
-      required final String equipment,
-      required final String level,
-      required final String type,
-      required final String description,
-      required final int sets,
-      required final String reps,
-      required final int restSeconds,
-      required final String prescriptionLabel,
-      required final String rationale}) = _$AiTemplateExerciseImpl;
+  const factory _AiTemplateExercise({
+    required final int order,
+    required final String title,
+    required final String bodyPart,
+    required final String equipment,
+    required final String level,
+    required final String type,
+    required final String description,
+    required final int sets,
+    required final String reps,
+    required final int restSeconds,
+    required final String prescriptionLabel,
+    required final String rationale,
+  }) = _$AiTemplateExerciseImpl;
 
   factory _AiTemplateExercise.fromJson(Map<String, dynamic> json) =
       _$AiTemplateExerciseImpl.fromJson;
@@ -1612,17 +1694,19 @@ mixin _$AiMonthlyPlanWeek {
 /// @nodoc
 abstract class $AiMonthlyPlanWeekCopyWith<$Res> {
   factory $AiMonthlyPlanWeekCopyWith(
-          AiMonthlyPlanWeek value, $Res Function(AiMonthlyPlanWeek) then) =
-      _$AiMonthlyPlanWeekCopyWithImpl<$Res, AiMonthlyPlanWeek>;
+    AiMonthlyPlanWeek value,
+    $Res Function(AiMonthlyPlanWeek) then,
+  ) = _$AiMonthlyPlanWeekCopyWithImpl<$Res, AiMonthlyPlanWeek>;
   @useResult
-  $Res call(
-      {int weekNumber,
-      double loadMultiplier,
-      int targetSets,
-      bool isDeload,
-      String progressionRule,
-      String focus,
-      List<AiMonthlyPlanDay> days});
+  $Res call({
+    int weekNumber,
+    double loadMultiplier,
+    int targetSets,
+    bool isDeload,
+    String progressionRule,
+    String focus,
+    List<AiMonthlyPlanDay> days,
+  });
 }
 
 /// @nodoc
@@ -1646,64 +1730,70 @@ class _$AiMonthlyPlanWeekCopyWithImpl<$Res, $Val extends AiMonthlyPlanWeek>
     Object? focus = null,
     Object? days = null,
   }) {
-    return _then(_value.copyWith(
-      weekNumber: null == weekNumber
-          ? _value.weekNumber
-          : weekNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      loadMultiplier: null == loadMultiplier
-          ? _value.loadMultiplier
-          : loadMultiplier // ignore: cast_nullable_to_non_nullable
-              as double,
-      targetSets: null == targetSets
-          ? _value.targetSets
-          : targetSets // ignore: cast_nullable_to_non_nullable
-              as int,
-      isDeload: null == isDeload
-          ? _value.isDeload
-          : isDeload // ignore: cast_nullable_to_non_nullable
-              as bool,
-      progressionRule: null == progressionRule
-          ? _value.progressionRule
-          : progressionRule // ignore: cast_nullable_to_non_nullable
-              as String,
-      focus: null == focus
-          ? _value.focus
-          : focus // ignore: cast_nullable_to_non_nullable
-              as String,
-      days: null == days
-          ? _value.days
-          : days // ignore: cast_nullable_to_non_nullable
-              as List<AiMonthlyPlanDay>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            weekNumber: null == weekNumber
+                ? _value.weekNumber
+                : weekNumber // ignore: cast_nullable_to_non_nullable
+                      as int,
+            loadMultiplier: null == loadMultiplier
+                ? _value.loadMultiplier
+                : loadMultiplier // ignore: cast_nullable_to_non_nullable
+                      as double,
+            targetSets: null == targetSets
+                ? _value.targetSets
+                : targetSets // ignore: cast_nullable_to_non_nullable
+                      as int,
+            isDeload: null == isDeload
+                ? _value.isDeload
+                : isDeload // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            progressionRule: null == progressionRule
+                ? _value.progressionRule
+                : progressionRule // ignore: cast_nullable_to_non_nullable
+                      as String,
+            focus: null == focus
+                ? _value.focus
+                : focus // ignore: cast_nullable_to_non_nullable
+                      as String,
+            days: null == days
+                ? _value.days
+                : days // ignore: cast_nullable_to_non_nullable
+                      as List<AiMonthlyPlanDay>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AiMonthlyPlanWeekImplCopyWith<$Res>
     implements $AiMonthlyPlanWeekCopyWith<$Res> {
-  factory _$$AiMonthlyPlanWeekImplCopyWith(_$AiMonthlyPlanWeekImpl value,
-          $Res Function(_$AiMonthlyPlanWeekImpl) then) =
-      __$$AiMonthlyPlanWeekImplCopyWithImpl<$Res>;
+  factory _$$AiMonthlyPlanWeekImplCopyWith(
+    _$AiMonthlyPlanWeekImpl value,
+    $Res Function(_$AiMonthlyPlanWeekImpl) then,
+  ) = __$$AiMonthlyPlanWeekImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int weekNumber,
-      double loadMultiplier,
-      int targetSets,
-      bool isDeload,
-      String progressionRule,
-      String focus,
-      List<AiMonthlyPlanDay> days});
+  $Res call({
+    int weekNumber,
+    double loadMultiplier,
+    int targetSets,
+    bool isDeload,
+    String progressionRule,
+    String focus,
+    List<AiMonthlyPlanDay> days,
+  });
 }
 
 /// @nodoc
 class __$$AiMonthlyPlanWeekImplCopyWithImpl<$Res>
     extends _$AiMonthlyPlanWeekCopyWithImpl<$Res, _$AiMonthlyPlanWeekImpl>
     implements _$$AiMonthlyPlanWeekImplCopyWith<$Res> {
-  __$$AiMonthlyPlanWeekImplCopyWithImpl(_$AiMonthlyPlanWeekImpl _value,
-      $Res Function(_$AiMonthlyPlanWeekImpl) _then)
-      : super(_value, _then);
+  __$$AiMonthlyPlanWeekImplCopyWithImpl(
+    _$AiMonthlyPlanWeekImpl _value,
+    $Res Function(_$AiMonthlyPlanWeekImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -1716,51 +1806,53 @@ class __$$AiMonthlyPlanWeekImplCopyWithImpl<$Res>
     Object? focus = null,
     Object? days = null,
   }) {
-    return _then(_$AiMonthlyPlanWeekImpl(
-      weekNumber: null == weekNumber
-          ? _value.weekNumber
-          : weekNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      loadMultiplier: null == loadMultiplier
-          ? _value.loadMultiplier
-          : loadMultiplier // ignore: cast_nullable_to_non_nullable
-              as double,
-      targetSets: null == targetSets
-          ? _value.targetSets
-          : targetSets // ignore: cast_nullable_to_non_nullable
-              as int,
-      isDeload: null == isDeload
-          ? _value.isDeload
-          : isDeload // ignore: cast_nullable_to_non_nullable
-              as bool,
-      progressionRule: null == progressionRule
-          ? _value.progressionRule
-          : progressionRule // ignore: cast_nullable_to_non_nullable
-              as String,
-      focus: null == focus
-          ? _value.focus
-          : focus // ignore: cast_nullable_to_non_nullable
-              as String,
-      days: null == days
-          ? _value._days
-          : days // ignore: cast_nullable_to_non_nullable
-              as List<AiMonthlyPlanDay>,
-    ));
+    return _then(
+      _$AiMonthlyPlanWeekImpl(
+        weekNumber: null == weekNumber
+            ? _value.weekNumber
+            : weekNumber // ignore: cast_nullable_to_non_nullable
+                  as int,
+        loadMultiplier: null == loadMultiplier
+            ? _value.loadMultiplier
+            : loadMultiplier // ignore: cast_nullable_to_non_nullable
+                  as double,
+        targetSets: null == targetSets
+            ? _value.targetSets
+            : targetSets // ignore: cast_nullable_to_non_nullable
+                  as int,
+        isDeload: null == isDeload
+            ? _value.isDeload
+            : isDeload // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        progressionRule: null == progressionRule
+            ? _value.progressionRule
+            : progressionRule // ignore: cast_nullable_to_non_nullable
+                  as String,
+        focus: null == focus
+            ? _value.focus
+            : focus // ignore: cast_nullable_to_non_nullable
+                  as String,
+        days: null == days
+            ? _value._days
+            : days // ignore: cast_nullable_to_non_nullable
+                  as List<AiMonthlyPlanDay>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiMonthlyPlanWeekImpl implements _AiMonthlyPlanWeek {
-  const _$AiMonthlyPlanWeekImpl(
-      {required this.weekNumber,
-      required this.loadMultiplier,
-      required this.targetSets,
-      required this.isDeload,
-      required this.progressionRule,
-      required this.focus,
-      final List<AiMonthlyPlanDay> days = const []})
-      : _days = days;
+  const _$AiMonthlyPlanWeekImpl({
+    required this.weekNumber,
+    required this.loadMultiplier,
+    required this.targetSets,
+    required this.isDeload,
+    required this.progressionRule,
+    required this.focus,
+    final List<AiMonthlyPlanDay> days = const [],
+  }) : _days = days;
 
   factory _$AiMonthlyPlanWeekImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiMonthlyPlanWeekImplFromJson(json);
@@ -1813,39 +1905,41 @@ class _$AiMonthlyPlanWeekImpl implements _AiMonthlyPlanWeek {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      weekNumber,
-      loadMultiplier,
-      targetSets,
-      isDeload,
-      progressionRule,
-      focus,
-      const DeepCollectionEquality().hash(_days));
+    runtimeType,
+    weekNumber,
+    loadMultiplier,
+    targetSets,
+    isDeload,
+    progressionRule,
+    focus,
+    const DeepCollectionEquality().hash(_days),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiMonthlyPlanWeekImplCopyWith<_$AiMonthlyPlanWeekImpl> get copyWith =>
       __$$AiMonthlyPlanWeekImplCopyWithImpl<_$AiMonthlyPlanWeekImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiMonthlyPlanWeekImplToJson(
-      this,
-    );
+    return _$$AiMonthlyPlanWeekImplToJson(this);
   }
 }
 
 abstract class _AiMonthlyPlanWeek implements AiMonthlyPlanWeek {
-  const factory _AiMonthlyPlanWeek(
-      {required final int weekNumber,
-      required final double loadMultiplier,
-      required final int targetSets,
-      required final bool isDeload,
-      required final String progressionRule,
-      required final String focus,
-      final List<AiMonthlyPlanDay> days}) = _$AiMonthlyPlanWeekImpl;
+  const factory _AiMonthlyPlanWeek({
+    required final int weekNumber,
+    required final double loadMultiplier,
+    required final int targetSets,
+    required final bool isDeload,
+    required final String progressionRule,
+    required final String focus,
+    final List<AiMonthlyPlanDay> days,
+  }) = _$AiMonthlyPlanWeekImpl;
 
   factory _AiMonthlyPlanWeek.fromJson(Map<String, dynamic> json) =
       _$AiMonthlyPlanWeekImpl.fromJson;
@@ -1902,26 +1996,28 @@ mixin _$AiMonthlyPlanDay {
 /// @nodoc
 abstract class $AiMonthlyPlanDayCopyWith<$Res> {
   factory $AiMonthlyPlanDayCopyWith(
-          AiMonthlyPlanDay value, $Res Function(AiMonthlyPlanDay) then) =
-      _$AiMonthlyPlanDayCopyWithImpl<$Res, AiMonthlyPlanDay>;
+    AiMonthlyPlanDay value,
+    $Res Function(AiMonthlyPlanDay) then,
+  ) = _$AiMonthlyPlanDayCopyWithImpl<$Res, AiMonthlyPlanDay>;
   @useResult
-  $Res call(
-      {String dayCode,
-      String dayLabel,
-      String type,
-      String? preferredTime,
-      String? preferredTimeLabel,
-      String? templateId,
-      String? templateTitle,
-      String focus,
-      List<String> exercises,
-      int? estimatedMinutes,
-      String? mobility,
-      String? warmUp,
-      String? cooldown,
-      double? loadMultiplier,
-      int? targetSets,
-      bool? isDeload});
+  $Res call({
+    String dayCode,
+    String dayLabel,
+    String type,
+    String? preferredTime,
+    String? preferredTimeLabel,
+    String? templateId,
+    String? templateTitle,
+    String focus,
+    List<String> exercises,
+    int? estimatedMinutes,
+    String? mobility,
+    String? warmUp,
+    String? cooldown,
+    double? loadMultiplier,
+    int? targetSets,
+    bool? isDeload,
+  });
 }
 
 /// @nodoc
@@ -1954,109 +2050,115 @@ class _$AiMonthlyPlanDayCopyWithImpl<$Res, $Val extends AiMonthlyPlanDay>
     Object? targetSets = freezed,
     Object? isDeload = freezed,
   }) {
-    return _then(_value.copyWith(
-      dayCode: null == dayCode
-          ? _value.dayCode
-          : dayCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      dayLabel: null == dayLabel
-          ? _value.dayLabel
-          : dayLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      preferredTime: freezed == preferredTime
-          ? _value.preferredTime
-          : preferredTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      preferredTimeLabel: freezed == preferredTimeLabel
-          ? _value.preferredTimeLabel
-          : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
-              as String?,
-      templateId: freezed == templateId
-          ? _value.templateId
-          : templateId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      templateTitle: freezed == templateTitle
-          ? _value.templateTitle
-          : templateTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
-      focus: null == focus
-          ? _value.focus
-          : focus // ignore: cast_nullable_to_non_nullable
-              as String,
-      exercises: null == exercises
-          ? _value.exercises
-          : exercises // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      estimatedMinutes: freezed == estimatedMinutes
-          ? _value.estimatedMinutes
-          : estimatedMinutes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mobility: freezed == mobility
-          ? _value.mobility
-          : mobility // ignore: cast_nullable_to_non_nullable
-              as String?,
-      warmUp: freezed == warmUp
-          ? _value.warmUp
-          : warmUp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      cooldown: freezed == cooldown
-          ? _value.cooldown
-          : cooldown // ignore: cast_nullable_to_non_nullable
-              as String?,
-      loadMultiplier: freezed == loadMultiplier
-          ? _value.loadMultiplier
-          : loadMultiplier // ignore: cast_nullable_to_non_nullable
-              as double?,
-      targetSets: freezed == targetSets
-          ? _value.targetSets
-          : targetSets // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isDeload: freezed == isDeload
-          ? _value.isDeload
-          : isDeload // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            dayCode: null == dayCode
+                ? _value.dayCode
+                : dayCode // ignore: cast_nullable_to_non_nullable
+                      as String,
+            dayLabel: null == dayLabel
+                ? _value.dayLabel
+                : dayLabel // ignore: cast_nullable_to_non_nullable
+                      as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as String,
+            preferredTime: freezed == preferredTime
+                ? _value.preferredTime
+                : preferredTime // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            preferredTimeLabel: freezed == preferredTimeLabel
+                ? _value.preferredTimeLabel
+                : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            templateId: freezed == templateId
+                ? _value.templateId
+                : templateId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            templateTitle: freezed == templateTitle
+                ? _value.templateTitle
+                : templateTitle // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            focus: null == focus
+                ? _value.focus
+                : focus // ignore: cast_nullable_to_non_nullable
+                      as String,
+            exercises: null == exercises
+                ? _value.exercises
+                : exercises // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            estimatedMinutes: freezed == estimatedMinutes
+                ? _value.estimatedMinutes
+                : estimatedMinutes // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            mobility: freezed == mobility
+                ? _value.mobility
+                : mobility // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            warmUp: freezed == warmUp
+                ? _value.warmUp
+                : warmUp // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            cooldown: freezed == cooldown
+                ? _value.cooldown
+                : cooldown // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            loadMultiplier: freezed == loadMultiplier
+                ? _value.loadMultiplier
+                : loadMultiplier // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            targetSets: freezed == targetSets
+                ? _value.targetSets
+                : targetSets // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            isDeload: freezed == isDeload
+                ? _value.isDeload
+                : isDeload // ignore: cast_nullable_to_non_nullable
+                      as bool?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AiMonthlyPlanDayImplCopyWith<$Res>
     implements $AiMonthlyPlanDayCopyWith<$Res> {
-  factory _$$AiMonthlyPlanDayImplCopyWith(_$AiMonthlyPlanDayImpl value,
-          $Res Function(_$AiMonthlyPlanDayImpl) then) =
-      __$$AiMonthlyPlanDayImplCopyWithImpl<$Res>;
+  factory _$$AiMonthlyPlanDayImplCopyWith(
+    _$AiMonthlyPlanDayImpl value,
+    $Res Function(_$AiMonthlyPlanDayImpl) then,
+  ) = __$$AiMonthlyPlanDayImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String dayCode,
-      String dayLabel,
-      String type,
-      String? preferredTime,
-      String? preferredTimeLabel,
-      String? templateId,
-      String? templateTitle,
-      String focus,
-      List<String> exercises,
-      int? estimatedMinutes,
-      String? mobility,
-      String? warmUp,
-      String? cooldown,
-      double? loadMultiplier,
-      int? targetSets,
-      bool? isDeload});
+  $Res call({
+    String dayCode,
+    String dayLabel,
+    String type,
+    String? preferredTime,
+    String? preferredTimeLabel,
+    String? templateId,
+    String? templateTitle,
+    String focus,
+    List<String> exercises,
+    int? estimatedMinutes,
+    String? mobility,
+    String? warmUp,
+    String? cooldown,
+    double? loadMultiplier,
+    int? targetSets,
+    bool? isDeload,
+  });
 }
 
 /// @nodoc
 class __$$AiMonthlyPlanDayImplCopyWithImpl<$Res>
     extends _$AiMonthlyPlanDayCopyWithImpl<$Res, _$AiMonthlyPlanDayImpl>
     implements _$$AiMonthlyPlanDayImplCopyWith<$Res> {
-  __$$AiMonthlyPlanDayImplCopyWithImpl(_$AiMonthlyPlanDayImpl _value,
-      $Res Function(_$AiMonthlyPlanDayImpl) _then)
-      : super(_value, _then);
+  __$$AiMonthlyPlanDayImplCopyWithImpl(
+    _$AiMonthlyPlanDayImpl _value,
+    $Res Function(_$AiMonthlyPlanDayImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -2078,96 +2180,98 @@ class __$$AiMonthlyPlanDayImplCopyWithImpl<$Res>
     Object? targetSets = freezed,
     Object? isDeload = freezed,
   }) {
-    return _then(_$AiMonthlyPlanDayImpl(
-      dayCode: null == dayCode
-          ? _value.dayCode
-          : dayCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      dayLabel: null == dayLabel
-          ? _value.dayLabel
-          : dayLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      preferredTime: freezed == preferredTime
-          ? _value.preferredTime
-          : preferredTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      preferredTimeLabel: freezed == preferredTimeLabel
-          ? _value.preferredTimeLabel
-          : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
-              as String?,
-      templateId: freezed == templateId
-          ? _value.templateId
-          : templateId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      templateTitle: freezed == templateTitle
-          ? _value.templateTitle
-          : templateTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
-      focus: null == focus
-          ? _value.focus
-          : focus // ignore: cast_nullable_to_non_nullable
-              as String,
-      exercises: null == exercises
-          ? _value._exercises
-          : exercises // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      estimatedMinutes: freezed == estimatedMinutes
-          ? _value.estimatedMinutes
-          : estimatedMinutes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mobility: freezed == mobility
-          ? _value.mobility
-          : mobility // ignore: cast_nullable_to_non_nullable
-              as String?,
-      warmUp: freezed == warmUp
-          ? _value.warmUp
-          : warmUp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      cooldown: freezed == cooldown
-          ? _value.cooldown
-          : cooldown // ignore: cast_nullable_to_non_nullable
-              as String?,
-      loadMultiplier: freezed == loadMultiplier
-          ? _value.loadMultiplier
-          : loadMultiplier // ignore: cast_nullable_to_non_nullable
-              as double?,
-      targetSets: freezed == targetSets
-          ? _value.targetSets
-          : targetSets // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isDeload: freezed == isDeload
-          ? _value.isDeload
-          : isDeload // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
+    return _then(
+      _$AiMonthlyPlanDayImpl(
+        dayCode: null == dayCode
+            ? _value.dayCode
+            : dayCode // ignore: cast_nullable_to_non_nullable
+                  as String,
+        dayLabel: null == dayLabel
+            ? _value.dayLabel
+            : dayLabel // ignore: cast_nullable_to_non_nullable
+                  as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        preferredTime: freezed == preferredTime
+            ? _value.preferredTime
+            : preferredTime // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        preferredTimeLabel: freezed == preferredTimeLabel
+            ? _value.preferredTimeLabel
+            : preferredTimeLabel // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        templateId: freezed == templateId
+            ? _value.templateId
+            : templateId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        templateTitle: freezed == templateTitle
+            ? _value.templateTitle
+            : templateTitle // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        focus: null == focus
+            ? _value.focus
+            : focus // ignore: cast_nullable_to_non_nullable
+                  as String,
+        exercises: null == exercises
+            ? _value._exercises
+            : exercises // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        estimatedMinutes: freezed == estimatedMinutes
+            ? _value.estimatedMinutes
+            : estimatedMinutes // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        mobility: freezed == mobility
+            ? _value.mobility
+            : mobility // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        warmUp: freezed == warmUp
+            ? _value.warmUp
+            : warmUp // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        cooldown: freezed == cooldown
+            ? _value.cooldown
+            : cooldown // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        loadMultiplier: freezed == loadMultiplier
+            ? _value.loadMultiplier
+            : loadMultiplier // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        targetSets: freezed == targetSets
+            ? _value.targetSets
+            : targetSets // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        isDeload: freezed == isDeload
+            ? _value.isDeload
+            : isDeload // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiMonthlyPlanDayImpl implements _AiMonthlyPlanDay {
-  const _$AiMonthlyPlanDayImpl(
-      {required this.dayCode,
-      required this.dayLabel,
-      required this.type,
-      this.preferredTime,
-      this.preferredTimeLabel,
-      this.templateId,
-      this.templateTitle,
-      required this.focus,
-      final List<String> exercises = const [],
-      this.estimatedMinutes,
-      this.mobility,
-      this.warmUp,
-      this.cooldown,
-      this.loadMultiplier,
-      this.targetSets,
-      this.isDeload})
-      : _exercises = exercises;
+  const _$AiMonthlyPlanDayImpl({
+    required this.dayCode,
+    required this.dayLabel,
+    required this.type,
+    this.preferredTime,
+    this.preferredTimeLabel,
+    this.templateId,
+    this.templateTitle,
+    required this.focus,
+    final List<String> exercises = const [],
+    this.estimatedMinutes,
+    this.mobility,
+    this.warmUp,
+    this.cooldown,
+    this.loadMultiplier,
+    this.targetSets,
+    this.isDeload,
+  }) : _exercises = exercises;
 
   factory _$AiMonthlyPlanDayImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiMonthlyPlanDayImplFromJson(json);
@@ -2235,8 +2339,10 @@ class _$AiMonthlyPlanDayImpl implements _AiMonthlyPlanDay {
             (identical(other.templateTitle, templateTitle) ||
                 other.templateTitle == templateTitle) &&
             (identical(other.focus, focus) || other.focus == focus) &&
-            const DeepCollectionEquality()
-                .equals(other._exercises, _exercises) &&
+            const DeepCollectionEquality().equals(
+              other._exercises,
+              _exercises,
+            ) &&
             (identical(other.estimatedMinutes, estimatedMinutes) ||
                 other.estimatedMinutes == estimatedMinutes) &&
             (identical(other.mobility, mobility) ||
@@ -2255,57 +2361,59 @@ class _$AiMonthlyPlanDayImpl implements _AiMonthlyPlanDay {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      dayCode,
-      dayLabel,
-      type,
-      preferredTime,
-      preferredTimeLabel,
-      templateId,
-      templateTitle,
-      focus,
-      const DeepCollectionEquality().hash(_exercises),
-      estimatedMinutes,
-      mobility,
-      warmUp,
-      cooldown,
-      loadMultiplier,
-      targetSets,
-      isDeload);
+    runtimeType,
+    dayCode,
+    dayLabel,
+    type,
+    preferredTime,
+    preferredTimeLabel,
+    templateId,
+    templateTitle,
+    focus,
+    const DeepCollectionEquality().hash(_exercises),
+    estimatedMinutes,
+    mobility,
+    warmUp,
+    cooldown,
+    loadMultiplier,
+    targetSets,
+    isDeload,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiMonthlyPlanDayImplCopyWith<_$AiMonthlyPlanDayImpl> get copyWith =>
       __$$AiMonthlyPlanDayImplCopyWithImpl<_$AiMonthlyPlanDayImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiMonthlyPlanDayImplToJson(
-      this,
-    );
+    return _$$AiMonthlyPlanDayImplToJson(this);
   }
 }
 
 abstract class _AiMonthlyPlanDay implements AiMonthlyPlanDay {
-  const factory _AiMonthlyPlanDay(
-      {required final String dayCode,
-      required final String dayLabel,
-      required final String type,
-      final String? preferredTime,
-      final String? preferredTimeLabel,
-      final String? templateId,
-      final String? templateTitle,
-      required final String focus,
-      final List<String> exercises,
-      final int? estimatedMinutes,
-      final String? mobility,
-      final String? warmUp,
-      final String? cooldown,
-      final double? loadMultiplier,
-      final int? targetSets,
-      final bool? isDeload}) = _$AiMonthlyPlanDayImpl;
+  const factory _AiMonthlyPlanDay({
+    required final String dayCode,
+    required final String dayLabel,
+    required final String type,
+    final String? preferredTime,
+    final String? preferredTimeLabel,
+    final String? templateId,
+    final String? templateTitle,
+    required final String focus,
+    final List<String> exercises,
+    final int? estimatedMinutes,
+    final String? mobility,
+    final String? warmUp,
+    final String? cooldown,
+    final double? loadMultiplier,
+    final int? targetSets,
+    final bool? isDeload,
+  }) = _$AiMonthlyPlanDayImpl;
 
   factory _AiMonthlyPlanDay.fromJson(Map<String, dynamic> json) =
       _$AiMonthlyPlanDayImpl.fromJson;
@@ -2368,14 +2476,16 @@ mixin _$AiReassessment {
 /// @nodoc
 abstract class $AiReassessmentCopyWith<$Res> {
   factory $AiReassessmentCopyWith(
-          AiReassessment value, $Res Function(AiReassessment) then) =
-      _$AiReassessmentCopyWithImpl<$Res, AiReassessment>;
+    AiReassessment value,
+    $Res Function(AiReassessment) then,
+  ) = _$AiReassessmentCopyWithImpl<$Res, AiReassessment>;
   @useResult
-  $Res call(
-      {int dueAfterDays,
-      String promptTitle,
-      String summary,
-      List<String> questions});
+  $Res call({
+    int dueAfterDays,
+    String promptTitle,
+    String summary,
+    List<String> questions,
+  });
 }
 
 /// @nodoc
@@ -2396,40 +2506,45 @@ class _$AiReassessmentCopyWithImpl<$Res, $Val extends AiReassessment>
     Object? summary = null,
     Object? questions = null,
   }) {
-    return _then(_value.copyWith(
-      dueAfterDays: null == dueAfterDays
-          ? _value.dueAfterDays
-          : dueAfterDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      promptTitle: null == promptTitle
-          ? _value.promptTitle
-          : promptTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      questions: null == questions
-          ? _value.questions
-          : questions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            dueAfterDays: null == dueAfterDays
+                ? _value.dueAfterDays
+                : dueAfterDays // ignore: cast_nullable_to_non_nullable
+                      as int,
+            promptTitle: null == promptTitle
+                ? _value.promptTitle
+                : promptTitle // ignore: cast_nullable_to_non_nullable
+                      as String,
+            summary: null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                      as String,
+            questions: null == questions
+                ? _value.questions
+                : questions // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AiReassessmentImplCopyWith<$Res>
     implements $AiReassessmentCopyWith<$Res> {
-  factory _$$AiReassessmentImplCopyWith(_$AiReassessmentImpl value,
-          $Res Function(_$AiReassessmentImpl) then) =
-      __$$AiReassessmentImplCopyWithImpl<$Res>;
+  factory _$$AiReassessmentImplCopyWith(
+    _$AiReassessmentImpl value,
+    $Res Function(_$AiReassessmentImpl) then,
+  ) = __$$AiReassessmentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int dueAfterDays,
-      String promptTitle,
-      String summary,
-      List<String> questions});
+  $Res call({
+    int dueAfterDays,
+    String promptTitle,
+    String summary,
+    List<String> questions,
+  });
 }
 
 /// @nodoc
@@ -2437,8 +2552,9 @@ class __$$AiReassessmentImplCopyWithImpl<$Res>
     extends _$AiReassessmentCopyWithImpl<$Res, _$AiReassessmentImpl>
     implements _$$AiReassessmentImplCopyWith<$Res> {
   __$$AiReassessmentImplCopyWithImpl(
-      _$AiReassessmentImpl _value, $Res Function(_$AiReassessmentImpl) _then)
-      : super(_value, _then);
+    _$AiReassessmentImpl _value,
+    $Res Function(_$AiReassessmentImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -2448,36 +2564,38 @@ class __$$AiReassessmentImplCopyWithImpl<$Res>
     Object? summary = null,
     Object? questions = null,
   }) {
-    return _then(_$AiReassessmentImpl(
-      dueAfterDays: null == dueAfterDays
-          ? _value.dueAfterDays
-          : dueAfterDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      promptTitle: null == promptTitle
-          ? _value.promptTitle
-          : promptTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      questions: null == questions
-          ? _value._questions
-          : questions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
+    return _then(
+      _$AiReassessmentImpl(
+        dueAfterDays: null == dueAfterDays
+            ? _value.dueAfterDays
+            : dueAfterDays // ignore: cast_nullable_to_non_nullable
+                  as int,
+        promptTitle: null == promptTitle
+            ? _value.promptTitle
+            : promptTitle // ignore: cast_nullable_to_non_nullable
+                  as String,
+        summary: null == summary
+            ? _value.summary
+            : summary // ignore: cast_nullable_to_non_nullable
+                  as String,
+        questions: null == questions
+            ? _value._questions
+            : questions // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiReassessmentImpl implements _AiReassessment {
-  const _$AiReassessmentImpl(
-      {required this.dueAfterDays,
-      required this.promptTitle,
-      required this.summary,
-      final List<String> questions = const []})
-      : _questions = questions;
+  const _$AiReassessmentImpl({
+    required this.dueAfterDays,
+    required this.promptTitle,
+    required this.summary,
+    final List<String> questions = const [],
+  }) : _questions = questions;
 
   factory _$AiReassessmentImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiReassessmentImplFromJson(json);
@@ -2512,36 +2630,44 @@ class _$AiReassessmentImpl implements _AiReassessment {
             (identical(other.promptTitle, promptTitle) ||
                 other.promptTitle == promptTitle) &&
             (identical(other.summary, summary) || other.summary == summary) &&
-            const DeepCollectionEquality()
-                .equals(other._questions, _questions));
+            const DeepCollectionEquality().equals(
+              other._questions,
+              _questions,
+            ));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, dueAfterDays, promptTitle,
-      summary, const DeepCollectionEquality().hash(_questions));
+  int get hashCode => Object.hash(
+    runtimeType,
+    dueAfterDays,
+    promptTitle,
+    summary,
+    const DeepCollectionEquality().hash(_questions),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiReassessmentImplCopyWith<_$AiReassessmentImpl> get copyWith =>
       __$$AiReassessmentImplCopyWithImpl<_$AiReassessmentImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiReassessmentImplToJson(
-      this,
-    );
+    return _$$AiReassessmentImplToJson(this);
   }
 }
 
 abstract class _AiReassessment implements AiReassessment {
-  const factory _AiReassessment(
-      {required final int dueAfterDays,
-      required final String promptTitle,
-      required final String summary,
-      final List<String> questions}) = _$AiReassessmentImpl;
+  const factory _AiReassessment({
+    required final int dueAfterDays,
+    required final String promptTitle,
+    required final String summary,
+    final List<String> questions,
+  }) = _$AiReassessmentImpl;
 
   factory _AiReassessment.fromJson(Map<String, dynamic> json) =
       _$AiReassessmentImpl.fromJson;

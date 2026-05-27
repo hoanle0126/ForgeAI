@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/router/app_router.dart';
+import 'package:forge_ai/features/insight/providers/insight_provider.dart';
+import 'package:forge_ai/features/profile/providers/profile_provider.dart';
 import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 import 'package:forge_ai/features/workout_builder/providers/workout_builder_plan_provider.dart';
@@ -59,7 +61,9 @@ class AiPlanActionBar extends ConsumerWidget {
 
                 ref
                   ..invalidate(workoutLibraryProvider)
-                  ..invalidate(trainingWorkoutProvider);
+                  ..invalidate(trainingWorkoutProvider)
+                  ..invalidate(insightNotifierProvider)
+                  ..invalidate(profileProvider);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Workouts updated successfully'),

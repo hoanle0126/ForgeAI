@@ -52,6 +52,10 @@ class ApiClient {
               // Token refresh failed, user should be logged out
               await _tokenStorage.clearTokens();
             }
+          } else if (error.response?.statusCode == 404 &&
+              error.requestOptions.path == '/auth/me') {
+            // User record deleted/missing in DB. Clear local session.
+            await _tokenStorage.clearTokens();
           }
           return handler.next(error);
         },

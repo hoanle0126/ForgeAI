@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -217,6 +218,9 @@ final workoutBuilderProfilePrefillProvider = FutureProvider<void>((ref) async {
 
     ref.read(ageProvider.notifier).prefillIfEmpty(age.toString());
   } catch (error, stackTrace) {
+    if (error is DioException && error.response?.statusCode == 404) {
+      await ref.read(authProvider.notifier).logOut();
+    }
     debugPrint('Workout builder profile prefill failed: $error\n$stackTrace');
   }
 });

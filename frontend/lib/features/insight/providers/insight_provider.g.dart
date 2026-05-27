@@ -12,14 +12,14 @@ String _$insightNotifierHash() => r'c8a107822007cdb2a1b3fee473051eb103bddc53';
 @ProviderFor(InsightNotifier)
 final insightNotifierProvider =
     AutoDisposeAsyncNotifierProvider<InsightNotifier, InsightState>.internal(
-  InsightNotifier.new,
-  name: r'insightNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$insightNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      InsightNotifier.new,
+      name: r'insightNotifierProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$insightNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$InsightNotifier = AutoDisposeAsyncNotifier<InsightState>;
 // ignore_for_file: type=lint

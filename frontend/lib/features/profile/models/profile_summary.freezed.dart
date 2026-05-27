@@ -12,7 +12,8 @@ part of 'profile_summary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 ProfileSummary _$ProfileSummaryFromJson(Map<String, dynamic> json) {
   return _ProfileSummary.fromJson(json);
@@ -43,22 +44,24 @@ mixin _$ProfileSummary {
 /// @nodoc
 abstract class $ProfileSummaryCopyWith<$Res> {
   factory $ProfileSummaryCopyWith(
-          ProfileSummary value, $Res Function(ProfileSummary) then) =
-      _$ProfileSummaryCopyWithImpl<$Res, ProfileSummary>;
+    ProfileSummary value,
+    $Res Function(ProfileSummary) then,
+  ) = _$ProfileSummaryCopyWithImpl<$Res, ProfileSummary>;
   @useResult
-  $Res call(
-      {String id,
-      String fullName,
-      String email,
-      String gender,
-      String dateOfBirth,
-      String createdAt,
-      String athleteAlias,
-      String athleteTitle,
-      int completionCount,
-      int streakDays,
-      ProfileLatestMetric? latestMetric,
-      ProfileTrainingSnapshotSummary trainingSnapshot});
+  $Res call({
+    String id,
+    String fullName,
+    String email,
+    String gender,
+    String dateOfBirth,
+    String createdAt,
+    String athleteAlias,
+    String athleteTitle,
+    int completionCount,
+    int streakDays,
+    ProfileLatestMetric? latestMetric,
+    ProfileTrainingSnapshotSummary trainingSnapshot,
+  });
 
   $ProfileLatestMetricCopyWith<$Res>? get latestMetric;
   $ProfileTrainingSnapshotSummaryCopyWith<$Res> get trainingSnapshot;
@@ -90,56 +93,59 @@ class _$ProfileSummaryCopyWithImpl<$Res, $Val extends ProfileSummary>
     Object? latestMetric = freezed,
     Object? trainingSnapshot = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateOfBirth: null == dateOfBirth
-          ? _value.dateOfBirth
-          : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      athleteAlias: null == athleteAlias
-          ? _value.athleteAlias
-          : athleteAlias // ignore: cast_nullable_to_non_nullable
-              as String,
-      athleteTitle: null == athleteTitle
-          ? _value.athleteTitle
-          : athleteTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      completionCount: null == completionCount
-          ? _value.completionCount
-          : completionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      streakDays: null == streakDays
-          ? _value.streakDays
-          : streakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      latestMetric: freezed == latestMetric
-          ? _value.latestMetric
-          : latestMetric // ignore: cast_nullable_to_non_nullable
-              as ProfileLatestMetric?,
-      trainingSnapshot: null == trainingSnapshot
-          ? _value.trainingSnapshot
-          : trainingSnapshot // ignore: cast_nullable_to_non_nullable
-              as ProfileTrainingSnapshotSummary,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            fullName: null == fullName
+                ? _value.fullName
+                : fullName // ignore: cast_nullable_to_non_nullable
+                      as String,
+            email: null == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                      as String,
+            gender: null == gender
+                ? _value.gender
+                : gender // ignore: cast_nullable_to_non_nullable
+                      as String,
+            dateOfBirth: null == dateOfBirth
+                ? _value.dateOfBirth
+                : dateOfBirth // ignore: cast_nullable_to_non_nullable
+                      as String,
+            createdAt: null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                      as String,
+            athleteAlias: null == athleteAlias
+                ? _value.athleteAlias
+                : athleteAlias // ignore: cast_nullable_to_non_nullable
+                      as String,
+            athleteTitle: null == athleteTitle
+                ? _value.athleteTitle
+                : athleteTitle // ignore: cast_nullable_to_non_nullable
+                      as String,
+            completionCount: null == completionCount
+                ? _value.completionCount
+                : completionCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            streakDays: null == streakDays
+                ? _value.streakDays
+                : streakDays // ignore: cast_nullable_to_non_nullable
+                      as int,
+            latestMetric: freezed == latestMetric
+                ? _value.latestMetric
+                : latestMetric // ignore: cast_nullable_to_non_nullable
+                      as ProfileLatestMetric?,
+            trainingSnapshot: null == trainingSnapshot
+                ? _value.trainingSnapshot
+                : trainingSnapshot // ignore: cast_nullable_to_non_nullable
+                      as ProfileTrainingSnapshotSummary,
+          )
+          as $Val,
+    );
   }
 
   @override
@@ -158,33 +164,37 @@ class _$ProfileSummaryCopyWithImpl<$Res, $Val extends ProfileSummary>
   @pragma('vm:prefer-inline')
   $ProfileTrainingSnapshotSummaryCopyWith<$Res> get trainingSnapshot {
     return $ProfileTrainingSnapshotSummaryCopyWith<$Res>(
-        _value.trainingSnapshot, (value) {
-      return _then(_value.copyWith(trainingSnapshot: value) as $Val);
-    });
+      _value.trainingSnapshot,
+      (value) {
+        return _then(_value.copyWith(trainingSnapshot: value) as $Val);
+      },
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ProfileSummaryImplCopyWith<$Res>
     implements $ProfileSummaryCopyWith<$Res> {
-  factory _$$ProfileSummaryImplCopyWith(_$ProfileSummaryImpl value,
-          $Res Function(_$ProfileSummaryImpl) then) =
-      __$$ProfileSummaryImplCopyWithImpl<$Res>;
+  factory _$$ProfileSummaryImplCopyWith(
+    _$ProfileSummaryImpl value,
+    $Res Function(_$ProfileSummaryImpl) then,
+  ) = __$$ProfileSummaryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String fullName,
-      String email,
-      String gender,
-      String dateOfBirth,
-      String createdAt,
-      String athleteAlias,
-      String athleteTitle,
-      int completionCount,
-      int streakDays,
-      ProfileLatestMetric? latestMetric,
-      ProfileTrainingSnapshotSummary trainingSnapshot});
+  $Res call({
+    String id,
+    String fullName,
+    String email,
+    String gender,
+    String dateOfBirth,
+    String createdAt,
+    String athleteAlias,
+    String athleteTitle,
+    int completionCount,
+    int streakDays,
+    ProfileLatestMetric? latestMetric,
+    ProfileTrainingSnapshotSummary trainingSnapshot,
+  });
 
   @override
   $ProfileLatestMetricCopyWith<$Res>? get latestMetric;
@@ -197,8 +207,9 @@ class __$$ProfileSummaryImplCopyWithImpl<$Res>
     extends _$ProfileSummaryCopyWithImpl<$Res, _$ProfileSummaryImpl>
     implements _$$ProfileSummaryImplCopyWith<$Res> {
   __$$ProfileSummaryImplCopyWithImpl(
-      _$ProfileSummaryImpl _value, $Res Function(_$ProfileSummaryImpl) _then)
-      : super(_value, _then);
+    _$ProfileSummaryImpl _value,
+    $Res Function(_$ProfileSummaryImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -216,75 +227,78 @@ class __$$ProfileSummaryImplCopyWithImpl<$Res>
     Object? latestMetric = freezed,
     Object? trainingSnapshot = null,
   }) {
-    return _then(_$ProfileSummaryImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateOfBirth: null == dateOfBirth
-          ? _value.dateOfBirth
-          : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      athleteAlias: null == athleteAlias
-          ? _value.athleteAlias
-          : athleteAlias // ignore: cast_nullable_to_non_nullable
-              as String,
-      athleteTitle: null == athleteTitle
-          ? _value.athleteTitle
-          : athleteTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      completionCount: null == completionCount
-          ? _value.completionCount
-          : completionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      streakDays: null == streakDays
-          ? _value.streakDays
-          : streakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      latestMetric: freezed == latestMetric
-          ? _value.latestMetric
-          : latestMetric // ignore: cast_nullable_to_non_nullable
-              as ProfileLatestMetric?,
-      trainingSnapshot: null == trainingSnapshot
-          ? _value.trainingSnapshot
-          : trainingSnapshot // ignore: cast_nullable_to_non_nullable
-              as ProfileTrainingSnapshotSummary,
-    ));
+    return _then(
+      _$ProfileSummaryImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        fullName: null == fullName
+            ? _value.fullName
+            : fullName // ignore: cast_nullable_to_non_nullable
+                  as String,
+        email: null == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        gender: null == gender
+            ? _value.gender
+            : gender // ignore: cast_nullable_to_non_nullable
+                  as String,
+        dateOfBirth: null == dateOfBirth
+            ? _value.dateOfBirth
+            : dateOfBirth // ignore: cast_nullable_to_non_nullable
+                  as String,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as String,
+        athleteAlias: null == athleteAlias
+            ? _value.athleteAlias
+            : athleteAlias // ignore: cast_nullable_to_non_nullable
+                  as String,
+        athleteTitle: null == athleteTitle
+            ? _value.athleteTitle
+            : athleteTitle // ignore: cast_nullable_to_non_nullable
+                  as String,
+        completionCount: null == completionCount
+            ? _value.completionCount
+            : completionCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        streakDays: null == streakDays
+            ? _value.streakDays
+            : streakDays // ignore: cast_nullable_to_non_nullable
+                  as int,
+        latestMetric: freezed == latestMetric
+            ? _value.latestMetric
+            : latestMetric // ignore: cast_nullable_to_non_nullable
+                  as ProfileLatestMetric?,
+        trainingSnapshot: null == trainingSnapshot
+            ? _value.trainingSnapshot
+            : trainingSnapshot // ignore: cast_nullable_to_non_nullable
+                  as ProfileTrainingSnapshotSummary,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProfileSummaryImpl implements _ProfileSummary {
-  const _$ProfileSummaryImpl(
-      {required this.id,
-      required this.fullName,
-      required this.email,
-      required this.gender,
-      required this.dateOfBirth,
-      required this.createdAt,
-      required this.athleteAlias,
-      required this.athleteTitle,
-      required this.completionCount,
-      required this.streakDays,
-      this.latestMetric,
-      required this.trainingSnapshot});
+  const _$ProfileSummaryImpl({
+    required this.id,
+    required this.fullName,
+    required this.email,
+    required this.gender,
+    required this.dateOfBirth,
+    required this.createdAt,
+    required this.athleteAlias,
+    required this.athleteTitle,
+    required this.completionCount,
+    required this.streakDays,
+    this.latestMetric,
+    required this.trainingSnapshot,
+  });
 
   factory _$ProfileSummaryImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileSummaryImplFromJson(json);
@@ -350,50 +364,51 @@ class _$ProfileSummaryImpl implements _ProfileSummary {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      fullName,
-      email,
-      gender,
-      dateOfBirth,
-      createdAt,
-      athleteAlias,
-      athleteTitle,
-      completionCount,
-      streakDays,
-      latestMetric,
-      trainingSnapshot);
+    runtimeType,
+    id,
+    fullName,
+    email,
+    gender,
+    dateOfBirth,
+    createdAt,
+    athleteAlias,
+    athleteTitle,
+    completionCount,
+    streakDays,
+    latestMetric,
+    trainingSnapshot,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileSummaryImplCopyWith<_$ProfileSummaryImpl> get copyWith =>
       __$$ProfileSummaryImplCopyWithImpl<_$ProfileSummaryImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileSummaryImplToJson(
-      this,
-    );
+    return _$$ProfileSummaryImplToJson(this);
   }
 }
 
 abstract class _ProfileSummary implements ProfileSummary {
-  const factory _ProfileSummary(
-          {required final String id,
-          required final String fullName,
-          required final String email,
-          required final String gender,
-          required final String dateOfBirth,
-          required final String createdAt,
-          required final String athleteAlias,
-          required final String athleteTitle,
-          required final int completionCount,
-          required final int streakDays,
-          final ProfileLatestMetric? latestMetric,
-          required final ProfileTrainingSnapshotSummary trainingSnapshot}) =
-      _$ProfileSummaryImpl;
+  const factory _ProfileSummary({
+    required final String id,
+    required final String fullName,
+    required final String email,
+    required final String gender,
+    required final String dateOfBirth,
+    required final String createdAt,
+    required final String athleteAlias,
+    required final String athleteTitle,
+    required final int completionCount,
+    required final int streakDays,
+    final ProfileLatestMetric? latestMetric,
+    required final ProfileTrainingSnapshotSummary trainingSnapshot,
+  }) = _$ProfileSummaryImpl;
 
   factory _ProfileSummary.fromJson(Map<String, dynamic> json) =
       _$ProfileSummaryImpl.fromJson;
@@ -449,15 +464,17 @@ mixin _$ProfileLatestMetric {
 /// @nodoc
 abstract class $ProfileLatestMetricCopyWith<$Res> {
   factory $ProfileLatestMetricCopyWith(
-          ProfileLatestMetric value, $Res Function(ProfileLatestMetric) then) =
-      _$ProfileLatestMetricCopyWithImpl<$Res, ProfileLatestMetric>;
+    ProfileLatestMetric value,
+    $Res Function(ProfileLatestMetric) then,
+  ) = _$ProfileLatestMetricCopyWithImpl<$Res, ProfileLatestMetric>;
   @useResult
-  $Res call(
-      {String recordedAt,
-      double? weightKg,
-      double? heightCm,
-      double? bodyFatPct,
-      double? muscleMass});
+  $Res call({
+    String recordedAt,
+    double? weightKg,
+    double? heightCm,
+    double? bodyFatPct,
+    double? muscleMass,
+  });
 }
 
 /// @nodoc
@@ -479,54 +496,60 @@ class _$ProfileLatestMetricCopyWithImpl<$Res, $Val extends ProfileLatestMetric>
     Object? bodyFatPct = freezed,
     Object? muscleMass = freezed,
   }) {
-    return _then(_value.copyWith(
-      recordedAt: null == recordedAt
-          ? _value.recordedAt
-          : recordedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      weightKg: freezed == weightKg
-          ? _value.weightKg
-          : weightKg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      heightCm: freezed == heightCm
-          ? _value.heightCm
-          : heightCm // ignore: cast_nullable_to_non_nullable
-              as double?,
-      bodyFatPct: freezed == bodyFatPct
-          ? _value.bodyFatPct
-          : bodyFatPct // ignore: cast_nullable_to_non_nullable
-              as double?,
-      muscleMass: freezed == muscleMass
-          ? _value.muscleMass
-          : muscleMass // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            recordedAt: null == recordedAt
+                ? _value.recordedAt
+                : recordedAt // ignore: cast_nullable_to_non_nullable
+                      as String,
+            weightKg: freezed == weightKg
+                ? _value.weightKg
+                : weightKg // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            heightCm: freezed == heightCm
+                ? _value.heightCm
+                : heightCm // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            bodyFatPct: freezed == bodyFatPct
+                ? _value.bodyFatPct
+                : bodyFatPct // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            muscleMass: freezed == muscleMass
+                ? _value.muscleMass
+                : muscleMass // ignore: cast_nullable_to_non_nullable
+                      as double?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ProfileLatestMetricImplCopyWith<$Res>
     implements $ProfileLatestMetricCopyWith<$Res> {
-  factory _$$ProfileLatestMetricImplCopyWith(_$ProfileLatestMetricImpl value,
-          $Res Function(_$ProfileLatestMetricImpl) then) =
-      __$$ProfileLatestMetricImplCopyWithImpl<$Res>;
+  factory _$$ProfileLatestMetricImplCopyWith(
+    _$ProfileLatestMetricImpl value,
+    $Res Function(_$ProfileLatestMetricImpl) then,
+  ) = __$$ProfileLatestMetricImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String recordedAt,
-      double? weightKg,
-      double? heightCm,
-      double? bodyFatPct,
-      double? muscleMass});
+  $Res call({
+    String recordedAt,
+    double? weightKg,
+    double? heightCm,
+    double? bodyFatPct,
+    double? muscleMass,
+  });
 }
 
 /// @nodoc
 class __$$ProfileLatestMetricImplCopyWithImpl<$Res>
     extends _$ProfileLatestMetricCopyWithImpl<$Res, _$ProfileLatestMetricImpl>
     implements _$$ProfileLatestMetricImplCopyWith<$Res> {
-  __$$ProfileLatestMetricImplCopyWithImpl(_$ProfileLatestMetricImpl _value,
-      $Res Function(_$ProfileLatestMetricImpl) _then)
-      : super(_value, _then);
+  __$$ProfileLatestMetricImplCopyWithImpl(
+    _$ProfileLatestMetricImpl _value,
+    $Res Function(_$ProfileLatestMetricImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -537,40 +560,43 @@ class __$$ProfileLatestMetricImplCopyWithImpl<$Res>
     Object? bodyFatPct = freezed,
     Object? muscleMass = freezed,
   }) {
-    return _then(_$ProfileLatestMetricImpl(
-      recordedAt: null == recordedAt
-          ? _value.recordedAt
-          : recordedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      weightKg: freezed == weightKg
-          ? _value.weightKg
-          : weightKg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      heightCm: freezed == heightCm
-          ? _value.heightCm
-          : heightCm // ignore: cast_nullable_to_non_nullable
-              as double?,
-      bodyFatPct: freezed == bodyFatPct
-          ? _value.bodyFatPct
-          : bodyFatPct // ignore: cast_nullable_to_non_nullable
-              as double?,
-      muscleMass: freezed == muscleMass
-          ? _value.muscleMass
-          : muscleMass // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
+    return _then(
+      _$ProfileLatestMetricImpl(
+        recordedAt: null == recordedAt
+            ? _value.recordedAt
+            : recordedAt // ignore: cast_nullable_to_non_nullable
+                  as String,
+        weightKg: freezed == weightKg
+            ? _value.weightKg
+            : weightKg // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        heightCm: freezed == heightCm
+            ? _value.heightCm
+            : heightCm // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        bodyFatPct: freezed == bodyFatPct
+            ? _value.bodyFatPct
+            : bodyFatPct // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        muscleMass: freezed == muscleMass
+            ? _value.muscleMass
+            : muscleMass // ignore: cast_nullable_to_non_nullable
+                  as double?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProfileLatestMetricImpl implements _ProfileLatestMetric {
-  const _$ProfileLatestMetricImpl(
-      {required this.recordedAt,
-      this.weightKg,
-      this.heightCm,
-      this.bodyFatPct,
-      this.muscleMass});
+  const _$ProfileLatestMetricImpl({
+    required this.recordedAt,
+    this.weightKg,
+    this.heightCm,
+    this.bodyFatPct,
+    this.muscleMass,
+  });
 
   factory _$ProfileLatestMetricImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileLatestMetricImplFromJson(json);
@@ -611,30 +637,37 @@ class _$ProfileLatestMetricImpl implements _ProfileLatestMetric {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, recordedAt, weightKg, heightCm, bodyFatPct, muscleMass);
+    runtimeType,
+    recordedAt,
+    weightKg,
+    heightCm,
+    bodyFatPct,
+    muscleMass,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileLatestMetricImplCopyWith<_$ProfileLatestMetricImpl> get copyWith =>
       __$$ProfileLatestMetricImplCopyWithImpl<_$ProfileLatestMetricImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileLatestMetricImplToJson(
-      this,
-    );
+    return _$$ProfileLatestMetricImplToJson(this);
   }
 }
 
 abstract class _ProfileLatestMetric implements ProfileLatestMetric {
-  const factory _ProfileLatestMetric(
-      {required final String recordedAt,
-      final double? weightKg,
-      final double? heightCm,
-      final double? bodyFatPct,
-      final double? muscleMass}) = _$ProfileLatestMetricImpl;
+  const factory _ProfileLatestMetric({
+    required final String recordedAt,
+    final double? weightKg,
+    final double? heightCm,
+    final double? bodyFatPct,
+    final double? muscleMass,
+  }) = _$ProfileLatestMetricImpl;
 
   factory _ProfileLatestMetric.fromJson(Map<String, dynamic> json) =
       _$ProfileLatestMetricImpl.fromJson;
@@ -656,7 +689,8 @@ abstract class _ProfileLatestMetric implements ProfileLatestMetric {
 }
 
 ProfileTrainingSnapshotSummary _$ProfileTrainingSnapshotSummaryFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _ProfileTrainingSnapshotSummary.fromJson(json);
 }
 
@@ -669,26 +703,32 @@ mixin _$ProfileTrainingSnapshotSummary {
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ProfileTrainingSnapshotSummaryCopyWith<ProfileTrainingSnapshotSummary>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ProfileTrainingSnapshotSummaryCopyWith<$Res> {
   factory $ProfileTrainingSnapshotSummaryCopyWith(
-          ProfileTrainingSnapshotSummary value,
-          $Res Function(ProfileTrainingSnapshotSummary) then) =
-      _$ProfileTrainingSnapshotSummaryCopyWithImpl<$Res,
-          ProfileTrainingSnapshotSummary>;
+    ProfileTrainingSnapshotSummary value,
+    $Res Function(ProfileTrainingSnapshotSummary) then,
+  ) =
+      _$ProfileTrainingSnapshotSummaryCopyWithImpl<
+        $Res,
+        ProfileTrainingSnapshotSummary
+      >;
   @useResult
-  $Res call(
-      {List<String> preferredDays,
-      int? preferredDurationMinutes,
-      String? primaryGoal});
+  $Res call({
+    List<String> preferredDays,
+    int? preferredDurationMinutes,
+    String? primaryGoal,
+  });
 }
 
 /// @nodoc
-class _$ProfileTrainingSnapshotSummaryCopyWithImpl<$Res,
-        $Val extends ProfileTrainingSnapshotSummary>
+class _$ProfileTrainingSnapshotSummaryCopyWithImpl<
+  $Res,
+  $Val extends ProfileTrainingSnapshotSummary
+>
     implements $ProfileTrainingSnapshotSummaryCopyWith<$Res> {
   _$ProfileTrainingSnapshotSummaryCopyWithImpl(this._value, this._then);
 
@@ -704,20 +744,23 @@ class _$ProfileTrainingSnapshotSummaryCopyWithImpl<$Res,
     Object? preferredDurationMinutes = freezed,
     Object? primaryGoal = freezed,
   }) {
-    return _then(_value.copyWith(
-      preferredDays: null == preferredDays
-          ? _value.preferredDays
-          : preferredDays // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      preferredDurationMinutes: freezed == preferredDurationMinutes
-          ? _value.preferredDurationMinutes
-          : preferredDurationMinutes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      primaryGoal: freezed == primaryGoal
-          ? _value.primaryGoal
-          : primaryGoal // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            preferredDays: null == preferredDays
+                ? _value.preferredDays
+                : preferredDays // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            preferredDurationMinutes: freezed == preferredDurationMinutes
+                ? _value.preferredDurationMinutes
+                : preferredDurationMinutes // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            primaryGoal: freezed == primaryGoal
+                ? _value.primaryGoal
+                : primaryGoal // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -725,26 +768,30 @@ class _$ProfileTrainingSnapshotSummaryCopyWithImpl<$Res,
 abstract class _$$ProfileTrainingSnapshotSummaryImplCopyWith<$Res>
     implements $ProfileTrainingSnapshotSummaryCopyWith<$Res> {
   factory _$$ProfileTrainingSnapshotSummaryImplCopyWith(
-          _$ProfileTrainingSnapshotSummaryImpl value,
-          $Res Function(_$ProfileTrainingSnapshotSummaryImpl) then) =
-      __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<$Res>;
+    _$ProfileTrainingSnapshotSummaryImpl value,
+    $Res Function(_$ProfileTrainingSnapshotSummaryImpl) then,
+  ) = __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<String> preferredDays,
-      int? preferredDurationMinutes,
-      String? primaryGoal});
+  $Res call({
+    List<String> preferredDays,
+    int? preferredDurationMinutes,
+    String? primaryGoal,
+  });
 }
 
 /// @nodoc
 class __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<$Res>
-    extends _$ProfileTrainingSnapshotSummaryCopyWithImpl<$Res,
-        _$ProfileTrainingSnapshotSummaryImpl>
+    extends
+        _$ProfileTrainingSnapshotSummaryCopyWithImpl<
+          $Res,
+          _$ProfileTrainingSnapshotSummaryImpl
+        >
     implements _$$ProfileTrainingSnapshotSummaryImplCopyWith<$Res> {
   __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl(
-      _$ProfileTrainingSnapshotSummaryImpl _value,
-      $Res Function(_$ProfileTrainingSnapshotSummaryImpl) _then)
-      : super(_value, _then);
+    _$ProfileTrainingSnapshotSummaryImpl _value,
+    $Res Function(_$ProfileTrainingSnapshotSummaryImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -753,20 +800,22 @@ class __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<$Res>
     Object? preferredDurationMinutes = freezed,
     Object? primaryGoal = freezed,
   }) {
-    return _then(_$ProfileTrainingSnapshotSummaryImpl(
-      preferredDays: null == preferredDays
-          ? _value._preferredDays
-          : preferredDays // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      preferredDurationMinutes: freezed == preferredDurationMinutes
-          ? _value.preferredDurationMinutes
-          : preferredDurationMinutes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      primaryGoal: freezed == primaryGoal
-          ? _value.primaryGoal
-          : primaryGoal // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$ProfileTrainingSnapshotSummaryImpl(
+        preferredDays: null == preferredDays
+            ? _value._preferredDays
+            : preferredDays // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        preferredDurationMinutes: freezed == preferredDurationMinutes
+            ? _value.preferredDurationMinutes
+            : preferredDurationMinutes // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        primaryGoal: freezed == primaryGoal
+            ? _value.primaryGoal
+            : primaryGoal // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
@@ -774,15 +823,15 @@ class __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProfileTrainingSnapshotSummaryImpl
     implements _ProfileTrainingSnapshotSummary {
-  const _$ProfileTrainingSnapshotSummaryImpl(
-      {required final List<String> preferredDays,
-      this.preferredDurationMinutes,
-      this.primaryGoal})
-      : _preferredDays = preferredDays;
+  const _$ProfileTrainingSnapshotSummaryImpl({
+    required final List<String> preferredDays,
+    this.preferredDurationMinutes,
+    this.primaryGoal,
+  }) : _preferredDays = preferredDays;
 
   factory _$ProfileTrainingSnapshotSummaryImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$ProfileTrainingSnapshotSummaryImplFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$$ProfileTrainingSnapshotSummaryImplFromJson(json);
 
   final List<String> _preferredDays;
   @override
@@ -807,10 +856,14 @@ class _$ProfileTrainingSnapshotSummaryImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProfileTrainingSnapshotSummaryImpl &&
-            const DeepCollectionEquality()
-                .equals(other._preferredDays, _preferredDays) &&
+            const DeepCollectionEquality().equals(
+              other._preferredDays,
+              _preferredDays,
+            ) &&
             (identical(
-                    other.preferredDurationMinutes, preferredDurationMinutes) ||
+                  other.preferredDurationMinutes,
+                  preferredDurationMinutes,
+                ) ||
                 other.preferredDurationMinutes == preferredDurationMinutes) &&
             (identical(other.primaryGoal, primaryGoal) ||
                 other.primaryGoal == primaryGoal));
@@ -819,33 +872,36 @@ class _$ProfileTrainingSnapshotSummaryImpl
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_preferredDays),
-      preferredDurationMinutes,
-      primaryGoal);
+    runtimeType,
+    const DeepCollectionEquality().hash(_preferredDays),
+    preferredDurationMinutes,
+    primaryGoal,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileTrainingSnapshotSummaryImplCopyWith<
-          _$ProfileTrainingSnapshotSummaryImpl>
-      get copyWith => __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<
-          _$ProfileTrainingSnapshotSummaryImpl>(this, _$identity);
+    _$ProfileTrainingSnapshotSummaryImpl
+  >
+  get copyWith =>
+      __$$ProfileTrainingSnapshotSummaryImplCopyWithImpl<
+        _$ProfileTrainingSnapshotSummaryImpl
+      >(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileTrainingSnapshotSummaryImplToJson(
-      this,
-    );
+    return _$$ProfileTrainingSnapshotSummaryImplToJson(this);
   }
 }
 
 abstract class _ProfileTrainingSnapshotSummary
     implements ProfileTrainingSnapshotSummary {
-  const factory _ProfileTrainingSnapshotSummary(
-      {required final List<String> preferredDays,
-      final int? preferredDurationMinutes,
-      final String? primaryGoal}) = _$ProfileTrainingSnapshotSummaryImpl;
+  const factory _ProfileTrainingSnapshotSummary({
+    required final List<String> preferredDays,
+    final int? preferredDurationMinutes,
+    final String? primaryGoal,
+  }) = _$ProfileTrainingSnapshotSummaryImpl;
 
   factory _ProfileTrainingSnapshotSummary.fromJson(Map<String, dynamic> json) =
       _$ProfileTrainingSnapshotSummaryImpl.fromJson;
@@ -859,6 +915,7 @@ abstract class _ProfileTrainingSnapshotSummary
   @override
   @JsonKey(ignore: true)
   _$$ProfileTrainingSnapshotSummaryImplCopyWith<
-          _$ProfileTrainingSnapshotSummaryImpl>
-      get copyWith => throw _privateConstructorUsedError;
+    _$ProfileTrainingSnapshotSummaryImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
 }

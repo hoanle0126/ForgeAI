@@ -4,7 +4,7 @@ import 'package:forge_ai/features/training/models/workout_library_models.dart';
 import 'package:forge_ai/features/training/models/workout_session_models.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 
-final trainingWorkoutProvider = FutureProvider<TrainingWorkoutPlan?>((
+final trainingWorkoutProvider = FutureProvider.autoDispose<TrainingWorkoutPlan?>((
   ref,
 ) async {
   final workouts = await ref.watch(workoutLibraryProvider.future);

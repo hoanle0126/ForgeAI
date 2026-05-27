@@ -27,7 +27,9 @@ class ProfileSettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileProvider).valueOrNull;
     final displayName =
-        profile?.fullName ?? ref.watch(authProvider).displayName ?? 'Alex Morgan';
+        profile?.fullName ??
+        ref.watch(authProvider).displayName ??
+        'Alex Morgan';
 
     return Scaffold(
       backgroundColor: AppColors.warmIvory,
@@ -42,7 +44,8 @@ class ProfileSettingsScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.lg),
               ProfileSettingsAccountCard(
                 displayName: displayName,
-                athleteTitle: profile?.athleteTitle ?? 'Hybrid strength athlete',
+                athleteTitle:
+                    profile?.athleteTitle ?? 'Hybrid strength athlete',
                 email: profile?.email ?? 'athlete@forge.ai',
               ),
               const SizedBox(height: AppSpacing.base),

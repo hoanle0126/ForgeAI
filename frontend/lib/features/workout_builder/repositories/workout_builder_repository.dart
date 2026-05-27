@@ -185,9 +185,7 @@ class WorkoutBuilderRepository {
     if (items is List) {
       sanitized['items'] = items
           .whereType<Map<Object?, Object?>>()
-          .map(
-            (item) => _sanitizeWorkoutItem(Map<String, dynamic>.from(item)),
-          )
+          .map((item) => _sanitizeWorkoutItem(Map<String, dynamic>.from(item)))
           .toList(growable: false);
     }
 

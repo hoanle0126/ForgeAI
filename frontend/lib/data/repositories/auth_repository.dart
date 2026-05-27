@@ -81,10 +81,7 @@ class AuthRepository {
   }
 
   Future<void> forgotPassword({required String email}) async {
-    await _dio.post<void>(
-      '/auth/forgot-password',
-      data: {'email': email},
-    );
+    await _dio.post<void>('/auth/forgot-password', data: {'email': email});
   }
 
   Future<String> verifyPasswordResetOtp({

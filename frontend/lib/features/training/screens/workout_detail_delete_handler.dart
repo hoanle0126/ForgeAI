@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
+import 'package:forge_ai/features/insight/providers/insight_provider.dart';
+import 'package:forge_ai/features/profile/providers/profile_provider.dart';
 import 'package:forge_ai/features/training/models/workout_library_models.dart';
 import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
@@ -47,7 +48,9 @@ Future<void> handleWorkoutDelete({
     ref
       ..invalidate(workoutLibraryProvider)
       ..invalidate(trainingWorkoutProvider)
-      ..invalidate(workoutDetailProvider(workout.id));
+      ..invalidate(workoutDetailProvider(workout.id))
+      ..invalidate(insightNotifierProvider)
+      ..invalidate(profileProvider);
 
     if (!context.mounted) return;
     context.pop();

@@ -345,7 +345,8 @@ class AuthNotifier extends Notifier<AuthState> {
       return AuthSubmitResult.success;
     } on DioException catch (e) {
       final message =
-          e.response?.data?['message']?.toString() ?? 'OTP verification failed.';
+          e.response?.data?['message']?.toString() ??
+          'OTP verification failed.';
       state = state.copyWith(isLoading: false, errorMessage: message);
       return AuthSubmitResult.invalid;
     } catch (_) {

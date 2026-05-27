@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:forge_ai/core/constants/app_colors.dart';
+import 'package:forge_ai/features/insight/providers/insight_provider.dart';
+import 'package:forge_ai/features/profile/providers/profile_provider.dart';
 import 'package:forge_ai/features/training/providers/training_workout_provider.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 import 'package:forge_ai/features/workout_create/providers/workout_create_provider.dart';
@@ -44,7 +45,9 @@ Future<void> handleWorkoutSave({
 
   ref
     ..invalidate(workoutLibraryProvider)
-    ..invalidate(trainingWorkoutProvider);
+    ..invalidate(trainingWorkoutProvider)
+    ..invalidate(insightNotifierProvider)
+    ..invalidate(profileProvider);
   if (state.editingWorkoutId case final workoutId?) {
     ref.invalidate(workoutDetailProvider(workoutId));
   }

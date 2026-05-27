@@ -12,7 +12,8 @@ part of 'insight_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$InsightState {
@@ -31,16 +32,18 @@ mixin _$InsightState {
 /// @nodoc
 abstract class $InsightStateCopyWith<$Res> {
   factory $InsightStateCopyWith(
-          InsightState value, $Res Function(InsightState) then) =
-      _$InsightStateCopyWithImpl<$Res, InsightState>;
+    InsightState value,
+    $Res Function(InsightState) then,
+  ) = _$InsightStateCopyWithImpl<$Res, InsightState>;
   @useResult
-  $Res call(
-      {List<MuscleData> muscleData,
-      List<MuscleAnalysis> muscleAnalyses,
-      List<InsightMessage> messages,
-      String selectedMuscleId,
-      AtlasSide activeAtlasSide,
-      bool isChatPanelOpen});
+  $Res call({
+    List<MuscleData> muscleData,
+    List<MuscleAnalysis> muscleAnalyses,
+    List<InsightMessage> messages,
+    String selectedMuscleId,
+    AtlasSide activeAtlasSide,
+    bool isChatPanelOpen,
+  });
 }
 
 /// @nodoc
@@ -63,32 +66,35 @@ class _$InsightStateCopyWithImpl<$Res, $Val extends InsightState>
     Object? activeAtlasSide = null,
     Object? isChatPanelOpen = null,
   }) {
-    return _then(_value.copyWith(
-      muscleData: null == muscleData
-          ? _value.muscleData
-          : muscleData // ignore: cast_nullable_to_non_nullable
-              as List<MuscleData>,
-      muscleAnalyses: null == muscleAnalyses
-          ? _value.muscleAnalyses
-          : muscleAnalyses // ignore: cast_nullable_to_non_nullable
-              as List<MuscleAnalysis>,
-      messages: null == messages
-          ? _value.messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<InsightMessage>,
-      selectedMuscleId: null == selectedMuscleId
-          ? _value.selectedMuscleId
-          : selectedMuscleId // ignore: cast_nullable_to_non_nullable
-              as String,
-      activeAtlasSide: null == activeAtlasSide
-          ? _value.activeAtlasSide
-          : activeAtlasSide // ignore: cast_nullable_to_non_nullable
-              as AtlasSide,
-      isChatPanelOpen: null == isChatPanelOpen
-          ? _value.isChatPanelOpen
-          : isChatPanelOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            muscleData: null == muscleData
+                ? _value.muscleData
+                : muscleData // ignore: cast_nullable_to_non_nullable
+                      as List<MuscleData>,
+            muscleAnalyses: null == muscleAnalyses
+                ? _value.muscleAnalyses
+                : muscleAnalyses // ignore: cast_nullable_to_non_nullable
+                      as List<MuscleAnalysis>,
+            messages: null == messages
+                ? _value.messages
+                : messages // ignore: cast_nullable_to_non_nullable
+                      as List<InsightMessage>,
+            selectedMuscleId: null == selectedMuscleId
+                ? _value.selectedMuscleId
+                : selectedMuscleId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            activeAtlasSide: null == activeAtlasSide
+                ? _value.activeAtlasSide
+                : activeAtlasSide // ignore: cast_nullable_to_non_nullable
+                      as AtlasSide,
+            isChatPanelOpen: null == isChatPanelOpen
+                ? _value.isChatPanelOpen
+                : isChatPanelOpen // ignore: cast_nullable_to_non_nullable
+                      as bool,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -96,17 +102,19 @@ class _$InsightStateCopyWithImpl<$Res, $Val extends InsightState>
 abstract class _$$InsightStateImplCopyWith<$Res>
     implements $InsightStateCopyWith<$Res> {
   factory _$$InsightStateImplCopyWith(
-          _$InsightStateImpl value, $Res Function(_$InsightStateImpl) then) =
-      __$$InsightStateImplCopyWithImpl<$Res>;
+    _$InsightStateImpl value,
+    $Res Function(_$InsightStateImpl) then,
+  ) = __$$InsightStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<MuscleData> muscleData,
-      List<MuscleAnalysis> muscleAnalyses,
-      List<InsightMessage> messages,
-      String selectedMuscleId,
-      AtlasSide activeAtlasSide,
-      bool isChatPanelOpen});
+  $Res call({
+    List<MuscleData> muscleData,
+    List<MuscleAnalysis> muscleAnalyses,
+    List<InsightMessage> messages,
+    String selectedMuscleId,
+    AtlasSide activeAtlasSide,
+    bool isChatPanelOpen,
+  });
 }
 
 /// @nodoc
@@ -114,8 +122,9 @@ class __$$InsightStateImplCopyWithImpl<$Res>
     extends _$InsightStateCopyWithImpl<$Res, _$InsightStateImpl>
     implements _$$InsightStateImplCopyWith<$Res> {
   __$$InsightStateImplCopyWithImpl(
-      _$InsightStateImpl _value, $Res Function(_$InsightStateImpl) _then)
-      : super(_value, _then);
+    _$InsightStateImpl _value,
+    $Res Function(_$InsightStateImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -127,48 +136,50 @@ class __$$InsightStateImplCopyWithImpl<$Res>
     Object? activeAtlasSide = null,
     Object? isChatPanelOpen = null,
   }) {
-    return _then(_$InsightStateImpl(
-      muscleData: null == muscleData
-          ? _value._muscleData
-          : muscleData // ignore: cast_nullable_to_non_nullable
-              as List<MuscleData>,
-      muscleAnalyses: null == muscleAnalyses
-          ? _value._muscleAnalyses
-          : muscleAnalyses // ignore: cast_nullable_to_non_nullable
-              as List<MuscleAnalysis>,
-      messages: null == messages
-          ? _value._messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<InsightMessage>,
-      selectedMuscleId: null == selectedMuscleId
-          ? _value.selectedMuscleId
-          : selectedMuscleId // ignore: cast_nullable_to_non_nullable
-              as String,
-      activeAtlasSide: null == activeAtlasSide
-          ? _value.activeAtlasSide
-          : activeAtlasSide // ignore: cast_nullable_to_non_nullable
-              as AtlasSide,
-      isChatPanelOpen: null == isChatPanelOpen
-          ? _value.isChatPanelOpen
-          : isChatPanelOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$InsightStateImpl(
+        muscleData: null == muscleData
+            ? _value._muscleData
+            : muscleData // ignore: cast_nullable_to_non_nullable
+                  as List<MuscleData>,
+        muscleAnalyses: null == muscleAnalyses
+            ? _value._muscleAnalyses
+            : muscleAnalyses // ignore: cast_nullable_to_non_nullable
+                  as List<MuscleAnalysis>,
+        messages: null == messages
+            ? _value._messages
+            : messages // ignore: cast_nullable_to_non_nullable
+                  as List<InsightMessage>,
+        selectedMuscleId: null == selectedMuscleId
+            ? _value.selectedMuscleId
+            : selectedMuscleId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        activeAtlasSide: null == activeAtlasSide
+            ? _value.activeAtlasSide
+            : activeAtlasSide // ignore: cast_nullable_to_non_nullable
+                  as AtlasSide,
+        isChatPanelOpen: null == isChatPanelOpen
+            ? _value.isChatPanelOpen
+            : isChatPanelOpen // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$InsightStateImpl implements _InsightState {
-  const _$InsightStateImpl(
-      {required final List<MuscleData> muscleData,
-      required final List<MuscleAnalysis> muscleAnalyses,
-      required final List<InsightMessage> messages,
-      required this.selectedMuscleId,
-      this.activeAtlasSide = AtlasSide.front,
-      this.isChatPanelOpen = false})
-      : _muscleData = muscleData,
-        _muscleAnalyses = muscleAnalyses,
-        _messages = messages;
+  const _$InsightStateImpl({
+    required final List<MuscleData> muscleData,
+    required final List<MuscleAnalysis> muscleAnalyses,
+    required final List<InsightMessage> messages,
+    required this.selectedMuscleId,
+    this.activeAtlasSide = AtlasSide.front,
+    this.isChatPanelOpen = false,
+  }) : _muscleData = muscleData,
+       _muscleAnalyses = muscleAnalyses,
+       _messages = messages;
 
   final List<MuscleData> _muscleData;
   @override
@@ -213,10 +224,14 @@ class _$InsightStateImpl implements _InsightState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InsightStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._muscleData, _muscleData) &&
-            const DeepCollectionEquality()
-                .equals(other._muscleAnalyses, _muscleAnalyses) &&
+            const DeepCollectionEquality().equals(
+              other._muscleData,
+              _muscleData,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._muscleAnalyses,
+              _muscleAnalyses,
+            ) &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             (identical(other.selectedMuscleId, selectedMuscleId) ||
                 other.selectedMuscleId == selectedMuscleId) &&
@@ -228,13 +243,14 @@ class _$InsightStateImpl implements _InsightState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_muscleData),
-      const DeepCollectionEquality().hash(_muscleAnalyses),
-      const DeepCollectionEquality().hash(_messages),
-      selectedMuscleId,
-      activeAtlasSide,
-      isChatPanelOpen);
+    runtimeType,
+    const DeepCollectionEquality().hash(_muscleData),
+    const DeepCollectionEquality().hash(_muscleAnalyses),
+    const DeepCollectionEquality().hash(_messages),
+    selectedMuscleId,
+    activeAtlasSide,
+    isChatPanelOpen,
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -244,13 +260,14 @@ class _$InsightStateImpl implements _InsightState {
 }
 
 abstract class _InsightState implements InsightState {
-  const factory _InsightState(
-      {required final List<MuscleData> muscleData,
-      required final List<MuscleAnalysis> muscleAnalyses,
-      required final List<InsightMessage> messages,
-      required final String selectedMuscleId,
-      final AtlasSide activeAtlasSide,
-      final bool isChatPanelOpen}) = _$InsightStateImpl;
+  const factory _InsightState({
+    required final List<MuscleData> muscleData,
+    required final List<MuscleAnalysis> muscleAnalyses,
+    required final List<InsightMessage> messages,
+    required final String selectedMuscleId,
+    final AtlasSide activeAtlasSide,
+    final bool isChatPanelOpen,
+  }) = _$InsightStateImpl;
 
   @override
   List<MuscleData> get muscleData;

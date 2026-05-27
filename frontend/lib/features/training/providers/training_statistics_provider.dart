@@ -4,7 +4,7 @@ import 'package:forge_ai/features/training/models/training_statistics_models.dar
 import 'package:forge_ai/features/training/models/workout_library_models.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
 
-final trainingStatisticsProvider = Provider<AsyncValue<TrainingStatisticsData>>(
+final trainingStatisticsProvider = Provider.autoDispose<AsyncValue<TrainingStatisticsData>>(
   (ref) {
     final workoutsAsync = ref.watch(workoutLibraryProvider);
     return workoutsAsync.whenData(_buildStatistics);

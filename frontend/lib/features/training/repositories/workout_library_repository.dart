@@ -68,10 +68,7 @@ class WorkoutLibraryRepository {
       data['durationSeconds'] = durationSeconds;
     }
 
-    await _apiClient.post<void>(
-      '/workouts/$workoutId/complete',
-      data: data,
-    );
+    await _apiClient.post<void>('/workouts/$workoutId/complete', data: data);
   }
 
   List<dynamic> _readList(Map<String, dynamic>? response, String key) {

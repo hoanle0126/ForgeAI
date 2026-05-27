@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:forge_ai/features/auth/providers/auth_provider.dart';
 import 'package:forge_ai/features/insight/models/insight_models.dart';
 import 'package:forge_ai/features/insight/repositories/insight_repository.dart';

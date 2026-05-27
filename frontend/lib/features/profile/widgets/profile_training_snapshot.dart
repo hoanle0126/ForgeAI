@@ -66,7 +66,9 @@ class ProfileTrainingSnapshot extends ConsumerWidget {
           ProfileSnapshotRow(
             icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
             title: 'Primary goal',
-            value: goal?.title ?? _goalLabel(profile?.trainingSnapshot.primaryGoal),
+            value:
+                goal?.title ??
+                _goalLabel(profile?.trainingSnapshot.primaryGoal),
             color: AppColors.sportOrange,
           ),
           const SizedBox(height: AppSpacing.md),
@@ -82,8 +84,11 @@ class ProfileTrainingSnapshot extends ConsumerWidget {
           ProfileSnapshotRow(
             icon: PhosphorIcons.clock(PhosphorIconsStyle.fill),
             title: 'Preferred time',
-            value: preferredTime?.label ??
-                _durationLabel(profile?.trainingSnapshot.preferredDurationMinutes),
+            value:
+                preferredTime?.label ??
+                _durationLabel(
+                  profile?.trainingSnapshot.preferredDurationMinutes,
+                ),
             color: AppColors.aiBlue,
           ),
         ],

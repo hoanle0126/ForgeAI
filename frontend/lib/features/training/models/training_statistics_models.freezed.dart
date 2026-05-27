@@ -12,7 +12,8 @@ part of 'training_statistics_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$TrainingStatisticsPoint {
@@ -26,16 +27,19 @@ mixin _$TrainingStatisticsPoint {
 
 /// @nodoc
 abstract class $TrainingStatisticsPointCopyWith<$Res> {
-  factory $TrainingStatisticsPointCopyWith(TrainingStatisticsPoint value,
-          $Res Function(TrainingStatisticsPoint) then) =
-      _$TrainingStatisticsPointCopyWithImpl<$Res, TrainingStatisticsPoint>;
+  factory $TrainingStatisticsPointCopyWith(
+    TrainingStatisticsPoint value,
+    $Res Function(TrainingStatisticsPoint) then,
+  ) = _$TrainingStatisticsPointCopyWithImpl<$Res, TrainingStatisticsPoint>;
   @useResult
   $Res call({String label, double value});
 }
 
 /// @nodoc
-class _$TrainingStatisticsPointCopyWithImpl<$Res,
-        $Val extends TrainingStatisticsPoint>
+class _$TrainingStatisticsPointCopyWithImpl<
+  $Res,
+  $Val extends TrainingStatisticsPoint
+>
     implements $TrainingStatisticsPointCopyWith<$Res> {
   _$TrainingStatisticsPointCopyWithImpl(this._value, this._then);
 
@@ -46,20 +50,20 @@ class _$TrainingStatisticsPointCopyWithImpl<$Res,
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? label = null,
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  $Res call({Object? label = null, Object? value = null}) {
+    return _then(
+      _value.copyWith(
+            label: null == label
+                ? _value.label
+                : label // ignore: cast_nullable_to_non_nullable
+                      as String,
+            value: null == value
+                ? _value.value
+                : value // ignore: cast_nullable_to_non_nullable
+                      as double,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -67,9 +71,9 @@ class _$TrainingStatisticsPointCopyWithImpl<$Res,
 abstract class _$$TrainingStatisticsPointImplCopyWith<$Res>
     implements $TrainingStatisticsPointCopyWith<$Res> {
   factory _$$TrainingStatisticsPointImplCopyWith(
-          _$TrainingStatisticsPointImpl value,
-          $Res Function(_$TrainingStatisticsPointImpl) then) =
-      __$$TrainingStatisticsPointImplCopyWithImpl<$Res>;
+    _$TrainingStatisticsPointImpl value,
+    $Res Function(_$TrainingStatisticsPointImpl) then,
+  ) = __$$TrainingStatisticsPointImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String label, double value});
@@ -77,38 +81,42 @@ abstract class _$$TrainingStatisticsPointImplCopyWith<$Res>
 
 /// @nodoc
 class __$$TrainingStatisticsPointImplCopyWithImpl<$Res>
-    extends _$TrainingStatisticsPointCopyWithImpl<$Res,
-        _$TrainingStatisticsPointImpl>
+    extends
+        _$TrainingStatisticsPointCopyWithImpl<
+          $Res,
+          _$TrainingStatisticsPointImpl
+        >
     implements _$$TrainingStatisticsPointImplCopyWith<$Res> {
   __$$TrainingStatisticsPointImplCopyWithImpl(
-      _$TrainingStatisticsPointImpl _value,
-      $Res Function(_$TrainingStatisticsPointImpl) _then)
-      : super(_value, _then);
+    _$TrainingStatisticsPointImpl _value,
+    $Res Function(_$TrainingStatisticsPointImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? label = null,
-    Object? value = null,
-  }) {
-    return _then(_$TrainingStatisticsPointImpl(
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+  $Res call({Object? label = null, Object? value = null}) {
+    return _then(
+      _$TrainingStatisticsPointImpl(
+        label: null == label
+            ? _value.label
+            : label // ignore: cast_nullable_to_non_nullable
+                  as String,
+        value: null == value
+            ? _value.value
+            : value // ignore: cast_nullable_to_non_nullable
+                  as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$TrainingStatisticsPointImpl implements _TrainingStatisticsPoint {
-  const _$TrainingStatisticsPointImpl(
-      {required this.label, required this.value});
+  const _$TrainingStatisticsPointImpl({
+    required this.label,
+    required this.value,
+  });
 
   @override
   final String label;
@@ -136,14 +144,17 @@ class _$TrainingStatisticsPointImpl implements _TrainingStatisticsPoint {
   @override
   @pragma('vm:prefer-inline')
   _$$TrainingStatisticsPointImplCopyWith<_$TrainingStatisticsPointImpl>
-      get copyWith => __$$TrainingStatisticsPointImplCopyWithImpl<
-          _$TrainingStatisticsPointImpl>(this, _$identity);
+  get copyWith =>
+      __$$TrainingStatisticsPointImplCopyWithImpl<
+        _$TrainingStatisticsPointImpl
+      >(this, _$identity);
 }
 
 abstract class _TrainingStatisticsPoint implements TrainingStatisticsPoint {
-  const factory _TrainingStatisticsPoint(
-      {required final String label,
-      required final double value}) = _$TrainingStatisticsPointImpl;
+  const factory _TrainingStatisticsPoint({
+    required final String label,
+    required final double value,
+  }) = _$TrainingStatisticsPointImpl;
 
   @override
   String get label;
@@ -152,7 +163,7 @@ abstract class _TrainingStatisticsPoint implements TrainingStatisticsPoint {
   @override
   @JsonKey(ignore: true)
   _$$TrainingStatisticsPointImplCopyWith<_$TrainingStatisticsPointImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -168,16 +179,19 @@ mixin _$TrainingStatisticsSegment {
 
 /// @nodoc
 abstract class $TrainingStatisticsSegmentCopyWith<$Res> {
-  factory $TrainingStatisticsSegmentCopyWith(TrainingStatisticsSegment value,
-          $Res Function(TrainingStatisticsSegment) then) =
-      _$TrainingStatisticsSegmentCopyWithImpl<$Res, TrainingStatisticsSegment>;
+  factory $TrainingStatisticsSegmentCopyWith(
+    TrainingStatisticsSegment value,
+    $Res Function(TrainingStatisticsSegment) then,
+  ) = _$TrainingStatisticsSegmentCopyWithImpl<$Res, TrainingStatisticsSegment>;
   @useResult
   $Res call({String label, int count, double ratio});
 }
 
 /// @nodoc
-class _$TrainingStatisticsSegmentCopyWithImpl<$Res,
-        $Val extends TrainingStatisticsSegment>
+class _$TrainingStatisticsSegmentCopyWithImpl<
+  $Res,
+  $Val extends TrainingStatisticsSegment
+>
     implements $TrainingStatisticsSegmentCopyWith<$Res> {
   _$TrainingStatisticsSegmentCopyWithImpl(this._value, this._then);
 
@@ -193,20 +207,23 @@ class _$TrainingStatisticsSegmentCopyWithImpl<$Res,
     Object? count = null,
     Object? ratio = null,
   }) {
-    return _then(_value.copyWith(
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      ratio: null == ratio
-          ? _value.ratio
-          : ratio // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            label: null == label
+                ? _value.label
+                : label // ignore: cast_nullable_to_non_nullable
+                      as String,
+            count: null == count
+                ? _value.count
+                : count // ignore: cast_nullable_to_non_nullable
+                      as int,
+            ratio: null == ratio
+                ? _value.ratio
+                : ratio // ignore: cast_nullable_to_non_nullable
+                      as double,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -214,9 +231,9 @@ class _$TrainingStatisticsSegmentCopyWithImpl<$Res,
 abstract class _$$TrainingStatisticsSegmentImplCopyWith<$Res>
     implements $TrainingStatisticsSegmentCopyWith<$Res> {
   factory _$$TrainingStatisticsSegmentImplCopyWith(
-          _$TrainingStatisticsSegmentImpl value,
-          $Res Function(_$TrainingStatisticsSegmentImpl) then) =
-      __$$TrainingStatisticsSegmentImplCopyWithImpl<$Res>;
+    _$TrainingStatisticsSegmentImpl value,
+    $Res Function(_$TrainingStatisticsSegmentImpl) then,
+  ) = __$$TrainingStatisticsSegmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String label, int count, double ratio});
@@ -224,13 +241,16 @@ abstract class _$$TrainingStatisticsSegmentImplCopyWith<$Res>
 
 /// @nodoc
 class __$$TrainingStatisticsSegmentImplCopyWithImpl<$Res>
-    extends _$TrainingStatisticsSegmentCopyWithImpl<$Res,
-        _$TrainingStatisticsSegmentImpl>
+    extends
+        _$TrainingStatisticsSegmentCopyWithImpl<
+          $Res,
+          _$TrainingStatisticsSegmentImpl
+        >
     implements _$$TrainingStatisticsSegmentImplCopyWith<$Res> {
   __$$TrainingStatisticsSegmentImplCopyWithImpl(
-      _$TrainingStatisticsSegmentImpl _value,
-      $Res Function(_$TrainingStatisticsSegmentImpl) _then)
-      : super(_value, _then);
+    _$TrainingStatisticsSegmentImpl _value,
+    $Res Function(_$TrainingStatisticsSegmentImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -239,28 +259,33 @@ class __$$TrainingStatisticsSegmentImplCopyWithImpl<$Res>
     Object? count = null,
     Object? ratio = null,
   }) {
-    return _then(_$TrainingStatisticsSegmentImpl(
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      ratio: null == ratio
-          ? _value.ratio
-          : ratio // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+    return _then(
+      _$TrainingStatisticsSegmentImpl(
+        label: null == label
+            ? _value.label
+            : label // ignore: cast_nullable_to_non_nullable
+                  as String,
+        count: null == count
+            ? _value.count
+            : count // ignore: cast_nullable_to_non_nullable
+                  as int,
+        ratio: null == ratio
+            ? _value.ratio
+            : ratio // ignore: cast_nullable_to_non_nullable
+                  as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$TrainingStatisticsSegmentImpl implements _TrainingStatisticsSegment {
-  const _$TrainingStatisticsSegmentImpl(
-      {required this.label, required this.count, required this.ratio});
+  const _$TrainingStatisticsSegmentImpl({
+    required this.label,
+    required this.count,
+    required this.ratio,
+  });
 
   @override
   final String label;
@@ -291,15 +316,18 @@ class _$TrainingStatisticsSegmentImpl implements _TrainingStatisticsSegment {
   @override
   @pragma('vm:prefer-inline')
   _$$TrainingStatisticsSegmentImplCopyWith<_$TrainingStatisticsSegmentImpl>
-      get copyWith => __$$TrainingStatisticsSegmentImplCopyWithImpl<
-          _$TrainingStatisticsSegmentImpl>(this, _$identity);
+  get copyWith =>
+      __$$TrainingStatisticsSegmentImplCopyWithImpl<
+        _$TrainingStatisticsSegmentImpl
+      >(this, _$identity);
 }
 
 abstract class _TrainingStatisticsSegment implements TrainingStatisticsSegment {
-  const factory _TrainingStatisticsSegment(
-      {required final String label,
-      required final int count,
-      required final double ratio}) = _$TrainingStatisticsSegmentImpl;
+  const factory _TrainingStatisticsSegment({
+    required final String label,
+    required final int count,
+    required final double ratio,
+  }) = _$TrainingStatisticsSegmentImpl;
 
   @override
   String get label;
@@ -310,7 +338,7 @@ abstract class _TrainingStatisticsSegment implements TrainingStatisticsSegment {
   @override
   @JsonKey(ignore: true)
   _$$TrainingStatisticsSegmentImplCopyWith<_$TrainingStatisticsSegmentImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -327,16 +355,19 @@ mixin _$TrainingExerciseSpotlight {
 
 /// @nodoc
 abstract class $TrainingExerciseSpotlightCopyWith<$Res> {
-  factory $TrainingExerciseSpotlightCopyWith(TrainingExerciseSpotlight value,
-          $Res Function(TrainingExerciseSpotlight) then) =
-      _$TrainingExerciseSpotlightCopyWithImpl<$Res, TrainingExerciseSpotlight>;
+  factory $TrainingExerciseSpotlightCopyWith(
+    TrainingExerciseSpotlight value,
+    $Res Function(TrainingExerciseSpotlight) then,
+  ) = _$TrainingExerciseSpotlightCopyWithImpl<$Res, TrainingExerciseSpotlight>;
   @useResult
   $Res call({String name, int workoutCount, int setCount, int totalReps});
 }
 
 /// @nodoc
-class _$TrainingExerciseSpotlightCopyWithImpl<$Res,
-        $Val extends TrainingExerciseSpotlight>
+class _$TrainingExerciseSpotlightCopyWithImpl<
+  $Res,
+  $Val extends TrainingExerciseSpotlight
+>
     implements $TrainingExerciseSpotlightCopyWith<$Res> {
   _$TrainingExerciseSpotlightCopyWithImpl(this._value, this._then);
 
@@ -353,24 +384,27 @@ class _$TrainingExerciseSpotlightCopyWithImpl<$Res,
     Object? setCount = null,
     Object? totalReps = null,
   }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      workoutCount: null == workoutCount
-          ? _value.workoutCount
-          : workoutCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      setCount: null == setCount
-          ? _value.setCount
-          : setCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalReps: null == totalReps
-          ? _value.totalReps
-          : totalReps // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            workoutCount: null == workoutCount
+                ? _value.workoutCount
+                : workoutCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            setCount: null == setCount
+                ? _value.setCount
+                : setCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            totalReps: null == totalReps
+                ? _value.totalReps
+                : totalReps // ignore: cast_nullable_to_non_nullable
+                      as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -378,9 +412,9 @@ class _$TrainingExerciseSpotlightCopyWithImpl<$Res,
 abstract class _$$TrainingExerciseSpotlightImplCopyWith<$Res>
     implements $TrainingExerciseSpotlightCopyWith<$Res> {
   factory _$$TrainingExerciseSpotlightImplCopyWith(
-          _$TrainingExerciseSpotlightImpl value,
-          $Res Function(_$TrainingExerciseSpotlightImpl) then) =
-      __$$TrainingExerciseSpotlightImplCopyWithImpl<$Res>;
+    _$TrainingExerciseSpotlightImpl value,
+    $Res Function(_$TrainingExerciseSpotlightImpl) then,
+  ) = __$$TrainingExerciseSpotlightImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, int workoutCount, int setCount, int totalReps});
@@ -388,13 +422,16 @@ abstract class _$$TrainingExerciseSpotlightImplCopyWith<$Res>
 
 /// @nodoc
 class __$$TrainingExerciseSpotlightImplCopyWithImpl<$Res>
-    extends _$TrainingExerciseSpotlightCopyWithImpl<$Res,
-        _$TrainingExerciseSpotlightImpl>
+    extends
+        _$TrainingExerciseSpotlightCopyWithImpl<
+          $Res,
+          _$TrainingExerciseSpotlightImpl
+        >
     implements _$$TrainingExerciseSpotlightImplCopyWith<$Res> {
   __$$TrainingExerciseSpotlightImplCopyWithImpl(
-      _$TrainingExerciseSpotlightImpl _value,
-      $Res Function(_$TrainingExerciseSpotlightImpl) _then)
-      : super(_value, _then);
+    _$TrainingExerciseSpotlightImpl _value,
+    $Res Function(_$TrainingExerciseSpotlightImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -404,35 +441,38 @@ class __$$TrainingExerciseSpotlightImplCopyWithImpl<$Res>
     Object? setCount = null,
     Object? totalReps = null,
   }) {
-    return _then(_$TrainingExerciseSpotlightImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      workoutCount: null == workoutCount
-          ? _value.workoutCount
-          : workoutCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      setCount: null == setCount
-          ? _value.setCount
-          : setCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalReps: null == totalReps
-          ? _value.totalReps
-          : totalReps // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$TrainingExerciseSpotlightImpl(
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        workoutCount: null == workoutCount
+            ? _value.workoutCount
+            : workoutCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        setCount: null == setCount
+            ? _value.setCount
+            : setCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        totalReps: null == totalReps
+            ? _value.totalReps
+            : totalReps // ignore: cast_nullable_to_non_nullable
+                  as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$TrainingExerciseSpotlightImpl implements _TrainingExerciseSpotlight {
-  const _$TrainingExerciseSpotlightImpl(
-      {required this.name,
-      required this.workoutCount,
-      required this.setCount,
-      required this.totalReps});
+  const _$TrainingExerciseSpotlightImpl({
+    required this.name,
+    required this.workoutCount,
+    required this.setCount,
+    required this.totalReps,
+  });
 
   @override
   final String name;
@@ -470,16 +510,19 @@ class _$TrainingExerciseSpotlightImpl implements _TrainingExerciseSpotlight {
   @override
   @pragma('vm:prefer-inline')
   _$$TrainingExerciseSpotlightImplCopyWith<_$TrainingExerciseSpotlightImpl>
-      get copyWith => __$$TrainingExerciseSpotlightImplCopyWithImpl<
-          _$TrainingExerciseSpotlightImpl>(this, _$identity);
+  get copyWith =>
+      __$$TrainingExerciseSpotlightImplCopyWithImpl<
+        _$TrainingExerciseSpotlightImpl
+      >(this, _$identity);
 }
 
 abstract class _TrainingExerciseSpotlight implements TrainingExerciseSpotlight {
-  const factory _TrainingExerciseSpotlight(
-      {required final String name,
-      required final int workoutCount,
-      required final int setCount,
-      required final int totalReps}) = _$TrainingExerciseSpotlightImpl;
+  const factory _TrainingExerciseSpotlight({
+    required final String name,
+    required final int workoutCount,
+    required final int setCount,
+    required final int totalReps,
+  }) = _$TrainingExerciseSpotlightImpl;
 
   @override
   String get name;
@@ -492,7 +535,7 @@ abstract class _TrainingExerciseSpotlight implements TrainingExerciseSpotlight {
   @override
   @JsonKey(ignore: true)
   _$$TrainingExerciseSpotlightImplCopyWith<_$TrainingExerciseSpotlightImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -522,29 +565,33 @@ mixin _$TrainingStatisticsData {
 
 /// @nodoc
 abstract class $TrainingStatisticsDataCopyWith<$Res> {
-  factory $TrainingStatisticsDataCopyWith(TrainingStatisticsData value,
-          $Res Function(TrainingStatisticsData) then) =
-      _$TrainingStatisticsDataCopyWithImpl<$Res, TrainingStatisticsData>;
+  factory $TrainingStatisticsDataCopyWith(
+    TrainingStatisticsData value,
+    $Res Function(TrainingStatisticsData) then,
+  ) = _$TrainingStatisticsDataCopyWithImpl<$Res, TrainingStatisticsData>;
   @useResult
-  $Res call(
-      {int trackedWorkouts,
-      int completedWorkouts,
-      int plannedMinutes,
-      int averageSessionMinutes,
-      int totalSetBlocks,
-      double completionRate,
-      String focusGoalLabel,
-      String busiestDayLabel,
-      String insightText,
-      List<TrainingStatisticsPoint> weeklyLoad,
-      List<TrainingStatisticsSegment> statusSegments,
-      List<TrainingStatisticsSegment> goalSegments,
-      List<TrainingExerciseSpotlight> topExercises});
+  $Res call({
+    int trackedWorkouts,
+    int completedWorkouts,
+    int plannedMinutes,
+    int averageSessionMinutes,
+    int totalSetBlocks,
+    double completionRate,
+    String focusGoalLabel,
+    String busiestDayLabel,
+    String insightText,
+    List<TrainingStatisticsPoint> weeklyLoad,
+    List<TrainingStatisticsSegment> statusSegments,
+    List<TrainingStatisticsSegment> goalSegments,
+    List<TrainingExerciseSpotlight> topExercises,
+  });
 }
 
 /// @nodoc
-class _$TrainingStatisticsDataCopyWithImpl<$Res,
-        $Val extends TrainingStatisticsData>
+class _$TrainingStatisticsDataCopyWithImpl<
+  $Res,
+  $Val extends TrainingStatisticsData
+>
     implements $TrainingStatisticsDataCopyWith<$Res> {
   _$TrainingStatisticsDataCopyWithImpl(this._value, this._then);
 
@@ -570,60 +617,63 @@ class _$TrainingStatisticsDataCopyWithImpl<$Res,
     Object? goalSegments = null,
     Object? topExercises = null,
   }) {
-    return _then(_value.copyWith(
-      trackedWorkouts: null == trackedWorkouts
-          ? _value.trackedWorkouts
-          : trackedWorkouts // ignore: cast_nullable_to_non_nullable
-              as int,
-      completedWorkouts: null == completedWorkouts
-          ? _value.completedWorkouts
-          : completedWorkouts // ignore: cast_nullable_to_non_nullable
-              as int,
-      plannedMinutes: null == plannedMinutes
-          ? _value.plannedMinutes
-          : plannedMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      averageSessionMinutes: null == averageSessionMinutes
-          ? _value.averageSessionMinutes
-          : averageSessionMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalSetBlocks: null == totalSetBlocks
-          ? _value.totalSetBlocks
-          : totalSetBlocks // ignore: cast_nullable_to_non_nullable
-              as int,
-      completionRate: null == completionRate
-          ? _value.completionRate
-          : completionRate // ignore: cast_nullable_to_non_nullable
-              as double,
-      focusGoalLabel: null == focusGoalLabel
-          ? _value.focusGoalLabel
-          : focusGoalLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      busiestDayLabel: null == busiestDayLabel
-          ? _value.busiestDayLabel
-          : busiestDayLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      insightText: null == insightText
-          ? _value.insightText
-          : insightText // ignore: cast_nullable_to_non_nullable
-              as String,
-      weeklyLoad: null == weeklyLoad
-          ? _value.weeklyLoad
-          : weeklyLoad // ignore: cast_nullable_to_non_nullable
-              as List<TrainingStatisticsPoint>,
-      statusSegments: null == statusSegments
-          ? _value.statusSegments
-          : statusSegments // ignore: cast_nullable_to_non_nullable
-              as List<TrainingStatisticsSegment>,
-      goalSegments: null == goalSegments
-          ? _value.goalSegments
-          : goalSegments // ignore: cast_nullable_to_non_nullable
-              as List<TrainingStatisticsSegment>,
-      topExercises: null == topExercises
-          ? _value.topExercises
-          : topExercises // ignore: cast_nullable_to_non_nullable
-              as List<TrainingExerciseSpotlight>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            trackedWorkouts: null == trackedWorkouts
+                ? _value.trackedWorkouts
+                : trackedWorkouts // ignore: cast_nullable_to_non_nullable
+                      as int,
+            completedWorkouts: null == completedWorkouts
+                ? _value.completedWorkouts
+                : completedWorkouts // ignore: cast_nullable_to_non_nullable
+                      as int,
+            plannedMinutes: null == plannedMinutes
+                ? _value.plannedMinutes
+                : plannedMinutes // ignore: cast_nullable_to_non_nullable
+                      as int,
+            averageSessionMinutes: null == averageSessionMinutes
+                ? _value.averageSessionMinutes
+                : averageSessionMinutes // ignore: cast_nullable_to_non_nullable
+                      as int,
+            totalSetBlocks: null == totalSetBlocks
+                ? _value.totalSetBlocks
+                : totalSetBlocks // ignore: cast_nullable_to_non_nullable
+                      as int,
+            completionRate: null == completionRate
+                ? _value.completionRate
+                : completionRate // ignore: cast_nullable_to_non_nullable
+                      as double,
+            focusGoalLabel: null == focusGoalLabel
+                ? _value.focusGoalLabel
+                : focusGoalLabel // ignore: cast_nullable_to_non_nullable
+                      as String,
+            busiestDayLabel: null == busiestDayLabel
+                ? _value.busiestDayLabel
+                : busiestDayLabel // ignore: cast_nullable_to_non_nullable
+                      as String,
+            insightText: null == insightText
+                ? _value.insightText
+                : insightText // ignore: cast_nullable_to_non_nullable
+                      as String,
+            weeklyLoad: null == weeklyLoad
+                ? _value.weeklyLoad
+                : weeklyLoad // ignore: cast_nullable_to_non_nullable
+                      as List<TrainingStatisticsPoint>,
+            statusSegments: null == statusSegments
+                ? _value.statusSegments
+                : statusSegments // ignore: cast_nullable_to_non_nullable
+                      as List<TrainingStatisticsSegment>,
+            goalSegments: null == goalSegments
+                ? _value.goalSegments
+                : goalSegments // ignore: cast_nullable_to_non_nullable
+                      as List<TrainingStatisticsSegment>,
+            topExercises: null == topExercises
+                ? _value.topExercises
+                : topExercises // ignore: cast_nullable_to_non_nullable
+                      as List<TrainingExerciseSpotlight>,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -631,36 +681,37 @@ class _$TrainingStatisticsDataCopyWithImpl<$Res,
 abstract class _$$TrainingStatisticsDataImplCopyWith<$Res>
     implements $TrainingStatisticsDataCopyWith<$Res> {
   factory _$$TrainingStatisticsDataImplCopyWith(
-          _$TrainingStatisticsDataImpl value,
-          $Res Function(_$TrainingStatisticsDataImpl) then) =
-      __$$TrainingStatisticsDataImplCopyWithImpl<$Res>;
+    _$TrainingStatisticsDataImpl value,
+    $Res Function(_$TrainingStatisticsDataImpl) then,
+  ) = __$$TrainingStatisticsDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int trackedWorkouts,
-      int completedWorkouts,
-      int plannedMinutes,
-      int averageSessionMinutes,
-      int totalSetBlocks,
-      double completionRate,
-      String focusGoalLabel,
-      String busiestDayLabel,
-      String insightText,
-      List<TrainingStatisticsPoint> weeklyLoad,
-      List<TrainingStatisticsSegment> statusSegments,
-      List<TrainingStatisticsSegment> goalSegments,
-      List<TrainingExerciseSpotlight> topExercises});
+  $Res call({
+    int trackedWorkouts,
+    int completedWorkouts,
+    int plannedMinutes,
+    int averageSessionMinutes,
+    int totalSetBlocks,
+    double completionRate,
+    String focusGoalLabel,
+    String busiestDayLabel,
+    String insightText,
+    List<TrainingStatisticsPoint> weeklyLoad,
+    List<TrainingStatisticsSegment> statusSegments,
+    List<TrainingStatisticsSegment> goalSegments,
+    List<TrainingExerciseSpotlight> topExercises,
+  });
 }
 
 /// @nodoc
 class __$$TrainingStatisticsDataImplCopyWithImpl<$Res>
-    extends _$TrainingStatisticsDataCopyWithImpl<$Res,
-        _$TrainingStatisticsDataImpl>
+    extends
+        _$TrainingStatisticsDataCopyWithImpl<$Res, _$TrainingStatisticsDataImpl>
     implements _$$TrainingStatisticsDataImplCopyWith<$Res> {
   __$$TrainingStatisticsDataImplCopyWithImpl(
-      _$TrainingStatisticsDataImpl _value,
-      $Res Function(_$TrainingStatisticsDataImpl) _then)
-      : super(_value, _then);
+    _$TrainingStatisticsDataImpl _value,
+    $Res Function(_$TrainingStatisticsDataImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -679,88 +730,90 @@ class __$$TrainingStatisticsDataImplCopyWithImpl<$Res>
     Object? goalSegments = null,
     Object? topExercises = null,
   }) {
-    return _then(_$TrainingStatisticsDataImpl(
-      trackedWorkouts: null == trackedWorkouts
-          ? _value.trackedWorkouts
-          : trackedWorkouts // ignore: cast_nullable_to_non_nullable
-              as int,
-      completedWorkouts: null == completedWorkouts
-          ? _value.completedWorkouts
-          : completedWorkouts // ignore: cast_nullable_to_non_nullable
-              as int,
-      plannedMinutes: null == plannedMinutes
-          ? _value.plannedMinutes
-          : plannedMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      averageSessionMinutes: null == averageSessionMinutes
-          ? _value.averageSessionMinutes
-          : averageSessionMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalSetBlocks: null == totalSetBlocks
-          ? _value.totalSetBlocks
-          : totalSetBlocks // ignore: cast_nullable_to_non_nullable
-              as int,
-      completionRate: null == completionRate
-          ? _value.completionRate
-          : completionRate // ignore: cast_nullable_to_non_nullable
-              as double,
-      focusGoalLabel: null == focusGoalLabel
-          ? _value.focusGoalLabel
-          : focusGoalLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      busiestDayLabel: null == busiestDayLabel
-          ? _value.busiestDayLabel
-          : busiestDayLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-      insightText: null == insightText
-          ? _value.insightText
-          : insightText // ignore: cast_nullable_to_non_nullable
-              as String,
-      weeklyLoad: null == weeklyLoad
-          ? _value._weeklyLoad
-          : weeklyLoad // ignore: cast_nullable_to_non_nullable
-              as List<TrainingStatisticsPoint>,
-      statusSegments: null == statusSegments
-          ? _value._statusSegments
-          : statusSegments // ignore: cast_nullable_to_non_nullable
-              as List<TrainingStatisticsSegment>,
-      goalSegments: null == goalSegments
-          ? _value._goalSegments
-          : goalSegments // ignore: cast_nullable_to_non_nullable
-              as List<TrainingStatisticsSegment>,
-      topExercises: null == topExercises
-          ? _value._topExercises
-          : topExercises // ignore: cast_nullable_to_non_nullable
-              as List<TrainingExerciseSpotlight>,
-    ));
+    return _then(
+      _$TrainingStatisticsDataImpl(
+        trackedWorkouts: null == trackedWorkouts
+            ? _value.trackedWorkouts
+            : trackedWorkouts // ignore: cast_nullable_to_non_nullable
+                  as int,
+        completedWorkouts: null == completedWorkouts
+            ? _value.completedWorkouts
+            : completedWorkouts // ignore: cast_nullable_to_non_nullable
+                  as int,
+        plannedMinutes: null == plannedMinutes
+            ? _value.plannedMinutes
+            : plannedMinutes // ignore: cast_nullable_to_non_nullable
+                  as int,
+        averageSessionMinutes: null == averageSessionMinutes
+            ? _value.averageSessionMinutes
+            : averageSessionMinutes // ignore: cast_nullable_to_non_nullable
+                  as int,
+        totalSetBlocks: null == totalSetBlocks
+            ? _value.totalSetBlocks
+            : totalSetBlocks // ignore: cast_nullable_to_non_nullable
+                  as int,
+        completionRate: null == completionRate
+            ? _value.completionRate
+            : completionRate // ignore: cast_nullable_to_non_nullable
+                  as double,
+        focusGoalLabel: null == focusGoalLabel
+            ? _value.focusGoalLabel
+            : focusGoalLabel // ignore: cast_nullable_to_non_nullable
+                  as String,
+        busiestDayLabel: null == busiestDayLabel
+            ? _value.busiestDayLabel
+            : busiestDayLabel // ignore: cast_nullable_to_non_nullable
+                  as String,
+        insightText: null == insightText
+            ? _value.insightText
+            : insightText // ignore: cast_nullable_to_non_nullable
+                  as String,
+        weeklyLoad: null == weeklyLoad
+            ? _value._weeklyLoad
+            : weeklyLoad // ignore: cast_nullable_to_non_nullable
+                  as List<TrainingStatisticsPoint>,
+        statusSegments: null == statusSegments
+            ? _value._statusSegments
+            : statusSegments // ignore: cast_nullable_to_non_nullable
+                  as List<TrainingStatisticsSegment>,
+        goalSegments: null == goalSegments
+            ? _value._goalSegments
+            : goalSegments // ignore: cast_nullable_to_non_nullable
+                  as List<TrainingStatisticsSegment>,
+        topExercises: null == topExercises
+            ? _value._topExercises
+            : topExercises // ignore: cast_nullable_to_non_nullable
+                  as List<TrainingExerciseSpotlight>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$TrainingStatisticsDataImpl implements _TrainingStatisticsData {
-  const _$TrainingStatisticsDataImpl(
-      {required this.trackedWorkouts,
-      required this.completedWorkouts,
-      required this.plannedMinutes,
-      required this.averageSessionMinutes,
-      required this.totalSetBlocks,
-      required this.completionRate,
-      required this.focusGoalLabel,
-      required this.busiestDayLabel,
-      required this.insightText,
-      final List<TrainingStatisticsPoint> weeklyLoad =
-          const <TrainingStatisticsPoint>[],
-      final List<TrainingStatisticsSegment> statusSegments =
-          const <TrainingStatisticsSegment>[],
-      final List<TrainingStatisticsSegment> goalSegments =
-          const <TrainingStatisticsSegment>[],
-      final List<TrainingExerciseSpotlight> topExercises =
-          const <TrainingExerciseSpotlight>[]})
-      : _weeklyLoad = weeklyLoad,
-        _statusSegments = statusSegments,
-        _goalSegments = goalSegments,
-        _topExercises = topExercises;
+  const _$TrainingStatisticsDataImpl({
+    required this.trackedWorkouts,
+    required this.completedWorkouts,
+    required this.plannedMinutes,
+    required this.averageSessionMinutes,
+    required this.totalSetBlocks,
+    required this.completionRate,
+    required this.focusGoalLabel,
+    required this.busiestDayLabel,
+    required this.insightText,
+    final List<TrainingStatisticsPoint> weeklyLoad =
+        const <TrainingStatisticsPoint>[],
+    final List<TrainingStatisticsSegment> statusSegments =
+        const <TrainingStatisticsSegment>[],
+    final List<TrainingStatisticsSegment> goalSegments =
+        const <TrainingStatisticsSegment>[],
+    final List<TrainingExerciseSpotlight> topExercises =
+        const <TrainingExerciseSpotlight>[],
+  }) : _weeklyLoad = weeklyLoad,
+       _statusSegments = statusSegments,
+       _goalSegments = goalSegments,
+       _topExercises = topExercises;
 
   @override
   final int trackedWorkouts;
@@ -844,57 +897,69 @@ class _$TrainingStatisticsDataImpl implements _TrainingStatisticsData {
                 other.busiestDayLabel == busiestDayLabel) &&
             (identical(other.insightText, insightText) ||
                 other.insightText == insightText) &&
-            const DeepCollectionEquality()
-                .equals(other._weeklyLoad, _weeklyLoad) &&
-            const DeepCollectionEquality()
-                .equals(other._statusSegments, _statusSegments) &&
-            const DeepCollectionEquality()
-                .equals(other._goalSegments, _goalSegments) &&
-            const DeepCollectionEquality()
-                .equals(other._topExercises, _topExercises));
+            const DeepCollectionEquality().equals(
+              other._weeklyLoad,
+              _weeklyLoad,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._statusSegments,
+              _statusSegments,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._goalSegments,
+              _goalSegments,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._topExercises,
+              _topExercises,
+            ));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      trackedWorkouts,
-      completedWorkouts,
-      plannedMinutes,
-      averageSessionMinutes,
-      totalSetBlocks,
-      completionRate,
-      focusGoalLabel,
-      busiestDayLabel,
-      insightText,
-      const DeepCollectionEquality().hash(_weeklyLoad),
-      const DeepCollectionEquality().hash(_statusSegments),
-      const DeepCollectionEquality().hash(_goalSegments),
-      const DeepCollectionEquality().hash(_topExercises));
+    runtimeType,
+    trackedWorkouts,
+    completedWorkouts,
+    plannedMinutes,
+    averageSessionMinutes,
+    totalSetBlocks,
+    completionRate,
+    focusGoalLabel,
+    busiestDayLabel,
+    insightText,
+    const DeepCollectionEquality().hash(_weeklyLoad),
+    const DeepCollectionEquality().hash(_statusSegments),
+    const DeepCollectionEquality().hash(_goalSegments),
+    const DeepCollectionEquality().hash(_topExercises),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TrainingStatisticsDataImplCopyWith<_$TrainingStatisticsDataImpl>
-      get copyWith => __$$TrainingStatisticsDataImplCopyWithImpl<
-          _$TrainingStatisticsDataImpl>(this, _$identity);
+  get copyWith =>
+      __$$TrainingStatisticsDataImplCopyWithImpl<_$TrainingStatisticsDataImpl>(
+        this,
+        _$identity,
+      );
 }
 
 abstract class _TrainingStatisticsData implements TrainingStatisticsData {
-  const factory _TrainingStatisticsData(
-          {required final int trackedWorkouts,
-          required final int completedWorkouts,
-          required final int plannedMinutes,
-          required final int averageSessionMinutes,
-          required final int totalSetBlocks,
-          required final double completionRate,
-          required final String focusGoalLabel,
-          required final String busiestDayLabel,
-          required final String insightText,
-          final List<TrainingStatisticsPoint> weeklyLoad,
-          final List<TrainingStatisticsSegment> statusSegments,
-          final List<TrainingStatisticsSegment> goalSegments,
-          final List<TrainingExerciseSpotlight> topExercises}) =
-      _$TrainingStatisticsDataImpl;
+  const factory _TrainingStatisticsData({
+    required final int trackedWorkouts,
+    required final int completedWorkouts,
+    required final int plannedMinutes,
+    required final int averageSessionMinutes,
+    required final int totalSetBlocks,
+    required final double completionRate,
+    required final String focusGoalLabel,
+    required final String busiestDayLabel,
+    required final String insightText,
+    final List<TrainingStatisticsPoint> weeklyLoad,
+    final List<TrainingStatisticsSegment> statusSegments,
+    final List<TrainingStatisticsSegment> goalSegments,
+    final List<TrainingExerciseSpotlight> topExercises,
+  }) = _$TrainingStatisticsDataImpl;
 
   @override
   int get trackedWorkouts;
@@ -925,5 +990,5 @@ abstract class _TrainingStatisticsData implements TrainingStatisticsData {
   @override
   @JsonKey(ignore: true)
   _$$TrainingStatisticsDataImplCopyWith<_$TrainingStatisticsDataImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }

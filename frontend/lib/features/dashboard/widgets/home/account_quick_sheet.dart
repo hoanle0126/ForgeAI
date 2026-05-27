@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_coach_card.dart';
-import 'package:forge_ai/features/dashboard/widgets/home/account_metric_tile.dart';
+import 'package:forge_ai/features/dashboard/widgets/home/account_metric_row.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_profile_hero.dart';
 import 'package:forge_ai/features/dashboard/widgets/home/account_sheet_action_list.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class AccountQuickSheet extends StatelessWidget {
   const AccountQuickSheet({
@@ -49,7 +48,7 @@ class AccountQuickSheet extends StatelessWidget {
             const SizedBox(height: AppSpacing.base),
             AccountProfileHero(displayName: displayName),
             const SizedBox(height: AppSpacing.base),
-            _MetricRow(
+            AccountMetricRow(
               streakValue: streakValue,
               readinessValue: readinessValue,
               loadValue: loadValue,
@@ -84,48 +83,6 @@ class _SheetHandle extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
         ),
       ),
-    );
-  }
-}
-
-class _MetricRow extends StatelessWidget {
-  const _MetricRow({
-    required this.streakValue,
-    required this.readinessValue,
-    required this.loadValue,
-  });
-
-  final String streakValue;
-  final String readinessValue;
-  final String loadValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        AccountMetricTile(
-          label: 'STREAK',
-          value: streakValue,
-          icon: PhosphorIcons.fire(PhosphorIconsStyle.fill),
-          backgroundColor: AppColors.sportOrangeLight,
-          labelColor: AppColors.sportOrange,
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        AccountMetricTile(
-          label: 'READY',
-          value: readinessValue,
-          icon: PhosphorIcons.heartbeat(PhosphorIconsStyle.fill),
-          backgroundColor: AppColors.inputBg,
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        AccountMetricTile(
-          label: 'LOAD',
-          value: loadValue,
-          icon: PhosphorIcons.barbell(PhosphorIconsStyle.fill),
-          backgroundColor: AppColors.recoveryLight,
-          labelColor: AppColors.recovery,
-        ),
-      ],
     );
   }
 }

@@ -82,12 +82,12 @@ class ProfilePerformanceCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           Row(
-          children: [
-            ProfileSignalPill(label: 'READINESS', value: readinessScore),
-            const SizedBox(width: AppSpacing.sm),
-            ProfileSignalPill(label: 'LOAD', value: loadLabel),
-          ],
-        ),
+            children: [
+              ProfileSignalPill(label: 'READINESS', value: readinessScore),
+              const SizedBox(width: AppSpacing.sm),
+              ProfileSignalPill(label: 'LOAD', value: loadLabel),
+            ],
+          ),
         ],
       ),
     );

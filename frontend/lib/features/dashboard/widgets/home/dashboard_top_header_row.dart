@@ -20,7 +20,9 @@ class DashboardTopHeaderRow extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileProvider).valueOrNull;
     final displayName =
-        profile?.fullName ?? ref.watch(authProvider).displayName ?? 'Alex Morgan';
+        profile?.fullName ??
+        ref.watch(authProvider).displayName ??
+        'Alex Morgan';
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,20 +93,18 @@ class DashboardTopHeaderRow extends ConsumerWidget {
   void _showBottomSheet({
     required BuildContext context,
     required WidgetBuilder builder,
-  }) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: AppColors.cardWhite,
-      barrierColor: AppColors.textDark.withValues(alpha: 0.28),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppSpacing.radiusXl),
-        ),
+  }) => showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: AppColors.cardWhite,
+    barrierColor: AppColors.textDark.withValues(alpha: 0.28),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(AppSpacing.radiusXl),
       ),
-      builder: builder,
-    );
-  }
+    ),
+    builder: builder,
+  );
 
   void _closeSheetAndShowMessage(
     BuildContext sheetContext,

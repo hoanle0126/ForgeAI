@@ -12,7 +12,8 @@ part of 'dashboard_home_summary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 DashboardHomeSummary _$DashboardHomeSummaryFromJson(Map<String, dynamic> json) {
   return _DashboardHomeSummary.fromJson(json);
@@ -36,23 +37,27 @@ mixin _$DashboardHomeSummary {
 
 /// @nodoc
 abstract class $DashboardHomeSummaryCopyWith<$Res> {
-  factory $DashboardHomeSummaryCopyWith(DashboardHomeSummary value,
-          $Res Function(DashboardHomeSummary) then) =
-      _$DashboardHomeSummaryCopyWithImpl<$Res, DashboardHomeSummary>;
+  factory $DashboardHomeSummaryCopyWith(
+    DashboardHomeSummary value,
+    $Res Function(DashboardHomeSummary) then,
+  ) = _$DashboardHomeSummaryCopyWithImpl<$Res, DashboardHomeSummary>;
   @useResult
-  $Res call(
-      {String greetingLine,
-      String athleteAlias,
-      int readinessScore,
-      String readinessMessage,
-      String volumeValue,
-      String volumeUnit,
-      int streakDays});
+  $Res call({
+    String greetingLine,
+    String athleteAlias,
+    int readinessScore,
+    String readinessMessage,
+    String volumeValue,
+    String volumeUnit,
+    int streakDays,
+  });
 }
 
 /// @nodoc
-class _$DashboardHomeSummaryCopyWithImpl<$Res,
-        $Val extends DashboardHomeSummary>
+class _$DashboardHomeSummaryCopyWithImpl<
+  $Res,
+  $Val extends DashboardHomeSummary
+>
     implements $DashboardHomeSummaryCopyWith<$Res> {
   _$DashboardHomeSummaryCopyWithImpl(this._value, this._then);
 
@@ -72,64 +77,70 @@ class _$DashboardHomeSummaryCopyWithImpl<$Res,
     Object? volumeUnit = null,
     Object? streakDays = null,
   }) {
-    return _then(_value.copyWith(
-      greetingLine: null == greetingLine
-          ? _value.greetingLine
-          : greetingLine // ignore: cast_nullable_to_non_nullable
-              as String,
-      athleteAlias: null == athleteAlias
-          ? _value.athleteAlias
-          : athleteAlias // ignore: cast_nullable_to_non_nullable
-              as String,
-      readinessScore: null == readinessScore
-          ? _value.readinessScore
-          : readinessScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      readinessMessage: null == readinessMessage
-          ? _value.readinessMessage
-          : readinessMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      volumeValue: null == volumeValue
-          ? _value.volumeValue
-          : volumeValue // ignore: cast_nullable_to_non_nullable
-              as String,
-      volumeUnit: null == volumeUnit
-          ? _value.volumeUnit
-          : volumeUnit // ignore: cast_nullable_to_non_nullable
-              as String,
-      streakDays: null == streakDays
-          ? _value.streakDays
-          : streakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            greetingLine: null == greetingLine
+                ? _value.greetingLine
+                : greetingLine // ignore: cast_nullable_to_non_nullable
+                      as String,
+            athleteAlias: null == athleteAlias
+                ? _value.athleteAlias
+                : athleteAlias // ignore: cast_nullable_to_non_nullable
+                      as String,
+            readinessScore: null == readinessScore
+                ? _value.readinessScore
+                : readinessScore // ignore: cast_nullable_to_non_nullable
+                      as int,
+            readinessMessage: null == readinessMessage
+                ? _value.readinessMessage
+                : readinessMessage // ignore: cast_nullable_to_non_nullable
+                      as String,
+            volumeValue: null == volumeValue
+                ? _value.volumeValue
+                : volumeValue // ignore: cast_nullable_to_non_nullable
+                      as String,
+            volumeUnit: null == volumeUnit
+                ? _value.volumeUnit
+                : volumeUnit // ignore: cast_nullable_to_non_nullable
+                      as String,
+            streakDays: null == streakDays
+                ? _value.streakDays
+                : streakDays // ignore: cast_nullable_to_non_nullable
+                      as int,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$DashboardHomeSummaryImplCopyWith<$Res>
     implements $DashboardHomeSummaryCopyWith<$Res> {
-  factory _$$DashboardHomeSummaryImplCopyWith(_$DashboardHomeSummaryImpl value,
-          $Res Function(_$DashboardHomeSummaryImpl) then) =
-      __$$DashboardHomeSummaryImplCopyWithImpl<$Res>;
+  factory _$$DashboardHomeSummaryImplCopyWith(
+    _$DashboardHomeSummaryImpl value,
+    $Res Function(_$DashboardHomeSummaryImpl) then,
+  ) = __$$DashboardHomeSummaryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String greetingLine,
-      String athleteAlias,
-      int readinessScore,
-      String readinessMessage,
-      String volumeValue,
-      String volumeUnit,
-      int streakDays});
+  $Res call({
+    String greetingLine,
+    String athleteAlias,
+    int readinessScore,
+    String readinessMessage,
+    String volumeValue,
+    String volumeUnit,
+    int streakDays,
+  });
 }
 
 /// @nodoc
 class __$$DashboardHomeSummaryImplCopyWithImpl<$Res>
     extends _$DashboardHomeSummaryCopyWithImpl<$Res, _$DashboardHomeSummaryImpl>
     implements _$$DashboardHomeSummaryImplCopyWith<$Res> {
-  __$$DashboardHomeSummaryImplCopyWithImpl(_$DashboardHomeSummaryImpl _value,
-      $Res Function(_$DashboardHomeSummaryImpl) _then)
-      : super(_value, _then);
+  __$$DashboardHomeSummaryImplCopyWithImpl(
+    _$DashboardHomeSummaryImpl _value,
+    $Res Function(_$DashboardHomeSummaryImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -142,50 +153,53 @@ class __$$DashboardHomeSummaryImplCopyWithImpl<$Res>
     Object? volumeUnit = null,
     Object? streakDays = null,
   }) {
-    return _then(_$DashboardHomeSummaryImpl(
-      greetingLine: null == greetingLine
-          ? _value.greetingLine
-          : greetingLine // ignore: cast_nullable_to_non_nullable
-              as String,
-      athleteAlias: null == athleteAlias
-          ? _value.athleteAlias
-          : athleteAlias // ignore: cast_nullable_to_non_nullable
-              as String,
-      readinessScore: null == readinessScore
-          ? _value.readinessScore
-          : readinessScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      readinessMessage: null == readinessMessage
-          ? _value.readinessMessage
-          : readinessMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      volumeValue: null == volumeValue
-          ? _value.volumeValue
-          : volumeValue // ignore: cast_nullable_to_non_nullable
-              as String,
-      volumeUnit: null == volumeUnit
-          ? _value.volumeUnit
-          : volumeUnit // ignore: cast_nullable_to_non_nullable
-              as String,
-      streakDays: null == streakDays
-          ? _value.streakDays
-          : streakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$DashboardHomeSummaryImpl(
+        greetingLine: null == greetingLine
+            ? _value.greetingLine
+            : greetingLine // ignore: cast_nullable_to_non_nullable
+                  as String,
+        athleteAlias: null == athleteAlias
+            ? _value.athleteAlias
+            : athleteAlias // ignore: cast_nullable_to_non_nullable
+                  as String,
+        readinessScore: null == readinessScore
+            ? _value.readinessScore
+            : readinessScore // ignore: cast_nullable_to_non_nullable
+                  as int,
+        readinessMessage: null == readinessMessage
+            ? _value.readinessMessage
+            : readinessMessage // ignore: cast_nullable_to_non_nullable
+                  as String,
+        volumeValue: null == volumeValue
+            ? _value.volumeValue
+            : volumeValue // ignore: cast_nullable_to_non_nullable
+                  as String,
+        volumeUnit: null == volumeUnit
+            ? _value.volumeUnit
+            : volumeUnit // ignore: cast_nullable_to_non_nullable
+                  as String,
+        streakDays: null == streakDays
+            ? _value.streakDays
+            : streakDays // ignore: cast_nullable_to_non_nullable
+                  as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DashboardHomeSummaryImpl implements _DashboardHomeSummary {
-  const _$DashboardHomeSummaryImpl(
-      {required this.greetingLine,
-      required this.athleteAlias,
-      required this.readinessScore,
-      required this.readinessMessage,
-      required this.volumeValue,
-      required this.volumeUnit,
-      required this.streakDays});
+  const _$DashboardHomeSummaryImpl({
+    required this.greetingLine,
+    required this.athleteAlias,
+    required this.readinessScore,
+    required this.readinessMessage,
+    required this.volumeValue,
+    required this.volumeUnit,
+    required this.streakDays,
+  });
 
   factory _$DashboardHomeSummaryImpl.fromJson(Map<String, dynamic> json) =>
       _$$DashboardHomeSummaryImplFromJson(json);
@@ -233,34 +247,43 @@ class _$DashboardHomeSummaryImpl implements _DashboardHomeSummary {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, greetingLine, athleteAlias,
-      readinessScore, readinessMessage, volumeValue, volumeUnit, streakDays);
+  int get hashCode => Object.hash(
+    runtimeType,
+    greetingLine,
+    athleteAlias,
+    readinessScore,
+    readinessMessage,
+    volumeValue,
+    volumeUnit,
+    streakDays,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DashboardHomeSummaryImplCopyWith<_$DashboardHomeSummaryImpl>
-      get copyWith =>
-          __$$DashboardHomeSummaryImplCopyWithImpl<_$DashboardHomeSummaryImpl>(
-              this, _$identity);
+  get copyWith =>
+      __$$DashboardHomeSummaryImplCopyWithImpl<_$DashboardHomeSummaryImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DashboardHomeSummaryImplToJson(
-      this,
-    );
+    return _$$DashboardHomeSummaryImplToJson(this);
   }
 }
 
 abstract class _DashboardHomeSummary implements DashboardHomeSummary {
-  const factory _DashboardHomeSummary(
-      {required final String greetingLine,
-      required final String athleteAlias,
-      required final int readinessScore,
-      required final String readinessMessage,
-      required final String volumeValue,
-      required final String volumeUnit,
-      required final int streakDays}) = _$DashboardHomeSummaryImpl;
+  const factory _DashboardHomeSummary({
+    required final String greetingLine,
+    required final String athleteAlias,
+    required final int readinessScore,
+    required final String readinessMessage,
+    required final String volumeValue,
+    required final String volumeUnit,
+    required final int streakDays,
+  }) = _$DashboardHomeSummaryImpl;
 
   factory _DashboardHomeSummary.fromJson(Map<String, dynamic> json) =
       _$DashboardHomeSummaryImpl.fromJson;
@@ -282,5 +305,5 @@ abstract class _DashboardHomeSummary implements DashboardHomeSummary {
   @override
   @JsonKey(ignore: true)
   _$$DashboardHomeSummaryImplCopyWith<_$DashboardHomeSummaryImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }

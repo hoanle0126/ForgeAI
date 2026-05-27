@@ -4,9 +4,12 @@ import 'package:forge_ai/core/constants/app_colors.dart';
 import 'package:forge_ai/core/constants/app_spacing.dart';
 import 'package:forge_ai/core/constants/app_typography.dart';
 import 'package:forge_ai/core/router/app_router.dart';
+import 'package:forge_ai/features/insight/providers/insight_provider.dart';
+import 'package:forge_ai/features/profile/providers/profile_provider.dart';
 import 'package:forge_ai/features/training/providers/active_workout_session_provider.dart';
 import 'package:forge_ai/features/training/providers/workout_library_provider.dart';
-import 'package:forge_ai/features/training/widgets/workout_feedback_chip.dart';
+import 'package:forge_ai/features/training/widgets/workout_feedback_notes.dart';
+import 'package:forge_ai/features/training/widgets/workout_feedback_selector.dart';
 import 'package:forge_ai/shared/widgets/app_button.dart';
 import 'package:forge_ai/shared/widgets/app_card.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +19,8 @@ class WorkoutFeedbackCard extends ConsumerStatefulWidget {
   const WorkoutFeedbackCard({super.key});
 
   @override
-  ConsumerState<WorkoutFeedbackCard> createState() => _WorkoutFeedbackCardState();
+  ConsumerState<WorkoutFeedbackCard> createState() =>
+      _WorkoutFeedbackCardState();
 }
 
 class _WorkoutFeedbackCardState extends ConsumerState<WorkoutFeedbackCard> {
@@ -31,12 +35,17 @@ class _WorkoutFeedbackCardState extends ConsumerState<WorkoutFeedbackCard> {
   }
 
   void _submit() {
-    ref.read(activeWorkoutSessionProvider.notifier).submitFeedback(
+    ref
+        .read(activeWorkoutSessionProvider.notifier)
+        .submitFeedback(
           effort: _effort,
           difficultyAdjustment: _difficultyAdjustment,
           notes: _notesController.text,
           onSuccess: () {
-            ref.invalidate(workoutLibraryProvider);
+            ref
+              ..invalidate(workoutLibraryProvider)
+              ..invalidate(insightNotifierProvider)
+              ..invalidate(profileProvider);
             context.go(AppRoutes.training);
           },
           onError: (error) {
@@ -53,7 +62,6 @@ class _WorkoutFeedbackCardState extends ConsumerState<WorkoutFeedbackCard> {
   @override
   Widget build(BuildContext context) {
     final session = ref.watch(activeWorkoutSessionProvider);
-
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,77 +73,29 @@ class _WorkoutFeedbackCardState extends ConsumerState<WorkoutFeedbackCard> {
             style: AppTypography.bodyMedium,
           ),
           const SizedBox(height: AppSpacing.lg),
-          _buildLabel('HOW WAS THIS WORKOUT?'),
-          const SizedBox(height: AppSpacing.sm),
-          Row(
-            children: [
-              WorkoutFeedbackChip(
-                label: 'Too Easy 🌟',
-                isSelected: _effort == 'too_easy',
-                onTap: () => setState(() => _effort = 'too_easy'),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              WorkoutFeedbackChip(
-                label: 'Just Right ✨',
-                isSelected: _effort == 'just_right',
-                onTap: () => setState(() => _effort = 'just_right'),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              WorkoutFeedbackChip(
-                label: 'Too Hard 🔥',
-                isSelected: _effort == 'too_hard',
-                onTap: () => setState(() => _effort = 'too_hard'),
-              ),
+          WorkoutFeedbackSelector(
+            title: 'HOW WAS THIS WORKOUT?',
+            options: const [
+              FeedbackOption(label: 'Too Easy 🌟', value: 'too_easy'),
+              FeedbackOption(label: 'Just Right ✨', value: 'just_right'),
+              FeedbackOption(label: 'Too Hard 🔥', value: 'too_hard'),
             ],
+            selectedValue: _effort,
+            onSelected: (val) => setState(() => _effort = val),
           ),
           const SizedBox(height: AppSpacing.lg),
-          _buildLabel('DIFFICULTY ADJUSTMENT FOR NEXT TIME'),
-          const SizedBox(height: AppSpacing.sm),
-          Row(
-            children: [
-              WorkoutFeedbackChip(
-                label: 'Decrease 📉',
-                isSelected: _difficultyAdjustment == 'decrease',
-                onTap: () => setState(() => _difficultyAdjustment = 'decrease'),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              WorkoutFeedbackChip(
-                label: 'Keep Same ⚖️',
-                isSelected: _difficultyAdjustment == 'maintain',
-                onTap: () => setState(() => _difficultyAdjustment = 'maintain'),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              WorkoutFeedbackChip(
-                label: 'Increase 📈',
-                isSelected: _difficultyAdjustment == 'increase',
-                onTap: () => setState(() => _difficultyAdjustment = 'increase'),
-              ),
+          WorkoutFeedbackSelector(
+            title: 'DIFFICULTY ADJUSTMENT FOR NEXT TIME',
+            options: const [
+              FeedbackOption(label: 'Decrease 📉', value: 'decrease'),
+              FeedbackOption(label: 'Keep Same ⚖️', value: 'maintain'),
+              FeedbackOption(label: 'Increase 📈', value: 'increase'),
             ],
+            selectedValue: _difficultyAdjustment,
+            onSelected: (val) => setState(() => _difficultyAdjustment = val),
           ),
           const SizedBox(height: AppSpacing.lg),
-          _buildLabel('TRAINING NOTES (OPTIONAL)'),
-          const SizedBox(height: AppSpacing.sm),
-          TextField(
-            controller: _notesController,
-            maxLines: 3,
-            style: AppTypography.bodyMedium.copyWith(color: AppColors.textDark),
-            decoration: InputDecoration(
-              hintText: 'Share your thoughts, soreness areas...',
-              hintStyle: AppTypography.bodyMedium.copyWith(
-                color: AppColors.textDisabled,
-              ),
-              filled: true,
-              fillColor: AppColors.inputBg,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.base,
-                vertical: AppSpacing.md,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
+          WorkoutFeedbackNotes(controller: _notesController),
           const SizedBox(height: AppSpacing.xl),
           AppButton(
             text: 'Submit Feedback & Complete',
@@ -144,16 +104,6 @@ class _WorkoutFeedbackCardState extends ConsumerState<WorkoutFeedbackCard> {
             onPressed: _submit,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildLabel(String text) {
-    return Text(
-      text,
-      style: AppTypography.label.copyWith(
-        color: AppColors.textDark,
-        fontWeight: FontWeight.w700,
       ),
     );
   }
